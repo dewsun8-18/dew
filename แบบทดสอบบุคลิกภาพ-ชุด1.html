@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบทดสอบบุคลิกภาพ – ชุด 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #181b24;
+    --surface2: #1e2230;
+    --border: #2a2f42;
+    --accent: #6c8eff;
+    --accent2: #a78bfa;
+    --gold: #f0c060;
+    --green: #4ade80;
+    --red: #f87171;
+    --orange: #fb923c;
+    --text: #e8eaf6;
+    --muted: #7b82a0;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 24px 16px 60px;
+  }
+
+  /* Header */
+  .hero {
+    text-align: center;
+    padding: 40px 20px 32px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 200px;
+    background: radial-gradient(ellipse, rgba(108,142,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, rgba(108,142,255,0.2), rgba(167,139,250,0.2));
+    border: 1px solid rgba(108,142,255,0.3);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif Thai', serif;
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  /* Score Summary Cards */
+  .summary-section {
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+  .summary-title {
+    font-family: 'Noto Serif Thai', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .summary-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .score-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .score-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--card-color, var(--accent));
+  }
+  .score-card.lie { --card-color: #f87171; }
+  .score-card.conscience { --card-color: #4ade80; }
+  .score-card.extrovert { --card-color: #60a5fa; }
+  .score-card.honest { --card-color: #f0c060; }
+  .score-card.anger { --card-color: #fb923c; }
+  .score-card.entrepreneur { --card-color: #a78bfa; }
+  .score-card.stress { --card-color: #34d399; }
+  .score-card.leader { --card-color: #e879f9; }
+
+  .score-icon { font-size: 22px; margin-bottom: 8px; }
+  .score-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .score-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--card-color, var(--accent));
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .score-label {
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .score-note {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .score-bar-wrap {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .score-bar {
+    height: 100%;
+    background: var(--card-color, var(--accent));
+    border-radius: 2px;
+    width: var(--pct, 50%);
+    transition: width 1s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* Lie scale highlight */
+  .lie-alert {
+    background: linear-gradient(135deg, rgba(248,113,113,0.12), rgba(251,146,60,0.08));
+    border: 1px solid rgba(248,113,113,0.3);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 13px;
+  }
+  .lie-alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .lie-alert strong { color: #f87171; }
+
+  /* Leader highlight */
+  .leader-highlight {
+    background: linear-gradient(135deg, rgba(232,121,249,0.12), rgba(108,142,255,0.08));
+    border: 1px solid rgba(232,121,249,0.3);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+  }
+  .leader-highlight h3 {
+    font-family: 'Noto Serif Thai', serif;
+    color: #e879f9;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .leader-highlight p { font-size: 13px; color: var(--text); line-height: 1.7; }
+  .leader-score-big {
+    font-size: 48px;
+    font-weight: 700;
+    color: #e879f9;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .leader-flex { display: flex; align-items: center; gap: 24px; }
+
+  /* Tabs */
+  .tabs-container { max-width: 900px; margin: 0 auto; }
+  .tabs-nav {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+  }
+  .tab-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tab-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Question Table */
+  .q-table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .q-table-header {
+    background: var(--surface2);
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: grid;
+    grid-template-columns: 40px 1fr 40px 40px 40px 40px 40px;
+    gap: 4px;
+    text-align: center;
+  }
+  .q-table-header .q-text { text-align: left; }
+
+  .q-row {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px 40px 40px 40px 40px;
+    gap: 4px;
+    align-items: center;
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    transition: background 0.15s;
+  }
+  .q-row:hover { background: var(--surface2); }
+  .q-num {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .q-text { color: var(--text); line-height: 1.5; }
+  .q-cell {
+    text-align: center;
+    width: 36px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .q-cell.selected {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .q-cell.empty-ans {
+    background: rgba(255,255,255,0.04);
+    border: 1px dashed var(--border);
+    color: transparent;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 12px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; color: var(--muted); }
+  .legend-dot {
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .legend-dot.v1 { background: #7b82a0; }
+  .legend-dot.v2 { background: #7b82a0; }
+  .legend-dot.v3 { background: var(--accent); }
+  .legend-dot.v4 { background: var(--green); }
+  .legend-dot.v5 { background: var(--gold); }
+
+  /* Completion badge */
+  .completion-bar-wrap {
+    max-width: 900px;
+    margin: 0 auto 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+  }
+  .completion-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: var(--muted);
+  }
+  .completion-label strong { color: var(--text); }
+  .completion-track {
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .completion-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    width: 38.9%;
+  }
+
+  /* Clear button */
+  .clear-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: transparent;
+    border: 1px solid rgba(248,113,113,0.4);
+    color: #f87171;
+    padding: 7px 18px;
+    border-radius: 20px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .clear-btn:hover {
+    background: rgba(248,113,113,0.12);
+    border-color: #f87171;
+  }
+  .clear-btn:active { transform: scale(0.97); }
+
+  /* Modal overlay */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 28px 24px;
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+    animation: modalIn 0.2s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes modalIn {
+    from { opacity:0; transform: scale(0.93) translateY(10px); }
+    to   { opacity:1; transform: scale(1)   translateY(0); }
+  }
+  .modal-icon { font-size: 36px; margin-bottom: 14px; }
+  .modal-title {
+    font-family: 'Noto Serif Thai', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .modal-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: center; }
+  .modal-cancel {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .modal-cancel:hover { border-color: var(--accent); color: var(--accent); }
+  .modal-confirm {
+    background: #f87171;
+    border: none;
+    color: #fff;
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .modal-confirm:hover { background: #ef4444; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #1e2230;
+    border: 1px solid #4ade80;
+    color: #4ade80;
+    padding: 10px 22px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .q-cell.clickable-cell {
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s, color 0.15s;
+    border: 1px solid transparent;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .q-cell.clickable-cell:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: scale(1.12);
+  }
+  .q-cell.clickable-cell.selected {
+    transform: scale(1.08);
+    border-color: transparent;
+  }
+
+  @media (max-width: 600px) {
+    .score-grid { grid-template-columns: 1fr 1fr; }
+    .q-table-header, .q-row { grid-template-columns: 32px 1fr 30px 30px 30px 30px 30px; }
+    .q-cell { width: 28px; }
+  }
+
+  /* Print */
+  @media print {
+    body { background: #fff; color: #000; }
+    .score-card { border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-tag">แบบทดสอบบุคลิกภาพ</div>
+  <h1>ผลการทดสอบ – ชุด 1</h1>
+  <p>ตอบแล้ว <span id="hero-count">35</span> ข้อ จากทั้งหมด 90 ข้อ (<span id="hero-pct">38.9%</span>)</p>
+  <p style="color:#7b82a0;font-size:12px;margin-top:4px;">มิติที่คำนวณได้ครบ: ความเป็นผู้นำ | มิติอื่นใช้คะแนนเท่าที่ตอบ</p>
+</div>
+
+<!-- Completion Bar -->
+<div class="completion-bar-wrap">
+  <div class="completion-label">
+    <span>ความคืบหน้าในการตอบ</span>
+    <strong>35 / 90 ข้อ</strong>
+  </div>
+  <div class="completion-track">
+    <div class="completion-fill" id="completion-fill"></div>
+  </div>
+</div>
+
+<!-- Score Summary -->
+<div class="summary-section">
+  <div class="summary-title">สรุปคะแนนรายมิติ</div>
+
+  <!-- Leader Highlight (complete data) -->
+  <div class="leader-highlight">
+    <div class="leader-flex">
+      <div>
+        <div class="leader-score-big" id="leader-big-score">20</div>
+        <div style="font-size:11px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;">คะแนน</div>
+      </div>
+      <div>
+        <h3>👑 ความเป็นผู้นำ — ข้อมูลครบถ้วน</h3>
+        <p>คะแนน <strong>20</strong> คะแนน (จากบวก 33 ลบ 13)<br>
+        เกณฑ์: 24–27 = มีน้อย &nbsp;|&nbsp; 28–31 = พอมีบ้าง &nbsp;|&nbsp; 32–35 = มีอย่างชัดเจน &nbsp;|&nbsp; ≥36 = มีมากคนนับถือ<br>
+        <strong style="color:#f87171;" id="leader-result">→ ผล: ไม่มีเลย (≤23)</strong> — แสดงถึงแนวโน้มที่ยังไม่แสดงออกในบทบาทผู้นำ</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lie Alert -->
+  <div class="lie-alert">
+    <div class="lie-alert-icon">⚠️</div>
+    <div>
+      <strong>มาตรวัดความโกหก (Lie Scale)</strong>: ตอบครบ 3 ข้อ (ข้อ 3, 16, 17) จาก 6 ข้อ &nbsp;|&nbsp; คะแนนที่ได้ = <strong>6</strong><br>
+      <span style="color:var(--muted);">ต้องตอบครบทั้ง 6 ข้อ (3, 16, 17, 34, 54, 71) จึงจะแปลผลได้อย่างสมบูรณ์</span>
+    </div>
+  </div>
+
+  <!-- Score Cards Grid -->
+  <div class="score-grid">
+
+    <div class="score-card lie" id="sc-lie">
+      <div class="score-icon">🎭</div>
+      <div class="score-name">มาตรวัดความโกหก</div>
+      <div class="score-number">6</div>
+      <div class="score-label">ค่อนข้างโกหก</div>
+      <div class="score-note">ตอบ 3/6 ข้อ</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="--pct:20%;width:20%"></div></div>
+    </div>
+
+    <div class="score-card conscience" id="sc-conscience">
+      <div class="score-icon">🧭</div>
+      <div class="score-name">ความมีมโนธรรม</div>
+      <div class="score-number">3</div>
+      <div class="score-label">ไม่มีมโนธรรม</div>
+      <div class="score-note">ตอบ 4/12 ข้อ</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="--pct:30%;width:30%"></div></div>
+    </div>
+
+    <div class="score-card extrovert" id="sc-extrovert">
+      <div class="score-icon">🎉</div>
+      <div class="score-name">การแสดงตัว</div>
+      <div class="score-number">-12</div>
+      <div class="score-label">เป็นคนเก็บตัว</div>
+      <div class="score-note">ตอบ 4/12 ข้อ</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="--pct:15%;width:15%"></div></div>
+    </div>
+
+    <div class="score-card honest" id="sc-honest">
+      <div class="score-icon">⚖️</div>
+      <div class="score-name">ความซื่อสัตย์</div>
+      <div class="score-number">10</div>
+      <div class="score-label">ไม่ซื่อสัตย์</div>
+      <div class="score-note">ตอบ 3/12 ข้อ</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="--pct:40%;width:40%"></div></div>
+    </div>
+
+    <div class="score-card anger" id="sc-anger">
+      <div class="score-icon">😤</div>
+      <div class="score-name">ความโกรธ</div>
+      <div class="score-number">-7</div>
+      <div class="score-label">โกรธจัด</div>
+      <div class="score-note">ตอบ 3/12 ข้อ</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="--pct:20%;width:20%"></div></div>
+    </div>
+
+    <div class="score-card entrepreneur" id="sc-entrepreneur">
+      <div class="score-icon">🚀</div>
+      <div class="score-name">ความเป็นผู้ประกอบการ</div>
+      <div class="score-number">-7</div>
+      <div class="score-label">ไม่มีลักษณะเลย</div>
+      <div class="score-note">ตอบ 3/11 ข้อ</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="--pct:20%;width:20%"></div></div>
+    </div>
+
+    <div class="score-card stress" id="sc-stress">
+      <div class="score-icon">🧘</div>
+      <div class="score-name">ความอดทนต่อความเครียด</div>
+      <div class="score-number">2</div>
+      <div class="score-label">จัดการได้น้อย</div>
+      <div class="score-note">ตอบ 3/12 ข้อ</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="--pct:35%;width:35%"></div></div>
+    </div>
+
+    <div class="score-card leader" id="sc-leader">
+      <div class="score-icon">👑</div>
+      <div class="score-name">ความเป็นผู้นำ</div>
+      <div class="score-number">20</div>
+      <div class="score-label" style="color:#e879f9;font-weight:600;">ไม่มีเลย</div>
+      <div class="score-note">ตอบ 12/12 ข้อ</div>
+      <div class="score-bar-wrap"><div class="score-bar" style="--pct:55%;width:55%"></div></div>
+    </div>
+
+  </div>
+
+  <!-- Scoring Reference -->
+  <details style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:28px;">
+    <summary style="cursor:pointer;font-weight:600;color:var(--gold);font-size:14px;">📋 เกณฑ์การให้คะแนนและแปลผล</summary>
+    <div style="margin-top:16px;display:grid;gap:12px;">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px;">
+        ค่าคะแนน: ไม่เห็นด้วยอย่างยิ่ง (มย) = 1 &nbsp;|&nbsp; ไม่เห็นด้วย (ม) = 2 &nbsp;|&nbsp; ความเห็นกลาง (ก) = 3 &nbsp;|&nbsp; เห็นด้วย (ห) = 4 &nbsp;|&nbsp; เห็นด้วยอย่างยิ่ง (หย) = 5
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <thead>
+          <tr style="background:var(--surface2);">
+            <th style="padding:8px 10px;text-align:left;color:var(--muted);border-bottom:1px solid var(--border);">มิติ</th>
+            <th style="padding:8px 10px;text-align:left;color:var(--muted);border-bottom:1px solid var(--border);">คะแนนสุทธิ</th>
+            <th style="padding:8px 10px;text-align:left;color:var(--muted);border-bottom:1px solid var(--border);">การแปลผล</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 10px;color:#f87171;">มาตรวัดโกหก</td>
+            <td style="padding:8px 10px;">≤18 | 19-23 | 24-29 | 30+</td>
+            <td style="padding:8px 10px;color:var(--muted);">ไม่โกหก | ค่อนข้างโกหก | โกหก | โกหกมาก</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 10px;color:#4ade80;">มโนธรรม</td>
+            <td style="padding:8px 10px;">≤29 | 30-32 | 33-35 | 36-41 | 42+</td>
+            <td style="padding:8px 10px;color:var(--muted);">ไม่มี | มีน้อย | พอมี | สูง | สูงมาก</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 10px;color:#60a5fa;">แสดงตัว</td>
+            <td style="padding:8px 10px;">≤11 | 12-17 | 18-21 | 22-23 | 24+</td>
+            <td style="padding:8px 10px;color:var(--muted);">เก็บตัว | ไม่ชอบ | พอประมาณ | ชอบ | ชอบมาก</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 10px;color:#f0c060;">ซื่อสัตย์</td>
+            <td style="padding:8px 10px;">≤29 | 30-32 | 33-35 | 36-41 | 42+</td>
+            <td style="padding:8px 10px;color:var(--muted);">ไม่ซื่อ | น้อยมาก | น้อย | พอใช้ | ซื่อสัตย์มาก</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 10px;color:#fb923c;">ความโกรธ</td>
+            <td style="padding:8px 10px;">≤11 | 12-17 | 18-21 | 22-23 | 24+</td>
+            <td style="padding:8px 10px;color:var(--muted);">โกรธจัด | ฉุนเฉียวมาก | ต้องปรึกษา | ต่ำ | ไม่ฉุนเฉียว</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 10px;color:#a78bfa;">ผู้ประกอบการ</td>
+            <td style="padding:8px 10px;">≤23 | 24-27 | 28-31 | 32-35 | 36+</td>
+            <td style="padding:8px 10px;color:var(--muted);">ไม่มีเลย | ไม่มี | พอมีบ้าง | มีพอควร | มีอย่างมาก</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:8px 10px;color:#34d399;">ความเครียด</td>
+            <td style="padding:8px 10px;">0 | 1-4 | 5-7 | 8-11 | 12+</td>
+            <td style="padding:8px 10px;color:var(--muted);">แย่มาก | น้อย | จัดการได้ | ดี | ยอดเยี่ยม</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 10px;color:#e879f9;">ผู้นำ</td>
+            <td style="padding:8px 10px;">≤23 | 24-27 | 28-31 | 32-35 | 36+</td>
+            <td style="padding:8px 10px;color:var(--muted);">ไม่มีเลย | มีน้อย | พอมีบ้าง | ชัดเจน | มีมาก</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>
+
+<!-- Question Tabs -->
+<div class="tabs-container">
+  <div class="summary-title">รายละเอียดคำตอบ</div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot v1">1</div> ไม่เห็นด้วยอย่างยิ่ง (มย)</div>
+    <div class="legend-item"><div class="legend-dot v2">2</div> ไม่เห็นด้วย (ม)</div>
+    <div class="legend-item"><div class="legend-dot v3">3</div> ความเห็นกลาง (ก)</div>
+    <div class="legend-item"><div class="legend-dot v4">4</div> เห็นด้วย (ห)</div>
+    <div class="legend-item"><div class="legend-dot v5">5</div> เห็นด้วยอย่างยิ่ง (หย)</div>
+  </div>
+
+  <div class="tabs-nav" style="justify-content:space-between;">
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <button class="tab-btn active" onclick="showTab('all', this)">ทั้งหมด (90)</button>
+      <button class="tab-btn" onclick="showTab('leader', this)">👑 ผู้นำ (12)</button>
+      <button class="tab-btn" onclick="showTab('main', this)">รวมชุด 1 (26)</button>
+      <button class="tab-btn" onclick="showTab('lie', this)">🎭 โกหก (6)</button>
+    </div>
+    <button class="clear-btn" onclick="openClearModal()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+      ล้างคำตอบ
+    </button>
+  </div>
+
+<!-- Confirm Modal -->
+<div class="modal-overlay" id="clearModal" onclick="if(event.target===this) closeClearModal()">
+  <div class="modal-box">
+    <div class="modal-icon">🗑️</div>
+    <div class="modal-title">ยืนยันการล้างคำตอบ</div>
+    <div class="modal-desc">คุณต้องการล้างคำตอบทั้งหมด 35 ข้อออกจากหน้านี้ใช่ไหม?<br>การดำเนินการนี้ไม่สามารถย้อนกลับได้</div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeClearModal()">ยกเลิก</button>
+      <button class="modal-confirm" onclick="confirmClear()">ล้างทั้งหมด</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">✓ ล้างคำตอบทั้งหมดแล้ว</div>
+
+  <!-- All Questions Panel -->
+  <div id="tab-all" class="tab-panel active">
+    <div class="q-table-wrap">
+      <div class="q-table-header">
+        <div>ข้อ</div>
+        <div class="q-text">คำถาม</div>
+        <div>มย</div><div>ม</div><div>ก</div><div>ห</div><div>หย</div>
+      </div>
+      <!-- Questions will be generated by JS -->
+    </div>
+  </div>
+
+  <div id="tab-leader" class="tab-panel">
+    <div class="q-table-wrap">
+      <div class="q-table-header">
+        <div>ข้อ</div>
+        <div class="q-text">คำถาม</div>
+        <div>มย</div><div>ม</div><div>ก</div><div>ห</div><div>หย</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-main" class="tab-panel">
+    <div class="q-table-wrap">
+      <div class="q-table-header">
+        <div>ข้อ</div>
+        <div class="q-text">คำถาม</div>
+        <div>มย</div><div>ม</div><div>ก</div><div>ห</div><div>หย</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-lie" class="tab-panel">
+    <div class="q-table-wrap">
+      <div class="q-table-header">
+        <div>ข้อ</div>
+        <div class="q-text">คำถาม</div>
+        <div>มย</div><div>ม</div><div>ก</div><div>ห</div><div>หย</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const questions = {
+  1:"ฉันมองว่าการทำงานนั้น ไม่ต้องรีบร้อน",
+  2:"โดยปกติแล้ว ฉันจะไม่เข้าไปร่วมกลุ่มกับคนมาก ๆ",
+  3:"ตอนเป็นนักเรียน ฉันยอดเยี่ยมในทุก ๆ ด้าน",
+  4:"ทุกคนจะอารมย์เสียในที่ทำงานเป็นบางครั้ง",
+  5:"ฉันเชื่อว่าคนส่วนใหญ่เป็นคนซื่อสัตย์",
+  6:"ฉันชอบทำงานประจำ ที่กำหนดไว้แล้ว",
+  7:"ฉันไม่มีเรื่องที่ต้องกังวลใจมากนัก",
+  8:"การคิดถึงอนาคต ทำให้ฉันตื่นเต้น",
+  9:"ฉันพยายามทำงานทุกอย่างที่ได้รับมอบหมายให้แล้วเสร็จ",
+  10:"ฉันไม่ชอบการพูดคุยกับคนอื่นมากนัก",
+  11:"บางครั้งฉันก็ควบคุมความโกรธของตัวเองไม่อยู่",
+  12:"การกระทำของคนเรามักจะเกิดจากเจตนาดี",
+  13:"ฉันจะพินิจพิเคราะห์สิ่งต่าง ๆ อย่างรอบครอบก่อนตัดสินใจ",
+  14:"ฉันรู้สึกว่าตัวเองปฏิบัติหน้าที่ไม่ได้อยู่บ่อย ๆ เนื่องจากความเครียด",
+  15:"คนงานส่วนใหญ่อยากทำงานให้น้อยที่สุดเท่าที่จะทำได้",
+  16:"ฉันไม่เคยทำอะไรด้วยอารมย์หุนหันพลันแล่น",
+  17:"ฉันไม่เคยรู้สึกเบี่อที่จะอ่านหนังสือ",
+  18:"ฉันจะดูแลบริเวณที่ทำงานของฉันให้เป็นระเบียบเรียบร้อยที่สุดเท่าที่จะทำได้",
+  19:"โดยปกติแล้ว ฉันชอบที่จะทำสิ่งต่าง ๆ เพียงลำพังมากกว่า",
+  20:"เราไม่ควรรับคนจร้อนมาทำงานไม่ว่าจะในตำแหน่งอะไร",
+  21:"พ่อแม่มีหน้าที่อบรมสั่งสอนลูก ๆ ของตนให้เป็นคนซื่อสัตย์",
+  22:"งานที่ซ้ำซาก จำเจ จะทำให้ฉันเบื่อได้ง่าย ๆ",
+  23:"ฉันไม่ค่อยรู้สึกกลัวหรือกังวลกับอะไร",
+  24:"คนส่วนใหญ่จะมีจุดมุ่งหมายเพื่อตัวเอง",
+  25:"ฉันไม่ใช่คนที่มีระเบียบมากนัก",
+  26:"บางครั้งกลุ่มคนเยอะ ๆ ก็ทำให้รู้สึกเครียด",
+  27:"คนขี้โมโหมาก ๆ เป็นคนที่มีปัญหาร้ายแรง",
+  28:"พฤติกรรมที่ไม่ซื่อสัตย์ในที่ทำงานนั้น มีมากเหลือเกิน",
+  29:"ฉันเชื่อว่าการเสี่ยงคือกุญแจสู่ความสำร็จ",
+  30:"ฉันรู้สึกตื่อเต้นกระสับกระส่ายอยู่บ่อย ๆ",
+  31:"พนักงานมักจะไม่ได้รับการท้าทายอย่างเพียงพอในที่ทำงาน",
+  32:"เป็นที่รู้กันดีว่าฉันแนคนที่มีประสิทธิผลในการทำงานอย่างมาก",
+  33:"ฉันไม่ชอบอยู่คนเดียวอย่างยิ่ง",
+  34:"ฉันไม่เคยเกลียดครูคนไหน",
+  35:"ทุกคนไม่ควรโมโหฉุนเฉียวในขณะปฏิบัติงาน",
+  36:"พนักงานที่ถูกจับได้ว่าขโมยของ ควรถูกไล่ออกทันที",
+  37:"การก่อตั้งธุรกิจของตัวเองเป็นความคิดที่น่าสนใจมากสำหรับฉัน",
+  38:"เพื่อน ๆ ของฉันมองว่าฉันเป็นคนอ่อนไหวเกินไปหน่อย",
+  39:"คนส่วนใหญ่ชอบความท้าทายในการทำงาน",
+  40:"ฉันมักจะเข้าร่วมสถานการณ์ต่าง ๆ โดยไม่มีความเตรียมการอย่างพอเพียง",
+  41:"เมื่อไม่นานมานี้ ฉันเพิ่งไปร่วมงานเลี้ยงที่ยื่งใหญ่มาก",
+  42:"แต่ก่อนฉันจะอารมณ์เสียบ่อยมาก",
+  43:"ฉันคิดว่าคนแทบทุกคนมีความรู้สึกอยากขโมยของเป็นบางครั้งบางคราว",
+  44:"ฉันชอบลองชิมอาหารรสชาติแปลก ๆ ใหม่ ๆ",
+  45:"ฉัน \"ไม่รู้สึกสะทกสะท้าน\" กับสถานการณ์ฉุกเฉิน",
+  46:"ฉันไม่ไช่คนที่มองโลกในแง่ดีนัก",
+  47:"ฉันพยายามที่จะทำให้เป้าหมายทุกอย่างของฉันบรรลุเป้าหมาย",
+  48:"ในขณะที่รอรถประจำทางฉันชอบอยู่ใกล้กับคนอื่น ๆ",
+  49:"ฉันไม่ค่อยรู้สึกโกรธในขณะที่ทำงาน",
+  50:"เวลาเล่นไพ่ ฉันจะเล่นโกงบ้างเป็นบางครั้ง",
+  51:"บางครั้งการเสี่ยง ก็คือการนำความหายนะมาสู่ตน",
+  52:"บางครั้งฉันก็มีปัญหาในการนอนหลับ เนื่องจากความเครียดจากการทำงาน",
+  53:"ทุกคนสามารถที่จะประสบความสำเร็จในชีวิตได้มากกว่าที่เป็นอยู่",
+  54:"ฉันไม่เคยส่งการบ้านช้า",
+  55:"ฉันชอบค้นหาคำตอบในเรื่องต่าง ๆ",
+  56:"บางครั้งแค่ได้อยู่ตามลำพังฉันก็มีความสุขแล้ว",
+  57:"พนักงานที่ขี้โมโหมาก ๆ ควรได้รับการให้คำปรึกษา หรือไม่ก็เลิกจ้าง",
+  58:"ครูไม่ควรยกโทษนักเรียนที่โกงการสอบ",
+  59:"คนที่ฉันชื่นชมนับถือมากที่สุด มักเป็นคนที่ชอบเสี่ยง",
+  60:"บางครั้งฉันก็รู้สึกอยากจะร้องไห้ เนื่องจากปัญหาในการทำงาน",
+  61:"ฉันเคยเป็นหัวหน้ากลุ่มต่าง ๆ ที่ฉันป็นสมาชิก",
+  62:"ฉันอยากทำงานต่าง ๆ ให้เสร็จทันเวลา",
+  63:"บางครั้งงานเลี้ยงที่อึกทึกครึกโครมก็ทำให้ฉันรู้สึกเบื่อหน่ายอย่างมาก",
+  64:"การที่คุณอารมณ์เสียคือสัญญาณที่บอกถึงความอบอุ่นของตัวเอง",
+  65:"วัยรุ่นส่วนใหญ่จะเคยขโมยของในร้านค้าหนึ่งครั้งเป็นอย่างน้อย",
+  66:"ก่อนจะทำอะไร ฉันจะต้องมีข้อมูลที่จำเป็นทุกอย่างเสียก่อน",
+  67:"ถ้าฉันจัดการกับความเครียดในที่ทำงานได้ดีกว่านี้ก็จะดีหรอก",
+  68:"เวลาประชุมกัน คนอื่นมักอยากได้รับคำแนะนำจากฉัน",
+  69:"บางครั้งฉันก็รู้สึกว่า มันยากที่จะจัดลำดับความสำคัญของสิ่งต่าง ๆ ในการทำงาน",
+  70:"ฉันสามารถพูดคุยเรื่องสัพเพเหระกับคนที่ไม่ค่อยรู้จัก",
+  71:"ฉันทำงานได้อย่างดีเยี่ยมเสมอ",
+  72:"บางครั้งฉันรู้สึกอยากเล่นงาน ผู้ร่วมงานที่ดูถูกเหยียดหยามฉัน",
+  73:"พ่อแม่ควรลงโทษลูกที่ถูกจ้บได้ว่าขโมยของที่โรงเรียน",
+  74:"ฉันจะเชื่อสัณชาตญาณของฉันอย่างมาก",
+  75:"บางครั้งฉันก็มีอาการปวดท้องเนื่องจากความเครียดในที่ทำงาน",
+  76:"การคิดถึงป้าหมายอันยิ่งใหญ่ในชีวิตทำให้ฉันรู้สึกตื่นเต้น",
+  77:"ฉันไม่ค่อยทิ้งงานค้างไว้",
+  78:"ฉันรู้สึกมีความสุขจริง ๆ เวลาได้อยู่ในงานเลี้ยงที่ใหญ่โตอลังการ",
+  79:"ทุกคนมีความคิดอยากจะจัดการกับเจ้านายของตนเองทั้งนั้น",
+  80:"กฏหมายเกี่ยวกับการลักขโมยของในร้านค้าของเรานั้นเบาเกินไป",
+  81:"คุณจะไม่ประสบความสำเร็จในการทำธุรกิจถ้าไม่เสี่ยง",
+  82:"ฉันไม่เคยรับประทานอาหารมากเกินไปเนื่องจากความเครียด",
+  83:"ฉันชอบที่จะดำเนินงานต่าง ๆ ด้วยตัวเอง",
+  84:"ฉันไม่รังเกียจที่จะอยู่ทำงานต่อจนดึกเพื่อให้งานเสร็จ",
+  85:"ฉันชอบที่จะปล่อยตัวตามสบายด้วยการหัวเราะไปกับกลุ่มคนอย่างเต็มที่",
+  86:"ฉันเคยอารมณ์เสียใส่ผู้ร่วมงานที่ทำให้ฉันหงุดหงิดโมโห",
+  87:"ฉันชื่นชมบรรดาพ่อแม่ที่ฝึกฝนอบรมลูก ๆ อย่างเข้มงวดเรื่องขโมยของผู้อื่น",
+  88:"เพื่อน ๆ ของฉันจะเห็นพ้องต้องกันว่า ฉันมีสัณชาตญาณที่ดีเยี่ยม",
+  89:"บางครั้งฉันรู้สึกอยากลาออกจากงานเนื่องจากความเครียด",
+  90:"ฉันอยากให้คนจดจำว่า ฉันได้ทำสิ่งที่ยิ่งใหญ่ให้บรรลุผลสำเร็จ"
+};
+
+// Live answer state (starts with pre-filled answers)
+const answers = {
+  1:1, 2:2, 3:2, 4:5, 5:3, 6:4, 7:2, 8:4, 9:5,
+  10:4, 11:4, 12:2, 13:5, 14:2, 15:4, 16:2, 17:2,
+  18:3, 19:2, 20:2, 21:5, 22:2, 23:2, 24:4, 25:4,
+  26:4, 31:4, 39:2, 46:1, 53:5, 61:5, 68:4, 76:4,
+  83:4, 90:5
+};
+
+// All 90 question numbers
+const allQNums = Array.from({length: 90}, (_, i) => i + 1);
+const leaderQs = [8, 15, 24, 31, 39, 46, 53, 61, 68, 76, 83, 90];
+const lieQs    = [3, 16, 17, 34, 54, 71];
+const mainQs   = Array.from({length: 26}, (_, i) => i + 1);
+
+const scoreColors = {1:'#7b82a0', 2:'#8b95b5', 3:'#6c8eff', 4:'#4ade80', 5:'#f0c060'};
+
+// ============================================================
+// SCORING RULES
+// ============================================================
+const scoringRules = {
+  lie:         { plus:[3,16,17,34,54,71],        minus:[] },
+  conscience:  { plus:[9,18,32,47,55,62,69,77,84], minus:[1,25,40] },
+  extrovert:   { plus:[33,41,48,70,78,85],         minus:[2,10,19,26,56,63] },
+  honest:      { plus:[5,12,21,28,36,58,73,80,87], minus:[43,50,65] },
+  anger:       { plus:[20,27,35,49,57,64],         minus:[4,11,42,72,79,86] },
+  entrepreneur:{ plus:[22,29,37,44,59,81,88],      minus:[6,13,51,66] },
+  stress:      { plus:[7,23,45,82],                minus:[14,30,38,52,60,67,75,89] },
+  leader:      { plus:[8,31,39,53,61,68,76,90],    minus:[15,24,46,83] }
+};
+
+const scoringInterpret = {
+  lie:         [[18,'ไม่โกหก'],[23,'ค่อนข้างโกหก'],[29,'โกหก'],[Infinity,'โกหกมาก']],
+  conscience:  [[29,'ไม่มีมโนธรรม'],[32,'มีมโนธรรมน้อยไป'],[35,'พอจะมีมโนธรรม'],[41,'มีมโนธรรมสูง'],[Infinity,'มีมโนธรรมสูงมาก']],
+  extrovert:   [[11,'เป็นคนเก็บตัว'],[17,'ไม่ชอบแสดงตัว'],[21,'แสดงตัวพอประมาณ'],[23,'ชอบแสดงตัว'],[Infinity,'ชอบแสดงตัวอย่างยิ่ง']],
+  honest:      [[29,'ไม่ซื่อสัตย์'],[32,'ซื่อสัตย์น้อยมาก'],[35,'ซื่อสัตย์น้อย'],[41,'ซื่อสัตย์พอใช้'],[Infinity,'ซื่อสัตย์มาก']],
+  anger:       [[11,'โกรธจัด'],[17,'ฉุนเฉียวมาก'],[21,'ฉุนเฉียวต้องรับคำปรึกษา'],[23,'ฉุนเฉียวต่ำ'],[Infinity,'ไม่ฉุนเฉียว']],
+  entrepreneur:[[23,'ไม่มีลักษณะเลย'],[27,'ไม่มีลักษณะ'],[31,'พอจะมีบ้าง'],[35,'มีพอควร'],[Infinity,'มีอย่างมาก']],
+  stress:      [[0,'จัดการได้แย่มาก'],[4,'จัดการได้น้อย'],[7,'จัดการได้'],[11,'จัดการได้ดี'],[Infinity,'จัดการได้ยอดเยี่ยม']],
+  leader:      [[23,'ไม่มีเลย'],[27,'มีน้อย'],[31,'พอมีบ้าง'],[35,'มีอย่างชัดเจน'],[Infinity,'มีมากคนนับถือ']]
+};
+
+function calcScore(dim) {
+  const rule = scoringRules[dim];
+  let plus = 0, minus = 0, answered = 0, total = rule.plus.length + rule.minus.length;
+  rule.plus.forEach(q  => { if (answers[q] != null) { plus  += answers[q]; answered++; } });
+  rule.minus.forEach(q => { if (answers[q] != null) { minus += answers[q]; answered++; } });
+  return { score: plus - minus, answered, total };
+}
+
+function getLabel(dim, score) {
+  const tiers = scoringInterpret[dim];
+  for (const [threshold, label] of tiers) {
+    if (score <= threshold) return label;
+  }
+  return tiers[tiers.length-1][1];
+}
+
+// ============================================================
+// RENDER ROWS (shared registry so cells sync across tabs)
+// ============================================================
+// Map: qNum -> array of all cell elements for that question (across tabs)
+const cellRegistry = {}; // qNum -> [{el (the row), cells:[el,el,el,el,el]}]
+
+function makeRow(qNum) {
+  const row = document.createElement('div');
+  row.className = 'q-row';
+  row.dataset.q = qNum;
+  if (answers[qNum] == null) row.style.opacity = '0.55';
+
+  const numEl = document.createElement('div');
+  numEl.className = 'q-num';
+  numEl.textContent = qNum;
+
+  const textEl = document.createElement('div');
+  textEl.className = 'q-text';
+  textEl.textContent = questions[qNum] || `ข้อ ${qNum}`;
+
+  row.appendChild(numEl);
+  row.appendChild(textEl);
+
+  const cells = [];
+  for (let v = 1; v <= 5; v++) {
+    const cell = document.createElement('div');
+    cell.className = 'q-cell clickable-cell';
+    cell.dataset.v = v;
+    cell.textContent = v;
+    if (answers[qNum] === v) {
+      cell.classList.add('selected');
+      cell.style.background = scoreColors[v];
+      cell.style.color = '#fff';
+    }
+    cell.addEventListener('click', () => onCellClick(qNum, v));
+    row.appendChild(cell);
+    cells.push(cell);
+  }
+
+  if (!cellRegistry[qNum]) cellRegistry[qNum] = [];
+  cellRegistry[qNum].push({ row, cells });
+
+  return row;
+}
+
+function onCellClick(qNum, v) {
+  // Toggle off if clicking same answer
+  if (answers[qNum] === v) {
+    answers[qNum] = null;
+  } else {
+    answers[qNum] = v;
+  }
+  // Update all rendered instances of this question
+  syncRow(qNum);
+  updateScoreCards();
+  updateHeroCount();
+}
+
+function syncRow(qNum) {
+  const ans = answers[qNum];
+  if (!cellRegistry[qNum]) return;
+  cellRegistry[qNum].forEach(({ row, cells }) => {
+    row.style.opacity = ans == null ? '0.55' : '1';
+    cells.forEach((cell, idx) => {
+      const v = idx + 1;
+      cell.classList.remove('selected');
+      cell.style.background = '';
+      cell.style.color = '';
+      if (ans === v) {
+        cell.classList.add('selected');
+        cell.style.background = scoreColors[v];
+        cell.style.color = '#fff';
+      }
+    });
+  });
+}
+
+function buildTable(container, qNums) {
+  const wrap = container.querySelector('.q-table-wrap');
+  qNums.forEach(q => wrap.appendChild(makeRow(q)));
+}
+
+// ============================================================
+// SCORE CARD UPDATE
+// ============================================================
+function updateScoreCards() {
+  const dims = ['lie','conscience','extrovert','honest','anger','entrepreneur','stress','leader'];
+  dims.forEach(dim => {
+    const { score, answered, total } = calcScore(dim);
+    const label = getLabel(dim, score);
+    const el = document.getElementById('sc-' + dim);
+    if (!el) return;
+    el.querySelector('.score-number').textContent = score;
+    el.querySelector('.score-label').textContent = `${label}`;
+    el.querySelector('.score-note').textContent = `ตอบ ${answered}/${total} ข้อ`;
+    // update bar pct — normalize to 0-100% based on max possible
+    const maxPossible = (scoringRules[dim].plus.length) * 5;
+    const pct = Math.max(0, Math.min(100, ((score + maxPossible) / (maxPossible * 2)) * 100));
+    el.querySelector('.score-bar').style.setProperty('--pct', pct + '%');
+    el.querySelector('.score-bar').style.width = pct + '%';
+  });
+
+  // Update leader highlight
+  const { score: ls } = calcScore('leader');
+  const leaderBig = document.getElementById('leader-big-score');
+  const leaderResult = document.getElementById('leader-result');
+  if (leaderBig) leaderBig.textContent = ls;
+  if (leaderResult) leaderResult.textContent = '→ ผล: ' + getLabel('leader', ls);
+}
+
+function updateHeroCount() {
+  const count = Object.values(answers).filter(v => v != null).length;
+  const heroCount = document.getElementById('hero-count');
+  const heroPct = document.getElementById('hero-pct');
+  const fillBar = document.getElementById('completion-fill');
+  if (heroCount) heroCount.textContent = count;
+  if (heroPct) heroPct.textContent = Math.round(count / 90 * 100) + '%';
+  if (fillBar) fillBar.style.width = (count / 90 * 100) + '%';
+}
+
+// ============================================================
+// BUILD ALL TABS
+// ============================================================
+buildTable(document.getElementById('tab-all'), allQNums);
+buildTable(document.getElementById('tab-leader'), leaderQs);
+buildTable(document.getElementById('tab-main'), mainQs);
+buildTable(document.getElementById('tab-lie'), lieQs);
+
+updateScoreCards();
+updateHeroCount();
+
+// ============================================================
+// TAB SWITCHING
+// ============================================================
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ============================================================
+// CLEAR MODAL
+// ============================================================
+function openClearModal() {
+  document.getElementById('clearModal').classList.add('show');
+}
+function closeClearModal() {
+  document.getElementById('clearModal').classList.remove('show');
+}
+function confirmClear() {
+  Object.keys(answers).forEach(k => { answers[k] = null; });
+  allQNums.forEach(q => syncRow(q));
+  updateScoreCards();
+  updateHeroCount();
+  closeClearModal();
+  const t = document.getElementById('toast');
+  t.textContent = '✓ ล้างคำตอบทั้งหมดแล้ว';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+</body>
+</html>
