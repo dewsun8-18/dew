@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เนื้อหากลาง ข้อ 10 | การกำกับดูแลกิจการที่ดี Corporate Governance</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Sarabun',sans-serif;background:#f0f4f8;color:#2d3748;line-height:1.7;}
+  .hero{background:linear-gradient(135deg,#1a1a00 0%,#3d3500 50%,#7d6608 100%);color:white;text-align:center;padding:60px 20px 50px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,210,0,.08) 0%,transparent 60%);animation:pulse 6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  .hero-logo{font-size:3.5rem;margin-bottom:12px;}
+  .hero h1{font-size:1.9rem;font-weight:700;letter-spacing:1px;margin-bottom:8px;}
+  .hero .sub{font-size:1rem;opacity:.85;font-weight:300;}
+  .badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:50px;padding:4px 18px;font-size:.85rem;margin-top:14px;}
+  .toc{background:white;padding:20px;border-bottom:3px solid #7d6608;overflow-x:auto;}
+  .toc-inner{max-width:960px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;}
+  .toc a{text-decoration:none;background:#fef9e7;color:#7d6608;border-radius:20px;padding:6px 14px;font-size:.82rem;font-weight:600;transition:all .2s;white-space:nowrap;}
+  .toc a:hover{background:#7d6608;color:white;}
+  .container{max-width:960px;margin:0 auto;padding:40px 20px 60px;}
+  .card{background:white;border-radius:16px;padding:32px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.07);border-left:5px solid #d4a017;transition:box-shadow .2s;}
+  .card:hover{box-shadow:0 6px 24px rgba(0,0,0,.12);}
+  .card.green{border-left-color:#27ae60;} .card.blue{border-left-color:#2e86c1;} .card.red{border-left-color:#c0392b;} .card.teal{border-left-color:#16a085;} .card.purple{border-left-color:#8e44ad;}
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .section-icon{font-size:1.8rem;background:#fef9e7;border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .card.green .section-icon{background:#eafaf1;} .card.blue .section-icon{background:#eaf4fb;} .card.red .section-icon{background:#fdedec;} .card.teal .section-icon{background:#e8f8f5;} .card.purple .section-icon{background:#f5eef8;}
+  .section-title{font-size:1.25rem;font-weight:700;color:#1a5276;}
+  .section-subtitle{font-size:.8rem;color:#7f8c8d;font-weight:400;}
+  .intro{background:linear-gradient(135deg,#fef9e7,#fdebd0);border-radius:12px;padding:18px 22px;font-size:.97rem;color:#1a5276;line-height:1.8;margin-bottom:20px;border-left:4px solid #d4a017;}
+  /* 5 PRINCIPLES */
+  .principle-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:8px;}
+  @media(max-width:640px){.principle-grid{grid-template-columns:1fr 1fr;}  }
+  .pr-box{border-radius:12px;padding:16px 12px;text-align:center;}
+  .pr1{background:#fdedec;border:2px solid #c0392b;}
+  .pr2{background:#fef9e7;border:2px solid #f39c12;}
+  .pr3{background:#eafaf1;border:2px solid #27ae60;}
+  .pr4{background:#eaf4fb;border:2px solid #2e86c1;}
+  .pr5{background:#f5eef8;border:2px solid #8e44ad;}
+  .pr-box .pr-letter{font-size:1.8rem;font-weight:800;margin-bottom:4px;}
+  .pr1 .pr-letter{color:#c0392b;} .pr2 .pr-letter{color:#e67e22;} .pr3 .pr-letter{color:#27ae60;} .pr4 .pr-letter{color:#2e86c1;} .pr5 .pr-letter{color:#8e44ad;}
+  .pr-box h4{font-size:.82rem;font-weight:700;color:#1a5276;margin-bottom:4px;}
+  .pr-box p{font-size:.75rem;color:#5d6d7e;line-height:1.4;}
+  /* BOARD STRUCTURE */
+  .board-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:600px){.board-grid{grid-template-columns:1fr;}}
+  .b-box{background:#f8fbfd;border-radius:12px;padding:18px;border:1px solid #d6eaf8;}
+  .b-box h4{font-size:.9rem;font-weight:700;color:#1a5276;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .b-box p{font-size:.83rem;color:#5d6d7e;line-height:1.6;}
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px;}
+  th{background:#7d6608;color:white;padding:11px 14px;text-align:left;font-weight:600;}
+  th:first-child{border-radius:10px 0 0 0;} th:last-child{border-radius:0 10px 0 0;}
+  td{padding:10px 14px;border-bottom:1px solid #eaecee;}
+  tr:nth-child(even) td{background:#f8f9fa;}
+  tr:last-child td:first-child{border-radius:0 0 0 10px;} tr:last-child td:last-child{border-radius:0 0 10px 0;}
+  .tag{background:#fef9e7;color:#7d6608;border-radius:6px;padding:2px 10px;font-size:.82rem;font-weight:600;white-space:nowrap;}
+  .tag.green{background:#eafaf1;color:#1e8449;} .tag.red{background:#fdedec;color:#922b21;} .tag.blue{background:#eaf4fb;color:#1a5276;}
+  .highlight{background:#fef9e7;border-left:4px solid #f39c12;border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px;font-size:.9rem;color:#7d6608;}
+  .highlight strong{color:#d35400;}
+  .tips-box{background:linear-gradient(135deg,#fff9e6,#fffde7);border:2px solid #f39c12;border-radius:14px;padding:24px;}
+  .tips-box h3{color:#d35400;font-size:1.05rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .tip-item{display:flex;gap:10px;margin-bottom:10px;font-size:.92rem;}
+  .tip-item .bullet{color:#f39c12;font-weight:700;flex-shrink:0;margin-top:1px;}
+  /* ANTI-CORRUPTION */
+  .ac-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
+  @media(max-width:600px){.ac-row{grid-template-columns:1fr;}}
+  .ac-box{border-radius:12px;padding:18px;}
+  .ac-do{background:#eafaf1;border:2px solid #27ae60;} .ac-dont{background:#fdedec;border:2px solid #c0392b;}
+  .ac-box h4{font-size:.9rem;font-weight:700;margin-bottom:8px;}
+  .ac-do h4{color:#1e8449;} .ac-dont h4{color:#922b21;}
+  .ac-box ul{list-style:none;font-size:.83rem;color:#5d6d7e;}
+  .ac-box ul li{padding:3px 0;}
+  .ac-do ul li::before{content:"✅ ";} .ac-dont ul li::before{content:"❌ ";}
+  footer{text-align:center;font-size:.82rem;color:#95a5a6;padding:24px;border-top:1px solid #eaecee;background:white;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo">⚖️</div>
+  <h1>ความรู้เนื้อหากลาง ข้อที่ 10</h1>
+  <p class="sub">การกำกับดูแลกิจการที่ดี (Corporate Governance : CG)</p>
+  <div class="badge">ธรรมาภิบาล | 5 หลักการ | Anti-Corruption | Whistleblower | จริยธรรม</div>
+</div>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#what">📖 CG คืออะไร</a>
+    <a href="#5principles">🏛️ 5 หลักการ</a>
+    <a href="#board">👥 โครงสร้างคณะกรรมการ</a>
+    <a href="#anti">🚫 Anti-Corruption</a>
+    <a href="#whistle">📣 Whistleblower</a>
+    <a href="#grc">⚙️ CG ใน GRC</a>
+    <a href="#exam">📝 เทคนิคสอบ</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- WHAT IS CG -->
+  <div id="what" class="card">
+    <div class="section-header">
+      <div class="section-icon">📖</div>
+      <div>
+        <div class="section-title">Corporate Governance (CG) คืออะไร</div>
+        <div class="section-subtitle">ระบบที่ทำให้องค์กรดำเนินงานอย่างโปร่งใส รับผิดชอบ และยั่งยืน</div>
+      </div>
+    </div>
+    <div class="intro">
+      Corporate Governance = <strong>ระบบการกำกับดูแลกิจการ</strong> ที่กำหนดความสัมพันธ์ระหว่าง
+      คณะกรรมการ ผู้บริหาร ผู้ถือหุ้น และผู้มีส่วนได้ส่วนเสีย
+      เพื่อให้มั่นใจว่าองค์กรดำเนินงาน <strong>โปร่งใส มีจริยธรรม รับผิดชอบ และยั่งยืน</strong>
+    </div>
+  </div>
+
+  <!-- 5 PRINCIPLES -->
+  <div id="5principles" class="card">
+    <div class="section-header">
+      <div class="section-icon">🏛️</div>
+      <div>
+        <div class="section-title">5 หลักการ CG ที่ดี (OECD Principles)</div>
+        <div class="section-subtitle">มาตรฐานสากลที่ ธ.ก.ส. ยึดถือ</div>
+      </div>
+    </div>
+    <div class="principle-grid">
+      <div class="pr-box pr1">
+        <div class="pr-letter">A</div>
+        <h4>Accountability</h4>
+        <p>รับผิดชอบต่อการตัดสินใจ พร้อมอธิบายเหตุผล</p>
+      </div>
+      <div class="pr-box pr2">
+        <div class="pr-letter">T</div>
+        <h4>Transparency</h4>
+        <p>เปิดเผยข้อมูลครบถ้วน ตรงเวลา ถูกต้อง</p>
+      </div>
+      <div class="pr-box pr3">
+        <div class="pr-letter">F</div>
+        <h4>Fairness</h4>
+        <p>ปฏิบัติต่อผู้มีส่วนได้ส่วนเสียอย่างเป็นธรรม เท่าเทียม</p>
+      </div>
+      <div class="pr-box pr4">
+        <div class="pr-letter">R</div>
+        <h4>Responsibility</h4>
+        <p>ดำเนินงานตามหน้าที่ด้วยความรับผิดชอบ รอบคอบ</p>
+      </div>
+      <div class="pr-box pr5">
+        <div class="pr-letter">E</div>
+        <h4>Ethics</h4>
+        <p>มีจรรยาบรรณ ปฏิบัติอย่างซื่อสัตย์ ไม่ขัดผลประโยชน์</p>
+      </div>
+    </div>
+    <div class="highlight">
+      <strong>จำง่าย:</strong> <strong>A-TREE</strong> = Accountability, Transparency, Responsibility, Ethics + Fairness — หรือจำว่า "โปร่งใส รับผิดชอบ เป็นธรรม มีจริยธรรม"
+    </div>
+  </div>
+
+  <!-- BOARD STRUCTURE -->
+  <div id="board" class="card blue">
+    <div class="section-header">
+      <div class="section-icon">👥</div>
+      <div>
+        <div class="section-title">โครงสร้างคณะกรรมการและการถ่วงดุลอำนาจ</div>
+        <div class="section-subtitle">Check and Balance ในโครงสร้าง ธ.ก.ส.</div>
+      </div>
+    </div>
+    <div class="board-grid">
+      <div class="b-box">
+        <h4>🏛️ คณะกรรมการ ธ.ก.ส.</h4>
+        <p>กำกับดูแลนโยบายและทิศทางองค์กร อนุมัติแผนวิสาหกิจ กำกับการบริหารความเสี่ยง ประเมินผู้บริหาร — รายงานต่อกระทรวงการคลัง</p>
+      </div>
+      <div class="b-box">
+        <h4>🔍 คณะกรรมการตรวจสอบ (Audit Committee)</h4>
+        <p>ดูแลความน่าเชื่อถือของรายงานการเงิน ควบคุมภายใน กำกับ Internal Audit — ต้องเป็นกรรมการอิสระเท่านั้น</p>
+      </div>
+      <div class="b-box">
+        <h4>⚠️ คณะกรรมการกำกับความเสี่ยง (Risk Committee)</h4>
+        <p>กำกับดูแลนโยบายบริหารความเสี่ยง กำหนด Risk Appetite ติดตาม KRI รายงานต่อคณะกรรมการ</p>
+      </div>
+      <div class="b-box">
+        <h4>⚖️ สายงานกำกับการปฏิบัติงาน (Compliance)</h4>
+        <p>ตรวจสอบว่าการดำเนินงานสอดคล้องกับกฎหมาย กฎ ธปท. Market Conduct PDPA AML — รายงานอิสระ</p>
+      </div>
+    </div>
+    <div class="highlight">
+      <strong>หลัก Check and Balance:</strong> ต้องมีการถ่วงดุลอำนาจ — Internal Audit รายงานตรงต่อคณะกรรมการตรวจสอบ ไม่ผ่านผู้บริหาร
+    </div>
+  </div>
+
+  <!-- ANTI-CORRUPTION -->
+  <div id="anti" class="card red">
+    <div class="section-header">
+      <div class="section-icon">🚫</div>
+      <div>
+        <div class="section-title">การต่อต้านการทุจริต (Anti-Corruption)</div>
+        <div class="section-subtitle">นโยบายซีโร่ทอเลอแรนซ์ ธ.ก.ส.</div>
+      </div>
+    </div>
+    <div class="ac-row">
+      <div class="ac-box ac-do">
+        <h4>✅ พฤติกรรมที่ถูกต้อง</h4>
+        <ul>
+          <li>แจ้งผลประโยชน์ทับซ้อนก่อนตัดสินใจ</li>
+          <li>ปฏิเสธของขวัญที่เกินมูลค่าที่กำหนด</li>
+          <li>รายงานเมื่อพบการทุจริตหรือผิดปกติ</li>
+          <li>ปฏิบัติตามระเบียบจัดซื้อจัดจ้างอย่างเคร่งครัด</li>
+          <li>ไม่ใช้ทรัพยากรขององค์กรเพื่อประโยชน์ส่วนตัว</li>
+        </ul>
+      </div>
+      <div class="ac-box ac-dont">
+        <h4>❌ ทุจริต/ผลประโยชน์ทับซ้อน</h4>
+        <ul>
+          <li>รับสินบน ของขวัญ เพื่อแลกกับการช่วยเหลือ</li>
+          <li>อนุมัติสินเชื่อให้พวกพ้องโดยขาดมาตรฐาน</li>
+          <li>เปิดเผยข้อมูลลับเพื่อประโยชน์ส่วนตัว</li>
+          <li>ยักยอกทรัพย์สินของธนาคาร</li>
+          <li>ปลอมแปลงเอกสาร แก้ไขข้อมูล</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHISTLEBLOWER -->
+  <div id="whistle" class="card teal">
+    <div class="section-header">
+      <div class="section-icon">📣</div>
+      <div>
+        <div class="section-title">ระบบผู้แจ้งเบาะแส (Whistleblower)</div>
+        <div class="section-subtitle">ช่องทางแจ้งเหตุทุจริตอย่างปลอดภัย</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>องค์ประกอบ</th><th>รายละเอียด</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag green">ช่องทางแจ้ง</span></td>
+          <td>ระบบออนไลน์ ตู้รับเรื่อง สายด่วน เพื่อให้แจ้งได้โดยไม่เปิดเผยตัวตน</td>
+        </tr>
+        <tr>
+          <td><span class="tag">การคุ้มครองผู้แจ้ง</span></td>
+          <td>ผู้แจ้งโดยสุจริตได้รับการคุ้มครอง ไม่ถูกตอบโต้หรือเลือกปฏิบัติ</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">การสอบสวน</span></td>
+          <td>มีกระบวนการสอบสวนที่เป็นอิสระ ยุติธรรม ปราศจากการแทรกแซง</td>
+        </tr>
+        <tr>
+          <td><span class="tag">การรายงานผล</span></td>
+          <td>รายงานผลต่อคณะกรรมการตรวจสอบ ไม่ผ่านสายงานที่เกี่ยวข้อง</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CG IN GRC -->
+  <div id="grc" class="card purple">
+    <div class="section-header">
+      <div class="section-icon">⚙️</div>
+      <div>
+        <div class="section-title">CG เป็นส่วนหนึ่งของ GRC</div>
+        <div class="section-subtitle">Governance + Risk + Compliance = GRC</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>มิติ</th><th>บทบาทใน CG</th><th>เครื่องมือหลัก</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">G — Governance</span></td>
+          <td>โครงสร้างคณะกรรมการ นโยบาย จรรยาบรรณ</td>
+          <td>Board Charter, Code of Conduct, CG Policy</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">R — Risk</span></td>
+          <td>กำกับการบริหารความเสี่ยงระดับองค์กร</td>
+          <td>Risk Appetite, ERM Framework, Risk Committee</td>
+        </tr>
+        <tr>
+          <td><span class="tag green">C — Compliance</span></td>
+          <td>ปฏิบัติตามกฎหมาย กฎ ธปท. มาตรฐานสากล</td>
+          <td>Compliance Program, Internal Audit, Whistleblower</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="highlight">
+      <strong>ผลคะแนน SE-AM ปี 2568:</strong> Composite Rating ระดับ 3 (พอใช้) — ธ.ก.ส. ยังต้องพัฒนาด้าน CG เพิ่มเติม โดยเฉพาะการบูรณาการ GRC ผ่านโครงการ SP69-32
+    </div>
+  </div>
+
+  <!-- EXAM TIPS -->
+  <div id="exam" class="tips-box">
+    <h3>📝 เทคนิคทำข้อสอบ — Corporate Governance</h3>
+    <div class="tip-item">
+      <span class="bullet">①</span>
+      <span><strong>5 หลักการ CG:</strong> Accountability + Transparency + Fairness + Responsibility + Ethics — จำ "ATFRE" หรือ "โปร่งใส รับผิดชอบ เป็นธรรม มีจริยธรรม"</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">②</span>
+      <span><strong>Internal Audit ต้องรายงานตรงต่อคณะกรรมการตรวจสอบ</strong> — ไม่ผ่านผู้บริหารสายงาน เพื่อความเป็นอิสระ</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">③</span>
+      <span><strong>ผลประโยชน์ทับซ้อน (Conflict of Interest)</strong> = ต้องแจ้งก่อน ไม่ใช่ซ่อน — ต้องงดออกเสียงในเรื่องที่มีผลประโยชน์</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">④</span>
+      <span><strong>Whistleblower ที่ดี</strong> = ต้องมีการคุ้มครองผู้แจ้ง ช่องทางที่ปลอดภัย และการสอบสวนที่เป็นอิสระ</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">⑤</span>
+      <span><strong>Tone from the Top</strong> = ผู้บริหารและคณะกรรมการต้องเป็นแบบอย่าง CG ที่ดี ถ้าบนไม่ดี ล่างก็ไม่ดี</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">⑥</span>
+      <span><strong>CG ≠ แค่ระเบียบบนกระดาษ</strong> — ต้องเป็นวัฒนธรรมจริงที่ทุกคนในองค์กรปฏิบัติ</span>
+    </div>
+  </div>
+
+</div>
+<footer>ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (ธ.ก.ส.) &nbsp;|&nbsp; เตรียมสอบ 2569 &nbsp;|&nbsp; ความรู้เนื้อหากลาง ข้อที่ 10</footer>
+<a href="index-เนื้อหากลาง.html" style="position:fixed;bottom:24px;left:24px;background:#1a5276;color:white;text-decoration:none;border-radius:50px;padding:12px 22px;font-family:'Sarabun',sans-serif;font-size:.88rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:999;">← กลับหน้ารวม</a>
+</body>
+</html>

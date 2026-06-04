@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เนื้อหากลาง ข้อ 6 | การกำกับดูแลข้อมูล Data Governance</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Sarabun',sans-serif;background:#f0f4f8;color:#2d3748;line-height:1.7;}
+  .hero{background:linear-gradient(135deg,#0b3d0b 0%,#155724 50%,#1e8449 100%);color:white;text-align:center;padding:60px 20px 50px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 60%);animation:pulse 6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  .hero-logo{font-size:3.5rem;margin-bottom:12px;}
+  .hero h1{font-size:1.9rem;font-weight:700;letter-spacing:1px;margin-bottom:8px;}
+  .hero .sub{font-size:1rem;opacity:.85;font-weight:300;}
+  .badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:50px;padding:4px 18px;font-size:.85rem;margin-top:14px;}
+  .toc{background:white;padding:20px;border-bottom:3px solid #1e8449;overflow-x:auto;}
+  .toc-inner{max-width:960px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;}
+  .toc a{text-decoration:none;background:#eafaf1;color:#1e8449;border-radius:20px;padding:6px 14px;font-size:.82rem;font-weight:600;transition:all .2s;white-space:nowrap;}
+  .toc a:hover{background:#1e8449;color:white;}
+  .container{max-width:960px;margin:0 auto;padding:40px 20px 60px;}
+  .card{background:white;border-radius:16px;padding:32px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.07);border-left:5px solid #27ae60;transition:box-shadow .2s;}
+  .card:hover{box-shadow:0 6px 24px rgba(0,0,0,.12);}
+  .card.blue{border-left-color:#2e86c1;} .card.orange{border-left-color:#e67e22;} .card.purple{border-left-color:#8e44ad;} .card.teal{border-left-color:#16a085;} .card.gold{border-left-color:#f39c12;}
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .section-icon{font-size:1.8rem;background:#eafaf1;border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .card.blue .section-icon{background:#eaf4fb;} .card.orange .section-icon{background:#fef9e7;} .card.purple .section-icon{background:#f5eef8;} .card.teal .section-icon{background:#e8f8f5;} .card.gold .section-icon{background:#fef9e7;}
+  .section-title{font-size:1.25rem;font-weight:700;color:#1a5276;}
+  .section-subtitle{font-size:.8rem;color:#7f8c8d;font-weight:400;}
+  .intro{background:linear-gradient(135deg,#eafaf1,#e8f8f5);border-radius:12px;padding:18px 22px;font-size:.97rem;color:#1a5276;line-height:1.8;margin-bottom:20px;border-left:4px solid #27ae60;}
+  /* QUALITY GRID */
+  .quality-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:640px){.quality-grid{grid-template-columns:1fr 1fr;}}
+  .q-box{background:#f8fbfd;border-radius:12px;padding:18px 14px;border:2px solid #d6eaf8;text-align:center;}
+  .q-box .q-icon{font-size:1.8rem;margin-bottom:6px;}
+  .q-box h4{font-size:.88rem;font-weight:700;color:#1a5276;margin-bottom:4px;}
+  .q-box p{font-size:.8rem;color:#5d6d7e;line-height:1.5;}
+  /* ROLES */
+  .roles-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:640px){.roles-row{grid-template-columns:1fr;}}
+  .role-box{border-radius:14px;padding:20px 16px;text-align:center;}
+  .r1{background:linear-gradient(135deg,#eafaf1,#d5f5e3);border:2px solid #27ae60;}
+  .r2{background:linear-gradient(135deg,#eaf4fb,#d6eaf8);border:2px solid #2e86c1;}
+  .r3{background:linear-gradient(135deg,#fef9e7,#fde8a0);border:2px solid #f39c12;}
+  .role-box h4{font-size:.9rem;font-weight:700;margin-bottom:8px;color:#1a5276;}
+  .role-box p{font-size:.82rem;color:#5d6d7e;line-height:1.5;}
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px;}
+  th{background:#1e8449;color:white;padding:11px 14px;text-align:left;font-weight:600;}
+  th:first-child{border-radius:10px 0 0 0;} th:last-child{border-radius:0 10px 0 0;}
+  td{padding:10px 14px;border-bottom:1px solid #eaecee;}
+  tr:nth-child(even) td{background:#f8f9fa;}
+  tr:last-child td:first-child{border-radius:0 0 0 10px;} tr:last-child td:last-child{border-radius:0 0 10px 0;}
+  .tag{background:#eafaf1;color:#1e8449;border-radius:6px;padding:2px 10px;font-size:.82rem;font-weight:600;white-space:nowrap;}
+  .tag.blue{background:#eaf4fb;color:#1a5276;} .tag.orange{background:#fef9e7;color:#b7770d;} .tag.red{background:#fdedec;color:#922b21;}
+  .highlight{background:#fef9e7;border-left:4px solid #f39c12;border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px;font-size:.9rem;color:#7d6608;}
+  .highlight strong{color:#d35400;}
+  .tips-box{background:linear-gradient(135deg,#fff9e6,#fffde7);border:2px solid #f39c12;border-radius:14px;padding:24px;}
+  .tips-box h3{color:#d35400;font-size:1.05rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .tip-item{display:flex;gap:10px;margin-bottom:10px;font-size:.92rem;}
+  .tip-item .bullet{color:#f39c12;font-weight:700;flex-shrink:0;margin-top:1px;}
+  /* CONCEPT BOX */
+  .concept-box{background:#f8fbfd;border-radius:12px;padding:18px;border:1px solid #d6eaf8;margin-top:8px;}
+  .concept-box h4{font-size:.9rem;font-weight:700;color:#1a5276;margin-bottom:8px;}
+  .concept-box p{font-size:.85rem;color:#5d6d7e;line-height:1.65;}
+  footer{text-align:center;font-size:.82rem;color:#95a5a6;padding:24px;border-top:1px solid #eaecee;background:white;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo">🗄️</div>
+  <h1>ความรู้เนื้อหากลาง ข้อที่ 6</h1>
+  <p class="sub">การกำกับดูแลข้อมูล (Data Governance)</p>
+  <div class="badge">คุณภาพข้อมูล · ผู้รับผิดชอบ · จริยธรรมข้อมูล · โครงการ Your Data</div>
+</div>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#what">📖 Data Governance คืออะไร</a>
+    <a href="#quality">✅ คุณภาพข้อมูล</a>
+    <a href="#roles">👥 บทบาทและความรับผิดชอบ</a>
+    <a href="#ropa">📋 ROPA</a>
+    <a href="#ethics">⚖️ จริยธรรม AI</a>
+    <a href="#baac">🏦 โครงการ ธ.ก.ส.</a>
+    <a href="#exam">📝 เทคนิคสอบ</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- WHAT IS DG -->
+  <div id="what" class="card">
+    <div class="section-header">
+      <div class="section-icon">📖</div>
+      <div>
+        <div class="section-title">Data Governance คืออะไร</div>
+        <div class="section-subtitle">กรอบการบริหารจัดการข้อมูลขององค์กร</div>
+      </div>
+    </div>
+    <div class="intro">
+      Data Governance = <strong>กรอบนโยบาย กระบวนการ และความรับผิดชอบ</strong> เพื่อให้มั่นใจว่าข้อมูลขององค์กรมีคุณภาพ ปลอดภัย ใช้งานได้ถูกต้อง และสอดคล้องกับกฎหมาย
+      — เป็นรากฐานสำคัญของ Digital Transformation และการใช้ AI อย่างมีจริยธรรม
+    </div>
+    <div class="concept-box">
+      <h4>🎯 ทำไม ธ.ก.ส. ถึงต้องมี Data Governance</h4>
+      <p>ธ.ก.ส. มีฐานข้อมูลลูกค้า 29+ ล้านคน ข้อมูลสินเชื่อ ข้อมูลการเกษตร ข้อมูลทางการเงิน — ถ้าข้อมูลไม่มีคุณภาพหรือถูกใช้ผิด จะกระทบทั้งการตัดสินใจสินเชื่อ การวิเคราะห์ความเสี่ยง และความเชื่อมั่นของลูกค้า</p>
+    </div>
+  </div>
+
+  <!-- DATA QUALITY -->
+  <div id="quality" class="card blue">
+    <div class="section-header">
+      <div class="section-icon">✅</div>
+      <div>
+        <div class="section-title">มิติคุณภาพข้อมูล (Data Quality Dimensions)</div>
+        <div class="section-subtitle">6 มิติที่ใช้วัดว่าข้อมูลดีพอหรือไม่</div>
+      </div>
+    </div>
+    <div class="quality-grid">
+      <div class="q-box">
+        <div class="q-icon">🎯</div>
+        <h4>Accuracy</h4>
+        <p>ความถูกต้องตามความเป็นจริง ข้อมูลที่บันทึกตรงกับข้อมูลจริงหรือไม่</p>
+      </div>
+      <div class="q-box">
+        <div class="q-icon">🧩</div>
+        <h4>Completeness</h4>
+        <p>ความครบถ้วน ข้อมูลที่จำเป็นครบหรือไม่ ไม่มีช่องว่างหรือข้อมูลหายไป</p>
+      </div>
+      <div class="q-box">
+        <div class="q-icon">🔄</div>
+        <h4>Consistency</h4>
+        <p>ความสอดคล้อง ข้อมูลในระบบต่างๆ ตรงกันหรือไม่ ไม่ขัดแย้งกัน</p>
+      </div>
+      <div class="q-box">
+        <div class="q-icon">⏱️</div>
+        <h4>Timeliness</h4>
+        <p>ความทันสมัย ข้อมูลอัพเดทตรงเวลาหรือไม่ ไม่ล้าสมัย</p>
+      </div>
+      <div class="q-box">
+        <div class="q-icon">🔗</div>
+        <h4>Relevancy</h4>
+        <p>ความเกี่ยวข้อง ข้อมูลที่เก็บจำเป็นจริงๆ ไม่เก็บเกินความจำเป็น</p>
+      </div>
+      <div class="q-box">
+        <div class="q-icon">🔒</div>
+        <h4>Integrity</h4>
+        <p>ความสมบูรณ์ ข้อมูลไม่ถูกแก้ไขโดยไม่ได้รับอนุญาต มีความน่าเชื่อถือ</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROLES -->
+  <div id="roles" class="card orange">
+    <div class="section-header">
+      <div class="section-icon">👥</div>
+      <div>
+        <div class="section-title">บทบาทและความรับผิดชอบด้านข้อมูล</div>
+        <div class="section-subtitle">3 บทบาทหลักใน Data Governance</div>
+      </div>
+    </div>
+    <div class="roles-row">
+      <div class="role-box r1">
+        <h4>🏛️ Data Owner</h4>
+        <p>เจ้าของข้อมูล — ผู้บริหารระดับสูงของส่วนงาน รับผิดชอบนโยบายการใช้ข้อมูลของส่วนงาน อนุญาตการเข้าถึง จัดทำบันทึก ROPA</p>
+      </div>
+      <div class="role-box r2">
+        <h4>📋 Data Steward</h4>
+        <p>ผู้ดูแลข้อมูล — ผู้ปฏิบัติงานที่รับผิดชอบคุณภาพข้อมูลในแต่ละวัน ตรวจสอบความถูกต้อง แก้ไขข้อมูลผิดพลาด</p>
+      </div>
+      <div class="role-box r3">
+        <h4>💾 Data Custodian</h4>
+        <p>ผู้ดูแลระบบ — ฝ่าย IT รับผิดชอบโครงสร้างพื้นฐาน การจัดเก็บ การสำรองข้อมูล ความปลอดภัยของระบบ</p>
+      </div>
+    </div>
+    <div class="concept-box" style="margin-top:16px;">
+      <h4>📊 คณะกรรมการกำกับดูแลข้อมูล (Data Governance Committee)</h4>
+      <p>ธ.ก.ส. มีคณะกรรมการระดับองค์กรเพื่อกำกับดูแลนโยบายข้อมูล ตรวจสอบการใช้ข้อมูลอย่างมีจริยธรรม และกำกับดูแลโมเดล AI ไม่ให้มีอคติ (Ethics & Fairness)</p>
+    </div>
+  </div>
+
+  <!-- ROPA -->
+  <div id="ropa" class="card teal">
+    <div class="section-header">
+      <div class="section-icon">📋</div>
+      <div>
+        <div class="section-title">บันทึกกิจกรรมการประมวลผลข้อมูล (ROPA)</div>
+        <div class="section-subtitle">Record of Processing Activities — ข้อกำหนดตาม PDPA</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>รายการใน ROPA</th><th>ตัวอย่าง</th></tr></thead>
+      <tbody>
+        <tr><td>วัตถุประสงค์การเก็บข้อมูล</td><td>เพื่อวิเคราะห์สินเชื่อ, เพื่อส่งข้อมูลโปรโมชัน</td></tr>
+        <tr><td>ประเภทข้อมูลที่เก็บ</td><td>ชื่อ-นามสกุล เลขบัตร รายได้ ประวัติการชำระหนี้</td></tr>
+        <tr><td>ฐานทางกฎหมายในการประมวลผล</td><td>Consent, สัญญา, ประโยชน์โดยชอบด้วยกฎหมาย</td></tr>
+        <tr><td>ระยะเวลาการเก็บข้อมูล</td><td>ตามกฎหมาย เช่น 5 ปีหลังสิ้นสุดสัญญา</td></tr>
+        <tr><td>ผู้ที่มีสิทธิ์เข้าถึง</td><td>เฉพาะส่วนงานที่จำเป็น ตามหลัก Need-to-Know</td></tr>
+        <tr><td>มาตรการรักษาความปลอดภัย</td><td>เข้ารหัส, Access Control, Log การเข้าถึง</td></tr>
+      </tbody>
+    </table>
+    <div class="highlight">
+      <strong>ใครต้องจัดทำ ROPA:</strong> ธนาคาร (ผู้ควบคุมข้อมูล) และส่วนงาน Data Owner — ไม่ใช่แค่ฝ่าย IT
+    </div>
+  </div>
+
+  <!-- ETHICS AI -->
+  <div id="ethics" class="card purple">
+    <div class="section-header">
+      <div class="section-icon">⚖️</div>
+      <div>
+        <div class="section-title">จริยธรรมข้อมูลและ AI (Data Ethics & AI Fairness)</div>
+        <div class="section-subtitle">ป้องกันอคติในระบบ AI ที่ใช้ตัดสินใจ</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>มิติ Data Governance</th><th>ความหมาย</th><th>ตัวอย่างปัญหา</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag">Ethics & Fairness</span></td>
+          <td>AI ต้องไม่มีอคติต่อกลุ่มใดกลุ่มหนึ่ง</td>
+          <td>AI ปฏิเสธสินเชื่อกลุ่มเกษตรกรรายย่อยอย่างเป็นระบบ (Systemic Bias)</td>
+        </tr>
+        <tr>
+          <td><span class="tag blue">Accuracy</span></td>
+          <td>ข้อมูลดิบที่ป้อนเข้า AI ต้องถูกต้อง</td>
+          <td>ข้อมูลรายได้ผิดพลาด ทำให้ AI วิเคราะห์ความเสี่ยงผิด</td>
+        </tr>
+        <tr>
+          <td><span class="tag orange">Relevancy</span></td>
+          <td>ข้อมูลที่ใช้ต้องจำเป็นต่อวัตถุประสงค์จริง</td>
+          <td>ใช้ข้อมูลสุขภาพในการพิจารณาสินเชื่อโดยไม่จำเป็น</td>
+        </tr>
+        <tr>
+          <td><span class="tag">Transparency</span></td>
+          <td>อธิบายได้ว่า AI ตัดสินใจอย่างไร (Explainability)</td>
+          <td>AI ปฏิเสธสินเชื่อโดยไม่สามารถอธิบายเหตุผลได้</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BAAC YOUR DATA -->
+  <div id="baac" class="card gold">
+    <div class="section-header">
+      <div class="section-icon">🏦</div>
+      <div>
+        <div class="section-title">โครงการ Your Data — ธ.ก.ส.</div>
+        <div class="section-subtitle">Open Data Initiative เพื่อลดความเหลื่อมล้ำในการเข้าถึงสินเชื่อ</div>
+      </div>
+    </div>
+    <div class="intro">
+      โครงการ Your Data ให้เกษตรกรสามารถใช้ <strong>"ข้อมูลทางเลือก" (Alternative Data)</strong> เช่น ประวัติการทำธุรกรรมดิจิทัล พฤติกรรมการชำระเงิน ข้อมูลการเกษตร
+      แทนหลักประกันที่ขาดแคลน เพื่อประเมินความสามารถในการชำระหนี้
+    </div>
+    <table>
+      <thead><tr><th>ประโยชน์</th><th>รายละเอียด</th></tr></thead>
+      <tbody>
+        <tr><td>ลดความเหลื่อมล้ำ</td><td>คนที่ไม่มีสลิปเงินเดือน/หลักประกัน เข้าถึงสินเชื่อได้ผ่านประวัติข้อมูลดิจิทัล</td></tr>
+        <tr><td>เพิ่มความแม่นยำ</td><td>Alternative Data ช่วยประเมินความเสี่ยงเครดิตได้ดีกว่าการดูแค่หลักประกัน</td></tr>
+        <tr><td>Financial Inclusion</td><td>ขยายการเข้าถึงบริการทางการเงินให้ครอบคลุมกลุ่มเปราะบาง</td></tr>
+        <tr><td>Data Portability</td><td>ลูกค้ามีสิทธิ์พกพาข้อมูลของตัวเองไปใช้กับสถาบันการเงินอื่น</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXAM TIPS -->
+  <div id="exam" class="tips-box">
+    <h3>📝 เทคนิคทำข้อสอบ — Data Governance</h3>
+    <div class="tip-item">
+      <span class="bullet">①</span>
+      <span><strong>Ethics & Fairness</strong> ใช้แก้ปัญหา AI มีอคติ (Systemic Bias) — ไม่ใช่ Accuracy หรือ Relevancy</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">②</span>
+      <span><strong>Data Owner ≠ IT</strong> — Data Owner คือผู้บริหารส่วนงานที่ "เป็นเจ้าของ" ข้อมูลนั้น, IT = Data Custodian ดูแลระบบ</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">③</span>
+      <span><strong>ROPA ต้องทำโดยธนาคารและ Data Owner</strong> — ไม่ใช่แค่ฝ่าย IT หรือเจ้าหน้าที่สาขา</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">④</span>
+      <span><strong>Your Data = Alternative Data ลดเหลื่อมล้ำ</strong> — ช่วยให้คนไม่มีหลักประกันเข้าถึงสินเชื่อได้ผ่านข้อมูลดิจิทัล</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">⑤</span>
+      <span><strong>Relevancy ≠ Accuracy</strong> — Relevancy = ข้อมูลที่เก็บ "จำเป็น" หรือเปล่า, Accuracy = ข้อมูลที่เก็บ "ถูกต้อง" หรือเปล่า</span>
+    </div>
+  </div>
+
+</div>
+<footer>ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (ธ.ก.ส.) &nbsp;|&nbsp; เตรียมสอบ 2569 &nbsp;|&nbsp; ความรู้เนื้อหากลาง ข้อที่ 6</footer>
+<a href="index-เนื้อหากลาง.html" style="position:fixed;bottom:24px;left:24px;background:#1a5276;color:white;text-decoration:none;border-radius:50px;padding:12px 22px;font-family:'Sarabun',sans-serif;font-size:.88rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:999;">← กลับหน้ารวม</a>
+</body>
+</html>

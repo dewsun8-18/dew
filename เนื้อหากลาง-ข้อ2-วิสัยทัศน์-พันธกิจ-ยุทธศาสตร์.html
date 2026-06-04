@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เนื้อหากลาง ข้อ 2 | วิสัยทัศน์ พันธกิจ ยุทธศาสตร์ ธ.ก.ส.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Sarabun',sans-serif; background:#f0f4f8; color:#2d3748; line-height:1.7; }
+
+  .hero {
+    background: linear-gradient(135deg, #1a3a52 0%, #1a5276 50%, #2980b9 100%);
+    color:white; text-align:center; padding:60px 20px 50px; position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+    background:radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+    animation:pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  .hero-logo{font-size:3.5rem;margin-bottom:12px;}
+  .hero h1{font-size:1.9rem;font-weight:700;letter-spacing:1px;margin-bottom:8px;}
+  .hero .sub{font-size:1rem;opacity:.85;font-weight:300;}
+  .badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:50px;padding:4px 18px;font-size:.85rem;margin-top:14px;}
+
+  .toc{background:white;padding:20px;border-bottom:3px solid #1a5276;overflow-x:auto;}
+  .toc-inner{max-width:960px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;}
+  .toc a{text-decoration:none;background:#eaf4fb;color:#1a5276;border-radius:20px;padding:6px 14px;font-size:.82rem;font-weight:600;transition:all .2s;white-space:nowrap;}
+  .toc a:hover{background:#1a5276;color:white;}
+
+  .container{max-width:960px;margin:0 auto;padding:40px 20px 60px;}
+
+  .card{background:white;border-radius:16px;padding:32px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.07);border-left:5px solid #2e86c1;transition:box-shadow .2s;}
+  .card:hover{box-shadow:0 6px 24px rgba(0,0,0,.12);}
+  .card.green{border-left-color:#27ae60;}
+  .card.orange{border-left-color:#e67e22;}
+  .card.purple{border-left-color:#8e44ad;}
+  .card.teal{border-left-color:#16a085;}
+  .card.gold{border-left-color:#f39c12;}
+  .card.dark{border-left-color:#2c3e50;}
+  .card.red{border-left-color:#c0392b;}
+
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .section-icon{font-size:1.8rem;background:#eaf4fb;border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .card.green .section-icon{background:#eafaf1;}
+  .card.orange .section-icon{background:#fef9e7;}
+  .card.purple .section-icon{background:#f5eef8;}
+  .card.teal .section-icon{background:#e8f8f5;}
+  .card.gold .section-icon{background:#fef9e7;}
+  .card.dark .section-icon{background:#eaecee;}
+  .card.red .section-icon{background:#fdedec;}
+  .section-title{font-size:1.25rem;font-weight:700;color:#1a5276;}
+  .section-subtitle{font-size:.8rem;color:#7f8c8d;font-weight:400;}
+
+  .intro{background:linear-gradient(135deg,#eaf4fb,#e8f8f5);border-radius:12px;padding:18px 22px;font-size:.97rem;color:#1a5276;line-height:1.8;margin-bottom:20px;border-left:4px solid #2e86c1;}
+
+  /* VISION BOX */
+  .vision-box{background:linear-gradient(135deg,#1a5276,#2980b9);color:white;border-radius:16px;padding:32px;text-align:center;margin-bottom:20px;}
+  .vision-box .v-label{font-size:.85rem;opacity:.8;font-weight:400;margin-bottom:8px;}
+  .vision-box h2{font-size:1.8rem;font-weight:800;line-height:1.4;margin-bottom:12px;}
+  .vision-box .v-def{font-size:.9rem;opacity:.85;line-height:1.7;max-width:700px;margin:0 auto;}
+
+  /* MISSION GRID */
+  .mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:640px){.mission-grid{grid-template-columns:1fr;}}
+  .mission-box{border-radius:14px;padding:22px 18px;border:2px solid;}
+  .mission-box:nth-child(1){background:#eaf4fb;border-color:#2e86c1;}
+  .mission-box:nth-child(2){background:#e8f8f5;border-color:#16a085;}
+  .mission-box:nth-child(3){background:#fef9e7;border-color:#f39c12;}
+  .mission-box .m-icon{font-size:2rem;margin-bottom:8px;}
+  .mission-box h4{font-size:.92rem;font-weight:700;color:#1a5276;margin-bottom:8px;}
+  .mission-box p{font-size:.83rem;color:#5d6d7e;line-height:1.6;}
+
+  /* SPARK */
+  .spark-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:8px;}
+  @media(max-width:640px){.spark-grid{grid-template-columns:1fr 1fr;}}
+  .spark-box{border-radius:14px;padding:18px 12px;text-align:center;}
+  .spark-s{background:#fdf2f8;border:2px solid #8e44ad;}
+  .spark-p{background:#eaf4fb;border:2px solid #2e86c1;}
+  .spark-a{background:#eafaf1;border:2px solid #27ae60;}
+  .spark-r{background:#fef9e7;border:2px solid #f39c12;}
+  .spark-k{background:#fdedec;border:2px solid #c0392b;}
+  .spark-box .letter{font-size:2.2rem;font-weight:800;margin-bottom:4px;}
+  .spark-s .letter{color:#8e44ad;}
+  .spark-p .letter{color:#2e86c1;}
+  .spark-a .letter{color:#27ae60;}
+  .spark-r .letter{color:#e67e22;}
+  .spark-k .letter{color:#c0392b;}
+  .spark-box h4{font-size:.8rem;font-weight:700;margin-bottom:6px;color:#1a5276;}
+  .spark-box p{font-size:.75rem;color:#5d6d7e;line-height:1.5;}
+
+  /* PHASE TIMELINE */
+  .phase-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px;}
+  @media(max-width:600px){.phase-row{grid-template-columns:1fr;}}
+  .phase-box{border-radius:14px;padding:22px 18px;position:relative;overflow:hidden;}
+  .phase-1{background:linear-gradient(135deg,#e8f8f5,#d5f5e3);border:2px solid #27ae60;}
+  .phase-2{background:linear-gradient(135deg,#eaf4fb,#d6eaf8);border:2px solid #2e86c1;}
+  .phase-3{background:linear-gradient(135deg,#fdf2f8,#f5eef8);border:2px solid #8e44ad;}
+  .phase-box .ph-period{font-size:.75rem;font-weight:700;margin-bottom:6px;}
+  .phase-1 .ph-period{color:#1e8449;}
+  .phase-2 .ph-period{color:#1a5276;}
+  .phase-3 .ph-period{color:#6c3483;}
+  .phase-box h4{font-size:.95rem;font-weight:800;margin-bottom:6px;color:#1a5276;}
+  .phase-box .en-name{font-size:.82rem;font-style:italic;margin-bottom:10px;color:#7f8c8d;}
+  .phase-box ul{list-style:none;font-size:.82rem;color:#5d6d7e;}
+  .phase-box ul li{padding:2px 0;}
+  .phase-box ul li::before{content:"• ";font-weight:700;}
+
+  /* SO GRID */
+  .so-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:600px){.so-grid{grid-template-columns:1fr;}}
+  .so-box{background:#f8fbfd;border-radius:12px;padding:18px;border:1px solid #d6eaf8;}
+  .so-box .so-num{display:inline-block;background:#1a5276;color:white;border-radius:8px;padding:2px 10px;font-size:.78rem;font-weight:700;margin-bottom:8px;}
+  .so-box h4{font-size:.9rem;font-weight:700;color:#1a5276;margin-bottom:6px;}
+  .so-box p{font-size:.82rem;color:#5d6d7e;line-height:1.6;}
+  .so-box .so-kpi{margin-top:8px;font-size:.79rem;color:#7f8c8d;border-top:1px solid #eaecee;padding-top:8px;}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px;}
+  th{background:#1a5276;color:white;padding:11px 14px;text-align:left;font-weight:600;}
+  th:first-child{border-radius:10px 0 0 0;}
+  th:last-child{border-radius:0 10px 0 0;}
+  td{padding:10px 14px;border-bottom:1px solid #eaecee;}
+  tr:nth-child(even) td{background:#f8f9fa;}
+  tr:last-child td:first-child{border-radius:0 0 0 10px;}
+  tr:last-child td:last-child{border-radius:0 0 10px 0;}
+  .tag{background:#eaf4fb;color:#1a5276;border-radius:6px;padding:2px 10px;font-size:.82rem;font-weight:600;white-space:nowrap;}
+  .tag.green{background:#eafaf1;color:#1e8449;}
+  .tag.orange{background:#fef9e7;color:#b7770d;}
+
+  /* KPI BOX */
+  .kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:600px){.kpi-grid{grid-template-columns:1fr 1fr;}}
+  .kpi-box{background:white;border-radius:12px;padding:18px;text-align:center;border:2px solid #d6eaf8;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+  .kpi-box .kpi-val{font-size:1.5rem;font-weight:800;color:#1a5276;margin-bottom:4px;}
+  .kpi-box .kpi-label{font-size:.8rem;color:#7f8c8d;line-height:1.4;}
+
+  /* HIGHLIGHT */
+  .highlight{background:#fef9e7;border-left:4px solid #f39c12;border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px;font-size:.9rem;color:#7d6608;}
+  .highlight strong{color:#d35400;}
+
+  /* EXAM TIPS */
+  .tips-box{background:linear-gradient(135deg,#fff9e6,#fffde7);border:2px solid #f39c12;border-radius:14px;padding:24px;}
+  .tips-box h3{color:#d35400;font-size:1.05rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .tip-item{display:flex;gap:10px;margin-bottom:10px;font-size:.92rem;}
+  .tip-item .bullet{color:#f39c12;font-weight:700;flex-shrink:0;margin-top:1px;}
+
+  /* CHAIN */
+  .chain{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:14px 18px;background:#f8fbfd;border-radius:10px;margin-top:12px;font-size:.88rem;font-weight:600;color:#1a5276;}
+  .chain .arrow{color:#2e86c1;font-size:1.1rem;}
+
+  /* CULTURE */
+  .culture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:600px){.culture-grid{grid-template-columns:1fr;}}
+  .culture-box{background:#f8fbfd;border-radius:12px;padding:18px;border:1px solid #d6eaf8;}
+  .culture-box h4{font-size:.9rem;font-weight:700;color:#1a5276;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .culture-box ul{list-style:none;font-size:.83rem;color:#5d6d7e;}
+  .culture-box ul li{padding:2px 0;}
+  .culture-box ul li::before{content:"▸ ";}
+
+  footer{text-align:center;font-size:.82rem;color:#95a5a6;padding:24px;border-top:1px solid #eaecee;background:white;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">🏦</div>
+  <h1>ความรู้เนื้อหากลาง ข้อที่ 2</h1>
+  <p class="sub">วิสัยทัศน์ · พันธกิจ · ยุทธศาสตร์ · นโยบาย · ทิศทางการดำเนินงาน ธ.ก.ส.</p>
+  <div class="badge">แผนวิสาหกิจ ระยะ 5 ปี ปีบัญชี 2567–2571 (ทบทวนปีบัญชี 2569)</div>
+</div>
+
+<!-- NAV -->
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#vision">🎯 วิสัยทัศน์</a>
+    <a href="#mission">📌 พันธกิจ</a>
+    <a href="#value">💎 ค่านิยม SPARK</a>
+    <a href="#culture">🌱 วัฒนธรรม HEAP</a>
+    <a href="#position">🗺️ ตำแหน่งยุทธศาสตร์</a>
+    <a href="#so">🎯 วัตถุประสงค์ SO</a>
+    <a href="#strategy">⚙️ กลยุทธ์ 12 ข้อ</a>
+    <a href="#kpi">📊 KPI ปี 2569</a>
+    <a href="#exam">📝 เทคนิคสอบ</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- VISION -->
+  <div id="vision" class="card">
+    <div class="section-header">
+      <div class="section-icon">🎯</div>
+      <div>
+        <div class="section-title">วิสัยทัศน์ (Vision)</div>
+        <div class="section-subtitle">ทิศทางระยะยาวของ ธ.ก.ส.</div>
+      </div>
+    </div>
+    <div class="vision-box">
+      <div class="v-label">วิสัยทัศน์ ธ.ก.ส.</div>
+      <h2>"ธนาคารพัฒนาชนบทที่ยั่งยืน"</h2>
+      <div class="v-def">
+        เป็นผู้ให้บริการทางการเงินที่รับผิดชอบ เพื่อสร้างการเติบโตระยะยาวที่ยั่งยืน และสร้างคุณค่าของผู้มีส่วนได้ส่วนเสีย<br>
+        ยกระดับเศรษฐกิจฐานรากด้วย <strong>เงินทุน · ความรู้ · นวัตกรรม · ตลาด</strong> เพื่อสร้างรายได้ที่มั่นคงให้เกษตรกรและชุมชน<br>
+        เน้นการสร้างสมดุลระหว่างเศรษฐกิจ สังคม สิ่งแวดล้อมอย่างยั่งยืน
+      </div>
+    </div>
+    <div class="chain">
+      <span>💰 เงินทุน</span><span class="arrow">+</span>
+      <span>📚 ความรู้</span><span class="arrow">+</span>
+      <span>💡 นวัตกรรม</span><span class="arrow">+</span>
+      <span>🛒 ตลาด</span><span class="arrow">→</span>
+      <span>🌾 เกษตรกรและชุมชนแข็งแกร่ง</span>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <div id="mission" class="card green">
+    <div class="section-header">
+      <div class="section-icon">📌</div>
+      <div>
+        <div class="section-title">พันธกิจ (Mission) — 3 ด้านหลัก</div>
+        <div class="section-subtitle">สิ่งที่ ธ.ก.ส. มุ่งทำเพื่อบรรลุวิสัยทัศน์</div>
+      </div>
+    </div>
+    <div class="mission-grid">
+      <div class="mission-box">
+        <div class="m-icon">🏛️</div>
+        <h4>ศูนย์กลางการเงินชนบท</h4>
+        <p>เป็นศูนย์กลางทางการเงินที่ให้บริการทางการเงินครบวงจรและทันสมัยแก่ภาคชนบท ควบคู่กับการดูแลสังคมและสิ่งแวดล้อม</p>
+      </div>
+      <div class="mission-box">
+        <div class="m-icon">💻</div>
+        <h4>องค์กรประสิทธิภาพสูง</h4>
+        <p>พัฒนาการบริหารและจัดการทรัพยากรด้วยเทคโนโลยีดิจิทัลและนวัตกรรม เพื่อมุ่งสู่การเป็นองค์กรประสิทธิภาพสูงอย่างมีธรรมาภิบาล</p>
+      </div>
+      <div class="mission-box">
+        <div class="m-icon">🌱</div>
+        <h4>ยกระดับภาคเกษตร</h4>
+        <p>สนับสนุนเงินทุนควบคู่กับความรู้ เทคโนโลยีและนวัตกรรม ยกระดับคุณภาพผลิตภัณฑ์ เชื่อมโยงตลาด สร้างรายได้ให้เกษตรกร</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPARK -->
+  <div id="value" class="card purple">
+    <div class="section-header">
+      <div class="section-icon">💎</div>
+      <div>
+        <div class="section-title">ค่านิยม (Core Values) — SPARK</div>
+        <div class="section-subtitle">พฤติกรรมที่พนักงาน ธ.ก.ส. ยึดถือในการทำงาน</div>
+      </div>
+    </div>
+    <div class="spark-grid">
+      <div class="spark-box spark-s">
+        <div class="letter">S</div>
+        <h4>Sustainability</h4>
+        <p>บริหารจัดการที่ดี ปฏิบัติตามจรรยาบรรณ ยึดหลักธรรมาภิบาล กล้าตัดสินใจในสิ่งที่ถูกต้อง</p>
+      </div>
+      <div class="spark-box spark-p">
+        <div class="letter">P</div>
+        <h4>Participation</h4>
+        <p>ร่วมดำเนินการตามแผน รับฟังความคิดเห็น สร้างเครือข่ายการทำงานที่ดี</p>
+      </div>
+      <div class="spark-box spark-a">
+        <div class="letter">A</div>
+        <h4>Accountability</h4>
+        <p>ตรงต่อเวลาและมีคุณภาพ ยึดมั่นในเป้าหมาย การปฏิบัติงานเต็มศักยภาพ</p>
+      </div>
+      <div class="spark-box spark-r">
+        <div class="letter">R</div>
+        <h4>Respect</h4>
+        <p>ปฏิบัติด้วยความเสมอภาค รักษาความสัมพันธ์ที่ดีกับลูกค้า ยกย่องชมเชย</p>
+      </div>
+      <div class="spark-box spark-k">
+        <div class="letter">K</div>
+        <h4>Knowledge</h4>
+        <p>รู้และเข้าใจในงานที่ทำ พัฒนาสร้างมูลค่า แก้ไขปัญหาได้ ถ่ายทอดแบ่งปัน</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CULTURE HEAP -->
+  <div id="culture" class="card teal">
+    <div class="section-header">
+      <div class="section-icon">🌱</div>
+      <div>
+        <div class="section-title">วัฒนธรรมองค์กร (Culture) — HEAP</div>
+        <div class="section-subtitle">วัฒนธรรมที่ ธ.ก.ส. ปลูกฝังในองค์กร</div>
+      </div>
+    </div>
+    <div class="culture-grid">
+      <div class="culture-box">
+        <h4>🤝 H — Honesty with integrity</h4>
+        <ul>
+          <li>ซื่อสัตย์สุจริต</li>
+          <li>ตรงเวลา รักษาคำพูด</li>
+          <li>รักษากฎระเบียบ</li>
+          <li>ไม่คดโกง ไม่เอาเปรียบ</li>
+        </ul>
+      </div>
+      <div class="culture-box">
+        <h4>🌿 E — Economy Sufficiency</h4>
+        <ul>
+          <li>ใช้ชีวิตพอเพียง</li>
+          <li>ดำรงตนสมฐานะ</li>
+          <li>รักษาชื่อเสียงเกียรติศักดิ์</li>
+          <li>ใฝ่รู้พัฒนาตนเองเสมอ</li>
+        </ul>
+      </div>
+      <div class="culture-box">
+        <h4>✅ A — Accountability</h4>
+        <ul>
+          <li>สำนึกรับผิดชอบ</li>
+          <li>รับผิดชอบต่อผลงาน</li>
+          <li>กล้ายอมรับความผิดพลาด</li>
+          <li>มุ่งมั่นแก้ไขปัญหา</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight" style="margin-top:14px;">
+      <strong>จำง่าย:</strong> ค่านิยม = <strong>SPARK</strong> (5 ตัว) | วัฒนธรรม = <strong>HEAP</strong> (H, E, A + P-Participation) — ข้อสอบชอบถามว่าตัวอักษรไหนหมายถึงอะไร
+    </div>
+  </div>
+
+  <!-- STRATEGIC POSITION -->
+  <div id="position" class="card orange">
+    <div class="section-header">
+      <div class="section-icon">🗺️</div>
+      <div>
+        <div class="section-title">ตำแหน่งทางยุทธศาสตร์ 3 ระยะ</div>
+        <div class="section-subtitle">เส้นทางสู่วิสัยทัศน์ "ธนาคารพัฒนาชนบทที่ยั่งยืน"</div>
+      </div>
+    </div>
+    <div class="phase-row">
+      <div class="phase-box phase-1">
+        <div class="ph-period">⏱️ ระยะสั้น | ปี 2567–2568</div>
+        <h4>Agricultural Networks</h4>
+        <div class="en-name">"เป็นธนาคารที่เชื่อมโยงภาคีเครือข่าย เพื่อนำไปสู่การพัฒนาภาคการเกษตร"</div>
+        <ul>
+          <li>พัฒนาเกษตรกรรุ่นใหม่ หัวขบวน</li>
+          <li>จัดหาเครือข่ายตลอด Value Chain</li>
+          <li>สินเชื่อ Green & Blue Economy</li>
+          <li>เป้า: สินเชื่อยั่งยืน 25,051 ลบ. (สะสม)</li>
+        </ul>
+      </div>
+      <div class="phase-box phase-2">
+        <div class="ph-period">⏱️ ระยะกลาง | ปี 2569–2571</div>
+        <h4>Modern Agricultural Bank</h4>
+        <div class="en-name">"เป็นธนาคารภาคการเงินชนบทที่ทันสมัย"</div>
+        <ul>
+          <li>Digital Transaction ≥ 75%</li>
+          <li>รายได้จากดิจิทัล ≥ 30%</li>
+          <li>สินเชื่อ ESG สะสม 100,000 ลบ.</li>
+          <li>HCROI ≥ 4 เท่า</li>
+          <li>NPLs/Loan ≤ 5%</li>
+        </ul>
+      </div>
+      <div class="phase-box phase-3">
+        <div class="ph-period">⏱️ ระยะยาว | ปี 2572–2575</div>
+        <h4>Sustainable Bank</h4>
+        <div class="en-name">"เป็นธนาคารพัฒนาชนบทที่ยั่งยืน"</div>
+        <ul>
+          <li>รายได้ธุรกิจใหม่เติบโต</li>
+          <li>ปรับตัวสู่ Net Zero Emissions</li>
+          <li>ลูกค้าผลิตได้ ขายเป็น รายได้มั่นคง</li>
+          <li>เศรษฐกิจฐานรากแข็งแรง</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- STRATEGIC OBJECTIVES SO -->
+  <div id="so" class="card">
+    <div class="section-header">
+      <div class="section-icon">🎯</div>
+      <div>
+        <div class="section-title">วัตถุประสงค์เชิงยุทธศาสตร์ (Strategic Objectives : SO)</div>
+        <div class="section-subtitle">6 เป้าหมายหลักประจำปีบัญชี 2569</div>
+      </div>
+    </div>
+    <div class="so-grid">
+      <div class="so-box">
+        <span class="so-num">SO 1</span>
+        <h4>บริหารจัดการสินทรัพย์ เพื่อสร้างรายได้ให้สมดุล</h4>
+        <p>ปรับพอร์ตสินเชื่อ เพิ่มลูกค้ากลุ่มศักยภาพสูง ขยาย Secure Port และสินเชื่อนอกภาคเกษตร</p>
+        <div class="so-kpi">🎯 สินเชื่อเติบโต ≥ 30,000 ลบ. | สัดส่วน ในภาค:นอกภาค = 84:16</div>
+      </div>
+      <div class="so-box">
+        <span class="so-num">SO 2</span>
+        <h4>บริหารจัดการคุณภาพสินเชื่อ เพื่อความแข็งแกร่งทางการเงิน</h4>
+        <p>ลด NPL ติดตามหนี้ถึงกำหนด ฟื้นฟูลูกค้าเปราะบาง บริหารจัดการหนี้อย่างเป็นระบบ</p>
+        <div class="so-kpi">🎯 NPLs/Loan ≤ 5.23% | อัตรารับชำระหนี้ ≥ 96%</div>
+      </div>
+      <div class="so-box">
+        <span class="so-num">SO 3</span>
+        <h4>เพิ่มขีดความสามารถลูกค้าและชุมชน ผ่านแกนกลางการเกษตร</h4>
+        <p>พัฒนาเกษตรกรกลุ่มพักหนี้/เปราะบาง ขับเคลื่อนชุมชนอุดมสุข พัฒนา SME เกษตรหัวขบวน</p>
+        <div class="so-kpi">🎯 ลูกค้าผ่านการพัฒนา 311,000 ราย | ชุมชนอุดมสุข 300 ชุมชน (สะสม)</div>
+      </div>
+      <div class="so-box">
+        <span class="so-num">SO 4</span>
+        <h4>เพิ่มขีดความสามารถองค์กร ด้วยเทคโนโลยีดิจิทัลและนวัตกรรม</h4>
+        <p>ยกระดับกระบวนการทำงาน พัฒนาระบบดิจิทัล เพิ่มธุรกรรมดิจิทัล สร้างนวัตกรรมมูลค่าเพิ่ม</p>
+        <div class="so-kpi">🎯 Digital Transaction ≥ 75% | Innovation Value ≥ 5% ของรายได้</div>
+      </div>
+      <div class="so-box">
+        <span class="so-num">SO 5</span>
+        <h4>เพิ่มศักยภาพบุคลากรและ GRC รองรับการเติบโตทางธุรกิจ</h4>
+        <p>พัฒนาทักษะ Upskill/Reskill บริหารความเสี่ยง ควบคุมภายใน ธรรมาภิบาล GRC</p>
+        <div class="so-kpi">🎯 HCROI ≥ 3 เท่า | Cost to Income ≤ 42.63%</div>
+      </div>
+      <div class="so-box">
+        <span class="so-num">SO 6</span>
+        <h4>บริหารจัดการองค์กรและชุมชน เพื่อมุ่งสู่ Net Zero Emissions</h4>
+        <p>สนับสนุนสินเชื่อ ESG ลดก๊าซเรือนกระจก Carbon Credit ข้าวลดโลกร้อน เกษตรยั่งยืน</p>
+        <div class="so-kpi">🎯 สินเชื่อ ESG สะสม 50,000 ลบ. | ลดก๊าซเรือนกระจก ≥ 8,843 tCO2eq</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 STRATEGIES -->
+  <div id="strategy" class="card green">
+    <div class="section-header">
+      <div class="section-icon">⚙️</div>
+      <div>
+        <div class="section-title">12 กลยุทธ์หลัก (Tactics) ปีบัญชี 2569</div>
+        <div class="section-subtitle">แปลงวัตถุประสงค์เชิงยุทธศาสตร์สู่การปฏิบัติ</div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr><th>#</th><th>กลยุทธ์</th><th>SO ที่เชื่อมโยง</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>สร้างขีดความสามารถการเติบโตสินเชื่อ</td><td><span class="tag">SO1</span></td></tr>
+        <tr><td>2</td><td>ยกระดับพอร์ตสินเชื่อของลูกค้ากลุ่มเปราะบางให้มีคุณภาพ</td><td><span class="tag">SO1 SO2</span></td></tr>
+        <tr><td>3</td><td>บริหารจัดการต้นทุนและรายได้เพื่อเพิ่มประสิทธิภาพ</td><td><span class="tag">SO5</span></td></tr>
+        <tr><td>4</td><td>บริหารจัดการหนี้ถึงกำหนดชำระ</td><td><span class="tag">SO2</span></td></tr>
+        <tr><td>5</td><td>บริหารจัดการสินทรัพย์ด้อยคุณภาพ</td><td><span class="tag">SO2</span></td></tr>
+        <tr><td>6</td><td>ฟื้นฟูพัฒนาศักยภาพตามกลุ่มลูกค้า</td><td><span class="tag">SO3</span></td></tr>
+        <tr><td>7</td><td>สนับสนุนกลไกการเชื่อมโยงเพื่อสร้างมูลค่าเพิ่มทางธุรกิจ</td><td><span class="tag">SO3</span></td></tr>
+        <tr><td>8</td><td>ยกระดับกระบวนการและบริการด้วยเทคโนโลยีดิจิทัล</td><td><span class="tag">SO4</span></td></tr>
+        <tr><td>9</td><td>พัฒนานวัตกรรมและผลิตภัณฑ์ใหม่เพื่อสร้างรายได้</td><td><span class="tag">SO4</span></td></tr>
+        <tr><td>10</td><td>ขยายขีดความสามารถของบุคลากรรองรับธุรกิจ</td><td><span class="tag">SO5</span></td></tr>
+        <tr><td>11</td><td>ยกระดับ GRC และการบริหารความเสี่ยง</td><td><span class="tag">SO5</span></td></tr>
+        <tr><td>12</td><td>ขับเคลื่อนการดำเนินงานองค์กรภายใต้ ESG</td><td><span class="tag">SO6</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- KPI ปี 2569 -->
+  <div id="kpi" class="card gold">
+    <div class="section-header">
+      <div class="section-icon">📊</div>
+      <div>
+        <div class="section-title">ตัวชี้วัดและเป้าหมายสำคัญ ปีบัญชี 2569</div>
+        <div class="section-subtitle">KPI ที่ต้องจำสำหรับการสอบ</div>
+      </div>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-box">
+        <div class="kpi-val">≥ 30,000</div>
+        <div class="kpi-label">สินเชื่อเติบโต (ล้านบาท)</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">≤ 5.23%</div>
+        <div class="kpi-label">NPLs/Loan</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">≥ 75%</div>
+        <div class="kpi-label">Digital Transaction</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">≥ 0.35%</div>
+        <div class="kpi-label">ROA (ผลตอบแทนสินทรัพย์)</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">≥ 12%</div>
+        <div class="kpi-label">BIS Ratio (เงินกองทุน)</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">84:16</div>
+        <div class="kpi-label">สัดส่วนสินเชื่อในภาค:นอกภาค</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">≥ 96%</div>
+        <div class="kpi-label">อัตรารับชำระหนี้ถึงกำหนด</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">50,000</div>
+        <div class="kpi-label">สินเชื่อ ESG สะสม (ล้านบาท)</div>
+      </div>
+      <div class="kpi-box">
+        <div class="kpi-val">≥ 3 เท่า</div>
+        <div class="kpi-label">HCROI (ผลตอบแทนทรัพยากรบุคคล)</div>
+      </div>
+    </div>
+
+    <table style="margin-top:18px;">
+      <thead>
+        <tr><th>ประมาณการกำไรสุทธิ ปี 2569 (3 กรณี)</th><th>กำไรสุทธิ</th><th>ROA</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="tag">Worst Case</span> รายได้ต่ำ สินเชื่อโตน้อย</td><td>6,796 ล้านบาท</td><td>0.27%</td></tr>
+        <tr><td><span class="tag orange">Base Case</span> ปรับกลยุทธ์รายได้+สินเชื่อ 30,000 ลบ.</td><td>8,819 ล้านบาท</td><td>0.35%</td></tr>
+        <tr><td><span class="tag green">Best Case</span> ทุกตัวชี้วัดบรรลุ</td><td>9,919 ล้านบาท</td><td>~0.39%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXAM TIPS -->
+  <div id="exam" class="tips-box">
+    <h3>📝 เทคนิคทำข้อสอบ — ความรู้เนื้อหากลาง ข้อที่ 2</h3>
+
+    <div class="tip-item">
+      <span class="bullet">①</span>
+      <span><strong>จำวิสัยทัศน์คำต่อคำ</strong> — "ธนาคารพัฒนาชนบทที่ยั่งยืน" เป็น Vision ระยะยาว (2575) ส่วน "Modern Agricultural Bank" เป็นระยะกลาง (2569-2571)</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">②</span>
+      <span><strong>SPARK ≠ HEAP</strong> — SPARK คือค่านิยม (Core Values) / HEAP คือวัฒนธรรม (Culture) ข้อสอบถามเรื่องนี้บ่อยมาก</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">③</span>
+      <span><strong>SO 6 ตัว ต้องจำได้</strong> — SO1=รายได้สมดุล, SO2=คุณภาพสินเชื่อ, SO3=พัฒนาลูกค้า/ชุมชน, SO4=ดิจิทัล, SO5=บุคลากร/GRC, SO6=ESG/Net Zero</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">④</span>
+      <span><strong>สัดส่วนสินเชื่อ 84:16</strong> — ในภาคเกษตร 84% : นอกภาค 16% (ไม่ใช่ 80:20 หรือ 85:15)</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">⑤</span>
+      <span><strong>3 ระยะ จำง่าย</strong> — สั้น=Network, กลาง=Modern, ยาว=Sustainable ตรงกับ "เชื่อมโยง → ทันสมัย → ยั่งยืน"</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">⑥</span>
+      <span><strong>KPI ปี 2569 สำคัญ</strong> — สินเชื่อโต 30,000 ลบ., NPL ≤ 5.23%, Digital ≥ 75%, ROA ≥ 0.35%, BIS ≥ 12%</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">⑦</span>
+      <span><strong>4 เสาหลักที่ยกระดับเกษตรกร</strong> — เงินทุน + ความรู้ + นวัตกรรม + ตลาด (ตามนิยามวิสัยทัศน์)</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (ธ.ก.ส.) &nbsp;|&nbsp; เตรียมสอบ 2569 &nbsp;|&nbsp; ความรู้เนื้อหากลาง ข้อที่ 2
+</footer>
+<a href="index-เนื้อหากลาง.html" style="position:fixed;bottom:24px;left:24px;background:#1a5276;color:white;text-decoration:none;border-radius:50px;padding:12px 22px;font-family:'Sarabun',sans-serif;font-size:.88rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:999;">← กลับหน้ารวม</a>
+
+</body>
+</html>

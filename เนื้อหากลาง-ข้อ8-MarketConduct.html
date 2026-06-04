@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>เนื้อหากลาง ข้อ 8 | Market Conduct บริการลูกค้าอย่างเป็นธรรม</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Sarabun',sans-serif;background:#f0f4f8;color:#2d3748;line-height:1.7;}
+  .hero{background:linear-gradient(135deg,#0d3b66 0%,#1565c0 50%,#1976d2 100%);color:white;text-align:center;padding:60px 20px 50px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,.05) 0%,transparent 60%);animation:pulse 6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  .hero-logo{font-size:3.5rem;margin-bottom:12px;}
+  .hero h1{font-size:1.9rem;font-weight:700;letter-spacing:1px;margin-bottom:8px;}
+  .hero .sub{font-size:1rem;opacity:.85;font-weight:300;}
+  .badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:50px;padding:4px 18px;font-size:.85rem;margin-top:14px;}
+  .toc{background:white;padding:20px;border-bottom:3px solid #1565c0;overflow-x:auto;}
+  .toc-inner{max-width:960px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;}
+  .toc a{text-decoration:none;background:#e3f2fd;color:#0d3b66;border-radius:20px;padding:6px 14px;font-size:.82rem;font-weight:600;transition:all .2s;white-space:nowrap;}
+  .toc a:hover{background:#0d3b66;color:white;}
+  .container{max-width:960px;margin:0 auto;padding:40px 20px 60px;}
+  .card{background:white;border-radius:16px;padding:32px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.07);border-left:5px solid #1565c0;transition:box-shadow .2s;}
+  .card:hover{box-shadow:0 6px 24px rgba(0,0,0,.12);}
+  .card.green{border-left-color:#27ae60;} .card.orange{border-left-color:#e67e22;} .card.red{border-left-color:#c0392b;} .card.teal{border-left-color:#16a085;} .card.gold{border-left-color:#f39c12;}
+  .section-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+  .section-icon{font-size:1.8rem;background:#e3f2fd;border-radius:12px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .card.green .section-icon{background:#eafaf1;} .card.orange .section-icon{background:#fef9e7;} .card.red .section-icon{background:#fdedec;} .card.teal .section-icon{background:#e8f8f5;} .card.gold .section-icon{background:#fef9e7;}
+  .section-title{font-size:1.25rem;font-weight:700;color:#1a5276;}
+  .section-subtitle{font-size:.8rem;color:#7f8c8d;font-weight:400;}
+  .intro{background:linear-gradient(135deg,#e3f2fd,#e8f8f5);border-radius:12px;padding:18px 22px;font-size:.97rem;color:#1a5276;line-height:1.8;margin-bottom:20px;border-left:4px solid #1565c0;}
+  /* PRINCIPLES */
+  .principle-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px;}
+  @media(max-width:600px){.principle-grid{grid-template-columns:1fr;}}
+  .p-box{background:#f8fbfd;border-radius:12px;padding:20px;border:1px solid #d6eaf8;}
+  .p-box h4{font-size:.9rem;font-weight:700;color:#1a5276;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .p-box p{font-size:.83rem;color:#5d6d7e;line-height:1.6;}
+  /* DO DONT */
+  .dd-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px;}
+  @media(max-width:600px){.dd-row{grid-template-columns:1fr;}}
+  .dd-box{border-radius:12px;padding:18px;}
+  .do-box{background:#eafaf1;border:2px solid #27ae60;} .dont-box{background:#fdedec;border:2px solid #c0392b;}
+  .dd-box h4{font-size:.9rem;font-weight:700;margin-bottom:8px;}
+  .do-box h4{color:#1e8449;} .dont-box h4{color:#922b21;}
+  .dd-box ul{list-style:none;font-size:.83rem;color:#5d6d7e;}
+  .dd-box ul li{padding:3px 0;}
+  .do-box ul li::before{content:"✅ ";} .dont-box ul li::before{content:"❌ ";}
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px;}
+  th{background:#1565c0;color:white;padding:11px 14px;text-align:left;font-weight:600;}
+  th:first-child{border-radius:10px 0 0 0;} th:last-child{border-radius:0 10px 0 0;}
+  td{padding:10px 14px;border-bottom:1px solid #eaecee;}
+  tr:nth-child(even) td{background:#f8f9fa;}
+  tr:last-child td:first-child{border-radius:0 0 0 10px;} tr:last-child td:last-child{border-radius:0 0 10px 0;}
+  .tag{background:#e3f2fd;color:#0d3b66;border-radius:6px;padding:2px 10px;font-size:.82rem;font-weight:600;white-space:nowrap;}
+  .tag.green{background:#eafaf1;color:#1e8449;} .tag.red{background:#fdedec;color:#922b21;} .tag.orange{background:#fef9e7;color:#b7770d;}
+  .highlight{background:#fef9e7;border-left:4px solid #f39c12;border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px;font-size:.9rem;color:#7d6608;}
+  .highlight strong{color:#d35400;}
+  .tips-box{background:linear-gradient(135deg,#fff9e6,#fffde7);border:2px solid #f39c12;border-radius:14px;padding:24px;}
+  .tips-box h3{color:#d35400;font-size:1.05rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .tip-item{display:flex;gap:10px;margin-bottom:10px;font-size:.92rem;}
+  .tip-item .bullet{color:#f39c12;font-weight:700;flex-shrink:0;margin-top:1px;}
+  footer{text-align:center;font-size:.82rem;color:#95a5a6;padding:24px;border-top:1px solid #eaecee;background:white;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-logo">🤝</div>
+  <h1>ความรู้เนื้อหากลาง ข้อที่ 8</h1>
+  <p class="sub">หลักเกณฑ์การบริหารจัดการด้านการให้บริการแก่ลูกค้าอย่างเป็นธรรม</p>
+  <div class="badge">Market Conduct | Responsible Lending | Financial Literacy</div>
+</div>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#what">📖 Market Conduct คืออะไร</a>
+    <a href="#principles">📌 หลักการสำคัญ</a>
+    <a href="#lending">💰 Responsible Lending</a>
+    <a href="#do-dont">✅ ควร/ไม่ควร</a>
+    <a href="#complaint">📣 การจัดการร้องเรียน</a>
+    <a href="#exam">📝 เทคนิคสอบ</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- WHAT -->
+  <div id="what" class="card">
+    <div class="section-header">
+      <div class="section-icon">📖</div>
+      <div>
+        <div class="section-title">Market Conduct คืออะไร</div>
+        <div class="section-subtitle">การให้บริการแก่ลูกค้าอย่างเป็นธรรม ตามหลักเกณฑ์ ธปท.</div>
+      </div>
+    </div>
+    <div class="intro">
+      Market Conduct = <strong>มาตรฐานพฤติกรรมของสถาบันการเงินต่อลูกค้า</strong>
+      เพื่อให้ลูกค้าได้รับการบริการที่ <strong>เป็นธรรม โปร่งใส และได้ข้อมูลครบถ้วน</strong>
+      ก่อนตัดสินใจใช้ผลิตภัณฑ์ทางการเงิน ธปท. กำกับดูแลเรื่องนี้อย่างเข้มงวด
+    </div>
+  </div>
+
+  <!-- 4 PRINCIPLES -->
+  <div id="principles" class="card green">
+    <div class="section-header">
+      <div class="section-icon">📌</div>
+      <div>
+        <div class="section-title">หลักการ 4 ด้านของ Market Conduct</div>
+        <div class="section-subtitle">FAIR — ที่ ธปท. กำหนด</div>
+      </div>
+    </div>
+    <div class="principle-grid">
+      <div class="p-box">
+        <h4>🎯 F — Fair Treatment</h4>
+        <p>ปฏิบัติต่อลูกค้าอย่างเป็นธรรม ไม่เลือกปฏิบัติ ไม่ฉวยโอกาสจากความไม่รู้ของลูกค้า บริการทุกกลุ่มอย่างเท่าเทียม</p>
+      </div>
+      <div class="p-box">
+        <h4>💡 A — Appropriate Products</h4>
+        <p>เสนอผลิตภัณฑ์ที่เหมาะสมกับความต้องการและความสามารถของลูกค้า ไม่ขายผลิตภัณฑ์ที่เกินความจำเป็น</p>
+      </div>
+      <div class="p-box">
+        <h4>📢 I — Informed Decision</h4>
+        <p>เปิดเผยข้อมูลครบถ้วน ชัดเจน ไม่ทำให้เข้าใจผิด ให้ลูกค้าสามารถตัดสินใจได้อย่างมีข้อมูล</p>
+      </div>
+      <div class="p-box">
+        <h4>🔄 R — Responsible Service</h4>
+        <p>ให้บริการด้วยความรับผิดชอบตลอดวงจรของผลิตภัณฑ์ ทั้งก่อน ระหว่าง และหลังการขาย รวมถึงการจัดการร้องเรียน</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESPONSIBLE LENDING -->
+  <div id="lending" class="card orange">
+    <div class="section-header">
+      <div class="section-icon">💰</div>
+      <div>
+        <div class="section-title">Responsible Lending — การปล่อยสินเชื่ออย่างรับผิดชอบ</div>
+        <div class="section-subtitle">หัวใจของ Market Conduct ด้านสินเชื่อ</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>หลักการ</th><th>ความหมาย</th><th>ตัวอย่างการปฏิบัติ</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="tag green">Suitability</span></td>
+          <td>สินเชื่อเหมาะสมกับลูกค้า</td>
+          <td>วิเคราะห์รายได้ รายจ่าย ภาระหนี้ก่อนอนุมัติ</td>
+        </tr>
+        <tr>
+          <td><span class="tag">Affordability</span></td>
+          <td>ลูกค้าชำระคืนได้จริง</td>
+          <td>คำนวณ DSR (Debt Service Ratio) ไม่เกินเกณฑ์</td>
+        </tr>
+        <tr>
+          <td><span class="tag orange">Transparency</span></td>
+          <td>เปิดเผยเงื่อนไขครบถ้วน</td>
+          <td>แจ้งดอกเบี้ย ค่าธรรมเนียม เงื่อนไขการผิดนัด ชัดเจน</td>
+        </tr>
+        <tr>
+          <td><span class="tag">Financial Literacy</span></td>
+          <td>ให้ความรู้ทางการเงิน</td>
+          <td>สอนลูกค้าให้รู้จักบริหารเงิน วางแผนชำระหนี้ได้</td>
+        </tr>
+        <tr>
+          <td><span class="tag green">Debt Resolution</span></td>
+          <td>ช่วยลูกค้าที่มีปัญหา</td>
+          <td>ปรับโครงสร้างหนี้ก่อนฟ้อง ช่วยลูกค้า "ปิดจบหนี้" ได้จริง</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="highlight">
+      <strong>แก่น Market Conduct 2569:</strong> ไม่ใช่แค่ให้กู้แล้วจบ — ต้องให้ความรู้ทางการเงิน (Financial Literacy) และช่วยลูกค้า <strong>ปิดจบหนี้ได้จริง</strong>
+    </div>
+  </div>
+
+  <!-- DO DONT -->
+  <div id="do-dont" class="card red">
+    <div class="section-header">
+      <div class="section-icon">⚖️</div>
+      <div>
+        <div class="section-title">พฤติกรรมที่ถูก/ผิด Market Conduct</div>
+        <div class="section-subtitle">ตัวอย่างที่ข้อสอบชอบถาม</div>
+      </div>
+    </div>
+    <div class="dd-row">
+      <div class="dd-box do-box">
+        <h4>✅ ถูกต้องตาม Market Conduct</h4>
+        <ul>
+          <li>อธิบายอัตราดอกเบี้ยที่แท้จริง (EIR) ให้ลูกค้าเข้าใจ</li>
+          <li>เสนอผลิตภัณฑ์ที่เหมาะกับความสามารถลูกค้า</li>
+          <li>ให้ลูกค้าอ่านสัญญาก่อนเซ็น ไม่เร่งรัด</li>
+          <li>แจ้งสิทธิ์และทางเลือกในการร้องเรียน</li>
+          <li>ช่วยลูกค้าปรับโครงสร้างหนี้ก่อนฟ้อง</li>
+          <li>ไม่ขายผลิตภัณฑ์เกินความจำเป็น (Overselling)</li>
+        </ul>
+      </div>
+      <div class="dd-box dont-box">
+        <h4>❌ ผิด Market Conduct</h4>
+        <ul>
+          <li>ขายพ่วงบังคับซื้อประกันเพื่อให้ได้สินเชื่อ</li>
+          <li>เร่งอนุมัติเพื่อให้ได้ยอด โดยไม่ดูความสามารถชำระ</li>
+          <li>ซ่อนค่าธรรมเนียม ไม่บอกเงื่อนไขที่เป็นโทษ</li>
+          <li>คุกคาม ข่มขู่ ลูกค้าที่ผิดนัดชำระ</li>
+          <li>เปิดเผยข้อมูลลูกค้าให้บุคคลที่สาม</li>
+          <li>โฆษณาเกินจริง ทำให้เข้าใจผิด</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLAINT -->
+  <div id="complaint" class="card teal">
+    <div class="section-header">
+      <div class="section-icon">📣</div>
+      <div>
+        <div class="section-title">การจัดการข้อร้องเรียนของลูกค้า</div>
+        <div class="section-subtitle">ช่องทางและกระบวนการที่ ธปท. กำหนด</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>ขั้นตอน</th><th>ช่องทาง</th><th>ระยะเวลา</th></tr></thead>
+      <tbody>
+        <tr><td>1. ร้องเรียนกับธนาคาร</td><td>สาขา Call Center เว็บไซต์ BAAC Mobile</td><td>ธนาคารต้องตอบภายใน 7 วันทำการ</td></tr>
+        <tr><td>2. หากไม่ได้รับการแก้ไข</td><td>ร้องเรียนต่อ ธปท. ผ่าน BOT Help Me</td><td>ภายใน 30 วันนับจากวันร้องเรียน</td></tr>
+        <tr><td>3. ขั้นสุดท้าย</td><td>สำนักงานคุ้มครองผู้บริโภค ศาล</td><td>ตามกระบวนการกฎหมาย</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXAM TIPS -->
+  <div id="exam" class="tips-box">
+    <h3>📝 เทคนิคทำข้อสอบ — Market Conduct</h3>
+    <div class="tip-item">
+      <span class="bullet">①</span>
+      <span><strong>Market Conduct ≠ แค่ขายสินค้า</strong> — ครอบคลุมตลอดวงจร: ก่อนขาย, ขาย, หลังขาย, ร้องเรียน</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">②</span>
+      <span><strong>Financial Literacy สำคัญมาก</strong> — ตอบที่เน้น "ให้ความรู้ลูกค้าเพื่อปิดจบหนี้ได้จริง" มักถูก</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">③</span>
+      <span><strong>Responsible Lending ≠ แค่ให้กู้แล้วจบ</strong> — ต้องวิเคราะห์ความสามารถชำระก่อน ไม่เร่งยอดแต่ไม่ดูความเสี่ยง</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">④</span>
+      <span><strong>ขายพ่วงบังคับ = ผิด Market Conduct</strong> — ลูกค้าต้องมีสิทธิ์เลือก ไม่ถูกบังคับซื้อประกันเพื่อแลกสินเชื่อ</span>
+    </div>
+    <div class="tip-item">
+      <span class="bullet">⑤</span>
+      <span><strong>EIR (Effective Interest Rate)</strong> = อัตราดอกเบี้ยที่แท้จริง ต้องแจ้งลูกค้า ไม่ใช่แค่ดอกเบี้ยหน้ากระดาษ</span>
+    </div>
+  </div>
+
+</div>
+<footer>ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (ธ.ก.ส.) &nbsp;|&nbsp; เตรียมสอบ 2569 &nbsp;|&nbsp; ความรู้เนื้อหากลาง ข้อที่ 8</footer>
+<a href="index-เนื้อหากลาง.html" style="position:fixed;bottom:24px;left:24px;background:#1a5276;color:white;text-decoration:none;border-radius:50px;padding:12px 22px;font-family:'Sarabun',sans-serif;font-size:.88rem;font-weight:700;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:999;">← กลับหน้ารวม</a>
+</body>
+</html>
