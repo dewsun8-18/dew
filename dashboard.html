@@ -156,22 +156,22 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center text-xs">
-          <div class="bg-white/10 p-2.5 rounded-xl border border-white/10">
+          <div id="target-card-branch1" onclick="selectBranch('branch1')" class="cursor-pointer bg-white/10 p-2.5 rounded-xl border border-white/10 transition-all hover:bg-white/20">
             <span class="text-blue-300 font-bold block">สาขา 1 (สัดส่วน 21.8%)</span>
             <span id="targetB1Daily" class="text-base font-bold text-white block mt-0.5">฿2,136 / วัน</span>
             <span class="text-[10px] text-blue-200 block mt-0.5">รวม 11 วัน: <strong id="targetB1Total">฿23,494</strong></span>
           </div>
-          <div class="bg-white/10 p-2.5 rounded-xl border border-white/10">
+          <div id="target-card-branch2" onclick="selectBranch('branch2')" class="cursor-pointer bg-white/10 p-2.5 rounded-xl border border-white/10 transition-all hover:bg-white/20">
             <span class="text-amber-300 font-bold block">สาขา 2 (สัดส่วน 22.0%)</span>
             <span id="targetB2Daily" class="text-base font-bold text-white block mt-0.5">฿2,155 / วัน</span>
             <span class="text-[10px] text-blue-200 block mt-0.5">รวม 11 วัน: <strong id="targetB2Total">฿23,709</strong></span>
           </div>
-          <div class="bg-white/10 p-2.5 rounded-xl border border-white/10">
+          <div id="target-card-branch3" onclick="selectBranch('branch3')" class="cursor-pointer bg-white/10 p-2.5 rounded-xl border border-white/10 transition-all hover:bg-white/20">
             <span class="text-emerald-300 font-bold block">สาขา 3 (สัดส่วน 29.9% 🏆)</span>
             <span id="targetB3Daily" class="text-base font-bold text-emerald-300 block mt-0.5">฿2,929 / วัน</span>
             <span class="text-[10px] text-blue-200 block mt-0.5">รวม 11 วัน: <strong id="targetB3Total">฿32,223</strong></span>
           </div>
-          <div class="bg-white/10 p-2.5 rounded-xl border border-white/10">
+          <div id="target-card-branch4" onclick="selectBranch('branch4')" class="cursor-pointer bg-white/10 p-2.5 rounded-xl border border-white/10 transition-all hover:bg-white/20">
             <span class="text-purple-300 font-bold block">สาขา 4 (สัดส่วน 26.4%)</span>
             <span id="targetB4Daily" class="text-base font-bold text-white block mt-0.5">฿2,586 / วัน</span>
             <span class="text-[10px] text-blue-200 block mt-0.5">รวม 11 วัน: <strong id="targetB4Total">฿28,451</strong></span>
@@ -181,30 +181,36 @@
     </div>
 
     <!-- Branch Filter Tabs -->
-    <div class="flex items-center gap-2 overflow-x-auto pb-1">
-      <button onclick="selectBranch('all')" id="btn-tab-all" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-active">
-        ทุกสาขารวมกัน
-      </button>
-      <button onclick="selectBranch('branch1')" id="btn-tab-branch1" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
-        สาขา 1 (ไฟล์ 106922)
-      </button>
-      <button onclick="selectBranch('branch2')" id="btn-tab-branch2" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
-        สาขา 2 (ไฟล์ 353933)
-      </button>
-      <button onclick="selectBranch('branch3')" id="btn-tab-branch3" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
-        สาขา 3 (ไฟล์ 39112)
-      </button>
-      <button onclick="selectBranch('branch4')" id="btn-tab-branch4" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
-        สาขา 4 (ไฟล์ 42869)
-      </button>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
+      <div class="flex items-center gap-2 overflow-x-auto pb-1">
+        <button onclick="selectBranch('all')" id="btn-tab-all" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-active shadow-sm flex items-center gap-1.5">
+          <span>📊</span> ทุกสาขารวมกัน
+        </button>
+        <button onclick="selectBranch('branch1')" id="btn-tab-branch1" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
+          สาขา 1
+        </button>
+        <button onclick="selectBranch('branch2')" id="btn-tab-branch2" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
+          สาขา 2
+        </button>
+        <button onclick="selectBranch('branch3')" id="btn-tab-branch3" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
+          สาขา 3 🏆
+        </button>
+        <button onclick="selectBranch('branch4')" id="btn-tab-branch4" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
+          สาขา 4
+        </button>
+      </div>
+      <div id="activeBranchTag" class="text-xs font-medium px-3 py-1.5 rounded-xl bg-blue-50 text-blue-700 border border-blue-100 flex items-center gap-2 shrink-0 self-start sm:self-auto shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
+        <span id="activeBranchTagText">กำลังดู: รวม 4 สาขา (19 วัน)</span>
+      </div>
     </div>
 
     <!-- KPI Metric Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       <!-- Card 1: Revenue -->
-      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm transition-all hover:shadow-md">
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">รายรับจริงรวม (19 วัน)</span>
+          <span id="kpiRevTitle" class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">รายรับจริงรวม (19 วัน)</span>
           <span class="p-2 rounded-xl bg-blue-50 text-blue-600">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </span>
@@ -216,9 +222,9 @@
       </div>
 
       <!-- Card 2: Operating Expenses -->
-      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm transition-all hover:shadow-md">
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">รายจ่ายดำเนินงาน</span>
+          <span id="kpiOpExpTitle" class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">รายจ่ายดำเนินงาน</span>
           <span class="p-2 rounded-xl bg-amber-50 text-amber-600">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
           </span>
@@ -230,9 +236,9 @@
       </div>
 
       <!-- Card 3: Fixed Rent -->
-      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm transition-all hover:shadow-md">
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">ค่าเช่าร้านคงที่</span>
+          <span id="kpiRentTitle" class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">ค่าเช่าร้านคงที่</span>
           <span class="p-2 rounded-xl bg-purple-50 text-purple-600">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
           </span>
@@ -244,9 +250,9 @@
       </div>
 
       <!-- Card 4: Net Profit -->
-      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm transition-all hover:shadow-md">
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">กำไร / ขาดทุนสุทธิ</span>
+          <span id="kpiNetTitle" class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">กำไร / ขาดทุนสุทธิ</span>
           <span id="kpiNetBadgeIcon" class="p-2 rounded-xl bg-red-50 text-red-600">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/></svg>
           </span>
@@ -266,8 +272,8 @@
         <div>
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">แนวโน้มรายรับรายวัน (วันที่ 1 - 19)</h3>
-              <p class="text-xs text-[var(--muted-foreground,#64748b)]">ชี้ที่จุดบนกราฟเพื่อดูรายละเอียดยอดขายแต่ละวัน</p>
+              <h3 id="trendChartTitle" class="text-lg font-bold text-[var(--foreground,#0f172a)]">แนวโน้มรายรับรายวัน (วันที่ 1 - 19)</h3>
+              <p id="trendChartSub" class="text-xs text-[var(--muted-foreground,#64748b)]">ชี้ที่จุดบนกราฟเพื่อดูรายละเอียดยอดขายแต่ละวัน</p>
             </div>
             <div class="flex items-center gap-4 text-xs">
               <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-500"></span>รายรับ</span>
@@ -282,46 +288,46 @@
           </div>
         </div>
 
-        <div class="mt-4 pt-4 border-t border-[var(--border,#f1f5f9)] flex items-center justify-between text-xs text-[var(--muted-foreground,#64748b)]">
+        <div id="trendChartSummary" class="mt-4 pt-4 border-t border-[var(--border,#f1f5f9)] flex items-center justify-between text-xs text-[var(--muted-foreground,#64748b)]">
           <span>ยอดขายสูงสุด: วันที่ 5 (฿6,510)</span>
-          <span>ยอดขายวันที่ 19 ล่าสุด: ฿5,055 (กำไรสุทธิ +฿1,777)</span>
+          <span>ยอดขายวันที่ 19 ล่าสุด: ฿5,055 (กำไรดำเนินงาน +฿1,777)</span>
         </div>
       </div>
 
       <!-- Chart 2: Branch Breakdown Donut & Share -->
       <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm flex flex-col justify-between">
         <div>
-          <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">สัดส่วนรายรับแยกตามสาขา</h3>
-          <p class="text-xs text-[var(--muted-foreground,#64748b)]">ยอดขายจริงรวม 19 วัน (฿90,563)</p>
+          <h3 id="donutTitle" class="text-lg font-bold text-[var(--foreground,#0f172a)]">สัดส่วนรายรับแยกตามสาขา</h3>
+          <p id="donutSub" class="text-xs text-[var(--muted-foreground,#64748b)]">ยอดขายจริงรวม 19 วัน (฿90,563)</p>
           
           <div class="flex items-center justify-center my-4 h-48">
             <svg id="donutSvg" class="w-44 h-44" viewBox="0 0 160 160"></svg>
           </div>
 
           <!-- Legend with Percentages -->
-          <div class="space-y-2 mt-2">
-            <div class="flex items-center justify-between text-xs">
+          <div class="space-y-1.5 mt-2" id="donutLegend">
+            <div id="legend-branch1" onclick="selectBranch('branch1')" class="cursor-pointer p-1.5 rounded-lg flex items-center justify-between text-xs hover:bg-slate-50 transition">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-blue-500"></span>
                 <span>สาขา 1 (฿19,720)</span>
               </div>
               <span class="font-bold">21.8%</span>
             </div>
-            <div class="flex items-center justify-between text-xs">
+            <div id="legend-branch2" onclick="selectBranch('branch2')" class="cursor-pointer p-1.5 rounded-lg flex items-center justify-between text-xs hover:bg-slate-50 transition">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-amber-500"></span>
                 <span>สาขา 2 (฿19,890)</span>
               </div>
               <span class="font-bold">22.0%</span>
             </div>
-            <div class="flex items-center justify-between text-xs">
+            <div id="legend-branch3" onclick="selectBranch('branch3')" class="cursor-pointer p-1.5 rounded-lg flex items-center justify-between text-xs hover:bg-slate-50 transition">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
                 <span>สาขา 3 (฿27,068)</span>
               </div>
               <span class="font-bold text-emerald-600">29.9% 🏆</span>
             </div>
-            <div class="flex items-center justify-between text-xs">
+            <div id="legend-branch4" onclick="selectBranch('branch4')" class="cursor-pointer p-1.5 rounded-lg flex items-center justify-between text-xs hover:bg-slate-50 transition">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-purple-500"></span>
                 <span>สาขา 4 (฿23,885)</span>
@@ -331,8 +337,8 @@
           </div>
         </div>
 
-        <div class="mt-4 pt-3 border-t border-[var(--border,#f1f5f9)] text-xs text-center text-[var(--muted-foreground,#64748b)]">
-          สาขา 3 (ไฟล์ 39112) มียอดขายสูงสุดในกลุ่ม
+        <div id="donutNote" class="mt-4 pt-3 border-t border-[var(--border,#f1f5f9)] text-xs text-center text-[var(--muted-foreground,#64748b)]">
+          สาขา 3 มียอดขายสูงสุดในกลุ่ม
         </div>
       </div>
 
@@ -340,11 +346,14 @@
 
     <!-- Branch Summary Cards -->
     <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm">
-      <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)] mb-4">สรุปผลประกอบการสะสม 19 วันแยกตามสาขา</h3>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">สรุปผลประกอบการสะสม 19 วันแยกตามสาขา</h3>
+        <span class="text-xs text-[var(--muted-foreground,#64748b)]">คลิกที่การ์ดเพื่อเลือกดูข้อมูลสาขานั้น</span>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         
         <!-- B1 Card -->
-        <div class="p-4 rounded-xl border border-blue-100 bg-blue-50/40">
+        <div id="summary-card-branch1" onclick="selectBranch('branch1')" class="cursor-pointer p-4 rounded-xl border border-blue-100 bg-blue-50/40 transition-all hover:shadow-md">
           <div class="flex items-center justify-between">
             <span class="font-bold text-blue-900">สาขา 1</span>
             <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">18 วันขาย</span>
@@ -361,7 +370,7 @@
         </div>
 
         <!-- B2 Card -->
-        <div class="p-4 rounded-xl border border-amber-100 bg-amber-50/40">
+        <div id="summary-card-branch2" onclick="selectBranch('branch2')" class="cursor-pointer p-4 rounded-xl border border-amber-100 bg-amber-50/40 transition-all hover:shadow-md">
           <div class="flex items-center justify-between">
             <span class="font-bold text-amber-900">สาขา 2</span>
             <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">เช่า 10k/3ด. (3,333/ด.)</span>
@@ -378,7 +387,7 @@
         </div>
 
         <!-- B3 Card -->
-        <div class="p-4 rounded-xl border border-emerald-100 bg-emerald-50/40">
+        <div id="summary-card-branch3" onclick="selectBranch('branch3')" class="cursor-pointer p-4 rounded-xl border border-emerald-100 bg-emerald-50/40 transition-all hover:shadow-md">
           <div class="flex items-center justify-between">
             <span class="font-bold text-emerald-900">สาขา 3</span>
             <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">ยอดขายสูงสุด 🏆</span>
@@ -395,7 +404,7 @@
         </div>
 
         <!-- B4 Card -->
-        <div class="p-4 rounded-xl border border-purple-100 bg-purple-50/40">
+        <div id="summary-card-branch4" onclick="selectBranch('branch4')" class="cursor-pointer p-4 rounded-xl border border-purple-100 bg-purple-50/40 transition-all hover:shadow-md">
           <div class="flex items-center justify-between">
             <span class="font-bold text-purple-900">สาขา 4</span>
             <span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">เช่า 10k/3ด. (3,333/ด.)</span>
@@ -418,8 +427,8 @@
     <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm overflow-hidden">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
         <div>
-          <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">ตารางรายรับ - รายจ่าย รายวัน (19 วัน)</h3>
-          <p class="text-xs text-[var(--muted-foreground,#64748b)]">ข้อมูลรายวันวันที่ 1 ถึง 19 กันยายน 2569</p>
+          <h3 id="tableTitle" class="text-lg font-bold text-[var(--foreground,#0f172a)]">ตารางรายรับ - รายจ่าย รายวัน (19 วัน)</h3>
+          <p id="tableSub" class="text-xs text-[var(--muted-foreground,#64748b)]">ข้อมูลรายวันวันที่ 1 ถึง 19 กันยายน 2569</p>
         </div>
         <div class="flex items-center gap-2">
           <input type="text" id="tableSearch" onkeyup="filterTable()" placeholder="ค้นหาวันที่..." class="px-3 py-1.5 text-xs rounded-xl border border-[var(--border,#e2e8f0)] bg-[var(--card,#fff)] focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -428,32 +437,14 @@
 
       <div class="overflow-x-auto">
         <table class="w-full text-left text-xs border-collapse" id="dataTable">
-          <thead>
-            <tr class="border-b border-[var(--border,#e2e8f0)] text-[var(--muted-foreground,#64748b)] font-semibold bg-[var(--secondary,#f8fafc)]">
-              <th class="py-3 px-3">วันที่</th>
-              <th class="py-3 px-3">สาขา 1 (รับ)</th>
-              <th class="py-3 px-3">สาขา 2 (รับ)</th>
-              <th class="py-3 px-3">สาขา 3 (รับ)</th>
-              <th class="py-3 px-3">สาขา 4 (รับ)</th>
-              <th class="py-3 px-3 font-bold text-blue-600">รวมรับ (บาท)</th>
-              <th class="py-3 px-3 font-bold text-amber-600">รวมจ่าย (บาท)</th>
-              <th class="py-3 px-3 font-bold text-slate-700">กำไรสุทธิวันนั้น</th>
-            </tr>
+          <thead id="tableHead">
+            <!-- Dynamically Rendered by JS -->
           </thead>
           <tbody id="tableBody" class="divide-y divide-[var(--border,#f1f5f9)]">
-            <!-- Rendered by JS -->
+            <!-- Dynamically Rendered by JS -->
           </tbody>
-          <tfoot>
-            <tr class="bg-blue-50/60 font-bold border-t-2 border-blue-200 text-[var(--foreground,#0f172a)]" id="tableFoot">
-              <td class="py-3 px-3">รวม 19 วัน</td>
-              <td class="py-3 px-3">฿19,720</td>
-              <td class="py-3 px-3">฿19,890</td>
-              <td class="py-3 px-3">฿27,068</td>
-              <td class="py-3 px-3">฿23,885</td>
-              <td class="py-3 px-3 text-blue-600">฿90,563</td>
-              <td class="py-3 px-3 text-amber-600">฿91,384</td>
-              <td class="py-3 px-3 text-red-600">-฿821</td>
-            </tr>
+          <tfoot id="tableFoot">
+            <!-- Dynamically Rendered by JS -->
           </tfoot>
         </table>
       </div>
@@ -485,11 +476,40 @@
     ];
 
     const branchMeta = {
-      all:     { name: "ทุกสาขารวมกัน", rev: 90563, opExp: 91384, rent: 15667, days: 19 },
-      branch1: { name: "สาขา 1", rev: 19720, opExp: 16993, rent: 5000,  days: 18 },
-      branch2: { name: "สาขา 2", rev: 19890, opExp: 25260, rent: 3333,  days: 19 },
-      branch3: { name: "สาขา 3", rev: 27068, opExp: 24119, rent: 4000,  days: 19 },
-      branch4: { name: "สาขา 4", rev: 23885, opExp: 25012, rent: 3333,  days: 19 }
+      all:     { name: "ทุกสาขารวมกัน", rev: 90563, opExp: 91384, rent: 15667, days: 19, tag: "รวม 4 สาขา (19 วัน)", rentNote: "4 สาขา (เฉลี่ยรายเดือน, ส.2&4 จ่ายรอบละ 3 ด.)" },
+      branch1: { name: "สาขา 1", rev: 19720, opExp: 16993, rent: 5000,  days: 18, tag: "สาขา 1 (เปิดขาย 18 วัน • หยุดวันที่ 15)", rentNote: "฿5,000 / เดือน (หักวันที่ 4)" },
+      branch2: { name: "สาขา 2", rev: 19890, opExp: 25260, rent: 3333,  days: 19, tag: "สาขา 2 (เปิดขาย 19 วัน • ค่าเช่า 10k/3 ด.)", rentNote: "฿10,000 ต่อ 3 เดือน (เฉลี่ย ฿3,333/ด.)" },
+      branch3: { name: "สาขา 3", rev: 27068, opExp: 24119, rent: 4000,  days: 19, tag: "สาขา 3 (เปิดขาย 19 วัน • ยอดขายสูงสุด 🏆)", rentNote: "฿4,000 / เดือน (หักวันที่ 4)" },
+      branch4: { name: "สาขา 4", rev: 23885, opExp: 25012, rent: 3333,  days: 19, tag: "สาขา 4 (เปิดขาย 19 วัน • มีค่าไฟเต่า 3.3k)", rentNote: "฿10,000 ต่อ 3 เดือน (เฉลี่ย ฿3,333/ด.)" }
+    };
+
+    const branchNotes = {
+      branch1: {
+        4: "หักค่าเช่า+ไฟ ฿5,000",
+        11: "ซื้อวัตถุดิบ ฿2,490",
+        15: "⚪ หยุดขาย (พักร้าน)",
+        19: "วันล่าสุด (กำไรดำเนินงาน +฿665)"
+      },
+      branch2: {
+        1: "เริ่มวันแรก ขาย ฿1,290 จ่าย ฿1,498",
+        4: "จ่ายดำเนินงาน ฿480",
+        9: "ซื้อวัตถุดิบ ฿3,945",
+        19: "วันล่าสุด (ผลดำเนินงาน -฿101)"
+      },
+      branch3: {
+        4: "หักค่าเช่า ฿4,000",
+        8: "ซื้อของ ฿3,303",
+        10: "⭐ ยอดขายพุ่ง ฿2,305",
+        11: "⭐ ยอดขายพุ่ง ฿2,390",
+        13: "ซื้อของ ฿3,479",
+        19: "วันล่าสุด (กำไรดำเนินงาน +฿902)"
+      },
+      branch4: {
+        3: "จ่ายค่าของ ฿2,000",
+        11: "ซื้อของ ฿4,303 (มีค่าไฟเต่า ฿3,330)",
+        17: "ซื้อของ ฿1,855",
+        19: "วันล่าสุด (กำไรดำเนินงาน +฿311)"
+      }
     };
 
     let currentBranch = 'all';
@@ -502,13 +522,6 @@
 
     // Target Calculation Logic
     function updateTargetPlanning() {
-      // Model:
-      // Fixed Rent = 15,667 (เฉลี่ยรายเดือน 4 สาขา: ส.1=5k, ส.2=3.33k, ส.3=4k, ส.4=3.33k)
-      // 30 days Total Fixed Wages (approx 1,450/day * 30) = 43,500
-      // Total Fixed Costs = 15,667 + 43,500 = 59,167
-      // Variable COGS (Materials, oil, gas) = ~50% of revenue (Contribution margin = 50%)
-      // Net Profit = (0.50 * Total Revenue) - 59,167
-      // Total Revenue Needed = (Target Profit + 59,167) / 0.50
       const fixedCosts = 59167;
       const contributionMarginRatio = 0.50;
       const targetMonthlyRevenue = (targetProfit + fixedCosts) / contributionMarginRatio;
@@ -578,11 +591,61 @@
 
     function selectBranch(branchKey) {
       currentBranch = branchKey;
+
+      // 1. Update Tab button styles
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.className = 'tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]';
       });
-      document.getElementById('btn-tab-' + branchKey).className = 'tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-active';
+      const activeTabBtn = document.getElementById('btn-tab-' + branchKey);
+      if (activeTabBtn) {
+        activeTabBtn.className = 'tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-active shadow-sm';
+      }
+
+      // 2. Update View Tag
+      const b = branchMeta[branchKey];
+      const tagText = document.getElementById('activeBranchTagText');
+      if (tagText) {
+        tagText.innerText = `กำลังดู: ${b.tag}`;
+      }
+
+      // 3. Highlight corresponding summary card, target card, and legend
+      ['branch1', 'branch2', 'branch3', 'branch4'].forEach(bk => {
+        const sc = document.getElementById('summary-card-' + bk);
+        const tc = document.getElementById('target-card-' + bk);
+        const lg = document.getElementById('legend-' + bk);
+
+        if (sc) {
+          if (branchKey === 'all') {
+            sc.className = 'cursor-pointer p-4 rounded-xl border border-slate-200 bg-slate-50/50 transition-all hover:shadow-md';
+          } else if (branchKey === bk) {
+            const ringColor = bk === 'branch1' ? 'ring-blue-500 border-blue-400' : bk === 'branch2' ? 'ring-amber-500 border-amber-400' : bk === 'branch3' ? 'ring-emerald-500 border-emerald-400' : 'ring-purple-500 border-purple-400';
+            sc.className = `cursor-pointer p-4 rounded-xl bg-white transition-all shadow-lg ring-2 ${ringColor} scale-[1.02]`;
+          } else {
+            sc.className = 'cursor-pointer p-4 rounded-xl border border-slate-200 bg-slate-50/40 transition-all opacity-60 hover:opacity-100';
+          }
+        }
+
+        if (tc) {
+          if (branchKey === bk) {
+            tc.className = 'cursor-pointer bg-white/30 p-2.5 rounded-xl border-2 border-amber-300 transition-all scale-[1.03] shadow-md';
+          } else {
+            tc.className = 'cursor-pointer bg-white/10 p-2.5 rounded-xl border border-white/10 transition-all hover:bg-white/20';
+          }
+        }
+
+        if (lg) {
+          if (branchKey === bk) {
+            lg.className = 'cursor-pointer p-1.5 rounded-lg flex items-center justify-between text-xs bg-blue-50 border border-blue-200 font-bold';
+          } else {
+            lg.className = 'cursor-pointer p-1.5 rounded-lg flex items-center justify-between text-xs hover:bg-slate-50 transition font-normal';
+          }
+        }
+      });
+
+      // 4. Update UI Components
       updateDashboard();
+      renderTable();
+      renderDonut();
     }
 
     function updateDashboard() {
@@ -593,15 +656,43 @@
       const totalExp = opExp + rent;
       const net = rev - totalExp;
 
+      // KPI Card 1: Revenue
       document.getElementById('kpiRevenue').innerText = '฿' + formatNumber(rev);
-      document.getElementById('kpiRevenueSub').innerText = `เฉลี่ย ฿${formatNumber(Math.round(rev / b.days))} / วัน`;
-      
+      const revTitle = document.getElementById('kpiRevTitle');
+      if (revTitle) {
+        revTitle.innerText = currentBranch === 'all' ? 'รายรับจริงรวม (19 วัน)' : `รายรับจริง ${b.name} (${b.days} วัน)`;
+      }
+      document.getElementById('kpiRevenueSub').innerText = currentBranch === 'all' 
+        ? `เฉลี่ย ฿${formatNumber(Math.round(rev / b.days))} / วัน (รวม 4 สาขา)` 
+        : `เฉลี่ย ฿${formatNumber(Math.round(rev / b.days))} / วันเปิดขาย`;
+
+      // KPI Card 2: Operating Expenses
       document.getElementById('kpiOpExp').innerText = '฿' + formatNumber(opExp);
+      const opExpTitle = document.getElementById('kpiOpExpTitle');
+      if (opExpTitle) {
+        opExpTitle.innerText = currentBranch === 'all' ? 'รายจ่ายดำเนินงานรวม' : `รายจ่ายดำเนินงาน ${b.name}`;
+      }
+      const opProfit = rev - opExp;
+      document.getElementById('kpiOpExpSub').innerText = currentBranch === 'all' 
+        ? 'ค่าแรง + วัตถุดิบ + แก๊ส (4 สาขา)' 
+        : (opProfit >= 0 ? `กำไรดำเนินงาน: +฿${formatNumber(opProfit)} (ก่อนหักค่าเช่า)` : `ขาดทุนดำเนินงาน: -฿${formatNumber(Math.abs(opProfit))} (ก่อนหักค่าเช่า)`);
+
+      // KPI Card 3: Fixed Rent
       document.getElementById('kpiRent').innerText = '฿' + formatNumber(b.rent);
-      
+      const rentTitle = document.getElementById('kpiRentTitle');
+      if (rentTitle) {
+        rentTitle.innerText = currentBranch === 'all' ? 'ค่าเช่าร้านคงที่' : `ค่าเช่าร้าน ${b.name}`;
+      }
+      document.getElementById('kpiRentSub').innerText = b.rentNote;
+
+      // KPI Card 4: Net Profit
       const kpiNetEl = document.getElementById('kpiNet');
       const kpiNetSubEl = document.getElementById('kpiNetSub');
       const kpiNetBadgeIcon = document.getElementById('kpiNetBadgeIcon');
+      const netTitle = document.getElementById('kpiNetTitle');
+      if (netTitle) {
+        netTitle.innerText = currentBranch === 'all' ? 'กำไร / ขาดทุนสุทธิ' : `กำไร / ขาดทุนสุทธิ ${b.name}`;
+      }
 
       if (net >= 0) {
         kpiNetEl.className = 'text-2xl lg:text-3xl font-bold text-emerald-600';
@@ -651,7 +742,36 @@
         return { day: d.day, r, e };
       });
 
-      const maxVal = Math.max(...points.map(p => Math.max(p.r, p.e)), 3000);
+      // Update Chart Title and Footer Summary
+      const b = branchMeta[currentBranch];
+      const titleEl = document.getElementById('trendChartTitle');
+      const subEl = document.getElementById('trendChartSub');
+      const summaryEl = document.getElementById('trendChartSummary');
+
+      if (titleEl) {
+        titleEl.innerText = currentBranch === 'all' 
+          ? 'แนวโน้มรายรับ - รายจ่าย รายวัน (รวมทุกสาขา)' 
+          : `แนวโน้มรายรับ - รายจ่าย รายวัน: ${b.name}`;
+      }
+      if (subEl) {
+        subEl.innerText = currentBranch === 'all' 
+          ? 'เปรียบเทียบยอดขายและต้นทุนดำเนินงานรวม 4 สาขา (วันที่ 1 - 19)' 
+          : `ชี้ที่จุดบนกราฟเพื่อดูรายรับ รายจ่าย และผลสุทธิแต่ละวันของ ${b.name}`;
+      }
+
+      let maxP = points[0];
+      points.forEach(p => { if (p.r > maxP.r) maxP = p; });
+      const lastP = points[points.length - 1];
+      const lastNet = lastP.r - lastP.e;
+
+      if (summaryEl) {
+        summaryEl.innerHTML = `
+          <span>ยอดขายสูงสุด: <strong>วันที่ ${maxP.day}</strong> (฿${formatNumber(maxP.r)})</span>
+          <span>ว.19 ล่าสุด: <strong>฿${formatNumber(lastP.r)}</strong> (ผลดำเนินงาน <strong class="${lastNet >= 0 ? 'text-emerald-600' : 'text-red-600'}">${lastNet >= 0 ? '+' : ''}฿${formatNumber(lastNet)}</strong>)</span>
+        `;
+      }
+
+      const maxVal = Math.max(...points.map(p => Math.max(p.r, p.e)), 2000);
       const ceiling = Math.ceil(maxVal / 1000) * 1000;
 
       for (let i = 0; i <= 4; i++) {
@@ -731,13 +851,14 @@
         circle.setAttribute('stroke-width', '2');
         circle.style.cursor = 'pointer';
 
-        circle.addEventListener('mouseenter', (evt) => {
+        circle.addEventListener('mouseenter', () => {
           circle.setAttribute('r', '6');
-          tooltip.innerHTML = `<strong>วันที่ ${p.day}</strong><br>รายรับ: ฿${formatNumber(p.r)}<br>รายจ่าย: ฿${formatNumber(p.e)}<br>สุทธิ: ฿${formatNumber(p.r - p.e)}`;
+          const netVal = p.r - p.e;
+          tooltip.innerHTML = `<strong>วันที่ ${p.day} (${b.name})</strong><br>รายรับ: ฿${formatNumber(p.r)}<br>รายจ่าย: ฿${formatNumber(p.e)}<br>ผลต่าง: <span style="color:${netVal >= 0 ? '#34d399' : '#f87171'}">${netVal >= 0 ? '+' : ''}฿${formatNumber(netVal)}</span>`;
           tooltip.classList.remove('hidden');
           const rect = svg.getBoundingClientRect();
-          tooltip.style.left = (x / width * rect.width - 40) + 'px';
-          tooltip.style.top = (yR / height * rect.height - 70) + 'px';
+          tooltip.style.left = (x / width * rect.width - 50) + 'px';
+          tooltip.style.top = (yR / height * rect.height - 75) + 'px';
         });
 
         circle.addEventListener('mouseleave', () => {
@@ -753,10 +874,10 @@
       const svg = document.getElementById('donutSvg');
       svg.innerHTML = '';
       const data = [
-        { name: 'สาขา 1', val: 19720, color: '#3b82f6' },
-        { name: 'สาขา 2', val: 19890, color: '#f59e0b' },
-        { name: 'สาขา 3', val: 27068, color: '#10b981' },
-        { name: 'สาขา 4', val: 23885, color: '#a855f7' }
+        { key: 'branch1', name: 'สาขา 1', val: 19720, color: '#3b82f6' },
+        { key: 'branch2', name: 'สาขา 2', val: 19890, color: '#f59e0b' },
+        { key: 'branch3', name: 'สาขา 3', val: 27068, color: '#10b981' },
+        { key: 'branch4', name: 'สาขา 4', val: 23885, color: '#a855f7' }
       ];
       const total = data.reduce((acc, d) => acc + d.val, 0);
       const r = 60;
@@ -776,15 +897,29 @@
         circle.setAttribute('r', r);
         circle.setAttribute('fill', 'transparent');
         circle.setAttribute('stroke', item.color);
-        circle.setAttribute('stroke-width', '24');
+        
+        // Highlight active slice
+        if (currentBranch === item.key) {
+          circle.setAttribute('stroke-width', '30');
+          circle.style.filter = 'drop-shadow(0px 0px 4px rgba(0,0,0,0.3))';
+        } else if (currentBranch !== 'all') {
+          circle.setAttribute('stroke-width', '20');
+          circle.setAttribute('opacity', '0.45');
+        } else {
+          circle.setAttribute('stroke-width', '24');
+        }
+
         circle.setAttribute('stroke-dasharray', dasharray);
         circle.setAttribute('stroke-dashoffset', offset);
         circle.setAttribute('transform', `rotate(-90 ${cx} ${cy})`);
+        circle.style.cursor = 'pointer';
+        circle.addEventListener('click', () => selectBranch(item.key));
         svg.appendChild(circle);
 
         accumulated += ratio;
       });
 
+      const b = branchMeta[currentBranch];
       const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
       text.setAttribute('x', cx);
       text.setAttribute('y', cy + 5);
@@ -792,42 +927,163 @@
       text.setAttribute('font-size', '14');
       text.setAttribute('font-weight', 'bold');
       text.setAttribute('fill', 'var(--foreground, #0f172a)');
-      text.textContent = '฿90.6k';
+      text.textContent = currentBranch === 'all' ? '฿90.6k' : `฿${(b.rev / 1000).toFixed(1)}k`;
       svg.appendChild(text);
+
+      const donutSub = document.getElementById('donutSub');
+      const donutNote = document.getElementById('donutNote');
+      if (donutSub) {
+        donutSub.innerText = currentBranch === 'all' 
+          ? 'ยอดขายจริงรวม 19 วัน (฿90,563)' 
+          : `สัดส่วน ${b.name}: ${((b.rev / 90563) * 100).toFixed(1)}% ของยอดขายทั้ง 4 สาขา`;
+      }
+      if (donutNote) {
+        donutNote.innerText = currentBranch === 'all' 
+          ? 'สาขา 3 มียอดขายสูงสุดในกลุ่ม' 
+          : `${b.name} ทำยอดขายได้ ฿${formatNumber(b.rev)} (${b.days} วันขาย)`;
+      }
     }
 
     function renderTable() {
+      const thead = document.getElementById('tableHead');
       const tbody = document.getElementById('tableBody');
+      const tfoot = document.getElementById('tableFoot');
+      const title = document.getElementById('tableTitle');
+      const sub = document.getElementById('tableSub');
+      const b = branchMeta[currentBranch];
+
       tbody.innerHTML = '';
 
-      dailyData.forEach(d => {
-        const totR = d.r1 + d.r2 + d.r3 + d.r4;
-        const totE = d.e1 + d.e2 + d.e3 + d.e4;
-        const net = totR - totE;
+      if (currentBranch === 'all') {
+        // === VIEW: ALL BRANCHES ===
+        title.innerText = 'ตารางรายรับ - รายจ่าย รายวัน (รวม 4 สาขา)';
+        sub.innerText = 'ข้อมูลรายวันวันที่ 1 ถึง 19 กันยายน 2569 รวมทั้ง 4 สาขา';
 
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-[var(--secondary,#f8fafc)] transition';
-        tr.innerHTML = `
-          <td class="py-2.5 px-3 font-medium">วันที่ ${d.day}</td>
-          <td class="py-2.5 px-3">${formatNumber(d.r1)}</td>
-          <td class="py-2.5 px-3">${formatNumber(d.r2)}</td>
-          <td class="py-2.5 px-3 font-medium text-emerald-600">${formatNumber(d.r3)}</td>
-          <td class="py-2.5 px-3">${formatNumber(d.r4)}</td>
-          <td class="py-2.5 px-3 font-bold text-blue-600">฿${formatNumber(totR)}</td>
-          <td class="py-2.5 px-3 font-bold text-amber-600">฿${formatNumber(totE)}</td>
-          <td class="py-2.5 px-3 font-bold ${net >= 0 ? 'text-emerald-600' : 'text-red-600'}">
-            ${net >= 0 ? '+' : ''}฿${formatNumber(net)}
-          </td>
+        thead.innerHTML = `
+          <tr class="border-b border-[var(--border,#e2e8f0)] text-[var(--muted-foreground,#64748b)] font-semibold bg-[var(--secondary,#f8fafc)]">
+            <th class="py-3 px-3">วันที่</th>
+            <th class="py-3 px-3">สาขา 1 (รับ)</th>
+            <th class="py-3 px-3">สาขา 2 (รับ)</th>
+            <th class="py-3 px-3">สาขา 3 (รับ)</th>
+            <th class="py-3 px-3">สาขา 4 (รับ)</th>
+            <th class="py-3 px-3 font-bold text-blue-600">รวมรับ (บาท)</th>
+            <th class="py-3 px-3 font-bold text-amber-600">รวมจ่าย (บาท)</th>
+            <th class="py-3 px-3 font-bold text-slate-700">กำไรดำเนินงานวันนั้น</th>
+          </tr>
         `;
-        tbody.appendChild(tr);
-      });
+
+        dailyData.forEach(d => {
+          const totR = d.r1 + d.r2 + d.r3 + d.r4;
+          const totE = d.e1 + d.e2 + d.e3 + d.e4;
+          const net = totR - totE;
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-[var(--secondary,#f8fafc)] transition';
+          tr.innerHTML = `
+            <td class="py-2.5 px-3 font-medium">วันที่ ${d.day}</td>
+            <td class="py-2.5 px-3">${formatNumber(d.r1)}</td>
+            <td class="py-2.5 px-3">${formatNumber(d.r2)}</td>
+            <td class="py-2.5 px-3 font-medium text-emerald-600">${formatNumber(d.r3)}</td>
+            <td class="py-2.5 px-3">${formatNumber(d.r4)}</td>
+            <td class="py-2.5 px-3 font-bold text-blue-600">฿${formatNumber(totR)}</td>
+            <td class="py-2.5 px-3 font-bold text-amber-600">฿${formatNumber(totE)}</td>
+            <td class="py-2.5 px-3 font-bold ${net >= 0 ? 'text-emerald-600' : 'text-red-600'}">
+              ${net >= 0 ? '+' : ''}฿${formatNumber(net)}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        tfoot.innerHTML = `
+          <tr class="bg-blue-50/60 font-bold border-t-2 border-blue-200 text-[var(--foreground,#0f172a)]">
+            <td class="py-3 px-3">รวม 19 วัน</td>
+            <td class="py-3 px-3">฿19,720</td>
+            <td class="py-3 px-3">฿19,890</td>
+            <td class="py-3 px-3">฿27,068</td>
+            <td class="py-3 px-3">฿23,885</td>
+            <td class="py-3 px-3 text-blue-600">฿90,563</td>
+            <td class="py-3 px-3 text-amber-600">฿91,384</td>
+            <td class="py-3 px-3 text-red-600">-฿821</td>
+          </tr>
+        `;
+      } else {
+        // === VIEW: SINGLE BRANCH ===
+        const branchKey = currentBranch;
+        const bIdx = branchKey.replace('branch', '');
+        title.innerText = `ตารางรายรับ - รายจ่าย รายวัน: ${b.name}`;
+        sub.innerText = `ข้อมูลรายวันวันที่ 1 ถึง 19 กันยายน 2569 ของ ${b.name} (${b.days} วันขาย)`;
+
+        thead.innerHTML = `
+          <tr class="border-b border-[var(--border,#e2e8f0)] text-[var(--muted-foreground,#64748b)] font-semibold bg-[var(--secondary,#f8fafc)]">
+            <th class="py-3 px-3">วันที่</th>
+            <th class="py-3 px-3 font-bold text-blue-600">รายรับจริง (บาท)</th>
+            <th class="py-3 px-3 font-bold text-amber-600">รายจ่ายดำเนินงาน (บาท)</th>
+            <th class="py-3 px-3 font-bold text-slate-700">กำไร/ขาดทุนดำเนินงาน</th>
+            <th class="py-3 px-3">อัตรากำไร (Margin)</th>
+            <th class="py-3 px-3">หมายเหตุ / สถานะ</th>
+          </tr>
+        `;
+
+        dailyData.forEach(d => {
+          const r = d['r' + bIdx];
+          const e = d['e' + bIdx];
+          const net = r - e;
+          const note = (branchNotes[branchKey] && branchNotes[branchKey][d.day]) || '';
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-[var(--secondary,#f8fafc)] transition';
+
+          if (r === 0 && e === 0) {
+            tr.innerHTML = `
+              <td class="py-2.5 px-3 font-medium text-slate-400">วันที่ ${d.day}</td>
+              <td class="py-2.5 px-3 text-slate-400">฿0</td>
+              <td class="py-2.5 px-3 text-slate-400">฿0</td>
+              <td class="py-2.5 px-3 text-slate-400">฿0</td>
+              <td class="py-2.5 px-3 text-slate-400">-</td>
+              <td class="py-2.5 px-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-100 text-slate-600">⚪ หยุดขาย (พักร้าน)</span></td>
+            `;
+          } else {
+            const margin = r > 0 ? ((net / r) * 100).toFixed(1) + '%' : '-';
+            tr.innerHTML = `
+              <td class="py-2.5 px-3 font-medium">วันที่ ${d.day}</td>
+              <td class="py-2.5 px-3 font-bold text-blue-600">฿${formatNumber(r)}</td>
+              <td class="py-2.5 px-3 text-amber-700">฿${formatNumber(e)}</td>
+              <td class="py-2.5 px-3 font-bold ${net >= 0 ? 'text-emerald-600' : 'text-red-600'}">
+                ${net >= 0 ? '+' : ''}฿${formatNumber(net)}
+              </td>
+              <td class="py-2.5 px-3 font-medium ${net >= 0 ? 'text-emerald-600' : 'text-red-600'}">${margin}</td>
+              <td class="py-2.5 px-3 text-[11px] text-[var(--muted-foreground,#64748b)]">${note ? `📌 ${note}` : (net >= 0 ? '🟢 ปกติ' : '🔴 วันนี้รายจ่ายสูง')}</td>
+            `;
+          }
+          tbody.appendChild(tr);
+        });
+
+        const opProfit = b.rev - b.opExp;
+        const marginTotal = ((opProfit / b.rev) * 100).toFixed(1) + '%';
+        const netAfterRent = b.rev - (b.opExp + b.rent);
+
+        tfoot.innerHTML = `
+          <tr class="bg-blue-50/60 font-bold border-t-2 border-blue-200 text-[var(--foreground,#0f172a)]">
+            <td class="py-3 px-3">รวม ${b.days} วันขาย</td>
+            <td class="py-3 px-3 text-blue-600">฿${formatNumber(b.rev)}</td>
+            <td class="py-3 px-3 text-amber-600">฿${formatNumber(b.opExp)}</td>
+            <td class="py-3 px-3 ${opProfit >= 0 ? 'text-emerald-600' : 'text-red-600'}">
+              ${opProfit >= 0 ? '+' : ''}฿${formatNumber(opProfit)}
+            </td>
+            <td class="py-3 px-3 text-blue-800">${marginTotal}</td>
+            <td class="py-3 px-3 text-xs text-purple-700 font-semibold">
+              สุทธิหักค่าเช่า (${formatNumber(b.rent)} บ.): <span class="${netAfterRent >= 0 ? 'text-emerald-700' : 'text-red-700'}">${netAfterRent >= 0 ? '+' : ''}฿${formatNumber(netAfterRent)}</span>
+            </td>
+          </tr>
+        `;
+      }
     }
 
     function filterTable() {
-      const q = document.getElementById('tableSearch').value.trim();
+      const q = document.getElementById('tableSearch').value.trim().toLowerCase();
       const rows = document.querySelectorAll('#tableBody tr');
       rows.forEach(r => {
-        const text = r.children[0].innerText;
+        const text = r.innerText.toLowerCase();
         if (!q || text.includes(q)) {
           r.style.display = '';
         } else {
@@ -852,9 +1108,7 @@
 
     // Initialize
     updateTargetPlanning();
-    updateDashboard();
-    renderDonut();
-    renderTable();
+    selectBranch('all');
   </script>
 </body>
 </html>
