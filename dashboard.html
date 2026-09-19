@@ -30,10 +30,10 @@
     <header class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4">
       <div>
         <div class="flex items-center gap-2">
-          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
-            18 วันแรก • ก.ย. 2569
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+            อัปเดตล่าสุด: 19 วันแรก • ก.ย. 2569
           </span>
-          <span class="text-xs text-[var(--muted-foreground,#64748b)]">อัปเดตข้อมูลตามโฟลเดอร์สาขาล่าสุด</span>
+          <span class="text-xs text-[var(--muted-foreground,#64748b)]">รวมข้อมูลวันที่ 19 ก.ย. เรียบร้อยแล้ว</span>
         </div>
         <h1 class="text-2xl md:text-3xl font-bold mt-1 text-[var(--foreground,#0f172a)]">
           Dashboard บัญชีร้านลูกชิ้น 4 สาขา
@@ -80,14 +80,14 @@
       <!-- Card 1: Revenue -->
       <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
         <div class="flex items-center justify-between">
-          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">รายรับจริงรวม</span>
+          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">รายรับจริงรวม (19 วัน)</span>
           <span class="p-2 rounded-xl bg-blue-50 text-blue-600">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </span>
         </div>
         <div class="mt-3">
-          <div id="kpiRevenue" class="text-2xl lg:text-3xl font-bold text-[var(--foreground,#0f172a)]">฿85,508</div>
-          <p id="kpiRevenueSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">เฉลี่ย ฿4,750 / วัน</p>
+          <div id="kpiRevenue" class="text-2xl lg:text-3xl font-bold text-[var(--foreground,#0f172a)]">฿90,563</div>
+          <p id="kpiRevenueSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">เฉลี่ย ฿4,766 / วัน</p>
         </div>
       </div>
 
@@ -100,7 +100,7 @@
           </span>
         </div>
         <div class="mt-3">
-          <div id="kpiOpExp" class="text-2xl lg:text-3xl font-bold text-amber-600">฿88,106</div>
+          <div id="kpiOpExp" class="text-2xl lg:text-3xl font-bold text-amber-600">฿91,384</div>
           <p id="kpiOpExpSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">ค่าแรง + วัตถุดิบ + แก๊ส</p>
         </div>
       </div>
@@ -115,7 +115,7 @@
         </div>
         <div class="mt-3">
           <div id="kpiRent" class="text-2xl lg:text-3xl font-bold text-purple-600">฿29,000</div>
-          <p id="kpiRentSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">4 สาขา (รวมเดือนนี้)</p>
+          <p id="kpiRentSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">4 สาขา (รวมทั้งเดือน)</p>
         </div>
       </div>
 
@@ -128,8 +128,8 @@
           </span>
         </div>
         <div class="mt-3">
-          <div id="kpiNet" class="text-2xl lg:text-3xl font-bold text-red-600">-฿31,598</div>
-          <p id="kpiNetSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">เมื่อรวมค่าเช่าต้นเดือน</p>
+          <div id="kpiNet" class="text-2xl lg:text-3xl font-bold text-red-600">-฿29,821</div>
+          <p id="kpiNetSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">เมื่อรวมค่าเช่าคงที่</p>
         </div>
       </div>
     </div>
@@ -142,7 +142,7 @@
         <div>
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">แนวโน้มรายรับรายวัน (วันที่ 1 - 18)</h3>
+              <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">แนวโน้มรายรับรายวัน (วันที่ 1 - 19)</h3>
               <p class="text-xs text-[var(--muted-foreground,#64748b)]">ชี้ที่จุดบนกราฟเพื่อดูรายละเอียดยอดขายแต่ละวัน</p>
             </div>
             <div class="flex items-center gap-4 text-xs">
@@ -160,7 +160,7 @@
 
         <div class="mt-4 pt-4 border-t border-[var(--border,#f1f5f9)] flex items-center justify-between text-xs text-[var(--muted-foreground,#64748b)]">
           <span>ยอดขายสูงสุด: วันที่ 5 (฿6,510)</span>
-          <span>ยอดขายต่ำสุด: วันที่ 3 (฿3,390)</span>
+          <span>ยอดขายวันที่ 19 ล่าสุด: ฿5,055 (กำไรสุทธิ +฿1,777)</span>
         </div>
       </div>
 
@@ -168,7 +168,7 @@
       <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm flex flex-col justify-between">
         <div>
           <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">สัดส่วนรายรับแยกตามสาขา</h3>
-          <p class="text-xs text-[var(--muted-foreground,#64748b)]">ยอดขายจริงรวม 18 วัน (฿85,508)</p>
+          <p class="text-xs text-[var(--muted-foreground,#64748b)]">ยอดขายจริงรวม 19 วัน (฿90,563)</p>
           
           <div class="flex items-center justify-center my-4 h-48">
             <svg id="donutSvg" class="w-44 h-44" viewBox="0 0 160 160"></svg>
@@ -179,28 +179,28 @@
             <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-blue-500"></span>
-                <span>สาขา 1 (฿18,630)</span>
+                <span>สาขา 1 (฿19,720)</span>
               </div>
               <span class="font-bold">21.8%</span>
             </div>
             <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-                <span>สาขา 2 (฿18,745)</span>
+                <span>สาขา 2 (฿19,890)</span>
               </div>
-              <span class="font-bold">21.9%</span>
+              <span class="font-bold">22.0%</span>
             </div>
             <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-                <span>สาขา 3 (฿25,568)</span>
+                <span>สาขา 3 (฿27,068)</span>
               </div>
               <span class="font-bold text-emerald-600">29.9% 🏆</span>
             </div>
             <div class="flex items-center justify-between text-xs">
               <div class="flex items-center gap-2">
                 <span class="w-3 h-3 rounded-full bg-purple-500"></span>
-                <span>สาขา 4 (฿22,565)</span>
+                <span>สาขา 4 (฿23,885)</span>
               </div>
               <span class="font-bold">26.4%</span>
             </div>
@@ -216,57 +216,57 @@
 
     <!-- Branch Audit Cards -->
     <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm">
-      <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)] mb-4">สรุปผลการตรวจสอบบัญชี 4 สาขา (ปรับปรุงตามโฟลเดอร์ล่าสุด)</h3>
+      <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)] mb-4">สรุปผลประกอบการสะสม 19 วันแยกตามสาขา</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         
         <!-- B1 Card -->
         <div class="p-4 rounded-xl border border-blue-100 bg-blue-50/40">
           <div class="flex items-center justify-between">
             <span class="font-bold text-blue-900">สาขา 1</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">ไฟล์ 106922</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">18 วันขาย</span>
           </div>
           <div class="mt-2 space-y-1 text-xs">
-            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿18,630</span></div>
-            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿21,568</span></div>
-            <div class="flex justify-between text-emerald-600 font-semibold"><span>กำไรดำเนินงาน:</span><span>+฿2,062</span></div>
-            <div class="flex justify-between text-red-600 font-semibold"><span>สุทธิ (หักค่าเช่า 5k):</span><span>-฿2,938</span></div>
+            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿19,720</span></div>
+            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿21,993</span></div>
+            <div class="flex justify-between text-emerald-600 font-semibold"><span>กำไรดำเนินงาน:</span><span>+฿2,727</span></div>
+            <div class="flex justify-between text-red-600 font-semibold"><span>สุทธิ (หักค่าเช่า 5k):</span><span>-฿2,273</span></div>
           </div>
           <div class="mt-3 pt-2 border-t border-blue-100 text-[11px] text-blue-800">
-            🔍 <strong>ตรวจพบ:</strong> วันที่ 17 ลืมบวกหน้าร้าน 300 บ. (ยอดขายจริงคือ 18,630)
+            📌 ว.19: ขาย ฿1,090 จ่าย ฿425 (กำไร <strong>+฿665</strong>)
           </div>
         </div>
 
-        <!-- B2 Card (New 353933) -->
+        <!-- B2 Card -->
         <div class="p-4 rounded-xl border border-amber-100 bg-amber-50/40">
           <div class="flex items-center justify-between">
             <span class="font-bold text-amber-900">สาขา 2</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">ไฟล์ 353933</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">ค่าเช่า 10k</span>
           </div>
           <div class="mt-2 space-y-1 text-xs">
-            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿18,745</span></div>
-            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿24,014</span></div>
-            <div class="flex justify-between text-red-600 font-semibold"><span>ขาดทุนดำเนินงาน:</span><span>-฿5,269</span></div>
-            <div class="flex justify-between text-red-700 font-semibold"><span>สุทธิ (รวมเช่า 10k):</span><span>-฿15,269</span></div>
+            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿19,890</span></div>
+            <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span class="font-semibold">฿25,260</span></div>
+            <div class="flex justify-between text-red-600 font-semibold"><span>ขาดทุนดำเนินงาน:</span><span>-฿5,370</span></div>
+            <div class="flex justify-between text-red-700 font-semibold"><span>สุทธิ (รวมเช่า 10k):</span><span>-฿15,370</span></div>
           </div>
           <div class="mt-3 pt-2 border-t border-amber-100 text-[11px] text-amber-800">
-            🔍 <strong>ตรวจพบ:</strong> ในสมุดบวกช่อง "หักเงิน" เบิ้ลเข้ายอดสะสมเกินไป 2,255 บ.
+            📌 ว.19: ขาย ฿1,145 จ่าย ฿1,246 (ผล <strong>-฿101</strong>)
           </div>
         </div>
 
-        <!-- B3 Card (New 39112) -->
+        <!-- B3 Card -->
         <div class="p-4 rounded-xl border border-emerald-100 bg-emerald-50/40">
           <div class="flex items-center justify-between">
             <span class="font-bold text-emerald-900">สาขา 3</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">ไฟล์ 39112 🏆</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">ยอดขายสูงสุด 🏆</span>
           </div>
           <div class="mt-2 space-y-1 text-xs">
-            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿25,568</span></div>
-            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿27,521</span></div>
-            <div class="flex justify-between text-emerald-600 font-semibold"><span>กำไรดำเนินงาน:</span><span>+฿2,047</span></div>
-            <div class="flex justify-between text-red-600 font-semibold"><span>สุทธิ (หักค่าเช่า 4k):</span><span>-฿1,953</span></div>
+            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿27,068</span></div>
+            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿28,119</span></div>
+            <div class="flex justify-between text-emerald-600 font-semibold"><span>กำไรดำเนินงาน:</span><span>+฿2,949</span></div>
+            <div class="flex justify-between text-red-600 font-semibold"><span>สุทธิ (หักค่าเช่า 4k):</span><span>-฿1,051</span></div>
           </div>
           <div class="mt-3 pt-2 border-t border-emerald-100 text-[11px] text-emerald-800">
-            🔍 <strong>ตรวจพบ:</strong> วันที่ 14 ในสมุดบวกสะสมขาดไป 1,000 บ. (ยอดขายจริงคือ 25,568)
+            📌 ว.19: ขาย ฿1,500 จ่าย ฿598 (กำไร <strong>+฿902</strong>)
           </div>
         </div>
 
@@ -274,16 +274,16 @@
         <div class="p-4 rounded-xl border border-purple-100 bg-purple-50/40">
           <div class="flex items-center justify-between">
             <span class="font-bold text-purple-900">สาขา 4</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">ไฟล์ 42869</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">มีค่าไฟเต่า</span>
           </div>
           <div class="mt-2 space-y-1 text-xs">
-            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿22,565</span></div>
-            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿24,003</span></div>
-            <div class="flex justify-between text-red-600 font-semibold"><span>ขาดทุนดำเนินงาน:</span><span>-฿1,438</span></div>
-            <div class="flex justify-between text-red-700 font-semibold"><span>สุทธิ (รวมเช่า 10k):</span><span>-฿11,438</span></div>
+            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿23,885</span></div>
+            <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span class="font-semibold">฿25,012</span></div>
+            <div class="flex justify-between text-red-600 font-semibold"><span>ขาดทุนดำเนินงาน:</span><span>-฿1,127</span></div>
+            <div class="flex justify-between text-red-700 font-semibold"><span>สุทธิ (รวมเช่า 10k):</span><span>-฿11,127</span></div>
           </div>
           <div class="mt-3 pt-2 border-t border-purple-100 text-[11px] text-purple-800">
-            🔍 <strong>ตรวจพบ:</strong> วันที่ 11 มีค่าไฟเต่า 3,330 บ. และยอดรับสะสมในสมุดเกิน 470 บ.
+            📌 ว.19: ขาย ฿1,320 จ่าย ฿1,009 (กำไร <strong>+฿311</strong>)
           </div>
         </div>
 
@@ -294,8 +294,8 @@
     <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm overflow-hidden">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
         <div>
-          <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">ตารางรายรับ - รายจ่าย รายวัน (ปรับปรุงใหม่)</h3>
-          <p class="text-xs text-[var(--muted-foreground,#64748b)]">ข้อมูลรายวันวันที่ 1 ถึง 18 กันยายน 2569</p>
+          <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">ตารางรายรับ - รายจ่าย รายวัน (19 วัน)</h3>
+          <p class="text-xs text-[var(--muted-foreground,#64748b)]">ข้อมูลรายวันวันที่ 1 ถึง 19 กันยายน 2569</p>
         </div>
         <div class="flex items-center gap-2">
           <input type="text" id="tableSearch" onkeyup="filterTable()" placeholder="ค้นหาวันที่..." class="px-3 py-1.5 text-xs rounded-xl border border-[var(--border,#e2e8f0)] bg-[var(--card,#fff)] focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -321,14 +321,14 @@
           </tbody>
           <tfoot>
             <tr class="bg-blue-50/60 font-bold border-t-2 border-blue-200 text-[var(--foreground,#0f172a)]" id="tableFoot">
-              <td class="py-3 px-3">รวม 18 วัน</td>
-              <td class="py-3 px-3">฿18,630</td>
-              <td class="py-3 px-3">฿18,745</td>
-              <td class="py-3 px-3">฿25,568</td>
-              <td class="py-3 px-3">฿22,565</td>
-              <td class="py-3 px-3 text-blue-600">฿85,508</td>
-              <td class="py-3 px-3 text-amber-600">฿88,106</td>
-              <td class="py-3 px-3 text-red-600">-฿2,598</td>
+              <td class="py-3 px-3">รวม 19 วัน</td>
+              <td class="py-3 px-3">฿19,720</td>
+              <td class="py-3 px-3">฿19,890</td>
+              <td class="py-3 px-3">฿27,068</td>
+              <td class="py-3 px-3">฿23,885</td>
+              <td class="py-3 px-3 text-blue-600">฿90,563</td>
+              <td class="py-3 px-3 text-amber-600">฿91,384</td>
+              <td class="py-3 px-3 text-red-600">-฿821</td>
             </tr>
           </tfoot>
         </table>
@@ -356,15 +356,16 @@
       { day: 15, r1: 0,    r2: 1165, r3: 875,  r4: 1530, e1: 0,    e2: 1267, e3: 974,  e4: 1067 },
       { day: 16, r1: 690,  r2: 1005, r3: 1315, r4: 1015, e1: 1905, e2: 1218, e3: 1723, e4: 1249 },
       { day: 17, r1: 790,  r2: 995,  r3: 1230, r4: 800,  e1: 425,  e2: 1233, e3: 1534, e4: 1855 },
-      { day: 18, r1: 440,  r2: 1075, r3: 1378, r4: 1020, e1: 395,  e2: 945,  e3: 1200, e4: 507 }
+      { day: 18, r1: 440,  r2: 1075, r3: 1378, r4: 1020, e1: 395,  e2: 945,  e3: 1200, e4: 507 },
+      { day: 19, r1: 1090, r2: 1145, r3: 1500, r4: 1320, e1: 425,  e2: 1246, e3: 598,  e4: 1009 }
     ];
 
     const branchMeta = {
-      all:     { name: "ทุกสาขารวมกัน", rev: 85508, opExp: 88106, rent: 29000, days: 18 },
-      branch1: { name: "สาขา 1", rev: 18630, opExp: 16568, rent: 5000,  days: 17 },
-      branch2: { name: "สาขา 2", rev: 18745, opExp: 24014, rent: 10000, days: 18 },
-      branch3: { name: "สาขา 3", rev: 25568, opExp: 23521, rent: 4000,  days: 18 },
-      branch4: { name: "สาขา 4", rev: 22565, opExp: 24003, rent: 10000, days: 18 }
+      all:     { name: "ทุกสาขารวมกัน", rev: 90563, opExp: 91384, rent: 29000, days: 19 },
+      branch1: { name: "สาขา 1", rev: 19720, opExp: 16993, rent: 5000,  days: 18 },
+      branch2: { name: "สาขา 2", rev: 19890, opExp: 25260, rent: 10000, days: 19 },
+      branch3: { name: "สาขา 3", rev: 27068, opExp: 24119, rent: 4000,  days: 19 },
+      branch4: { name: "สาขา 4", rev: 23885, opExp: 25012, rent: 10000, days: 19 }
     };
 
     let currentBranch = 'all';
@@ -502,7 +503,7 @@
         pathR += (idx === 0 ? `M ${x} ${yR}` : ` L ${x} ${yR}`);
         pathE += (idx === 0 ? `M ${x} ${yE}` : ` L ${x} ${yE}`);
 
-        if (p.day % 2 === 1 || p.day === 18) {
+        if (p.day % 2 === 1 || p.day === 19) {
           const xText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
           xText.setAttribute('x', x);
           xText.setAttribute('y', height - 10);
@@ -565,10 +566,10 @@
       const svg = document.getElementById('donutSvg');
       svg.innerHTML = '';
       const data = [
-        { name: 'สาขา 1', val: 18630, color: '#3b82f6' },
-        { name: 'สาขา 2', val: 18745, color: '#f59e0b' },
-        { name: 'สาขา 3', val: 25568, color: '#10b981' },
-        { name: 'สาขา 4', val: 22565, color: '#a855f7' }
+        { name: 'สาขา 1', val: 19720, color: '#3b82f6' },
+        { name: 'สาขา 2', val: 19890, color: '#f59e0b' },
+        { name: 'สาขา 3', val: 27068, color: '#10b981' },
+        { name: 'สาขา 4', val: 23885, color: '#a855f7' }
       ];
       const total = data.reduce((acc, d) => acc + d.val, 0);
       const r = 60;
@@ -604,7 +605,7 @@
       text.setAttribute('font-size', '14');
       text.setAttribute('font-weight', 'bold');
       text.setAttribute('fill', 'var(--foreground, #0f172a)');
-      text.textContent = '฿85.5k';
+      text.textContent = '฿90.6k';
       svg.appendChild(text);
     }
 
@@ -651,14 +652,14 @@
     function downloadCSV() {
       const csvContent = "data:text/csv;charset=utf-8," + 
         encodeURIComponent("สาขา,รายรับจริง,รายจ่ายดำเนินงาน,กำไรดำเนินงาน,ค่าเช่าคงที่,สุทธิ\n" +
-        "สาขา 1,18630,16568,2062,5000,-2938\n" +
-        "สาขา 2,18745,24014,-5269,10000,-15269\n" +
-        "สาขา 3,25568,23521,2047,4000,-1953\n" +
-        "สาขา 4,22565,24003,-1438,10000,-11438\n" +
-        "รวมทั้ง 4 สาขา,85508,88106,-2598,29000,-31598");
+        "สาขา 1,19720,16993,2727,5000,-2273\n" +
+        "สาขา 2,19890,25260,-5370,10000,-15370\n" +
+        "สาขา 3,27068,24119,2949,4000,-1051\n" +
+        "สาขา 4,23885,25012,-1127,10000,-11127\n" +
+        "รวมทั้ง 4 สาขา,90563,91384,-821,29000,-29821");
       const a = document.createElement("a");
       a.href = csvContent;
-      a.download = "สรุปยอด_4สาขา.csv";
+      a.download = "สรุปยอด_4สาขา_19วัน.csv";
       a.click();
     }
 
