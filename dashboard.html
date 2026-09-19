@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard สรุปยอดรายรับ-รายจ่าย ร้านลูกชิ้น 4 สาขา</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .chart-tooltip {
+      transition: opacity 0.15s ease-in-out;
+      pointer-events: none;
+    }
+    .badge-profit {
+      background-color: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+    }
+    .badge-loss {
+      background-color: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+    .tab-active {
+      background-color: var(--primary, #3b82f6);
+      color: white;
+    }
+    .tab-inactive {
+      background-color: var(--secondary, #f3f4f6);
+      color: var(--foreground, #374151);
+    }
+  </style>
+</head>
+<body class="bg-[var(--background,#f8fafc)] text-[var(--foreground,#0f172a)] antialiased p-4 md:p-8">
+  <div class="max-w-7xl mx-auto space-y-6">
+    
+    <!-- Top Header -->
+    <header class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
+            18 วันแรก • ก.ย. 2569
+          </span>
+          <span class="text-xs text-[var(--muted-foreground,#64748b)]">อัปเดตข้อมูลอัตโนมัติจากไฟล์บัญชี</span>
+        </div>
+        <h1 class="text-2xl md:text-3xl font-bold mt-1 text-[var(--foreground,#0f172a)]">
+          Dashboard บัญชีร้านลูกชิ้น 4 สาขา
+        </h1>
+        <p class="text-sm text-[var(--muted-foreground,#64748b)] mt-0.5">
+          สรุปยอดรายรับจริง รายจ่ายดำเนินงาน ค่าเช่าคงที่ และผลกำไรสุทธิ
+        </p>
+      </div>
+
+      <!-- Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="toggleRentBtn" onclick="toggleRent()" class="px-4 py-2 rounded-xl text-sm font-medium border border-[var(--border,#e2e8f0)] bg-[var(--card,#fff)] hover:bg-[var(--secondary,#f1f5f9)] transition flex items-center gap-2">
+          <span id="rentIndicator" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+          <span id="rentBtnText">รวมค่าเช่าคงที่: เปิด</span>
+        </button>
+        <button onclick="downloadCSV()" class="px-4 py-2 rounded-xl text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          ดาวน์โหลด CSV
+        </button>
+      </div>
+    </header>
+
+    <!-- Branch Filter Tabs -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-1">
+      <button onclick="selectBranch('all')" id="btn-tab-all" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-active">
+        ทุกสาขารวมกัน
+      </button>
+      <button onclick="selectBranch('branch1')" id="btn-tab-branch1" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
+        สาขา 1
+      </button>
+      <button onclick="selectBranch('branch2')" id="btn-tab-branch2" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
+        สาขา 2
+      </button>
+      <button onclick="selectBranch('branch3')" id="btn-tab-branch3" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
+        สาขา 3
+      </button>
+      <button onclick="selectBranch('branch4')" id="btn-tab-branch4" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
+        สาขา 4
+      </button>
+    </div>
+
+    <!-- KPI Metric Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Card 1: Revenue -->
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">รายรับจริงรวม</span>
+          <span class="p-2 rounded-xl bg-blue-50 text-blue-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div id="kpiRevenue" class="text-2xl lg:text-3xl font-bold text-[var(--foreground,#0f172a)]">฿85,508</div>
+          <p id="kpiRevenueSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">เฉลี่ย ฿4,750 / วัน</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Operating Expenses -->
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">รายจ่ายดำเนินงาน</span>
+          <span class="p-2 rounded-xl bg-amber-50 text-amber-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div id="kpiOpExp" class="text-2xl lg:text-3xl font-bold text-amber-600">฿88,106</div>
+          <p id="kpiOpExpSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">ค่าแรง + วัตถุดิบ + แก๊ส</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Fixed Rent -->
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">ค่าเช่าร้านคงที่</span>
+          <span class="p-2 rounded-xl bg-purple-50 text-purple-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div id="kpiRent" class="text-2xl lg:text-3xl font-bold text-purple-600">฿29,000</div>
+          <p id="kpiRentSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">4 สาขา (รวมเดือนนี้)</p>
+        </div>
+      </div>
+
+      <!-- Card 4: Net Profit -->
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-5 shadow-sm">
+        <div class="flex items-center justify-between">
+          <span class="text-sm font-medium text-[var(--muted-foreground,#64748b)]">กำไร / ขาดทุนสุทธิ</span>
+          <span id="kpiNetBadgeIcon" class="p-2 rounded-xl bg-red-50 text-red-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/></svg>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div id="kpiNet" class="text-2xl lg:text-3xl font-bold text-red-600">-฿31,598</div>
+          <p id="kpiNetSub" class="text-xs text-[var(--muted-foreground,#64748b)] mt-1">เมื่อรวมค่าเช่าต้นเดือน</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Chart 1: Daily Trend (2 Cols) -->
+      <div class="lg:col-span-2 bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">แนวโน้มรายรับรายวัน (วันที่ 1 - 18)</h3>
+              <p class="text-xs text-[var(--muted-foreground,#64748b)]">ชี้ที่จุดบนกราฟเพื่อดูรายละเอียดยอดขายแต่ละวัน</p>
+            </div>
+            <div class="flex items-center gap-4 text-xs">
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-blue-500"></span>รายรับ</span>
+              <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-400"></span>รายจ่าย</span>
+            </div>
+          </div>
+
+          <!-- SVG Chart -->
+          <div class="relative mt-6 h-64 w-full" id="trendChartContainer">
+            <svg id="trendSvg" class="w-full h-full overflow-visible" viewBox="0 0 700 240"></svg>
+            <div id="chartTooltip" class="chart-tooltip absolute hidden bg-slate-900 text-white text-xs rounded-lg px-2.5 py-1.5 shadow-lg border border-slate-700 pointer-events-none z-10"></div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-4 border-t border-[var(--border,#f1f5f9)] flex items-center justify-between text-xs text-[var(--muted-foreground,#64748b)]">
+          <span>ยอดขายสูงสุด: วันที่ 5 (฿6,510)</span>
+          <span>ยอดขายต่ำสุด: วันที่ 3 (฿3,390)</span>
+        </div>
+      </div>
+
+      <!-- Chart 2: Branch Breakdown Donut & Share -->
+      <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+        <div>
+          <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">สัดส่วนรายรับแยกตามสาขา</h3>
+          <p class="text-xs text-[var(--muted-foreground,#64748b)]">ยอดขายจริงรวม 18 วัน (฿85,508)</p>
+          
+          <div class="flex items-center justify-center my-4 h-48">
+            <svg id="donutSvg" class="w-44 h-44" viewBox="0 0 160 160"></svg>
+          </div>
+
+          <!-- Legend with Percentages -->
+          <div class="space-y-2 mt-2">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+                <span>สาขา 1 (฿18,630)</span>
+              </div>
+              <span class="font-bold">21.8%</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <span>สาขา 2 (฿25,568)</span>
+              </div>
+              <span class="font-bold text-emerald-600">29.9% 🏆</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                <span>สาขา 3 (฿18,745)</span>
+              </div>
+              <span class="font-bold">21.9%</span>
+            </div>
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-purple-500"></span>
+                <span>สาขา 4 (฿22,565)</span>
+              </div>
+              <span class="font-bold">26.4%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-[var(--border,#f1f5f9)] text-xs text-center text-[var(--muted-foreground,#64748b)]">
+          สาขา 2 มียอดขายสูงที่สุดในกลุ่ม
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Branch Audit Cards -->
+    <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm">
+      <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)] mb-4">สรุปผลการตรวจสอบบัญชี 4 สาขา</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- B1 Card -->
+        <div class="p-4 rounded-xl border border-blue-100 bg-blue-50/40">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-blue-900">สาขา 1</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">17 วันขาย</span>
+          </div>
+          <div class="mt-2 space-y-1 text-xs">
+            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿18,630</span></div>
+            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿21,568</span></div>
+            <div class="flex justify-between text-emerald-600 font-semibold"><span>กำไรดำเนินงาน:</span><span>+฿2,062</span></div>
+            <div class="flex justify-between text-red-600 font-semibold"><span>สุทธิ (หักค่าเช่า 5k):</span><span>-฿2,938</span></div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-blue-100 text-[11px] text-blue-800">
+            🔍 <strong>ตรวจพบ:</strong> วันที่ 17 ในสมุดลืมบวกหน้าร้าน 300 บ. (ยอดขายจริงต้องเป็น 18,630)
+          </div>
+        </div>
+
+        <!-- B2 Card -->
+        <div class="p-4 rounded-xl border border-emerald-100 bg-emerald-50/40">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-emerald-900">สาขา 2</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-medium">ยอดขายสูงสุด</span>
+          </div>
+          <div class="mt-2 space-y-1 text-xs">
+            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿25,568</span></div>
+            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿27,521</span></div>
+            <div class="flex justify-between text-emerald-600 font-semibold"><span>กำไรดำเนินงาน:</span><span>+฿2,047</span></div>
+            <div class="flex justify-between text-red-600 font-semibold"><span>สุทธิ (หักค่าเช่า 4k):</span><span>-฿1,953</span></div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-emerald-100 text-[11px] text-emerald-800">
+            🔍 <strong>ตรวจพบ:</strong> วันที่ 14 ในสมุดบวกสะสมขาดไป 1,000 บ. (ยอดขายจริงคือ 25,568)
+          </div>
+        </div>
+
+        <!-- B3 Card -->
+        <div class="p-4 rounded-xl border border-amber-100 bg-amber-50/40">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-amber-900">สาขา 3</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-medium">ค่าเช่า 10k</span>
+          </div>
+          <div class="mt-2 space-y-1 text-xs">
+            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿18,745</span></div>
+            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿24,014</span></div>
+            <div class="flex justify-between text-red-600 font-semibold"><span>ขาดทุนดำเนินงาน:</span><span>-฿5,269</span></div>
+            <div class="flex justify-between text-red-700 font-semibold"><span>สุทธิ (รวมเช่า 10k):</span><span>-฿15,269</span></div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-amber-100 text-[11px] text-amber-800">
+            🔍 <strong>ตรวจพบ:</strong> สมุดบวกช่อง "หักเงิน" เบิ้ลเข้ายอดสะสมเกินไป 2,255 บ.
+          </div>
+        </div>
+
+        <!-- B4 Card -->
+        <div class="p-4 rounded-xl border border-purple-100 bg-purple-50/40">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-purple-900">สาขา 4</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-medium">มีค่าไฟเต่า</span>
+          </div>
+          <div class="mt-2 space-y-1 text-xs">
+            <div class="flex justify-between"><span>รายรับจริง:</span><span class="font-semibold">฿22,565</span></div>
+            <div class="flex justify-between"><span>รายจ่ายรวม:</span><span class="font-semibold">฿24,003</span></div>
+            <div class="flex justify-between text-red-600 font-semibold"><span>ขาดทุนดำเนินงาน:</span><span>-฿1,438</span></div>
+            <div class="flex justify-between text-red-700 font-semibold"><span>สุทธิ (รวมเช่า 10k):</span><span>-฿11,438</span></div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-purple-100 text-[11px] text-purple-800">
+            🔍 <strong>ตรวจพบ:</strong> วันที่ 11 มีค่าไฟเต่า 3,330 บ. และยอดรับสะสมในสมุดเกิน 470 บ.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Daily Data Table -->
+    <div class="bg-[var(--card,#ffffff)] border border-[var(--border,#e2e8f0)] rounded-2xl p-6 shadow-sm overflow-hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+        <div>
+          <h3 class="text-lg font-bold text-[var(--foreground,#0f172a)]">ตารางรายรับ - รายจ่าย รายวัน</h3>
+          <p class="text-xs text-[var(--muted-foreground,#64748b)]">ข้อมูลรายวันวันที่ 1 ถึง 18 กันยายน 2569</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="text" id="tableSearch" onkeyup="filterTable()" placeholder="ค้นหาวันที่..." class="px-3 py-1.5 text-xs rounded-xl border border-[var(--border,#e2e8f0)] bg-[var(--card,#fff)] focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse" id="dataTable">
+          <thead>
+            <tr class="border-b border-[var(--border,#e2e8f0)] text-[var(--muted-foreground,#64748b)] font-semibold bg-[var(--secondary,#f8fafc)]">
+              <th class="py-3 px-3">วันที่</th>
+              <th class="py-3 px-3">สาขา 1 (รับ)</th>
+              <th class="py-3 px-3">สาขา 2 (รับ)</th>
+              <th class="py-3 px-3">สาขา 3 (รับ)</th>
+              <th class="py-3 px-3">สาขา 4 (รับ)</th>
+              <th class="py-3 px-3 font-bold text-blue-600">รวมรับ (บาท)</th>
+              <th class="py-3 px-3 font-bold text-amber-600">รวมจ่าย (บาท)</th>
+              <th class="py-3 px-3 font-bold text-slate-700">กำไรสุทธิวันนั้น</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody" class="divide-y divide-[var(--border,#f1f5f9)]">
+            <!-- Rendered by JS -->
+          </tbody>
+          <tfoot>
+            <tr class="bg-blue-50/60 font-bold border-t-2 border-blue-200 text-[var(--foreground,#0f172a)]" id="tableFoot">
+              <td class="py-3 px-3">รวม 18 วัน</td>
+              <td class="py-3 px-3">฿18,630</td>
+              <td class="py-3 px-3">฿25,568</td>
+              <td class="py-3 px-3">฿18,745</td>
+              <td class="py-3 px-3">฿22,565</td>
+              <td class="py-3 px-3 text-blue-600">฿85,508</td>
+              <td class="py-3 px-3 text-amber-600">฿88,106</td>
+              <td class="py-3 px-3 text-red-600">-฿2,598</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const dailyData = [
+      { day: 1,  r1: 2430, r2: 1080, r3: 1290, r4: 925,  e1: 569,  e2: 970,  e3: 1498, e4: 469 },
+      { day: 2,  r1: 855,  r2: 1055, r3: 1145, r4: 1335, e1: 1147, e2: 1195, e3: 1539, e4: 1112 },
+      { day: 3,  r1: 650,  r2: 690,  r3: 1155, r4: 895,  e1: 1290, e2: 1510, e3: 1450, e4: 2000 },
+      { day: 4,  r1: 1245, r2: 685,  r3: 1110, r4: 1010, e1: 5385, e2: 4460, e3: 480,  e4: 950 },
+      { day: 5,  r1: 1800, r2: 1765, r3: 1255, r4: 1690, e1: 530,  e2: 808,  e3: 1300, e4: 917 },
+      { day: 6,  r1: 1060, r2: 1850, r3: 1140, r4: 1495, e1: 3054, e2: 910,  e3: 1050, e4: 550 },
+      { day: 7,  r1: 1080, r2: 1410, r3: 955,  r4: 1240, e1: 540,  e2: 412,  e3: 963,  e4: 749 },
+      { day: 8,  r1: 830,  r2: 1070, r3: 670,  r4: 1120, e1: 1381, e2: 3303, e3: 546,  e4: 1525 },
+      { day: 9,  r1: 780,  r2: 1300, r3: 755,  r4: 1515, e1: 390,  e2: 1383, e3: 3945, e4: 1020 },
+      { day: 10, r1: 1350, r2: 2305, r3: 1065, r4: 1245, e1: 625,  e2: 440,  e3: 1596, e4: 1571 },
+      { day: 11, r1: 775,  r2: 2390, r3: 700,  r4: 1465, e1: 2490, e2: 1895, e3: 1533, e4: 4303 },
+      { day: 12, r1: 1305, r2: 1635, r3: 1015, r4: 1235, e1: 425,  e2: 390,  e3: 1021, e4: 1529 },
+      { day: 13, r1: 1180, r2: 1875, r3: 1190, r4: 1505, e1: 607,  e2: 3479, e3: 1288, e4: 1158 },
+      { day: 14, r1: 1370, r2: 1660, r3: 1060, r4: 1525, e1: 410,  e2: 935,  e3: 1142, e4: 1472 },
+      { day: 15, r1: 0,    r2: 875,  r3: 1165, r4: 1530, e1: 0,    e2: 974,  e3: 1267, e4: 1067 },
+      { day: 16, r1: 690,  r2: 1315, r3: 1005, r4: 1015, e1: 1905, e2: 1723, e3: 1218, e4: 1249 },
+      { day: 17, r1: 790,  r2: 1230, r3: 995,  r4: 800,  e1: 425,  e2: 1534, e3: 1233, e4: 1855 },
+      { day: 18, r1: 440,  r2: 1378, r3: 1075, r4: 1020, e1: 395,  e2: 1200, e3: 945,  e4: 507 }
+    ];
+
+    const branchMeta = {
+      all:     { name: "ทุกสาขารวมกัน", rev: 85508, opExp: 88106, rent: 29000, days: 18 },
+      branch1: { name: "สาขา 1", rev: 18630, opExp: 16568, rent: 5000,  days: 17 },
+      branch2: { name: "สาขา 2", rev: 25568, opExp: 23521, rent: 4000,  days: 18 },
+      branch3: { name: "สาขา 3", rev: 18745, opExp: 24014, rent: 10000, days: 18 },
+      branch4: { name: "สาขา 4", rev: 22565, opExp: 24003, rent: 10000, days: 18 }
+    };
+
+    let currentBranch = 'all';
+    let includeRent = true;
+
+    function formatNumber(num) {
+      return num.toLocaleString('th-TH');
+    }
+
+    function toggleRent() {
+      includeRent = !includeRent;
+      const indicator = document.getElementById('rentIndicator');
+      const text = document.getElementById('rentBtnText');
+      if (includeRent) {
+        indicator.className = 'w-2.5 h-2.5 rounded-full bg-emerald-500';
+        text.innerText = 'รวมค่าเช่าคงที่: เปิด';
+      } else {
+        indicator.className = 'w-2.5 h-2.5 rounded-full bg-slate-400';
+        text.innerText = 'รวมค่าเช่าคงที่: ปิด';
+      }
+      updateDashboard();
+    }
+
+    function selectBranch(branchKey) {
+      currentBranch = branchKey;
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.className = 'tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]';
+      });
+      document.getElementById('btn-tab-' + branchKey).className = 'tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-active';
+      updateDashboard();
+    }
+
+    function updateDashboard() {
+      const b = branchMeta[currentBranch];
+      const rev = b.rev;
+      const opExp = b.opExp;
+      const rent = includeRent ? b.rent : 0;
+      const totalExp = opExp + rent;
+      const net = rev - totalExp;
+
+      document.getElementById('kpiRevenue').innerText = '฿' + formatNumber(rev);
+      document.getElementById('kpiRevenueSub').innerText = `เฉลี่ย ฿${formatNumber(Math.round(rev / b.days))} / วัน`;
+      
+      document.getElementById('kpiOpExp').innerText = '฿' + formatNumber(opExp);
+      document.getElementById('kpiRent').innerText = '฿' + formatNumber(b.rent);
+      
+      const kpiNetEl = document.getElementById('kpiNet');
+      const kpiNetSubEl = document.getElementById('kpiNetSub');
+      const kpiNetBadgeIcon = document.getElementById('kpiNetBadgeIcon');
+
+      if (net >= 0) {
+        kpiNetEl.className = 'text-2xl lg:text-3xl font-bold text-emerald-600';
+        kpiNetEl.innerText = '+฿' + formatNumber(net);
+        kpiNetBadgeIcon.className = 'p-2 rounded-xl bg-emerald-50 text-emerald-600';
+        kpiNetBadgeIcon.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>';
+      } else {
+        kpiNetEl.className = 'text-2xl lg:text-3xl font-bold text-red-600';
+        kpiNetEl.innerText = '-฿' + formatNumber(Math.abs(net));
+        kpiNetBadgeIcon.className = 'p-2 rounded-xl bg-red-50 text-red-600';
+        kpiNetBadgeIcon.innerHTML = '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"/></svg>';
+      }
+
+      kpiNetSubEl.innerText = includeRent ? 'เมื่อรวมค่าเช่าคงที่' : 'เฉพาะกำไรจากการดำเนินงาน';
+
+      renderTrendChart();
+    }
+
+    function renderTrendChart() {
+      const svg = document.getElementById('trendSvg');
+      svg.innerHTML = '';
+      
+      const width = 700;
+      const height = 240;
+      const padL = 40;
+      const padR = 20;
+      const padT = 20;
+      const padB = 30;
+
+      const plotW = width - padL - padR;
+      const plotH = height - padT - padB;
+
+      // Extract points
+      const points = dailyData.map(d => {
+        let r = 0, e = 0;
+        if (currentBranch === 'all') {
+          r = d.r1 + d.r2 + d.r3 + d.r4;
+          e = d.e1 + d.e2 + d.e3 + d.e4;
+        } else if (currentBranch === 'branch1') {
+          r = d.r1; e = d.e1;
+        } else if (currentBranch === 'branch2') {
+          r = d.r2; e = d.e2;
+        } else if (currentBranch === 'branch3') {
+          r = d.r3; e = d.e3;
+        } else if (currentBranch === 'branch4') {
+          r = d.r4; e = d.e4;
+        }
+        return { day: d.day, r, e };
+      });
+
+      const maxVal = Math.max(...points.map(p => Math.max(p.r, p.e)), 3000);
+      const ceiling = Math.ceil(maxVal / 1000) * 1000;
+
+      // Grid lines
+      for (let i = 0; i <= 4; i++) {
+        const yVal = (ceiling / 4) * i;
+        const yPos = padT + plotH - (yVal / ceiling) * plotH;
+        
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', padL);
+        line.setAttribute('y1', yPos);
+        line.setAttribute('x2', width - padR);
+        line.setAttribute('y2', yPos);
+        line.setAttribute('stroke', '#f1f5f9');
+        line.setAttribute('stroke-width', '1');
+        svg.appendChild(line);
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', padL - 8);
+        text.setAttribute('y', yPos + 4);
+        text.setAttribute('text-anchor', 'end');
+        text.setAttribute('font-size', '10');
+        text.setAttribute('fill', '#94a3b8');
+        text.textContent = (yVal >= 1000 ? (yVal / 1000) + 'k' : yVal);
+        svg.appendChild(text);
+      }
+
+      // X Axis Points
+      const xStep = plotW / (points.length - 1);
+
+      let pathR = '';
+      let pathE = '';
+
+      points.forEach((p, idx) => {
+        const x = padL + idx * xStep;
+        const yR = padT + plotH - (p.r / ceiling) * plotH;
+        const yE = padT + plotH - (p.e / ceiling) * plotH;
+
+        pathR += (idx === 0 ? `M ${x} ${yR}` : ` L ${x} ${yR}`);
+        pathE += (idx === 0 ? `M ${x} ${yE}` : ` L ${x} ${yE}`);
+
+        // X label
+        if (p.day % 2 === 1 || p.day === 18) {
+          const xText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          xText.setAttribute('x', x);
+          xText.setAttribute('y', height - 10);
+          xText.setAttribute('text-anchor', 'middle');
+          xText.setAttribute('font-size', '10');
+          xText.setAttribute('fill', '#94a3b8');
+          xText.textContent = 'ว.' + p.day;
+          svg.appendChild(xText);
+        }
+      });
+
+      // Draw Path E (Expenses)
+      const pExp = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      pExp.setAttribute('d', pathE);
+      pExp.setAttribute('fill', 'none');
+      pExp.setAttribute('stroke', '#fbbf24');
+      pExp.setAttribute('stroke-width', '2.5');
+      pExp.setAttribute('stroke-dasharray', '4 4');
+      svg.appendChild(pExp);
+
+      // Draw Path R (Revenue)
+      const pRev = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      pRev.setAttribute('d', pathR);
+      pRev.setAttribute('fill', 'none');
+      pRev.setAttribute('stroke', '#3b82f6');
+      pRev.setAttribute('stroke-width', '3');
+      svg.appendChild(pRev);
+
+      // Draw Dots
+      const tooltip = document.getElementById('chartTooltip');
+      points.forEach((p, idx) => {
+        const x = padL + idx * xStep;
+        const yR = padT + plotH - (p.r / ceiling) * plotH;
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', x);
+        circle.setAttribute('cy', yR);
+        circle.setAttribute('r', '4');
+        circle.setAttribute('fill', '#3b82f6');
+        circle.setAttribute('stroke', '#ffffff');
+        circle.setAttribute('stroke-width', '2');
+        circle.style.cursor = 'pointer';
+
+        circle.addEventListener('mouseenter', (evt) => {
+          circle.setAttribute('r', '6');
+          tooltip.innerHTML = `<strong>วันที่ ${p.day}</strong><br>รายรับ: ฿${formatNumber(p.r)}<br>รายจ่าย: ฿${formatNumber(p.e)}<br>สุทธิ: ฿${formatNumber(p.r - p.e)}`;
+          tooltip.classList.remove('hidden');
+          const rect = svg.getBoundingClientRect();
+          tooltip.style.left = (x / width * rect.width - 40) + 'px';
+          tooltip.style.top = (yR / height * rect.height - 70) + 'px';
+        });
+
+        circle.addEventListener('mouseleave', () => {
+          circle.setAttribute('r', '4');
+          tooltip.classList.add('hidden');
+        });
+
+        svg.appendChild(circle);
+      });
+    }
+
+    function renderDonut() {
+      const svg = document.getElementById('donutSvg');
+      const data = [
+        { name: 'สาขา 1', val: 18630, color: '#3b82f6' },
+        { name: 'สาขา 2', val: 25568, color: '#10b981' },
+        { name: 'สาขา 3', val: 18745, color: '#f59e0b' },
+        { name: 'สาขา 4', val: 22565, color: '#a855f7' }
+      ];
+      const total = data.reduce((acc, d) => acc + d.val, 0);
+      const r = 60;
+      const cx = 80;
+      const cy = 80;
+      const circumference = 2 * Math.PI * r;
+
+      let accumulated = 0;
+      data.forEach(item => {
+        const ratio = item.val / total;
+        const dasharray = `${circumference * ratio} ${circumference * (1 - ratio)}`;
+        const offset = circumference * (1 - accumulated);
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', cx);
+        circle.setAttribute('cy', cy);
+        circle.setAttribute('r', r);
+        circle.setAttribute('fill', 'transparent');
+        circle.setAttribute('stroke', item.color);
+        circle.setAttribute('stroke-width', '24');
+        circle.setAttribute('stroke-dasharray', dasharray);
+        circle.setAttribute('stroke-dashoffset', offset);
+        circle.setAttribute('transform', `rotate(-90 ${cx} ${cy})`);
+        svg.appendChild(circle);
+
+        accumulated += ratio;
+      });
+
+      // Center text
+      const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      text.setAttribute('x', cx);
+      text.setAttribute('y', cy + 5);
+      text.setAttribute('text-anchor', 'middle');
+      text.setAttribute('font-size', '14');
+      text.setAttribute('font-weight', 'bold');
+      text.setAttribute('fill', 'var(--foreground, #0f172a)');
+      text.textContent = '฿85.5k';
+      svg.appendChild(text);
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      dailyData.forEach(d => {
+        const totR = d.r1 + d.r2 + d.r3 + d.r4;
+        const totE = d.e1 + d.e2 + d.e3 + d.e4;
+        const net = totR - totE;
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-[var(--secondary,#f8fafc)] transition';
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 font-medium">วันที่ ${d.day}</td>
+          <td class="py-2.5 px-3">${formatNumber(d.r1)}</td>
+          <td class="py-2.5 px-3 font-medium text-emerald-600">${formatNumber(d.r2)}</td>
+          <td class="py-2.5 px-3">${formatNumber(d.r3)}</td>
+          <td class="py-2.5 px-3">${formatNumber(d.r4)}</td>
+          <td class="py-2.5 px-3 font-bold text-blue-600">฿${formatNumber(totR)}</td>
+          <td class="py-2.5 px-3 font-bold text-amber-600">฿${formatNumber(totE)}</td>
+          <td class="py-2.5 px-3 font-bold ${net >= 0 ? 'text-emerald-600' : 'text-red-600'}">
+            ${net >= 0 ? '+' : ''}฿${formatNumber(net)}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function filterTable() {
+      const q = document.getElementById('tableSearch').value.trim();
+      const rows = document.querySelectorAll('#tableBody tr');
+      rows.forEach(r => {
+        const text = r.children[0].innerText;
+        if (!q || text.includes(q)) {
+          r.style.display = '';
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    }
+
+    function downloadCSV() {
+      const csvContent = "data:text/csv;charset=utf-8," + 
+        encodeURIComponent("สาขา,รายรับจริง,รายจ่ายดำเนินงาน,กำไรดำเนินงาน,ค่าเช่าคงที่,สุทธิ\n" +
+        "สาขา 1,18630,16568,2062,5000,-2938\n" +
+        "สาขา 2,25568,23521,2047,4000,-1953\n" +
+        "สาขา 3,18745,24014,-5269,10000,-15269\n" +
+        "สาขา 4,22565,24003,-1438,10000,-11438\n" +
+        "รวมทั้ง 4 สาขา,85508,88106,-2598,29000,-31598");
+      const a = document.createElement("a");
+      a.href = csvContent;
+      a.download = "สรุปยอด_4สาขา.csv";
+      a.click();
+    }
+
+    // Initialize
+    updateDashboard();
+    renderDonut();
+    renderTable();
+  </script>
+</body>
+</html>
