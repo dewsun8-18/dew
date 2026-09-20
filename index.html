@@ -198,6 +198,9 @@
         <button onclick="selectBranch('branch4')" id="btn-tab-branch4" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)]">
           สาขา 4
         </button>
+        <button onclick="selectBranch('annual2569')" id="btn-tab-annual2569" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-inactive hover:bg-[var(--secondary,#e2e8f0)] flex items-center gap-1.5 border border-indigo-200">
+          <span>📅</span> สรุปรวมปี 2569 🌟
+        </button>
       </div>
       <div id="activeBranchTag" class="text-xs font-medium px-3 py-1.5 rounded-xl bg-blue-50 text-blue-700 border border-blue-100 flex items-center gap-2 shrink-0 self-start sm:self-auto shadow-sm">
         <span class="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
@@ -447,6 +450,316 @@
             <!-- Dynamically Rendered by JS -->
           </tfoot>
         </table>
+      </div>
+    </div>
+
+    <!-- 🏛️ Annual Summary 2569 Performance Section (ม.ค. - ก.ย. 2569) -->
+    <div id="annualSection" class="bg-[var(--card,#ffffff)] border-2 border-indigo-300 rounded-2xl p-6 shadow-sm overflow-hidden transition-all duration-300 mb-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-800">
+              สรุปภาพรวมประจำปี 2569
+            </span>
+            <span class="text-xs text-[var(--muted-foreground,#64748b)]">มกราคม - กันยายน 2569 (9 เดือน)</span>
+          </div>
+          <h3 class="text-xl md:text-2xl font-bold text-indigo-950 mt-1 flex items-center gap-2">
+            <span>📅</span> รายงานสรุปผลประกอบการรวมทั้งกิจการ ปี 2569
+          </h3>
+          <p class="text-xs text-[var(--muted-foreground,#64748b)] mt-0.5">
+            ข้อมูลสังเคราะห์ผลการดำเนินงาน 4 สาขา (ยอดขายสะสมทะลุ 1.07 ล้านบาท • กำไรสุทธิรวมทั้งกิจการเป็นบวก)
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-semibold text-indigo-900 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-xl">
+            ยอดขายทะลุ 1 ล้าน! ฿1,079,924 • สงกรานต์ Peak ฿205k 🚀
+          </span>
+          <button onclick="downloadAnnualCSV()" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            ดาวน์โหลด CSV สรุปรวมปี 2569
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Metric Cards for Annual 2569 -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl p-4">
+          <span class="text-xs text-indigo-700 font-medium block">ยอดขายรวมทั้งกิจการ (9 เดือน)</span>
+          <div class="text-2xl font-bold text-indigo-950 mt-1">฿1,079,924</div>
+          <span class="text-[11px] text-indigo-600 block mt-0.5">เฉลี่ย ฿119,992 / เดือน (ทะลุ 1.07 ล้าน)</span>
+        </div>
+        <div class="bg-amber-50/70 border border-amber-100 rounded-xl p-4">
+          <span class="text-xs text-amber-700 font-medium block">ยอดขายเดือนสูงสุด (All-Time High)</span>
+          <div class="text-2xl font-bold text-amber-900 mt-1">฿205,921</div>
+          <span class="text-[11px] text-amber-600 block mt-0.5">เดือน เม.ย. 2569 (สงกรานต์ กำไร +฿44,721)</span>
+        </div>
+        <div class="bg-emerald-50/70 border border-emerald-100 rounded-xl p-4">
+          <span class="text-xs text-emerald-700 font-medium block">กำไรสุทธิรวมทั้งปี 2569 🎯</span>
+          <div class="text-2xl font-bold text-emerald-600 mt-1">+฿949</div>
+          <span class="text-[11px] text-emerald-600 block mt-0.5">พลิกกลับมามีกำไรสุทธิรวม (สาขา 1 หนุน +4.2 หมื่น)</span>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+          <span class="text-xs text-slate-600 font-medium block">รายจ่ายรวมทั้งปี</span>
+          <div class="text-2xl font-bold text-slate-800 mt-1">฿1,078,975</div>
+          <span class="text-[11px] text-slate-500 block mt-0.5">ดำเนินงาน ฿992,963 + ค่าเช่า ฿86,012</span>
+        </div>
+      </div>
+
+      <!-- Chart: 9-Month Combined Revenue & Expenses -->
+      <div class="bg-white border border-[var(--border,#e2e8f0)] rounded-xl p-5 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <h4 class="text-sm font-bold text-[var(--foreground,#0f172a)]">กราฟผลประกอบการรวมทั้ง 4 สาขา รายเดือน ปี 2569 (ม.ค. - ก.ย. 69)</h4>
+            <p class="text-[11px] text-[var(--muted-foreground,#64748b)]">ชี้ที่แท่งกราฟเพื่อดูรายละเอียดรายรับ รายจ่าย และผลกำไรแต่ละเดือน</p>
+          </div>
+          <div class="flex items-center gap-4 text-xs">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-indigo-600"></span>รายรับรวม</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-400"></span>รายจ่ายรวม</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-1 bg-emerald-500 rounded-full"></span>ค่าเฉลี่ยยอดขาย (120k)</span>
+          </div>
+        </div>
+        <div class="relative h-64 w-full">
+          <svg id="annualChartSvg" class="w-full h-full overflow-visible" viewBox="0 0 700 240"></svg>
+          <div id="annualTooltip" class="chart-tooltip absolute hidden bg-slate-900 text-white text-xs rounded-lg px-2.5 py-1.5 shadow-lg border border-slate-700 pointer-events-none z-10"></div>
+        </div>
+      </div>
+
+      <!-- Table 1: เปรียบเทียบ 4 สาขา ประจำปี 2569 -->
+      <div class="mb-6">
+        <h4 class="text-sm font-bold text-indigo-950 mb-2 flex items-center gap-1.5">
+          <span>📊</span> ตารางสรุปเปรียบเทียบผลประกอบการ 4 สาขา ประจำปี 2569
+        </h4>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-indigo-100 bg-indigo-50/70 text-indigo-950 font-semibold">
+                <th class="py-3 px-3">สาขา</th>
+                <th class="py-3 px-3">ช่วงเวลาบันทึก</th>
+                <th class="py-3 px-3 font-bold text-indigo-700">รายรับจริง (บาท)</th>
+                <th class="py-3 px-3">สัดส่วนรายรับ</th>
+                <th class="py-3 px-3 text-amber-700">รายจ่ายดำเนินงาน (บาท)</th>
+                <th class="py-3 px-3">ค่าเช่าบันทึก (บาท)</th>
+                <th class="py-3 px-3">รายจ่ายรวม (บาท)</th>
+                <th class="py-3 px-3 font-bold">กำไร/ขาดทุนสุทธิ</th>
+                <th class="py-3 px-3">Margin</th>
+                <th class="py-3 px-3">บทบาทและสถานะทางธุรกิจ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-indigo-50/20 bg-blue-50/20">
+                <td class="py-2.5 px-3 font-bold text-blue-900">สาขา 1 🏆</td>
+                <td class="py-2.5 px-3">9 เดือน (ม.ค.-ก.ย.)</td>
+                <td class="py-2.5 px-3 font-bold text-blue-600">฿473,461</td>
+                <td class="py-2.5 px-3 font-semibold text-blue-700">43.8%</td>
+                <td class="py-2.5 px-3">฿385,317</td>
+                <td class="py-2.5 px-3">฿45,343</td>
+                <td class="py-2.5 px-3">฿430,660</td>
+                <td class="py-2.5 px-3 font-bold text-emerald-600">+฿42,801</td>
+                <td class="py-2.5 px-3 text-emerald-600 font-bold">+9.0%</td>
+                <td class="py-2.5 px-3 text-[11px] text-blue-800 font-semibold">⭐ Cash Cow อันดับ 1 (กำไรสูงสุดและยอดขายสูงสุดในกลุ่ม)</td>
+              </tr>
+              <tr class="hover:bg-indigo-50/20">
+                <td class="py-2.5 px-3 font-medium">สาขา 2</td>
+                <td class="py-2.5 px-3">ก.ย. (19 วันแรก)</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿19,890</td>
+                <td class="py-2.5 px-3">1.8%</td>
+                <td class="py-2.5 px-3">฿25,260</td>
+                <td class="py-2.5 px-3">฿3,333.33</td>
+                <td class="py-2.5 px-3">฿28,593.33</td>
+                <td class="py-2.5 px-3 font-bold text-red-600">-฿8,703</td>
+                <td class="py-2.5 px-3 text-red-600">-43.8%</td>
+                <td class="py-2.5 px-3 text-[11px] text-slate-600">มีข้อมูลบันทึก 19 วันแรก ก.ย. 69 (ค่าเช่า 10k/3 ด. เฉลี่ย 3.3k/ด.)</td>
+              </tr>
+              <tr class="hover:bg-indigo-50/20 bg-emerald-50/20">
+                <td class="py-2.5 px-3 font-bold text-emerald-900">สาขา 3 🥈</td>
+                <td class="py-2.5 px-3">9 เดือน (ม.ค.-ก.ย.)</td>
+                <td class="py-2.5 px-3 font-bold text-emerald-700">฿387,155</td>
+                <td class="py-2.5 px-3 font-semibold text-emerald-700">35.9%</td>
+                <td class="py-2.5 px-3">฿387,569</td>
+                <td class="py-2.5 px-3">฿24,000</td>
+                <td class="py-2.5 px-3">฿411,569</td>
+                <td class="py-2.5 px-3 font-bold text-red-600">-฿24,414</td>
+                <td class="py-2.5 px-3 text-red-600">-6.3%</td>
+                <td class="py-2.5 px-3 text-[11px] text-emerald-800 font-medium">ยอดขายสม่ำเสมออันดับ 2 ทะลุเป้า 40k ติดต่อกัน 4 เดือนซ้อน</td>
+              </tr>
+              <tr class="hover:bg-indigo-50/20 bg-purple-50/20">
+                <td class="py-2.5 px-3 font-bold text-purple-900">สาขา 4 🚀</td>
+                <td class="py-2.5 px-3">7 เดือน (มี.ค.-ก.ย.)</td>
+                <td class="py-2.5 px-3 font-bold text-purple-700">฿199,418</td>
+                <td class="py-2.5 px-3 font-semibold text-purple-700">18.5%</td>
+                <td class="py-2.5 px-3">฿194,817</td>
+                <td class="py-2.5 px-3">฿13,335.99</td>
+                <td class="py-2.5 px-3">฿208,152.99</td>
+                <td class="py-2.5 px-3 font-bold text-red-600">-฿4,278</td>
+                <td class="py-2.5 px-3 text-red-600">-2.1%</td>
+                <td class="py-2.5 px-3 text-[11px] text-purple-800 font-medium">เติบโตเร็วที่สุด (+72% MoM) ค่าเช่ารอบ 3 เดือน 10,000 บ.</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="bg-indigo-100/70 font-bold border-t-2 border-indigo-300 text-indigo-950">
+                <td class="py-3 px-3">รวมทั้งกิจการ</td>
+                <td class="py-3 px-3">ม.ค. - ก.ย. 2569</td>
+                <td class="py-3 px-3 text-indigo-900">฿1,079,924</td>
+                <td class="py-3 px-3">100.0%</td>
+                <td class="py-3 px-3">฿992,963</td>
+                <td class="py-3 px-3">฿86,012</td>
+                <td class="py-3 px-3">฿1,078,975</td>
+                <td class="py-3 px-3 text-emerald-700">+฿949</td>
+                <td class="py-3 px-3 text-emerald-700">+0.1%</td>
+                <td class="py-3 px-3 text-xs text-indigo-900 font-bold">ยอดขายรวมทะลุ 1.07 ล้านบาท พลิกกลับมามีกำไรสุทธิรวมทั้งปี</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- Table 2: ผลประกอบการรายเดือนทั้งกิจการ (ม.ค. - ก.ย. 69) -->
+      <div>
+        <h4 class="text-sm font-bold text-indigo-950 mb-2 flex items-center gap-1.5">
+          <span>📈</span> ตารางสรุปผลประกอบการรายเดือนทั้งกิจการ ปี 2569 (มกราคม - กันยายน 2569)
+        </h4>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-indigo-100 bg-slate-50 text-slate-800 font-semibold">
+                <th class="py-3 px-3">เดือน</th>
+                <th class="py-3 px-3">สาขา 1</th>
+                <th class="py-3 px-3">สาขา 2</th>
+                <th class="py-3 px-3">สาขา 3</th>
+                <th class="py-3 px-3">สาขา 4</th>
+                <th class="py-3 px-3 font-bold text-indigo-700">รายรับรวม (บาท)</th>
+                <th class="py-3 px-3 text-amber-700">รายจ่ายรวม (บาท)</th>
+                <th class="py-3 px-3 font-bold">กำไร/ขาดทุนสุทธิ</th>
+                <th class="py-3 px-3">Margin</th>
+                <th class="py-3 px-3">หมายเหตุและสถานะ</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50">
+                <td class="py-2.5 px-3 font-medium">มกราคม 2569</td>
+                <td class="py-2.5 px-3">฿44,743</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3">฿77,494</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿122,237</td>
+                <td class="py-2.5 px-3">฿97,468</td>
+                <td class="py-2.5 px-3 font-bold text-emerald-600">+฿24,769</td>
+                <td class="py-2.5 px-3 text-emerald-600">+20.3%</td>
+                <td class="py-2.5 px-3 text-[11px] text-slate-600">เปิดปีใหม่ ยอดขายทะลุ 1.2 แสน สาขา 3 ทำ ATH 7.7 หมื่นบาท</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-2.5 px-3 font-medium">กุมภาพันธ์ 2569</td>
+                <td class="py-2.5 px-3">฿31,510</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3">฿44,473</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿75,983</td>
+                <td class="py-2.5 px-3">฿89,714</td>
+                <td class="py-2.5 px-3 font-bold text-red-600">-฿13,731</td>
+                <td class="py-2.5 px-3 text-red-600">-18.1%</td>
+                <td class="py-2.5 px-3 text-[11px] text-slate-600">เดือนสั้น 28 วัน ยอดชะลอตัว</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-2.5 px-3 font-medium">มีนาคม 2569</td>
+                <td class="py-2.5 px-3">฿54,373</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3">฿32,186</td>
+                <td class="py-2.5 px-3">฿22,454</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿109,013</td>
+                <td class="py-2.5 px-3">฿121,197</td>
+                <td class="py-2.5 px-3 font-bold text-red-600">-฿12,184</td>
+                <td class="py-2.5 px-3 text-red-600">-11.2%</td>
+                <td class="py-2.5 px-3 text-[11px] text-slate-600">สาขา 4 เปิดขายเดือนแรก ยอดรวมแตะ 1.09 แสนบาท</td>
+              </tr>
+              <tr class="hover:bg-slate-50 bg-amber-50/30">
+                <td class="py-2.5 px-3 font-bold text-amber-900">เมษายน 2569 🏆</td>
+                <td class="py-2.5 px-3 font-bold text-blue-600">฿144,215</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3">฿37,470</td>
+                <td class="py-2.5 px-3">฿24,236</td>
+                <td class="py-2.5 px-3 font-bold text-amber-700 text-sm">฿205,921</td>
+                <td class="py-2.5 px-3 font-semibold text-slate-700">฿161,200</td>
+                <td class="py-2.5 px-3 font-bold text-emerald-600 text-sm">+฿44,721</td>
+                <td class="py-2.5 px-3 text-emerald-600 font-bold">+21.7%</td>
+                <td class="py-2.5 px-3 text-[11px] text-amber-900 font-bold">⭐ All-Time High! สงกรานต์ยอดพุ่งทะลุ 2 แสน กำไรสุทธิ +฿44,721</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-2.5 px-3 font-medium">พฤษภาคม 2569</td>
+                <td class="py-2.5 px-3">฿45,260</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3">฿32,214</td>
+                <td class="py-2.5 px-3">฿31,466</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿108,940</td>
+                <td class="py-2.5 px-3">฿108,101</td>
+                <td class="py-2.5 px-3 font-bold text-emerald-600">+฿839</td>
+                <td class="py-2.5 px-3 text-emerald-600">+0.8%</td>
+                <td class="py-2.5 px-3 text-[11px] text-slate-600">สาขา 4 ทะลุเป้า 30k ยอดรวมเกิน 1.08 แสน กำไรสุทธิเป็นบวก</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-2.5 px-3 font-medium">มิถุนายน 2569</td>
+                <td class="py-2.5 px-3">฿33,265</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3">฿41,143</td>
+                <td class="py-2.5 px-3">฿28,368</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿102,776</td>
+                <td class="py-2.5 px-3">฿127,963</td>
+                <td class="py-2.5 px-3 font-bold text-red-600">-฿25,187</td>
+                <td class="py-2.5 px-3 text-red-600">-24.5%</td>
+                <td class="py-2.5 px-3 text-[11px] text-slate-600">ต้นฤดูฝน มีรอบจ่ายค่าเช่าและสต็อกของหลายสาขา</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-2.5 px-3 font-medium">กรกฎาคม 2569</td>
+                <td class="py-2.5 px-3">฿56,370</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3">฿49,295</td>
+                <td class="py-2.5 px-3">฿34,810</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿140,475</td>
+                <td class="py-2.5 px-3">฿142,490</td>
+                <td class="py-2.5 px-3 font-bold text-red-600">-฿2,015</td>
+                <td class="py-2.5 px-3 text-red-600">-1.4%</td>
+                <td class="py-2.5 px-3 text-[11px] text-slate-600">ยอดขายฟื้นตัวแข็งแกร่ง ทุกสาขาเติบโตแตะ 1.4 แสนบาท</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-2.5 px-3 font-medium">สิงหาคม 2569</td>
+                <td class="py-2.5 px-3">฿44,005</td>
+                <td class="py-2.5 px-3 text-slate-400">-</td>
+                <td class="py-2.5 px-3">฿45,812</td>
+                <td class="py-2.5 px-3">฿38,655</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿128,472</td>
+                <td class="py-2.5 px-3">฿123,791</td>
+                <td class="py-2.5 px-3 font-bold text-emerald-600">+฿4,681</td>
+                <td class="py-2.5 px-3 text-emerald-600">+3.6%</td>
+                <td class="py-2.5 px-3 text-[11px] text-emerald-800 font-semibold">สาขา 4 ทำ ATH พลิกกลับมามีกำไรสุทธิรวม +4,681 บ.</td>
+              </tr>
+              <tr class="hover:bg-slate-50">
+                <td class="py-2.5 px-3 font-medium">กันยายน 2569 (19 วัน)</td>
+                <td class="py-2.5 px-3">฿19,720</td>
+                <td class="py-2.5 px-3">฿19,890</td>
+                <td class="py-2.5 px-3">฿27,068</td>
+                <td class="py-2.5 px-3">฿23,885</td>
+                <td class="py-2.5 px-3 font-bold text-indigo-700">฿90,563</td>
+                <td class="py-2.5 px-3">฿107,051</td>
+                <td class="py-2.5 px-3 font-bold text-red-600">-฿16,488</td>
+                <td class="py-2.5 px-3 text-red-600">-18.2%</td>
+                <td class="py-2.5 px-3 text-[11px] text-slate-600">ข้อมูล 19 วันแรก รวมทั้ง 4 สาขา คาดสิ้นเดือนทะลุ 1.4 แสนบาท</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr class="bg-indigo-100/70 font-bold border-t-2 border-indigo-300 text-indigo-950">
+                <td class="py-3 px-3">รวมสะสม 9 เดือน</td>
+                <td class="py-3 px-3">฿473,461</td>
+                <td class="py-3 px-3">฿19,890</td>
+                <td class="py-3 px-3">฿387,155</td>
+                <td class="py-3 px-3">฿199,418</td>
+                <td class="py-3 px-3 text-indigo-950">฿1,079,924</td>
+                <td class="py-3 px-3">฿1,078,975</td>
+                <td class="py-3 px-3 text-emerald-700">+฿949</td>
+                <td class="py-3 px-3 text-emerald-700">+0.1%</td>
+                <td class="py-3 px-3 text-xs text-indigo-900 font-bold">ยอดขายรวมทะลุ 1.07 ล้านบาท กำไรสุทธิรวมทั้งปีเป็นบวก</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -1073,7 +1386,8 @@
       branch1: { name: "สาขา 1", rev: 19720, opExp: 16993, rent: 5000,  days: 18, tag: "สาขา 1 (เปิดขาย 18 วัน • หยุดวันที่ 15)", rentNote: "฿5,000 / เดือน (หักวันที่ 4)" },
       branch2: { name: "สาขา 2", rev: 19890, opExp: 25260, rent: 3333,  days: 19, tag: "สาขา 2 (เปิดขาย 19 วัน • ค่าเช่า 10k/3 ด.)", rentNote: "฿10,000 ต่อ 3 เดือน (เฉลี่ย ฿3,333/ด.)" },
       branch3: { name: "สาขา 3", rev: 27068, opExp: 24119, rent: 4000,  days: 19, tag: "สาขา 3 (เปิดขาย 19 วัน • ยอดขายสูงสุด 🏆)", rentNote: "฿4,000 / เดือน (หักวันที่ 4)" },
-      branch4: { name: "สาขา 4", rev: 23885, opExp: 25012, rent: 3333,  days: 19, tag: "สาขา 4 (เปิดขาย 19 วัน • มีค่าไฟเต่า 3.3k)", rentNote: "฿10,000 ต่อ 3 เดือน (เฉลี่ย ฿3,333/ด.)" }
+      branch4: { name: "สาขา 4", rev: 23885, opExp: 25012, rent: 3333,  days: 19, tag: "สาขา 4 (เปิดขาย 19 วัน • มีค่าไฟเต่า 3.3k)", rentNote: "฿10,000 ต่อ 3 เดือน (เฉลี่ย ฿3,333/ด.)" },
+      annual2569: { name: "ทั้งปี 2569", rev: 1079924, opExp: 992963, rent: 86012, days: 270, tag: "สรุปรวมปี 2569 (ยอดขาย ฿1,079,924 • กำไรสุทธิรวม +฿949)", rentNote: "ค่าเช่าบันทึกรวม ฿86,012 (รวม 4 สาขา)" }
     };
 
     const branchNotes = {
@@ -1191,7 +1505,11 @@
       });
       const activeTabBtn = document.getElementById('btn-tab-' + branchKey);
       if (activeTabBtn) {
-        activeTabBtn.className = 'tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-active shadow-sm';
+        if (branchKey === 'annual2569') {
+          activeTabBtn.className = 'tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition bg-indigo-600 text-white shadow-md border border-indigo-700';
+        } else {
+          activeTabBtn.className = 'tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition tab-active shadow-sm';
+        }
       }
 
       // 2. Update View Tag
@@ -1208,7 +1526,7 @@
         const lg = document.getElementById('legend-' + bk);
 
         if (sc) {
-          if (branchKey === 'all') {
+          if (branchKey === 'all' || branchKey === 'annual2569') {
             sc.className = 'cursor-pointer p-4 rounded-xl border border-slate-200 bg-slate-50/50 transition-all hover:shadow-md';
           } else if (branchKey === bk) {
             const ringColor = bk === 'branch1' ? 'ring-blue-500 border-blue-400' : bk === 'branch2' ? 'ring-amber-500 border-amber-400' : bk === 'branch3' ? 'ring-emerald-500 border-emerald-400' : 'ring-purple-500 border-purple-400';
@@ -1235,7 +1553,17 @@
         }
       });
 
-      // 4. Highlight Branch 1, Branch 3 & Branch 4 History Sections
+      // 4. Highlight History & Annual Sections
+      const annSec = document.getElementById('annualSection');
+      if (annSec) {
+        if (branchKey === 'annual2569') {
+          annSec.classList.add('ring-4', 'ring-indigo-500', 'shadow-2xl');
+          annSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          annSec.classList.remove('ring-4', 'ring-indigo-500', 'shadow-2xl');
+        }
+      }
+
       const b1HistSec = document.getElementById('branch1HistorySection');
       if (b1HistSec) {
         if (branchKey === 'branch1') {
@@ -1348,7 +1676,7 @@
 
       const points = dailyData.map(d => {
         let r = 0, e = 0;
-        if (currentBranch === 'all') {
+        if (currentBranch === 'all' || currentBranch === 'annual2569') {
           r = d.r1 + d.r2 + d.r3 + d.r4;
           e = d.e1 + d.e2 + d.e3 + d.e4;
         } else if (currentBranch === 'branch1') {
@@ -1494,7 +1822,13 @@
     function renderDonut() {
       const svg = document.getElementById('donutSvg');
       svg.innerHTML = '';
-      const data = [
+      const isAnnual = currentBranch === 'annual2569';
+      const data = isAnnual ? [
+        { key: 'branch1', name: 'สาขา 1', val: 473461, color: '#3b82f6' },
+        { key: 'branch2', name: 'สาขา 2', val: 19890, color: '#f59e0b' },
+        { key: 'branch3', name: 'สาขา 3', val: 387155, color: '#10b981' },
+        { key: 'branch4', name: 'สาขา 4', val: 199418, color: '#a855f7' }
+      ] : [
         { key: 'branch1', name: 'สาขา 1', val: 19720, color: '#3b82f6' },
         { key: 'branch2', name: 'สาขา 2', val: 19890, color: '#f59e0b' },
         { key: 'branch3', name: 'สาขา 3', val: 27068, color: '#10b981' },
@@ -1523,7 +1857,7 @@
         if (currentBranch === item.key) {
           circle.setAttribute('stroke-width', '30');
           circle.style.filter = 'drop-shadow(0px 0px 4px rgba(0,0,0,0.3))';
-        } else if (currentBranch !== 'all') {
+        } else if (currentBranch !== 'all' && currentBranch !== 'annual2569') {
           circle.setAttribute('stroke-width', '20');
           circle.setAttribute('opacity', '0.45');
         } else {
@@ -1548,7 +1882,7 @@
       text.setAttribute('font-size', '14');
       text.setAttribute('font-weight', 'bold');
       text.setAttribute('fill', 'var(--foreground, #0f172a)');
-      text.textContent = currentBranch === 'all' ? '฿90.6k' : `฿${(b.rev / 1000).toFixed(1)}k`;
+      text.textContent = currentBranch === 'all' ? '฿90.6k' : isAnnual ? '฿1.08M' : `฿${(b.rev / 1000).toFixed(1)}k`;
       svg.appendChild(text);
 
       const donutSub = document.getElementById('donutSub');
@@ -1556,11 +1890,15 @@
       if (donutSub) {
         donutSub.innerText = currentBranch === 'all' 
           ? 'ยอดขายจริงรวม 19 วัน (฿90,563)' 
+          : isAnnual
+          ? 'สัดส่วนยอดขายรวมทั้งปี 2569 (฿1,079,924)'
           : `สัดส่วน ${b.name}: ${((b.rev / 90563) * 100).toFixed(1)}% ของยอดขายทั้ง 4 สาขา`;
       }
       if (donutNote) {
         donutNote.innerText = currentBranch === 'all' 
           ? 'สาขา 3 มียอดขายสูงสุดในกลุ่ม' 
+          : isAnnual
+          ? 'สาขา 1 มีส่วนแบ่งยอดขายสูงสุด 43.8% (฿473.5k)'
           : `${b.name} ทำยอดขายได้ ฿${formatNumber(b.rev)} (${b.days} วันขาย)`;
       }
     }
@@ -1575,7 +1913,7 @@
 
       tbody.innerHTML = '';
 
-      if (currentBranch === 'all') {
+      if (currentBranch === 'all' || currentBranch === 'annual2569') {
         // === VIEW: ALL BRANCHES ===
         title.innerText = 'ตารางรายรับ - รายจ่าย รายวัน (รวม 4 สาขา)';
         sub.innerText = 'ข้อมูลรายวันวันที่ 1 ถึง 19 กันยายน 2569 รวมทั้ง 4 สาขา';
@@ -1724,6 +2062,204 @@
       const a = document.createElement("a");
       a.href = csvContent;
       a.download = "สรุปยอด_4สาขา_19วัน.csv";
+      a.click();
+    }
+
+    // === Historical Data & Functions for Annual Summary 2569 ===
+    const annualHistoryData = [
+      { month: 'ม.ค. 69', fullMonth: 'มกราคม 2569', rev: 122237, totalExp: 97468, net: 24769, note: 'เปิดปีใหม่ ยอดขายทะลุ 1.2 แสน สาขา 3 ทำ ATH 7.7 หมื่น' },
+      { month: 'ก.พ. 69', fullMonth: 'กุมภาพันธ์ 2569', rev: 75983, totalExp: 89714, net: -13731, note: 'เดือนสั้น 28 วัน ยอดชะลอตัว' },
+      { month: 'มี.ค. 69', fullMonth: 'มีนาคม 2569', rev: 109013, totalExp: 121197, net: -12184, note: 'สาขา 4 เปิดขายเดือนแรก ยอดรวมแตะ 1.09 แสนบาท' },
+      { month: 'เม.ย. 69', fullMonth: 'เมษายน 2569', rev: 205921, totalExp: 161200, net: 44721, note: '⭐ All-Time High! สงกรานต์ยอดพุ่งทะลุ 2 แสน กำไรสุทธิ +฿44,721' },
+      { month: 'พ.ค. 69', fullMonth: 'พฤษภาคม 2569', rev: 108940, totalExp: 108101, net: 839, note: 'สาขา 4 ทะลุเป้า 30k ยอดรวมเกิน 1.08 แสน กำไรสุทธิเป็นบวก' },
+      { month: 'มิ.ย. 69', fullMonth: 'มิถุนายน 2569', rev: 102776, totalExp: 127963, net: -25187, note: 'ต้นฤดูฝน มีรอบจ่ายค่าเช่าและสต็อกของหลายสาขา' },
+      { month: 'ก.ค. 69', fullMonth: 'กรกฎาคม 2569', rev: 140475, totalExp: 142490, net: -2015, note: 'ยอดขายฟื้นตัวแข็งแกร่ง ทุกสาขาเติบโตแตะ 1.4 แสนบาท' },
+      { month: 'ส.ค. 69', fullMonth: 'สิงหาคม 2569', rev: 128472, totalExp: 123791, net: 4681, note: 'สาขา 4 ทำ ATH พลิกกลับมามีกำไรสุทธิรวม +4,681 บ.' },
+      { month: 'ก.ย. 69', fullMonth: 'กันยายน 2569 (19 วัน)', rev: 90563, totalExp: 107051, net: -16488, note: 'ข้อมูล 19 วันแรก รวมทั้ง 4 สาขา คาดสิ้นเดือนทะลุ 1.4 แสนบาท' }
+    ];
+
+    function renderAnnualChart() {
+      const svg = document.getElementById('annualChartSvg');
+      if (!svg) return;
+      svg.innerHTML = '';
+
+      const width = 700;
+      const height = 240;
+      const padL = 45;
+      const padR = 25;
+      const padT = 30;
+      const padB = 40;
+
+      const plotW = width - padL - padR;
+      const plotH = height - padT - padB;
+      const ceiling = 220000;
+
+      // Background grid lines (0k, 55k, 110k, 165k, 220k)
+      for (let i = 0; i <= 4; i++) {
+        const yVal = (ceiling / 4) * i;
+        const yPos = padT + plotH - (yVal / ceiling) * plotH;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', padL);
+        line.setAttribute('y1', yPos);
+        line.setAttribute('x2', width - padR);
+        line.setAttribute('y2', yPos);
+        line.setAttribute('stroke', '#f1f5f9');
+        line.setAttribute('stroke-width', '1');
+        svg.appendChild(line);
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', padL - 8);
+        text.setAttribute('y', yPos + 4);
+        text.setAttribute('text-anchor', 'end');
+        text.setAttribute('font-size', '10');
+        text.setAttribute('fill', '#94a3b8');
+        text.textContent = (yVal >= 1000 ? (yVal / 1000) + 'k' : yVal);
+        svg.appendChild(text);
+      }
+
+      // Average reference line at 120,000 THB
+      const avgY = padT + plotH - (120000 / ceiling) * plotH;
+      const avgLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      avgLine.setAttribute('x1', padL);
+      avgLine.setAttribute('y1', avgY);
+      avgLine.setAttribute('x2', width - padR);
+      avgLine.setAttribute('y2', avgY);
+      avgLine.setAttribute('stroke', '#10b981');
+      avgLine.setAttribute('stroke-width', '1.5');
+      avgLine.setAttribute('stroke-dasharray', '4 4');
+      avgLine.setAttribute('opacity', '0.75');
+      svg.appendChild(avgLine);
+
+      const colW = plotW / annualHistoryData.length;
+      const barW = 16;
+      const tooltip = document.getElementById('annualTooltip');
+
+      annualHistoryData.forEach((d, idx) => {
+        const groupX = padL + idx * colW;
+        const centerX = groupX + colW / 2;
+
+        const hRev = (d.rev / ceiling) * plotH;
+        const yRev = padT + plotH - hRev;
+
+        const hExp = (d.totalExp / ceiling) * plotH;
+        const yExp = padT + plotH - hExp;
+
+        // Revenue bar (indigo)
+        const rectRev = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rectRev.setAttribute('x', centerX - barW - 1.5);
+        rectRev.setAttribute('y', yRev);
+        rectRev.setAttribute('width', barW);
+        rectRev.setAttribute('height', hRev);
+        rectRev.setAttribute('fill', '#4f46e5');
+        rectRev.setAttribute('rx', '3');
+        rectRev.style.cursor = 'pointer';
+        svg.appendChild(rectRev);
+
+        // Expense bar (amber)
+        const rectExp = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rectExp.setAttribute('x', centerX + 1.5);
+        rectExp.setAttribute('y', yExp);
+        rectExp.setAttribute('width', barW);
+        rectExp.setAttribute('height', hExp);
+        rectExp.setAttribute('fill', '#f59e0b');
+        rectExp.setAttribute('rx', '3');
+        rectExp.style.cursor = 'pointer';
+        svg.appendChild(rectExp);
+
+        // Month label
+        const xText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        xText.setAttribute('x', centerX);
+        xText.setAttribute('y', height - 14);
+        xText.setAttribute('text-anchor', 'middle');
+        xText.setAttribute('font-size', '10.5');
+        xText.setAttribute('font-weight', '500');
+        xText.setAttribute('fill', idx === 3 ? '#4338ca' : '#64748b');
+        xText.textContent = d.month;
+        svg.appendChild(xText);
+
+        // Net profit indicator label above bars
+        const netLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        const higherY = Math.min(yRev, yExp) - 6;
+        netLabel.setAttribute('x', centerX);
+        netLabel.setAttribute('y', higherY);
+        netLabel.setAttribute('text-anchor', 'middle');
+        netLabel.setAttribute('font-size', '8.5');
+        netLabel.setAttribute('font-weight', 'bold');
+        netLabel.setAttribute('fill', d.net >= 0 ? '#059669' : '#dc2626');
+        netLabel.textContent = (d.net >= 0 ? '+' : '') + formatNumber(Math.round(d.net));
+        svg.appendChild(netLabel);
+
+        // Hover group overlay for interactive tooltip
+        const hitArea = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        hitArea.setAttribute('x', groupX + 1);
+        hitArea.setAttribute('y', padT);
+        hitArea.setAttribute('width', colW - 2);
+        hitArea.setAttribute('height', plotH);
+        hitArea.setAttribute('fill', 'transparent');
+        hitArea.style.cursor = 'pointer';
+
+        hitArea.addEventListener('mouseenter', () => {
+          rectRev.setAttribute('fill', '#3730a3');
+          rectExp.setAttribute('fill', '#d97706');
+          if (tooltip) {
+            tooltip.innerHTML = `
+              <div class="font-bold text-indigo-300 border-b border-slate-700 pb-1 mb-1">
+                ${d.fullMonth}
+              </div>
+              <div class="grid grid-cols-2 gap-x-2 text-[11px] leading-relaxed">
+                <span>รายรับรวม:</span><strong class="text-right text-indigo-300">฿${formatNumber(d.rev)}</strong>
+                <span>รายจ่ายรวม:</span><strong class="text-right text-amber-300">฿${formatNumber(Math.round(d.totalExp))}</strong>
+                <span>กำไรสุทธิ:</span><strong class="text-right ${d.net >= 0 ? 'text-emerald-400' : 'text-red-400'}">${d.net >= 0 ? '+' : ''}฿${formatNumber(Math.round(d.net))}</strong>
+                <span>อัตรากำไร:</span><strong class="text-right text-blue-300">${((d.net / d.rev) * 100).toFixed(1)}%</strong>
+              </div>
+              <div class="text-[10px] text-slate-300 mt-1 border-t border-slate-800 pt-1 font-normal">
+                ${d.note}
+              </div>
+            `;
+            tooltip.classList.remove('hidden');
+            const rect = svg.getBoundingClientRect();
+            tooltip.style.left = Math.max(10, (centerX / width * rect.width - 80)) + 'px';
+            tooltip.style.top = Math.max(5, (higherY / height * rect.height - 90)) + 'px';
+          }
+        });
+
+        hitArea.addEventListener('mouseleave', () => {
+          rectRev.setAttribute('fill', '#4f46e5');
+          rectExp.setAttribute('fill', '#f59e0b');
+          if (tooltip) tooltip.classList.add('hidden');
+        });
+
+        svg.appendChild(hitArea);
+      });
+    }
+
+    function downloadAnnualCSV() {
+      const bom = "\uFEFF";
+      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(bom +
+        "ตารางที่ 1: สรุปเปรียบเทียบผลประกอบการ 4 สาขา ประจำปี 2569 (มกราคม - กันยายน 2569)\n" +
+        "สาขา,ช่วงเวลาที่มีข้อมูล,รายรับรวม (บาท),สัดส่วนรายรับ,รายจ่ายดำเนินงาน (บาท),ค่าเช่าบันทึก (บาท),รายจ่ายรวม (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),บทบาทและสถานะทางธุรกิจ\n" +
+        "สาขา 1,9 เดือน (ม.ค.-ก.ย.),473461,43.84%,385317,45343,430660,42801,9.04%,Cash Cow อันดับ 1 (กำไรสุทธิสูงสุดและยอดขายสูงสุดในกลุ่ม)\n" +
+        "สาขา 2,ก.ย. (19 วันแรก),19890,1.84%,25260,3333.33,28593.33,-8703.33,-43.76%,สาขาที่มีข้อมูลบันทึก 19 วันแรก ก.ย. 69 (ค่าเช่ารอบ 3 ด.)\n" +
+        "สาขา 3,9 เดือน (ม.ค.-ก.ย.),387155,35.85%,387569,24000,411569,-24414,-6.31%,ยอดขายสม่ำเสมออันดับ 2 ทะลุเป้า 40k ติดต่อกัน 4 เดือนซ้อน\n" +
+        "สาขา 4,7 เดือน (มี.ค.-ก.ย.),199418,18.47%,194817,13335.99,208152.99,-4278,-2.15%,เติบโตเร็วที่สุด (+72% MoM) ค่าเช่ารอบ 3 เดือน\n" +
+        "รวมทั้งกิจการ,ม.ค. - ก.ย. 2569,1079924,100.00%,992963,86012.32,1078975.32,948.68,0.09%,ยอดขายทะลุ 1.07 ล้านบาท พลิกกลับมามีกำไรสุทธิรวมทั้งกิจการ\n\n" +
+        "ตารางที่ 2: สรุปผลประกอบการรายเดือนทั้งกิจการ ปี 2569 (มกราคม - กันยายน 2569)\n" +
+        "เดือน,ปี,สาขา 1 (บาท),สาขา 2 (บาท),สาขา 3 (บาท),สาขา 4 (บาท),รายรับรวม (บาท),รายจ่ายรวม (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),หมายเหตุสำคัญ\n" +
+        "มกราคม,2569,44743,0,77494,0,122237,97468,24769,20.26%,เปิดปีใหม่ ยอดขายทะลุ 1.2 แสน สาขา 3 ทำ All-Time High 7.7 หมื่นบาท\n" +
+        "กุมภาพันธ์,2569,31510,0,44473,0,75983,89714,-13731,-18.07%,เดือนสั้น 28 วัน ยอดชะลอตัว\n" +
+        "มีนาคม,2569,54373,0,32186,22454,109013,121197,-12184,-11.18%,สาขา 4 เปิดขายเดือนแรก ยอดรวมแตะ 1.09 แสนบาท\n" +
+        "เมษายน,2569,144215,0,37470,24236,205921,161200,44721,21.72%,All-Time High! เทศกาลสงกรานต์ ยอดขายพุ่งทะลุ 2 แสน กำไรสุทธิเดือนเดียวกว่า 4.4 หมื่น\n" +
+        "พฤษภาคม,2569,45260,0,32214,31466,108940,108101,839,0.77%,สาขา 4 ทะลุเป้า 30k ยอดรวมเกิน 1.08 แสนบาท กำไรสุทธิเป็นบวก\n" +
+        "มิถุนายน,2569,33265,0,41143,28368,102776,127963,-25187,-24.51%,ต้นฤดูฝน มีรอบจ่ายค่าเช่าและสต็อกของหลายสาขา\n" +
+        "กรกฎาคม,2569,56370,0,49295,34810,140475,142490,-2015,-1.43%,ยอดขายฟื้นตัวอย่างแข็งแกร่ง ทุกสาขาเติบโตแตะ 1.4 แสนบาท\n" +
+        "สิงหาคม,2569,44005,0,45812,38655,128472,123791,4681,3.64%,สาขา 4 ทำ All-Time High พลิกกลับมามีกำไรสุทธิ +4681 บ.\n" +
+        "กันยายน (1-19 วัน),2569,19720,19890,27068,23885,90563,107051,-16488,-18.21%,ข้อมูล 19 วันแรก รวมทั้ง 4 สาขา คาดสิ้นเดือนทะลุ 1.4 แสนบาท\n" +
+        "รวมสะสม 9 เดือน,-,473461,19890,387155,199418,1079924,1078975,949,0.09%,ยอดขายสะสมทะลุ 1.07 ล้านบาท กำไรสุทธิรวมเป็นบวก"
+      );
+      const a = document.createElement("a");
+      a.href = csvContent;
+      a.download = "สรุปภาพรวมปี_2569.csv";
       a.click();
     }
 
@@ -2296,6 +2832,7 @@
     // Initialize
     updateTargetPlanning();
     selectBranch('all');
+    renderAnnualChart();
     renderB1HistoryChart();
     renderB3HistoryChart();
     renderHistoryChart();
