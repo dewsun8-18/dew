@@ -450,6 +450,189 @@
       </div>
     </div>
 
+    <!-- 🏛️ Branch 4 Historical Performance Section (มี.ค. - ก.ย. 2569) -->
+    <div id="branch4HistorySection" class="bg-[var(--card,#ffffff)] border border-purple-200 rounded-2xl p-6 shadow-sm overflow-hidden transition-all duration-300">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-100 text-purple-800">
+              ข้อมูลประวัติย้อนหลัง 7 เดือน
+            </span>
+            <span class="text-xs text-[var(--muted-foreground,#64748b)]">มีนาคม - กันยายน 2569</span>
+          </div>
+          <h3 class="text-xl font-bold text-[var(--foreground,#0f172a)] mt-1 flex items-center gap-2">
+            <span>📈</span> สรุปประวัติผลประกอบการย้อนหลัง: สาขา 4
+          </h3>
+          <p class="text-xs text-[var(--muted-foreground,#64748b)] mt-0.5">
+            สถิติยอดขาย ต้นทุนดำเนินงาน และการตัดรอบค่าเช่าทุก 3 เดือน (มี.ค. ถึง 19 ก.ย. 2569)
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-semibold text-purple-700 bg-purple-50 border border-purple-200 px-3 py-1.5 rounded-xl">
+            ยอดขายเติบโต +72.1% (มี.ค. 22.5k ➔ ส.ค. 38.7k) 🚀
+          </span>
+          <button onclick="downloadB4HistoryCSV()" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-purple-600 hover:bg-purple-700 text-white shadow-sm transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            ดาวน์โหลด CSV สาขา 4
+          </button>
+        </div>
+      </div>
+
+      <!-- 4 Metric Cards for B4 History -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-purple-50/50 border border-purple-100 rounded-xl p-4">
+          <span class="text-xs text-purple-700 font-medium block">รายรับสะสม 7 เดือน</span>
+          <div class="text-2xl font-bold text-purple-900 mt-1">฿199,418</div>
+          <span class="text-[11px] text-purple-600 block mt-0.5">เฉลี่ย ฿28,488 / เดือน</span>
+        </div>
+        <div class="bg-emerald-50/50 border border-emerald-100 rounded-xl p-4">
+          <span class="text-xs text-emerald-700 font-medium block">ยอดขายสูงสุด (All-Time High)</span>
+          <div class="text-2xl font-bold text-emerald-800 mt-1">฿38,655</div>
+          <span class="text-[11px] text-emerald-600 block mt-0.5">เดือน ส.ค. 2569 (กำไร +฿1,879)</span>
+        </div>
+        <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4">
+          <span class="text-xs text-blue-700 font-medium block">รอบจ่ายค่าเช่าร้าน</span>
+          <div class="text-2xl font-bold text-blue-900 mt-1">฿10,000 / 3 ด.</div>
+          <span class="text-[11px] text-blue-600 block mt-0.5">เฉลี่ย ฿3,333.33 / เดือน (จ่าย เม.ย., ก.ค.)</span>
+        </div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+          <span class="text-xs text-slate-600 font-medium block">กำไรสุทธิสะสม 7 เดือน</span>
+          <div class="text-2xl font-bold text-slate-800 mt-1">-฿4,278</div>
+          <span class="text-[11px] text-slate-500 block mt-0.5">รวมค่าไฟเต่า 3,330 บ. (ส.ค. พลิกกำไร +1,879)</span>
+        </div>
+      </div>
+
+      <!-- Chart: MoM Revenue & Expenses -->
+      <div class="bg-white border border-[var(--border,#e2e8f0)] rounded-xl p-5 mb-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <h4 class="text-sm font-bold text-[var(--foreground,#0f172a)]">กราฟเปรียบเทียบ รายรับจริง vs รายจ่ายรวม รายเดือน (มี.ค. - ก.ย. 69)</h4>
+            <p class="text-[11px] text-[var(--muted-foreground,#64748b)]">ชี้ที่แท่งกราฟเพื่อดูรายละเอียดผลกำไรแต่ละเดือน</p>
+          </div>
+          <div class="flex items-center gap-4 text-xs">
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-purple-600"></span>รายรับจริง</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-amber-400"></span>รายจ่ายรวม</span>
+            <span class="flex items-center gap-1.5"><span class="w-3 h-1 bg-emerald-500 rounded-full"></span>เป้าหมายยอดขาย</span>
+          </div>
+        </div>
+        <div class="relative h-64 w-full">
+          <svg id="historyChartSvg" class="w-full h-full overflow-visible" viewBox="0 0 700 240"></svg>
+          <div id="historyTooltip" class="chart-tooltip absolute hidden bg-slate-900 text-white text-xs rounded-lg px-2.5 py-1.5 shadow-lg border border-slate-700 pointer-events-none z-10"></div>
+        </div>
+      </div>
+
+      <!-- Table: Monthly Details -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-purple-100 bg-purple-50/60 text-purple-900 font-semibold">
+              <th class="py-3 px-3">เดือน</th>
+              <th class="py-3 px-3">เป้าหมาย (บาท)</th>
+              <th class="py-3 px-3 font-bold text-purple-700">รายรับจริง (บาท)</th>
+              <th class="py-3 px-3 text-amber-700">รายจ่ายดำเนินงาน (บาท)</th>
+              <th class="py-3 px-3">ค่าเช่าจ่ายสด (รอบ 3 ด.)</th>
+              <th class="py-3 px-3">ค่าเช่าเฉลี่ยรายเดือน</th>
+              <th class="py-3 px-3 font-bold">กำไร/ขาดทุนสุทธิ</th>
+              <th class="py-3 px-3">อัตรากำไร (Margin)</th>
+              <th class="py-3 px-3">สถานะและหมายเหตุ</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr class="hover:bg-purple-50/20">
+              <td class="py-2.5 px-3 font-medium">มีนาคม 2569</td>
+              <td class="py-2.5 px-3">฿30,000</td>
+              <td class="py-2.5 px-3 font-bold text-purple-700">฿22,454</td>
+              <td class="py-2.5 px-3">฿23,083</td>
+              <td class="py-2.5 px-3 text-slate-400">-</td>
+              <td class="py-2.5 px-3 text-slate-400">-</td>
+              <td class="py-2.5 px-3 font-bold text-red-600">-฿629</td>
+              <td class="py-2.5 px-3 text-red-600">-2.8%</td>
+              <td class="py-2.5 px-3 text-[11px] text-slate-600">เปิดขายเดือนแรก ยอดถึง ว.29 ได้ ฿20,839 สิ้นเดือนรวม ฿22,454</td>
+            </tr>
+            <tr class="hover:bg-purple-50/20">
+              <td class="py-2.5 px-3 font-medium">เมษายน 2569</td>
+              <td class="py-2.5 px-3">฿30,000</td>
+              <td class="py-2.5 px-3 font-bold text-purple-700">฿24,236</td>
+              <td class="py-2.5 px-3">฿19,992</td>
+              <td class="py-2.5 px-3 font-semibold text-purple-800">฿10,000 (ว.18)</td>
+              <td class="py-2.5 px-3">฿3,333.33</td>
+              <td class="py-2.5 px-3 font-bold text-emerald-600">+฿911</td>
+              <td class="py-2.5 px-3 text-emerald-600">+3.8%</td>
+              <td class="py-2.5 px-3 text-[11px] text-slate-600">ขาย 21 วัน (ถึง ว.23) จ่ายค่าเช่าร้านรอบ 3 เดือน (เม.ย.-มิ.ย.) 10,000 บ.</td>
+            </tr>
+            <tr class="hover:bg-purple-50/20">
+              <td class="py-2.5 px-3 font-medium">พฤษภาคม 2569</td>
+              <td class="py-2.5 px-3">฿30,000</td>
+              <td class="py-2.5 px-3 font-bold text-purple-700">฿31,466</td>
+              <td class="py-2.5 px-3">฿31,161</td>
+              <td class="py-2.5 px-3 text-slate-400">-</td>
+              <td class="py-2.5 px-3 text-slate-400">-</td>
+              <td class="py-2.5 px-3 font-bold text-emerald-600">+฿305</td>
+              <td class="py-2.5 px-3 text-emerald-600">+1.0%</td>
+              <td class="py-2.5 px-3 text-[11px] text-emerald-700 font-medium">🎯 ทะลุเป้า 30,000 บ. กำไรสุทธิ +฿305 (ตามสมุดบันทึก)</td>
+            </tr>
+            <tr class="hover:bg-purple-50/20">
+              <td class="py-2.5 px-3 font-medium">มิถุนายน 2569</td>
+              <td class="py-2.5 px-3">฿30,000</td>
+              <td class="py-2.5 px-3 font-bold text-purple-700">฿28,368</td>
+              <td class="py-2.5 px-3">฿27,442</td>
+              <td class="py-2.5 px-3 text-purple-700">฿3,336 (ตัดรอบ)</td>
+              <td class="py-2.5 px-3">฿3,336.00</td>
+              <td class="py-2.5 px-3 font-bold text-red-600">-฿2,410</td>
+              <td class="py-2.5 px-3 text-red-600">-8.5%</td>
+              <td class="py-2.5 px-3 text-[11px] text-slate-600">ลงตัดรอบค่าเช่า ฿3,336 ในวันที่ 1 (ก่อนหักค่าเช่ากำไรดำเนินงาน +฿926)</td>
+            </tr>
+            <tr class="hover:bg-purple-50/20">
+              <td class="py-2.5 px-3 font-medium">กรกฎาคม 2569</td>
+              <td class="py-2.5 px-3">฿30,000</td>
+              <td class="py-2.5 px-3 font-bold text-purple-700">฿34,810</td>
+              <td class="py-2.5 px-3">฿31,351</td>
+              <td class="py-2.5 px-3 font-semibold text-purple-800">฿10,000 (ว.14)</td>
+              <td class="py-2.5 px-3">฿3,333.33</td>
+              <td class="py-2.5 px-3 font-bold text-emerald-600">+฿126</td>
+              <td class="py-2.5 px-3 text-emerald-600">+0.4%</td>
+              <td class="py-2.5 px-3 text-[11px] text-emerald-700 font-medium">🎯 ทะลุเป้า จ่ายค่าเช่ารอบใหม่ 3 เดือน (ก.ค.-ก.ย.) 10,000 บ. หักเฉลี่ยกำไรเป็นบวก</td>
+            </tr>
+            <tr class="hover:bg-purple-50/20 bg-emerald-50/30">
+              <td class="py-2.5 px-3 font-bold text-emerald-900">สิงหาคม 2569 🏆</td>
+              <td class="py-2.5 px-3 font-semibold">฿40,000</td>
+              <td class="py-2.5 px-3 font-bold text-emerald-600">฿38,655</td>
+              <td class="py-2.5 px-3 font-medium">฿36,776</td>
+              <td class="py-2.5 px-3 text-slate-400">-</td>
+              <td class="py-2.5 px-3 text-slate-400">-</td>
+              <td class="py-2.5 px-3 font-bold text-emerald-600">+฿1,879</td>
+              <td class="py-2.5 px-3 text-emerald-600 font-bold">+4.9%</td>
+              <td class="py-2.5 px-3 text-[11px] text-emerald-800 font-semibold">⭐ ยอดขายสูงสุดเป็นประวัติการณ์! กำไรสูงสุด +฿1,879</td>
+            </tr>
+            <tr class="hover:bg-purple-50/20">
+              <td class="py-2.5 px-3 font-medium">กันยายน 2569 (19 วัน)</td>
+              <td class="py-2.5 px-3">฿40,000</td>
+              <td class="py-2.5 px-3 font-bold text-purple-700">฿23,885</td>
+              <td class="py-2.5 px-3">฿25,012</td>
+              <td class="py-2.5 px-3 text-slate-400">-</td>
+              <td class="py-2.5 px-3">฿3,333.33</td>
+              <td class="py-2.5 px-3 font-bold text-red-600">-฿4,460</td>
+              <td class="py-2.5 px-3 text-red-600">-18.7%</td>
+              <td class="py-2.5 px-3 text-[11px] text-slate-600">รวม 19 วัน มีค่าไฟเต่า ฿3,330 ใน ว.11 คาดการณ์สิ้นเดือนแตะ ~฿37,700</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-purple-100/70 font-bold border-t-2 border-purple-300 text-purple-950">
+              <td class="py-3 px-3">รวมสะสม 7 เดือน</td>
+              <td class="py-3 px-3">-</td>
+              <td class="py-3 px-3 text-purple-900">฿199,418</td>
+              <td class="py-3 px-3">฿194,817</td>
+              <td class="py-3 px-3">฿23,336</td>
+              <td class="py-3 px-3">฿13,333.33</td>
+              <td class="py-3 px-3 text-slate-800">-฿4,278</td>
+              <td class="py-3 px-3">-2.1%</td>
+              <td class="py-3 px-3 text-xs text-purple-900">ยอดขายรวมเกือบ 2 แสนบาท แนวโน้มเติบโตต่อเนื่องชัดเจน</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
   </div>
 
   <script>
@@ -642,7 +825,17 @@
         }
       });
 
-      // 4. Update UI Components
+      // 4. Highlight Branch 4 History Section if Branch 4 is active
+      const b4HistSec = document.getElementById('branch4HistorySection');
+      if (b4HistSec) {
+        if (branchKey === 'branch4') {
+          b4HistSec.classList.add('ring-2', 'ring-purple-500', 'shadow-md');
+        } else {
+          b4HistSec.classList.remove('ring-2', 'ring-purple-500', 'shadow-md');
+        }
+      }
+
+      // 5. Update UI Components
       updateDashboard();
       renderTable();
       renderDonut();
@@ -1106,9 +1299,196 @@
       a.click();
     }
 
+    // === Historical Data & Functions for Branch 4 ===
+    const b4HistoryData = [
+      { month: 'มี.ค. 69', fullMonth: 'มีนาคม 2569', target: 30000, rev: 22454, opExp: 23083, rentPaid: 0, rentAmort: 0, totalExp: 23083, net: -629, note: 'เดือนแรกที่เปิดร้าน ยอดขาย ฿22,454' },
+      { month: 'เม.ย. 69', fullMonth: 'เมษายน 2569', target: 30000, rev: 24236, opExp: 19992, rentPaid: 10000, rentAmort: 3333.33, totalExp: 23325.33, net: 910.67, note: 'เปิดขาย 21 วัน (ถึง ว.23) จ่ายค่าเช่า 3 ด. ฿10,000' },
+      { month: 'พ.ค. 69', fullMonth: 'พฤษภาคม 2569', target: 30000, rev: 31466, opExp: 31161, rentPaid: 0, rentAmort: 0, totalExp: 31161, net: 305, note: '🎯 ทะลุเป้า 30,000 บ. กำไรสุทธิ +฿305' },
+      { month: 'มิ.ย. 69', fullMonth: 'มิถุนายน 2569', target: 30000, rev: 28368, opExp: 27442, rentPaid: 3336, rentAmort: 3336, totalExp: 30778, net: -2410, note: 'ตัดรอบค่าเช่า ฿3,336 วันที่ 1 (กำไรก่อนค่าเช่า +฿926)' },
+      { month: 'ก.ค. 69', fullMonth: 'กรกฎาคม 2569', target: 30000, rev: 34810, opExp: 31351, rentPaid: 10000, rentAmort: 3333.33, totalExp: 34684.33, net: 125.67, note: '🎯 ทะลุเป้า จ่ายค่าเช่ารอบใหม่ 3 ด. ฿10,000 หักเฉลี่ยกำไร +฿126' },
+      { month: 'ส.ค. 69', fullMonth: 'สิงหาคม 2569', target: 40000, rev: 38655, opExp: 36776, rentPaid: 0, rentAmort: 0, totalExp: 36776, net: 1879, note: '🏆 All-Time High! ยอดขายและกำไรสูงสุดเป็นประวัติการณ์' },
+      { month: 'ก.ย. 69', fullMonth: 'กันยายน 2569 (19 วัน)', target: 40000, rev: 23885, opExp: 25012, rentPaid: 0, rentAmort: 3333.33, totalExp: 28345.33, net: -4460.33, note: 'ขาย 19 วัน รวมค่าไฟเต่า ฿3,330 คาดสิ้นเดือนแตะ ~฿37.7k' }
+    ];
+
+    function renderHistoryChart() {
+      const svg = document.getElementById('historyChartSvg');
+      if (!svg) return;
+      svg.innerHTML = '';
+
+      const width = 700;
+      const height = 240;
+      const padL = 45;
+      const padR = 25;
+      const padT = 30;
+      const padB = 40;
+
+      const plotW = width - padL - padR;
+      const plotH = height - padT - padB;
+      const ceiling = 45000;
+
+      // Background grid lines
+      for (let i = 0; i <= 4; i++) {
+        const yVal = (ceiling / 4) * i;
+        const yPos = padT + plotH - (yVal / ceiling) * plotH;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', padL);
+        line.setAttribute('y1', yPos);
+        line.setAttribute('x2', width - padR);
+        line.setAttribute('y2', yPos);
+        line.setAttribute('stroke', '#f1f5f9');
+        line.setAttribute('stroke-width', '1');
+        svg.appendChild(line);
+
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', padL - 8);
+        text.setAttribute('y', yPos + 4);
+        text.setAttribute('text-anchor', 'end');
+        text.setAttribute('font-size', '10');
+        text.setAttribute('fill', '#94a3b8');
+        text.textContent = (yVal >= 1000 ? (yVal / 1000) + 'k' : yVal);
+        svg.appendChild(text);
+      }
+
+      const colW = plotW / b4HistoryData.length;
+      const barW = 20;
+      const tooltip = document.getElementById('historyTooltip');
+
+      b4HistoryData.forEach((d, idx) => {
+        const groupX = padL + idx * colW;
+        const centerX = groupX + colW / 2;
+
+        const hRev = (d.rev / ceiling) * plotH;
+        const yRev = padT + plotH - hRev;
+
+        const hExp = (d.totalExp / ceiling) * plotH;
+        const yExp = padT + plotH - hExp;
+
+        // Target marker (line across the group)
+        const yTarget = padT + plotH - (d.target / ceiling) * plotH;
+        const tLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        tLine.setAttribute('x1', centerX - 24);
+        tLine.setAttribute('y1', yTarget);
+        tLine.setAttribute('x2', centerX + 24);
+        tLine.setAttribute('y2', yTarget);
+        tLine.setAttribute('stroke', '#10b981');
+        tLine.setAttribute('stroke-width', '2');
+        tLine.setAttribute('stroke-dasharray', '3 3');
+        tLine.setAttribute('opacity', '0.85');
+        svg.appendChild(tLine);
+
+        // Revenue bar (purple)
+        const rectRev = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rectRev.setAttribute('x', centerX - barW - 2);
+        rectRev.setAttribute('y', yRev);
+        rectRev.setAttribute('width', barW);
+        rectRev.setAttribute('height', hRev);
+        rectRev.setAttribute('fill', '#9333ea');
+        rectRev.setAttribute('rx', '4');
+        rectRev.style.cursor = 'pointer';
+        svg.appendChild(rectRev);
+
+        // Expense bar (amber)
+        const rectExp = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rectExp.setAttribute('x', centerX + 2);
+        rectExp.setAttribute('y', yExp);
+        rectExp.setAttribute('width', barW);
+        rectExp.setAttribute('height', hExp);
+        rectExp.setAttribute('fill', '#f59e0b');
+        rectExp.setAttribute('rx', '4');
+        rectExp.style.cursor = 'pointer';
+        svg.appendChild(rectExp);
+
+        // Month label
+        const xText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        xText.setAttribute('x', centerX);
+        xText.setAttribute('y', height - 14);
+        xText.setAttribute('text-anchor', 'middle');
+        xText.setAttribute('font-size', '11');
+        xText.setAttribute('font-weight', '500');
+        xText.setAttribute('fill', idx === 5 ? '#059669' : '#64748b');
+        xText.textContent = d.month;
+        svg.appendChild(xText);
+
+        // Net profit indicator label above bars
+        const netLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        const higherY = Math.min(yRev, yExp) - 6;
+        netLabel.setAttribute('x', centerX);
+        netLabel.setAttribute('y', higherY);
+        netLabel.setAttribute('text-anchor', 'middle');
+        netLabel.setAttribute('font-size', '9');
+        netLabel.setAttribute('font-weight', 'bold');
+        netLabel.setAttribute('fill', d.net >= 0 ? '#059669' : '#dc2626');
+        netLabel.textContent = (d.net >= 0 ? '+' : '') + formatNumber(Math.round(d.net));
+        svg.appendChild(netLabel);
+
+        // Hover group overlay for interactive tooltip
+        const hitArea = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        hitArea.setAttribute('x', groupX + 2);
+        hitArea.setAttribute('y', padT);
+        hitArea.setAttribute('width', colW - 4);
+        hitArea.setAttribute('height', plotH);
+        hitArea.setAttribute('fill', 'transparent');
+        hitArea.style.cursor = 'pointer';
+
+        hitArea.addEventListener('mouseenter', () => {
+          rectRev.setAttribute('fill', '#7e22ce');
+          rectExp.setAttribute('fill', '#d97706');
+          if (tooltip) {
+            tooltip.innerHTML = `
+              <div class="font-bold text-purple-300 border-b border-slate-700 pb-1 mb-1">
+                ${d.fullMonth}
+              </div>
+              <div class="grid grid-cols-2 gap-x-2 text-[11px] leading-relaxed">
+                <span>รายรับจริง:</span><strong class="text-right text-purple-300">฿${formatNumber(d.rev)}</strong>
+                <span>รายจ่ายรวม:</span><strong class="text-right text-amber-300">฿${formatNumber(Math.round(d.totalExp))}</strong>
+                <span>เป้าหมายยอด:</span><strong class="text-right text-emerald-400">฿${formatNumber(d.target)}</strong>
+                <span>กำไรสุทธิ:</span><strong class="text-right ${d.net >= 0 ? 'text-emerald-400' : 'text-red-400'}">${d.net >= 0 ? '+' : ''}฿${formatNumber(Math.round(d.net))}</strong>
+              </div>
+              <div class="text-[10px] text-slate-300 mt-1 border-t border-slate-800 pt-1 font-normal">
+                ${d.note}
+              </div>
+            `;
+            tooltip.classList.remove('hidden');
+            const rect = svg.getBoundingClientRect();
+            tooltip.style.left = Math.max(10, (centerX / width * rect.width - 80)) + 'px';
+            tooltip.style.top = Math.max(5, (higherY / height * rect.height - 90)) + 'px';
+          }
+        });
+
+        hitArea.addEventListener('mouseleave', () => {
+          rectRev.setAttribute('fill', '#9333ea');
+          rectExp.setAttribute('fill', '#f59e0b');
+          if (tooltip) tooltip.classList.add('hidden');
+        });
+
+        svg.appendChild(hitArea);
+      });
+    }
+
+    function downloadB4HistoryCSV() {
+      const bom = "\uFEFF";
+      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(bom +
+        "เดือน,ปี,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายดำเนินงาน (บาท),ค่าเช่าจ่ายสด (รอบ 3 ด.),ค่าเช่าเฉลี่ยรายเดือน (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),หมายเหตุและสถานะ\n" +
+        "มีนาคม,2569,30000,22454,23083,0,0,-629,-2.80%,เปิดขายเดือนแรก\n" +
+        "เมษายน,2569,30000,24236,19992,10000,3333.33,910.67,3.76%,ขาย 21 วัน (ถึง ว.23) จ่ายค่าเช่ารอบ 3 ด. 10000 บ.\n" +
+        "พฤษภาคม,2569,30000,31466,31161,0,0,305,0.97%,ทะลุเป้า 30000 บ. กำไรสุทธิ +305 บ.\n" +
+        "มิถุนายน,2569,30000,28368,27442,3336,3336,-2410,-8.50%,ตัดรอบค่าเช่า 3336 บ. วันที่ 1 (กำไรดำเนินงานก่อนค่าเช่า +926 บ.)\n" +
+        "กรกฎาคม,2569,30000,34810,31351,10000,3333.33,125.67,0.36%,ทะลุเป้า จ่ายค่าเช่ารอบใหม่ 3 ด. 10000 บ. หักเฉลี่ยกำไรเป็นบวก\n" +
+        "สิงหาคม,2569,40000,38655,36776,0,0,1879,4.86%,All-Time High! ยอดขายและกำไรสูงสุดเป็นประวัติการณ์\n" +
+        "กันยายน (1-19 วัน),2569,40000,23885,25012,0,3333.33,-4460.33,-18.67%,รวม 19 วัน มีค่าไฟเต่า 3330 บ. คาดสิ้นเดือนแตะ ~37700 บ.\n" +
+        "รวมสะสม 7 เดือน,-,-,199418,194817,23336,13335.99,-4278,-2.15%,ยอดขายรวมเกือบ 2 แสนบาท แนวโน้มเติบโตต่อเนื่องชัดเจน"
+      );
+      const a = document.createElement("a");
+      a.href = csvContent;
+      a.download = "สรุปประวัติย้อนหลัง_สาขา4.csv";
+      a.click();
+    }
+
     // Initialize
     updateTargetPlanning();
     selectBranch('all');
+    renderHistoryChart();
   </script>
 </body>
 </html>
