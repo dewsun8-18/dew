@@ -131,12 +131,18 @@
         <button onclick="switchMainTab('annual')" id="mainTab-annual" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
           <span>📅</span>
           <span>สรุปภาพรวมปี 2569</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold">1.08M 🌟</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold">1.26M 🌟</span>
         </button>
 
         <button onclick="switchMainTab('branches')" id="mainTab-branches" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
           <span>🏪</span>
           <span>เจาะลึกประวัติรายสาขา</span>
+        </button>
+
+        <button onclick="switchMainTab('insights')" id="mainTab-insights" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
+          <span>📈</span>
+          <span>วิเคราะห์เจาะลึกธุรกิจ</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-rose-100 text-rose-700 font-bold">Insight ✨</span>
         </button>
 
         <button onclick="switchMainTab('simulator')" id="mainTab-simulator" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
@@ -268,6 +274,184 @@
             <div class="flex items-center justify-between mt-1">
               <span id="kpiNetSub" class="text-xs text-slate-500">เมื่อรวมค่าเช่าคงที่</span>
               <span id="kpiMarginBadge" class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-red-100 text-red-700 font-num">-17.1%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- MONTH-END RUN-RATE FORECAST WIDGET (ประมาณการสิ้นเดือน)     -->
+      <!-- ======================================================== -->
+      <div class="bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-white border border-indigo-700/50 rounded-3xl p-5 sm:p-6 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-12 -top-12 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Header of Widget -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-indigo-800/40 pb-5">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
+                🔮 ระบบประมาณการปิดยอดสิ้นเดือนอัตโนมัติ (Month-End Forecast)
+              </span>
+              <span class="text-xs text-emerald-400 font-medium">คำนวณจาก Run-Rate 20 วันแรก</span>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-2">
+              คาดการณ์ผลประกอบการ ณ 30 กันยายน 2569
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1">
+              จากสปีดยอดขายเฉลี่ย <strong class="text-white font-num">฿4,825 / วัน</strong> ใน 20 วันแรก (เหลืออีก 10 วันขาย) ระบบพยากรณ์ยอดปิดสิ้นเดือนและกำไรสุทธิล่วงหน้า
+            </p>
+          </div>
+
+          <!-- Scenario Switcher Buttons -->
+          <div class="flex items-center bg-slate-800/80 p-1.5 rounded-2xl border border-indigo-800/50 shrink-0 self-start lg:self-center">
+            <button onclick="setForecastScenario('conservative')" id="btn-scen-con" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">
+              ฝนตก/ชะลอ (-10%)
+            </button>
+            <button onclick="setForecastScenario('base')" id="btn-scen-base" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white shadow-sm transition">
+              สปีดจริง 100% (Base)
+            </button>
+            <button onclick="setForecastScenario('optimistic')" id="btn-scen-opt" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition">
+              เร่งสิ้นเดือน (+15%)
+            </button>
+          </div>
+        </div>
+
+        <!-- 3 Big Projection Metric Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+          
+          <!-- Card 1: Projected Revenue -->
+          <div class="bg-indigo-900/40 border border-indigo-700/40 rounded-2xl p-4 sm:p-5 backdrop-blur-sm">
+            <span class="text-xs font-semibold text-indigo-300 block">ยอดขายคาดการณ์สิ้นเดือน (30 วัน)</span>
+            <div id="fcTotalRev" class="text-3xl sm:text-4xl font-extrabold font-num text-white mt-1.5">฿144,746</div>
+            <div class="text-xs text-indigo-200/80 mt-2 flex items-center justify-between">
+              <span>20 วันแรกทำได้: <strong class="font-num text-white">฿96,497</strong></span>
+              <span id="fcRemainingRevText" class="font-num text-emerald-400 font-semibold">+฿48,249 (10 วัน)</span>
+            </div>
+            <div class="w-full bg-indigo-950/80 h-2 rounded-full mt-3 overflow-hidden border border-indigo-800/50">
+              <div id="fcRevProgressBar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-400 rounded-full" style="width: 66.7%"></div>
+            </div>
+            <span class="text-[10px] text-slate-400 mt-1 block text-right font-num">ความคืบหน้า 66.7% ของเดือน</span>
+          </div>
+
+          <!-- Card 2: Projected Operating Expenses -->
+          <div class="bg-amber-950/30 border border-amber-700/30 rounded-2xl p-4 sm:p-5 backdrop-blur-sm">
+            <span class="text-xs font-semibold text-amber-300 block">รายจ่ายดำเนินงานคาดการณ์ (ไม่รวมเช่า)</span>
+            <div id="fcTotalExp" class="text-3xl sm:text-4xl font-extrabold font-num text-amber-400 mt-1.5">฿145,958</div>
+            <div class="text-xs text-amber-200/80 mt-2 flex items-center justify-between">
+              <span>20 วันแรกจ่ายจริง: <strong class="font-num text-white">฿97,305</strong></span>
+              <span id="fcRemainingExpText" class="font-num text-amber-300 font-semibold">+฿48,653 (10 วัน)</span>
+            </div>
+            <div class="w-full bg-slate-950/80 h-2 rounded-full mt-3 overflow-hidden border border-amber-800/50">
+              <div class="h-full bg-gradient-to-r from-amber-500 to-orange-400 rounded-full" style="width: 66.7%"></div>
+            </div>
+            <span class="text-[10px] text-slate-400 mt-1 block text-right font-num">เฉลี่ย ฿4,865 / วัน (ค่าแรง+ของ)</span>
+          </div>
+
+          <!-- Card 3: Projected Net Profit -->
+          <div class="bg-rose-950/30 border border-rose-700/30 rounded-2xl p-4 sm:p-5 backdrop-blur-sm flex flex-col justify-between">
+            <div>
+              <span class="text-xs font-semibold text-rose-300 block">กำไร/ขาดทุนสุทธิคาดการณ์ (รวมเช่า ฿15.7k)</span>
+              <div id="fcNetProfit" class="text-3xl sm:text-4xl font-extrabold font-num text-rose-400 mt-1.5">-฿16,879</div>
+              <div class="text-xs text-rose-200/80 mt-2 flex items-center justify-between">
+                <span>Margin คาดการณ์:</span>
+                <strong id="fcMarginText" class="font-num font-bold text-rose-300">-11.7%</strong>
+              </div>
+            </div>
+            <div class="mt-3 pt-2.5 border-t border-rose-900/40 text-[11px] text-slate-300">
+              <span class="text-amber-300 font-semibold">💡 ข้อแนะนำ:</span> หากต้องการให้เดือนนี้พลิกกลับมามีกำไร ต้องเร่งยอดขาย 10 วันสุดท้ายให้ได้เฉลี่ย <strong class="text-white font-num">฿6,515 / วัน</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 4 Branch Projected Breakdown -->
+        <div class="mt-5 pt-4 border-t border-indigo-800/30">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+              <span>🏢</span> ประมาณการยอดขายสิ้นเดือนแยกรายสาขา (Projected Revenue by Branch):
+            </span>
+            <span class="text-xs text-slate-400">คำนวณจาก Run-Rate ของแต่ละสาขา</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-num">
+            
+            <!-- B1 Forecast -->
+            <div class="p-3.5 rounded-xl bg-blue-900/30 border border-blue-700/40">
+              <div class="flex items-center justify-between">
+                <span class="font-sans font-bold text-xs text-blue-300">สาขา 1 (เปิด 19 วัน)</span>
+                <span class="text-[11px] text-slate-400">Run-Rate: ฿1,113/วัน</span>
+              </div>
+              <div class="flex items-baseline justify-between mt-2">
+                <span id="fcB1Rev" class="text-xl font-extrabold text-white">฿32,274</span>
+                <span class="text-xs text-blue-300">20 วัน: ฿21,145</span>
+              </div>
+              <div class="text-[10px] text-slate-300 mt-1 font-sans">
+                คาดการณ์ 10 วันที่เหลือ: +฿11,129
+              </div>
+            </div>
+
+            <!-- B2 Forecast -->
+            <div class="p-3.5 rounded-xl bg-amber-900/30 border border-amber-700/40">
+              <div class="flex items-center justify-between">
+                <span class="font-sans font-bold text-xs text-amber-300">สาขา 2 (เปิด 20 วัน)</span>
+                <span class="text-[11px] text-slate-400">Run-Rate: ฿1,061/วัน</span>
+              </div>
+              <div class="flex items-baseline justify-between mt-2">
+                <span id="fcB2Rev" class="text-xl font-extrabold text-white">฿31,823</span>
+                <span class="text-xs text-amber-300">20 วัน: ฿21,215</span>
+              </div>
+              <div class="text-[10px] text-slate-300 mt-1 font-sans">
+                คาดการณ์ 10 วันที่เหลือ: +฿10,608
+              </div>
+            </div>
+
+            <!-- B3 Forecast -->
+            <div class="p-3.5 rounded-xl bg-emerald-900/30 border border-emerald-700/40">
+              <div class="flex items-center justify-between">
+                <span class="font-sans font-bold text-xs text-emerald-300">สาขา 3 🏆 (ยอดขายอันดับ 1)</span>
+                <span class="text-[11px] text-slate-400">Run-Rate: ฿1,437/วัน</span>
+              </div>
+              <div class="flex items-baseline justify-between mt-2">
+                <span id="fcB3Rev" class="text-xl font-extrabold text-emerald-300">฿43,121</span>
+                <span class="text-xs text-emerald-200">20 วัน: ฿28,747</span>
+              </div>
+              <div class="text-[10px] text-emerald-300 font-sans font-semibold mt-1">
+                🎯 ทะลุเป้า 40k ติดต่อกันเป็นเดือนที่ 5!
+              </div>
+            </div>
+
+            <!-- B4 Forecast -->
+            <div class="p-3.5 rounded-xl bg-purple-900/30 border border-purple-700/40">
+              <div class="flex items-center justify-between">
+                <span class="font-sans font-bold text-xs text-purple-300">สาขา 4 🚀 (เติบโตเร็ว)</span>
+                <span class="text-[11px] text-slate-400">Run-Rate: ฿1,270/วัน</span>
+              </div>
+              <div class="flex items-baseline justify-between mt-2">
+                <span id="fcB4Rev" class="text-xl font-extrabold text-white">฿38,085</span>
+                <span class="text-xs text-purple-300">20 วัน: ฿25,390</span>
+              </div>
+              <div class="text-[10px] text-slate-300 mt-1 font-sans">
+                คาดการณ์ 10 วันที่เหลือ: +฿12,695
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Action Buttons -->
+          <div class="flex flex-wrap items-center justify-between gap-3 mt-4 pt-3 border-t border-indigo-800/30 text-xs">
+            <div class="text-slate-300 flex items-center gap-1.5 font-sans">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>คำนวณแบบอัตโนมัติ Real-Time ตามสูตร Run-Rate สากล</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="switchMainTab('insights')" class="px-3.5 py-1.5 rounded-xl font-semibold bg-rose-600/80 hover:bg-rose-600 text-white transition flex items-center gap-1.5">
+                <span>📈</span> ดูการวิเคราะห์เจาะลึกธุรกิจเพื่อเพิ่มกำไร ➔
+              </button>
+              <button onclick="switchMainTab('simulator')" class="px-3.5 py-1.5 rounded-xl font-semibold bg-indigo-600/80 hover:bg-indigo-600 text-white transition flex items-center gap-1.5">
+                <span>🎯</span> ปรับแผนกำไรใน Simulator ➔
+              </button>
             </div>
           </div>
         </div>
@@ -1171,6 +1355,524 @@
     </div>
 
     <!-- ======================================================== -->
+    <!-- TAB 5: BUSINESS INSIGHTS (วิเคราะห์เจาะลึกธุรกิจเพื่อเพิ่มกำไร) -->
+    <!-- ======================================================== -->
+    <div id="view-insights" class="hidden space-y-6">
+
+      <!-- Header & Executive Highlights -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 text-white rounded-3xl p-6 sm:p-7 shadow-xl border border-indigo-800/40 relative overflow-hidden">
+        <div class="absolute -right-16 -top-16 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-400/30">
+                📈 การวิเคราะห์เชิงกลยุทธ์ (Business Intelligence)
+              </span>
+              <span class="text-xs text-indigo-300 font-medium">กลั่นกรองจากข้อมูล 20 วันแรก & สถิติ 9 เดือน</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white mt-2">
+              4 มิติวิเคราะห์เจาะลึกเพื่อเพิ่มผลกำไรและประสิทธิภาพร้าน
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl">
+              ตอบคำถามสำคัญทางธุรกิจ: สัดส่วนเงินโอน vs เงินสด, ทำไมบางวันขายดีแต่ยังติดลบ, แพทเทิร์นวันยอดขายพีคสุดสัปดาห์ และเป้าหมายคุ้มทุนขั้นต่ำ (BEP) รายวันของแต่ละสาขา
+            </p>
+          </div>
+
+          <!-- Quick Stat Badge Group -->
+          <div class="flex items-center gap-2 shrink-0 flex-wrap">
+            <div class="bg-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center">
+              <span class="text-[11px] text-slate-300 block">สัดส่วนเงินโอน</span>
+              <span class="text-base font-bold font-num text-emerald-400">37.6%</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center">
+              <span class="text-[11px] text-slate-300 block">พีคสุดสัปดาห์</span>
+              <span class="text-base font-bold font-num text-amber-400">+32.6%</span>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center">
+              <span class="text-[11px] text-slate-300 block">BEP รวม 4 สาขา</span>
+              <span class="text-base font-bold font-num text-blue-400">฿3,844/ว.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSIGHT 1: CASH VS TRANSFER RATIO -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="p-2 rounded-xl bg-blue-100 text-blue-700 text-base">💳</span>
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">
+                  1. การวิเคราะห์สัดส่วนเงินสด vs เงินโอน (Cash vs Transfer Ratio)
+                </h3>
+                <p class="text-xs text-slate-500">
+                  พฤติกรรมการชำระเงินของลูกค้าแต่ละสาขาใน 20 วันแรก (ยอดขายรวม ฿96,497)
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 text-xs">
+            <div class="flex items-center gap-1.5 font-medium text-slate-600">
+              <span class="w-3 h-3 rounded-full bg-blue-600"></span> เงินสด (62.4%)
+            </div>
+            <div class="flex items-center gap-1.5 font-medium text-slate-600">
+              <span class="w-3 h-3 rounded-full bg-emerald-500"></span> เงินโอน/สแกน (37.6%)
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Branch Cash vs Transfer Comparison Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-6">
+          <!-- Branch 1 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sm text-slate-800">สาขา 1 (รวม ฿21,145)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-semibold font-num">เงินสด 64.9%</span>
+              </div>
+              <div class="mt-3 space-y-1.5 font-num text-xs">
+                <div class="flex justify-between text-slate-600">
+                  <span>💵 เงินสด:</span>
+                  <span class="font-bold text-blue-700">฿13,723 (64.9%)</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                  <span>📱 เงินโอน:</span>
+                  <span class="font-bold text-emerald-700">฿7,422 (35.1%)</span>
+                </div>
+              </div>
+              <div class="w-full bg-slate-200 h-2.5 rounded-full mt-3 overflow-hidden flex">
+                <div class="bg-blue-600 h-full" style="width: 64.9%" title="เงินสด 64.9%"></div>
+                <div class="bg-emerald-500 h-full" style="width: 35.1%" title="เงินโอน 35.1%"></div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 text-[11px] text-slate-500">
+              🪙 ต้องสำรองเงินทอนอย่างน้อย <strong class="text-slate-800 font-num">฿600-800/วัน</strong>
+            </div>
+          </div>
+
+          <!-- Branch 2 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sm text-slate-800">สาขา 2 (รวม ฿21,215)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-semibold font-num">เงินสด 67.8% 🔥</span>
+              </div>
+              <div class="mt-3 space-y-1.5 font-num text-xs">
+                <div class="flex justify-between text-slate-600">
+                  <span>💵 เงินสด:</span>
+                  <span class="font-bold text-blue-700">฿14,386 (67.8%)</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                  <span>📱 เงินโอน:</span>
+                  <span class="font-bold text-emerald-700">฿6,829 (32.2%)</span>
+                </div>
+              </div>
+              <div class="w-full bg-slate-200 h-2.5 rounded-full mt-3 overflow-hidden flex">
+                <div class="bg-blue-600 h-full" style="width: 67.8%" title="เงินสด 67.8%"></div>
+                <div class="bg-emerald-500 h-full" style="width: 32.2%" title="เงินโอน 32.2%"></div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 text-[11px] text-slate-500">
+              🪙 สัดส่วนเงินสดสูงสุด ต้องคุมเงินทอนและรอบฝากเข้าธนาคารอย่างสม่ำเสมอ
+            </div>
+          </div>
+
+          <!-- Branch 3 -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sm text-slate-800">สาขา 3 🏆 (รวม ฿28,747)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-semibold font-num">เงินสด 65.5%</span>
+              </div>
+              <div class="mt-3 space-y-1.5 font-num text-xs">
+                <div class="flex justify-between text-slate-600">
+                  <span>💵 เงินสด:</span>
+                  <span class="font-bold text-blue-700">฿18,829 (65.5%)</span>
+                </div>
+                <div class="flex justify-between text-slate-600">
+                  <span>📱 เงินโอน:</span>
+                  <span class="font-bold text-emerald-700">฿9,918 (34.5%)</span>
+                </div>
+              </div>
+              <div class="w-full bg-slate-200 h-2.5 rounded-full mt-3 overflow-hidden flex">
+                <div class="bg-blue-600 h-full" style="width: 65.5%" title="เงินสด 65.5%"></div>
+                <div class="bg-emerald-500 h-full" style="width: 34.5%" title="เงินโอน 34.5%"></div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 text-[11px] text-slate-500">
+              🪙 ยอดขายเงินสดสูงสุดแตะ ฿1.88 หมื่น ระวังความเสี่ยงเงินสูญหายตอนปิดร้าน
+            </div>
+          </div>
+
+          <!-- Branch 4 -->
+          <div class="p-4 rounded-2xl bg-purple-50/50 border border-purple-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sm text-purple-950">สาขา 4 🚀 (รวม ฿25,390)</span>
+                <span class="text-[11px] px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 font-semibold font-num">โอน 47.7% สูงสุด! 🌟</span>
+              </div>
+              <div class="mt-3 space-y-1.5 font-num text-xs">
+                <div class="flex justify-between text-purple-900">
+                  <span>💵 เงินสด:</span>
+                  <span class="font-bold text-blue-700">฿13,276 (52.3%)</span>
+                </div>
+                <div class="flex justify-between text-purple-900">
+                  <span>📱 เงินโอน:</span>
+                  <span class="font-bold text-emerald-700">฿12,114 (47.7%)</span>
+                </div>
+              </div>
+              <div class="w-full bg-slate-200 h-2.5 rounded-full mt-3 overflow-hidden flex">
+                <div class="bg-blue-600 h-full" style="width: 52.3%" title="เงินสด 52.3%"></div>
+                <div class="bg-emerald-500 h-full" style="width: 47.7%" title="เงินโอน 47.7%"></div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-purple-200/80 text-[11px] text-purple-700">
+              ⚡ ลูกค้าวัยรุ่น/คนทำงานชอบสแกน QR เงินเข้าบัญชีไว ไม่ต้องสำรองเงินทอนเยอะ
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Horizontal Stacked Chart & Recommendations -->
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          <div class="lg:col-span-7 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            <span class="text-xs font-bold text-slate-700 block mb-3">
+              📊 เปรียบเทียบสัดส่วนยอดเงิน (บาท) เงินสด vs เงินโอน รายสาขา:
+            </span>
+            <div id="chart-cash-transfer-container" class="w-full h-44 relative">
+              <!-- SVG Horizontal Stacked Bar rendered by JS -->
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 space-y-3">
+            <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed">
+              <strong class="font-bold block mb-1 text-amber-950 flex items-center gap-1.5">
+                <span>💡</span> คำแนะนำด้านการสำรองเงินทอน (Cash Reserves)
+              </strong>
+              สาขา 1, 2, 3 มีเงินสดเฉลี่ย 65-68% วันละ ฿700 - ฿1,000 ต่อสาขา ควรเตรียมเหรียญ 1/5/10 และแบงก์ 20/50 ไว้อย่างน้อยสาขาละ <strong>฿500 - ฿800</strong> ทุกเช้า เพื่อป้องกันการเสียโอกาสขายช่วงลูกค้าเร่งด่วน
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-blue-50 border border-blue-200 text-xs text-blue-900 leading-relaxed">
+              <strong class="font-bold block mb-1 text-blue-950 flex items-center gap-1.5">
+                <span>🛡️</span> คำแนะนำด้านการลดความเสี่ยงเงินสูญหาย (Cash Leakage)
+              </strong>
+              ถอดโมเดลจากสาขา 4 ที่ลูกค้าโอนสูงถึง <strong>47.7%</strong> ด้วยการตั้งป้าย QR Code ชัดเจนหน้าร้านทุกสาขา จะช่วยลดภาระการนับเงินทอน ลดความผิดพลาดเงินขาด และเงินเข้าบัญชีเจ้าของร้านโดยตรง
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSIGHT 2: COST BREAKDOWN & BULK STOCK EXPLANATION -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="p-2 rounded-xl bg-amber-100 text-amber-700 text-base">🥩</span>
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">
+                  2. โครงสร้างต้นทุนและการวิเคราะห์สต็อก (Cost Breakdown & Accrual)
+                </h3>
+                <p class="text-xs text-slate-500">
+                  สัดส่วนรายจ่าย 3 ส่วนหลัก (รวม ฿97,305 ใน 20 วันแรก) และการคลี่คลายปัญหากำไรผันผวน
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
+          <!-- Cost Pillar 1: Food Cost -->
+          <div class="p-4 rounded-2xl bg-indigo-50 border border-indigo-200">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-indigo-900 uppercase">1. ต้นทุนวัตถุดิบ (Food Cost)</span>
+              <span class="text-xs font-bold font-num px-2 py-0.5 rounded-full bg-indigo-200 text-indigo-800">53.6%</span>
+            </div>
+            <div class="text-2xl font-extrabold font-num text-indigo-950 mt-2">฿52,155</div>
+            <p class="text-xs text-indigo-800 mt-2 leading-relaxed">
+              ลูกชิ้น, ไส้กรอก, น้ำจิ้ม, น้ำมันทอด, ผักสด, ถุงพลาสติก และไม้เสียบ (เฉลี่ย ฿2,608/วัน ทั้ง 4 สาขา หรือ ฿652/วัน/สาขา)
+            </p>
+            <div class="mt-3 pt-2 border-t border-indigo-200 text-[11px] text-indigo-700">
+              🎯 อัตรา Food Cost เทียบยอดขาย = <strong>54.1%</strong> (มาตรฐานร้านสตรีทฟู้ดควรอยู่ที่ 45-50%)
+            </div>
+          </div>
+
+          <!-- Cost Pillar 2: Labor Cost -->
+          <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-900 uppercase">2. ค่าแรงพนักงาน (Labor Cost)</span>
+              <span class="text-xs font-bold font-num px-2 py-0.5 rounded-full bg-amber-200 text-amber-800">28.4%</span>
+            </div>
+            <div class="text-2xl font-extrabold font-num text-amber-950 mt-2">฿27,650</div>
+            <p class="text-xs text-amber-800 mt-2 leading-relaxed">
+              คำนวณจาก 79 คน-วัน (วันละ ฿350 ต่อสาขา โดยสาขา 1 พัก 1 วัน) ค่าแรงคงที่สม่ำเสมอ
+            </p>
+            <div class="mt-3 pt-2 border-t border-amber-200 text-[11px] text-amber-700">
+              👥 สัดส่วนเทียบยอดขาย = <strong>28.7%</strong> อยู่ในเกณฑ์เหมาะสมสำหรับร้าน 1 คนต่อสาขา
+            </div>
+          </div>
+
+          <!-- Cost Pillar 3: Utilities & Overhead -->
+          <div class="p-4 rounded-2xl bg-rose-50 border border-rose-200">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-rose-900 uppercase">3. ค่าไฟ/อุปกรณ์ (Overhead)</span>
+              <span class="text-xs font-bold font-num px-2 py-0.5 rounded-full bg-rose-200 text-rose-800">18.0%</span>
+            </div>
+            <div class="text-2xl font-extrabold font-num text-rose-950 mt-2">฿17,500</div>
+            <p class="text-xs text-rose-800 mt-2 leading-relaxed">
+              ค่าไฟหน้าร้าน, อุปกรณ์สิ้นเปลือง และก้อนใหญ่พิเศษ เช่น ค่าไฟเตาไฟฟ้าสาขา 4 จำนวน <strong>฿3,330</strong>
+            </p>
+            <div class="mt-3 pt-2 border-t border-rose-200 text-[11px] text-rose-700">
+              ⚡ ต้นทุนแฝงที่ทำให้กำไรบางสาขาชะลอตัวลงในรอบเดือนนี้
+            </div>
+          </div>
+        </div>
+
+        <!-- Deep Dive Note: Lump-sum stock purchase explanation -->
+        <div class="mt-6 p-4 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 text-white border border-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="text-2xl">🧐</span>
+            <div>
+              <h4 class="text-sm font-bold text-amber-300">
+                ไขข้อข้องใจ: ทำไมยอดขายสูง แต่บางวันผลประกอบการติดลบหนัก? (Lump-Sum Inventory Effect)
+              </h4>
+              <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+                ในระบบบัญชีเงินสด (Cash Basis) รายจ่ายจะถูกบันทึกในวันที่ “จ่ายเงินออก” ทันที ทำให้ในวันที่สั่งลูกชิ้นและวัตถุดิบล็อตใหญ่ (เช่น วันที่ 1, 8, 15 ซึ่งมีการจ่าย ฿3,000 - ฿6,000) ผลประกอบการวันนั้นจะติดลบ <span class="text-rose-400 font-bold font-num">-฿1,500 ถึง -฿3,000</span> แม้ยอดขายวันนั้นจะสูงถึง ฿5,000 ก็ตาม แต่วันต่อๆ มาผลกำไรจะกลับมาเป็นบวกสูงเพราะใช้วัตถุดิบที่ซื้อตุนไว้แล้ว
+              </p>
+              <div class="mt-2.5 flex items-center gap-2 text-xs text-emerald-300 font-semibold">
+                <span>✅ แนวทางแก้ไข:</span> ดูผลประกอบการแบบค่าเฉลี่ยสะสม 7 วัน (7-Day Moving Average) หรือประมาณการสิ้นเดือนจะสะท้อนกำไรที่แท้จริงได้แม่นยำที่สุด
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSIGHT 3: DAY OF THE WEEK PATTERN (WEEKEND PEAK) -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="p-2 rounded-xl bg-emerald-100 text-emerald-700 text-base">📅</span>
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">
+                  3. แพทเทิร์นยอดขายตามวันในสัปดาห์ (Day of the Week Sales Pattern)
+                </h3>
+                <p class="text-xs text-slate-500">
+                  วิเคราะห์ยอดขายเฉลี่ยรายวันทั้ง 4 สาขารวมกัน เปรียบเทียบจันทร์-อาทิตย์
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-800 font-bold">
+              🔥 เสาร์-อาทิตย์ พีคกว่าวันธรรมดา +32.6%
+            </span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-center">
+          
+          <!-- SVG Bar Chart -->
+          <div class="lg:col-span-7 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-700">ยอดขายเฉลี่ยต่อวัน (บาท):</span>
+              <span class="text-[11px] text-slate-500">เส้นประ = เฉลี่ยวันธรรมดา (฿4,511)</span>
+            </div>
+            <div id="chart-dow-container" class="w-full h-56 relative">
+              <!-- SVG Bar chart rendered by JS -->
+            </div>
+          </div>
+
+          <!-- 7-Day Numbers & Action Plan -->
+          <div class="lg:col-span-5 space-y-3 font-num">
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span class="text-slate-600 font-sans">จันทร์ (2 วัน)</span>
+                <span class="font-bold text-slate-800">฿5,150</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span class="text-slate-600 font-sans">อังคาร (3 วัน)</span>
+                <span class="font-bold text-slate-800">฿4,328</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span class="text-slate-600 font-sans">พุธ (3 วัน)</span>
+                <span class="font-bold text-slate-500">฿4,255 (ต่ำสุด)</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span class="text-slate-600 font-sans">พฤหัสฯ (3 วัน)</span>
+                <span class="font-bold text-slate-800">฿4,390</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span class="text-slate-600 font-sans">ศุกร์ (3 วัน)</span>
+                <span class="font-bold text-slate-800">฿4,431</span>
+              </div>
+              <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-300 flex justify-between items-center text-amber-900">
+                <span class="font-bold font-sans">เสาร์ (3 วัน) 🌟</span>
+                <span class="font-extrabold text-amber-700">฿5,585</span>
+              </div>
+              <div class="col-span-2 p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 flex justify-between items-center text-emerald-900">
+                <span class="font-bold font-sans">อาทิตย์ (3 วัน) 🏆 (Peak Day สูงสุด)</span>
+                <span class="font-extrabold text-emerald-700">฿5,743</span>
+              </div>
+            </div>
+
+            <!-- Operational Recommendations -->
+            <div class="p-3.5 rounded-2xl bg-indigo-50 border border-indigo-200 text-xs text-indigo-900 leading-relaxed font-sans">
+              <strong class="font-bold block mb-1 text-indigo-950 flex items-center gap-1.5">
+                <span>📋</span> แผนการดำเนินงานล่วงหน้าวันศุกร์ (Friday Action Plan)
+              </strong>
+              <ul class="list-disc list-inside space-y-1 text-[11px] text-indigo-800">
+                <li><strong>เตรียมสต็อกล่วงหน้า:</strong> สั่งลูกชิ้นและไม้เสียบเพิ่ม +35% ทุกบ่ายวันศุกร์ เพื่อป้องกันของหมดช่วงพีควันเสาร์-อาทิตย์</li>
+                <li><strong>การจัดกะพนักงาน:</strong> ห้ามขาด/ห้ามลาช่วงสุดสัปดาห์ หากสาขาใดคิวแน่น (เช่น สาขา 3 และ 4) ควรมีคนช่วยแพ็คถุง</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- INSIGHT 4: DAILY BREAK-EVEN POINT (BEP) PER BRANCH -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-5 sm:p-7 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-100">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="p-2 rounded-xl bg-purple-100 text-purple-700 text-base">⚖️</span>
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">
+                  4. จุดคุ้มทุนรายวันแยกรายสาขา (Daily Break-Even Point: BEP)
+                </h3>
+                <p class="text-xs text-slate-500">
+                  ยอดขายขั้นต่ำต่อวันที่ร้านต้องทำให้ได้เพื่อไม่ให้ขาดทุน (คำนวณจากค่าแรง ฿350/วัน + ค่าเช่าเฉลี่ย + GP Margin 50%)
+                </p>
+              </div>
+            </div>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-200">
+            สูตร: ต้นทุนคงที่รายวัน ÷ GP Margin 50%
+          </span>
+        </div>
+
+        <!-- 4 Branch BEP Targets & Gamified Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 font-num">
+          
+          <!-- Branch 1 BEP -->
+          <div class="p-4 rounded-2xl bg-blue-50/60 border border-blue-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between font-sans">
+                <span class="font-bold text-sm text-blue-900">สาขา 1</span>
+                <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">ผ่านเกณฑ์ ✅</span>
+              </div>
+              <div class="mt-3">
+                <span class="text-xs text-slate-500 font-sans block">จุดคุ้มทุนขั้นต่ำ (BEP):</span>
+                <span class="text-2xl font-extrabold text-blue-950">฿1,034 / วัน</span>
+              </div>
+              <div class="mt-2 text-xs text-slate-600 font-sans space-y-1">
+                <div>• ค่าแรง ฿350 + เช่าเฉลี่ย ฿167 = ฿517/วัน</div>
+                <div>• ทำได้จริง 20 วันแรก: <strong class="text-emerald-600">฿1,113 / วัน</strong> (107.6%)</div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-blue-200 font-sans">
+              <span class="text-xs font-bold text-blue-800 block">🎯 เป้าหมายแนะนำหน้าร้าน:</span>
+              <span class="text-base font-bold text-blue-900 font-num">฿1,350 / วัน</span>
+              <span class="text-[10px] text-slate-500 block mt-0.5">เพื่อให้มีกำไรสุทธิปลอดภัย ฿300+/วัน</span>
+            </div>
+          </div>
+
+          <!-- Branch 2 BEP -->
+          <div class="p-4 rounded-2xl bg-amber-50/60 border border-amber-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between font-sans">
+                <span class="font-bold text-sm text-amber-900">สาขา 2</span>
+                <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">ผ่านเกณฑ์ ✅</span>
+              </div>
+              <div class="mt-3">
+                <span class="text-xs text-slate-500 font-sans block">จุดคุ้มทุนขั้นต่ำ (BEP):</span>
+                <span class="text-2xl font-extrabold text-amber-950">฿922 / วัน</span>
+              </div>
+              <div class="mt-2 text-xs text-slate-600 font-sans space-y-1">
+                <div>• ค่าแรง ฿350 + เช่าเฉลี่ย ฿111 = ฿461/วัน</div>
+                <div>• ทำได้จริง 20 วันแรก: <strong class="text-emerald-600">฿1,061 / วัน</strong> (115.1%)</div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-amber-200 font-sans">
+              <span class="text-xs font-bold text-amber-800 block">🎯 เป้าหมายแนะนำหน้าร้าน:</span>
+              <span class="text-base font-bold text-amber-900 font-num">฿1,100 / วัน</span>
+              <span class="text-[10px] text-slate-500 block mt-0.5">เพื่อแตะเป้ายอดขาย 3.3 หมื่นบาท/เดือน</span>
+            </div>
+          </div>
+
+          <!-- Branch 3 BEP -->
+          <div class="p-4 rounded-2xl bg-emerald-50/60 border border-emerald-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between font-sans">
+                <span class="font-bold text-sm text-emerald-900">สาขา 3 🏆</span>
+                <span class="text-[11px] font-semibold text-emerald-800 bg-emerald-200 px-2 py-0.5 rounded-md">ทะลุเป้าสูง 🌟</span>
+              </div>
+              <div class="mt-3">
+                <span class="text-xs text-slate-500 font-sans block">จุดคุ้มทุนขั้นต่ำ (BEP):</span>
+                <span class="text-2xl font-extrabold text-emerald-950">฿966 / วัน</span>
+              </div>
+              <div class="mt-2 text-xs text-slate-600 font-sans space-y-1">
+                <div>• ค่าแรง ฿350 + เช่า ฿133 = ฿483/วัน</div>
+                <div>• ทำได้จริง 20 วันแรก: <strong class="text-emerald-600">฿1,437 / วัน</strong> (148.8%)</div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-emerald-200 font-sans">
+              <span class="text-xs font-bold text-emerald-800 block">🎯 เป้าหมายแนะนำหน้าร้าน:</span>
+              <span class="text-base font-bold text-emerald-900 font-num">฿1,400 / วัน</span>
+              <span class="text-[10px] text-slate-500 block mt-0.5">รักษาตำแหน่งแชมป์ยอดขายเกิน 4 หมื่น/เดือน</span>
+            </div>
+          </div>
+
+          <!-- Branch 4 BEP -->
+          <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between font-sans">
+                <span class="font-bold text-sm text-purple-900">สาขา 4 🚀</span>
+                <span class="text-[11px] font-semibold text-purple-800 bg-purple-200 px-2 py-0.5 rounded-md">เติบโตเด่น 🚀</span>
+              </div>
+              <div class="mt-3">
+                <span class="text-xs text-slate-500 font-sans block">จุดคุ้มทุนขั้นต่ำ (BEP):</span>
+                <span class="text-2xl font-extrabold text-purple-950">฿922 / วัน</span>
+              </div>
+              <div class="mt-2 text-xs text-slate-600 font-sans space-y-1">
+                <div>• ค่าแรง ฿350 + เช่าเฉลี่ย ฿111 = ฿461/วัน</div>
+                <div>• ทำได้จริง 20 วันแรก: <strong class="text-emerald-600">฿1,270 / วัน</strong> (137.7%)</div>
+              </div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-purple-200 font-sans">
+              <span class="text-xs font-bold text-purple-800 block">🎯 เป้าหมายแนะนำหน้าร้าน:</span>
+              <span class="text-base font-bold text-purple-900 font-num">฿1,250 / วัน</span>
+              <span class="text-[10px] text-slate-500 block mt-0.5">ผลักดันให้ยอดรวมเดือนนี้แตะ 3.8 หมื่นบาท</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- BEP Gamification Summary Box -->
+        <div class="mt-5 p-4 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🎮</span>
+            <div>
+              <div class="text-sm font-bold text-white">
+                เป้าหมายรวม 4 สาขา: จุดคุ้มทุน <span class="text-amber-400 font-num">฿3,844 / วัน</span> • เป้าหมายแนะนำกำไรปลอดภัย <span class="text-emerald-400 font-num">฿4,800 - ฿5,100 / วัน</span>
+              </div>
+              <p class="text-xs text-slate-300 mt-0.5">
+                เฉลี่ย 20 วันแรกทำได้ <strong>฿4,825 / วัน</strong> ถือว่าแตะเป้าความปลอดภัยขั้นต้นแล้ว หากดันช่วง 10 วันสุดท้ายให้แตะ ฿5,500/วัน จะสร้างกำไรสุทธิสูงสุด
+              </p>
+            </div>
+          </div>
+          <button onclick="switchMainTab('simulator')" class="shrink-0 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-md transition flex items-center gap-1.5">
+            <span>🎯</span> ไปยังเครื่องมือจำลองเป้าหมาย
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ======================================================== -->
     <!-- TAB 4: TARGET GOAL SIMULATOR (เครื่องมือวางแผนเป้าหมาย)     -->
     <!-- ======================================================== -->
     <div id="view-simulator" class="hidden space-y-6">
@@ -1395,7 +2097,7 @@
     // 2. NAVIGATION & TAB SWITCHING
     function switchMainTab(tabId) {
       currentMainTab = tabId;
-      const tabs = ['current', 'annual', 'branches', 'simulator'];
+      const tabs = ['current', 'annual', 'branches', 'insights', 'simulator'];
       
       tabs.forEach(t => {
         const viewEl = document.getElementById('view-' + t);
@@ -1424,6 +2126,11 @@
           renderB2HistoryChart();
           renderB3HistoryChart();
           renderHistoryChart();
+        }, 50);
+      } else if (tabId === 'insights') {
+        setTimeout(() => {
+          renderCashTransferChart();
+          renderDayOfWeekChart();
         }, 50);
       }
     }
@@ -2936,6 +3643,254 @@
       }
     }
 
+    // 11.5 BUSINESS INSIGHTS & FORECAST LOGIC
+    function setForecastScenario(mode) {
+      const btnCon = document.getElementById('btn-scen-con');
+      const btnBase = document.getElementById('btn-scen-base');
+      const btnOpt = document.getElementById('btn-scen-opt');
+      
+      const activeClass = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-indigo-600 text-white shadow-sm transition';
+      const inactiveClass = 'px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition';
+      
+      if (btnCon) btnCon.className = (mode === 'conservative') ? activeClass : inactiveClass;
+      if (btnBase) btnBase.className = (mode === 'base') ? activeClass : inactiveClass;
+      if (btnOpt) btnOpt.className = (mode === 'optimistic') ? activeClass : inactiveClass;
+
+      let totalRev = 144746;
+      let remRev = 48249;
+      let totalExp = 145958;
+      let remExp = 48653;
+      let netProfit = -16879;
+      let margin = '-11.7%';
+      let progPct = 66.7;
+      let b1 = 32274;
+      let b2 = 31823;
+      let b3 = 43121;
+      let b4 = 38085;
+
+      if (mode === 'optimistic') {
+        remRev = 55486;
+        totalRev = 96497 + remRev; // 151,983
+        remExp = 52272;
+        totalExp = 97305 + remExp; // 149,577
+        netProfit = totalRev - (totalExp + 15667); // -13,261
+        margin = ((netProfit / totalRev) * 100).toFixed(1) + '%';
+        progPct = ((96497 / totalRev) * 100).toFixed(1);
+        b1 = 33943;
+        b2 = 33414;
+        b3 = 45277;
+        b4 = 39989;
+      } else if (mode === 'conservative') {
+        remRev = 43424;
+        totalRev = 96497 + remRev; // 139,921
+        remExp = 46241;
+        totalExp = 97305 + remExp; // 143,546
+        netProfit = totalRev - (totalExp + 15667); // -19,292
+        margin = ((netProfit / totalRev) * 100).toFixed(1) + '%';
+        progPct = ((96497 / totalRev) * 100).toFixed(1);
+        b1 = 31161;
+        b2 = 30762;
+        b3 = 41684;
+        b4 = 36816;
+      }
+
+      const elRev = document.getElementById('fcTotalRev');
+      if (elRev) elRev.innerText = '฿' + formatNumber(totalRev);
+
+      const elRemRev = document.getElementById('fcRemainingRevText');
+      if (elRemRev) elRemRev.innerText = '+฿' + formatNumber(remRev) + ' (10 วัน)';
+
+      const elProg = document.getElementById('fcRevProgressBar');
+      if (elProg) elProg.style.width = progPct + '%';
+
+      const elExp = document.getElementById('fcTotalExp');
+      if (elExp) elExp.innerText = '฿' + formatNumber(totalExp);
+
+      const elRemExp = document.getElementById('fcRemainingExpText');
+      if (elRemExp) elRemExp.innerText = '+฿' + formatNumber(remExp) + ' (10 วัน)';
+
+      const elProfit = document.getElementById('fcNetProfit');
+      if (elProfit) elProfit.innerText = (netProfit >= 0 ? '+฿' : '-฿') + formatNumber(Math.abs(netProfit));
+
+      const elMargin = document.getElementById('fcMarginText');
+      if (elMargin) elMargin.innerText = margin;
+
+      const elB1 = document.getElementById('fcB1Rev');
+      if (elB1) elB1.innerText = '฿' + formatNumber(b1);
+
+      const elB2 = document.getElementById('fcB2Rev');
+      if (elB2) elB2.innerText = '฿' + formatNumber(b2);
+
+      const elB3 = document.getElementById('fcB3Rev');
+      if (elB3) elB3.innerText = '฿' + formatNumber(b3);
+
+      const elB4 = document.getElementById('fcB4Rev');
+      if (elB4) elB4.innerText = '฿' + formatNumber(b4);
+    }
+
+    function renderCashTransferChart() {
+      const container = document.getElementById('chart-cash-transfer-container');
+      if (!container) return;
+
+      const width = container.clientWidth || 550;
+      const height = 175;
+      const margin = { top: 10, right: 45, bottom: 25, left: 60 };
+      const chartWidth = width - margin.left - margin.right;
+      const chartHeight = height - margin.top - margin.bottom;
+
+      const data = [
+        { name: 'สาขา 1', cash: 13723, transfer: 7422, total: 21145, cashPct: 64.9, transPct: 35.1 },
+        { name: 'สาขา 2', cash: 14386, transfer: 6829, total: 21215, cashPct: 67.8, transPct: 32.2 },
+        { name: 'สาขา 3', cash: 18829, transfer: 9918, total: 28747, cashPct: 65.5, transPct: 34.5 },
+        { name: 'สาขา 4', cash: 13276, transfer: 12114, total: 25390, cashPct: 52.3, transPct: 47.7 }
+      ];
+
+      const maxTotal = 30000;
+      const rowHeight = chartHeight / data.length;
+      const barHeight = 18;
+
+      let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="overflow-visible font-num">`;
+
+      data.forEach((d, i) => {
+        const y = margin.top + i * rowHeight + (rowHeight - barHeight) / 2;
+        const totalW = (d.total / maxTotal) * chartWidth;
+        const cashW = (d.cash / d.total) * totalW;
+        const transW = totalW - cashW;
+
+        // Branch label
+        svg += `<text x="${margin.left - 10}" y="${y + barHeight - 4}" text-anchor="end" fill="#475569" font-size="12" font-family="'Prompt', sans-serif" font-weight="600">${d.name}</text>`;
+
+        // Background track
+        svg += `<rect x="${margin.left}" y="${y}" width="${chartWidth}" height="${barHeight}" rx="4" fill="#e2e8f0" opacity="0.4"/>`;
+
+        // Cash bar (blue)
+        svg += `<rect x="${margin.left}" y="${y}" width="${cashW}" height="${barHeight}" rx="4" fill="#2563eb" opacity="0.9">
+          <title>${d.name} เงินสด: ฿${formatNumber(d.cash)} (${d.cashPct}%)</title>
+        </rect>`;
+
+        // Transfer bar (emerald)
+        svg += `<rect x="${margin.left + cashW}" y="${y}" width="${transW}" height="${barHeight}" rx="4" fill="#10b981" opacity="0.95">
+          <title>${d.name} เงินโอน: ฿${formatNumber(d.transfer)} (${d.transPct}%)</title>
+        </rect>`;
+
+        // Value text
+        const cashLabel = d.cashPct >= 30 ? `${d.cashPct}%` : '';
+        const transLabel = d.transPct >= 30 ? `${d.transPct}%` : '';
+
+        if (cashW > 35) {
+          svg += `<text x="${margin.left + cashW / 2}" y="${y + barHeight - 4.5}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">${cashLabel}</text>`;
+        }
+        if (transW > 35) {
+          svg += `<text x="${margin.left + cashW + transW / 2}" y="${y + barHeight - 4.5}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">${transLabel}</text>`;
+        }
+
+        // Total badge on right
+        svg += `<text x="${margin.left + totalW + 8}" y="${y + barHeight - 4.5}" fill="#1e293b" font-size="11" font-weight="bold">฿${formatNumber(d.total)}</text>`;
+      });
+
+      // Axis ticks at bottom
+      const ticks = [0, 10000, 20000, 30000];
+      const yAxis = height - margin.bottom + 14;
+      ticks.forEach(t => {
+        const x = margin.left + (t / maxTotal) * chartWidth;
+        svg += `<text x="${x}" y="${yAxis}" text-anchor="middle" fill="#94a3b8" font-size="10">฿${t / 1000}k</text>`;
+        svg += `<line x1="${x}" y1="${margin.top}" x2="${x}" y2="${height - margin.bottom}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 2"/>`;
+      });
+
+      svg += `</svg>`;
+      container.innerHTML = svg;
+    }
+
+    function renderDayOfWeekChart() {
+      const container = document.getElementById('chart-dow-container');
+      if (!container) return;
+
+      const width = container.clientWidth || 550;
+      const height = 220;
+      const margin = { top: 25, right: 20, bottom: 38, left: 45 };
+      const chartWidth = width - margin.left - margin.right;
+      const chartHeight = height - margin.top - margin.bottom;
+
+      const dowData = [
+        { day: 'จันทร์', avg: 5150, count: 2, isWeekend: false, isPeak: false },
+        { day: 'อังคาร', avg: 4328, count: 3, isWeekend: false, isPeak: false },
+        { day: 'พุธ', avg: 4255, count: 3, isWeekend: false, isPeak: false },
+        { day: 'พฤหัสฯ', avg: 4390, count: 3, isWeekend: false, isPeak: false },
+        { day: 'ศุกร์', avg: 4431, count: 3, isWeekend: false, isPeak: false },
+        { day: 'เสาร์', avg: 5585, count: 3, isWeekend: true, isPeak: false },
+        { day: 'อาทิตย์', avg: 5743, count: 3, isWeekend: true, isPeak: true }
+      ];
+
+      const maxVal = 6500;
+      const barWidth = Math.min(48, (chartWidth / dowData.length) * 0.65);
+      const step = chartWidth / dowData.length;
+
+      let svg = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="overflow-visible font-num">`;
+
+      // Define gradients
+      svg += `
+        <defs>
+          <linearGradient id="grad-dow-weekday" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#3b82f6" />
+            <stop offset="100%" stop-color="#1d4ed8" />
+          </linearGradient>
+          <linearGradient id="grad-dow-sat" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#f59e0b" />
+            <stop offset="100%" stop-color="#d97706" />
+          </linearGradient>
+          <linearGradient id="grad-dow-sun" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#10b981" />
+            <stop offset="100%" stop-color="#047857" />
+          </linearGradient>
+        </defs>
+      `;
+
+      // Weekday average reference line (฿4,511)
+      const weekdayAvg = 4511;
+      const refY = margin.top + chartHeight - (weekdayAvg / maxVal) * chartHeight;
+      svg += `<line x1="${margin.left}" y1="${refY}" x2="${margin.left + chartWidth}" y2="${refY}" stroke="#f97316" stroke-width="1.5" stroke-dasharray="4 4" />`;
+      svg += `<text x="${margin.left + chartWidth}" y="${refY - 5}" text-anchor="end" fill="#ea580c" font-size="10" font-weight="bold">เฉลี่ยวันธรรมดา ฿4,511</text>`;
+
+      // Horizontal grid lines
+      [2000, 4000, 6000].forEach(val => {
+        const y = margin.top + chartHeight - (val / maxVal) * chartHeight;
+        svg += `<line x1="${margin.left}" y1="${y}" x2="${margin.left + chartWidth}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 2" />`;
+        svg += `<text x="${margin.left - 8}" y="${y + 3}" text-anchor="end" fill="#94a3b8" font-size="10">฿${val / 1000}k</text>`;
+      });
+
+      dowData.forEach((d, i) => {
+        const barH = (d.avg / maxVal) * chartHeight;
+        const x = margin.left + i * step + (step - barWidth) / 2;
+        const y = margin.top + chartHeight - barH;
+
+        let fill = "url(#grad-dow-weekday)";
+        if (d.day === 'เสาร์') fill = "url(#grad-dow-sat)";
+        if (d.day === 'อาทิตย์') fill = "url(#grad-dow-sun)";
+
+        // Bar rect with rounded top
+        svg += `<rect x="${x}" y="${y}" width="${barWidth}" height="${barH}" rx="6" fill="${fill}" class="transition-all hover:opacity-85 cursor-pointer">
+          <title>${d.day}: เฉลี่ย ฿${formatNumber(d.avg)}/วัน (${d.count} วัน)</title>
+        </rect>`;
+
+        // Value on top of bar
+        const textFill = d.isPeak ? '#059669' : (d.day === 'เสาร์' ? '#d97706' : '#1e293b');
+        svg += `<text x="${x + barWidth / 2}" y="${y - 6}" text-anchor="middle" fill="${textFill}" font-size="11" font-weight="bold">฿${formatNumber(d.avg)}</text>`;
+
+        // Day label below axis
+        const isHighlight = d.isWeekend;
+        const labelWeight = isHighlight ? 'bold' : 'normal';
+        const labelFill = isHighlight ? '#0f172a' : '#64748b';
+        svg += `<text x="${x + barWidth / 2}" y="${height - margin.bottom + 18}" text-anchor="middle" fill="${labelFill}" font-size="12" font-family="'Prompt', sans-serif" font-weight="${labelWeight}">${d.day}</text>`;
+
+        if (d.isPeak) {
+          svg += `<text x="${x + barWidth / 2}" y="${height - margin.bottom + 31}" text-anchor="middle" fill="#10b981" font-size="9" font-family="'Prompt', sans-serif" font-weight="bold">🏆 พีคสุด</text>`;
+        }
+      });
+
+      svg += `</svg>`;
+      container.innerHTML = svg;
+    }
+
     // 12. TARGET SIMULATOR LOGIC
     function updateTargetPlanning() {
       const fixedCosts = 59167;
@@ -3148,6 +4103,8 @@
       renderB3HistoryChart();
       renderB4HistoryTable();
       renderHistoryChart();
+      renderCashTransferChart();
+      renderDayOfWeekChart();
       updateTargetPlanning();
     });
 
@@ -3163,6 +4120,9 @@
         renderB2HistoryChart();
         renderB3HistoryChart();
         renderHistoryChart();
+      } else if (currentMainTab === 'insights') {
+        renderCashTransferChart();
+        renderDayOfWeekChart();
       }
     });
   </script>
