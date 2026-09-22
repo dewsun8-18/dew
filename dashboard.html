@@ -88,6 +88,13 @@
             <span class="xs:hidden">ค่าเช่า</span>
           </button>
 
+          <!-- Pricing Strategy Report Button -->
+          <a href="รายงานวิเคราะห์และข้อเสนอแนะการปรับราคาสินค้า.html" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition flex items-center gap-1.5" title="เปิดรายงานวิเคราะห์ต้นทุนและข้อเสนอแนะการปรับราคาแยก 4 สาขา">
+            <span>📑</span>
+            <span class="hidden md:inline">รายงานวิเคราะห์ปรับราคา</span>
+            <span class="md:hidden">ปรับราคา</span>
+          </a>
+
           <!-- Export Dropdown -->
           <div class="relative inline-block text-left">
             <button onclick="toggleExportMenu()" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition flex items-center gap-1.5">
@@ -150,6 +157,12 @@
           <span>เครื่องมือวางแผนเป้าหมาย</span>
           <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-100 text-amber-800 font-bold">8 วันที่เหลือ</span>
         </button>
+
+        <a href="รายงานวิเคราะห์และข้อเสนอแนะการปรับราคาสินค้า.html" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2 hover:text-emerald-700 hover:bg-emerald-50 border border-emerald-200">
+          <span>📑</span>
+          <span>รายงานวิเคราะห์และปรับราคา</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold">กลยุทธ์ 4 สาขา ✨</span>
+        </a>
       </div>
 
     </div>
@@ -1859,7 +1872,7 @@
                 เป้าหมายรวม 4 สาขา: จุดคุ้มทุน <span class="text-amber-400 font-num">฿3,844 / วัน</span> • เป้าหมายแนะนำกำไรปลอดภัย <span class="text-emerald-400 font-num">฿4,800 - ฿5,100 / วัน</span>
               </div>
               <p class="text-xs text-slate-300 mt-0.5">
-                เฉลี่ย 21 วันแรกทำได้ <strong>฿4,776 / วัน</strong> ถือว่าแตะเป้าความปลอดภัยขั้นต้นแล้ว หากดันช่วง 9 วันสุดท้ายให้แตะ ฿5,500/วัน จะสร้างกำไรสุทธิสูงสุด
+                เฉลี่ย 22 วันแรกทำได้ <strong>฿4,728 / วัน</strong> ปลอดภัยเกินจุดคุ้มทุนแล้ว หากเร่งยอด 8 วันสุดท้ายให้แตะ ฿5,500/วัน จะช่วยผลักดันกำไรสูงสุด
               </p>
             </div>
           </div>
@@ -1868,6 +1881,34 @@
           </button>
         </div>
 
+      </div>
+
+      <!-- STRATEGIC PRICING REPORT BANNER -->
+      <div class="bg-gradient-to-r from-emerald-950 via-teal-900 to-slate-900 border border-emerald-600/50 rounded-3xl p-6 sm:p-7 shadow-xl text-white flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
+        <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="flex items-start gap-4">
+          <span class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-2xl shrink-0 border border-emerald-400/30">
+            📑
+          </span>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/30 text-emerald-200 border border-emerald-400/30">
+                รายงานกลยุทธ์สำคัญ (Special Strategy Report)
+              </span>
+              <span class="text-xs text-amber-300 font-semibold">+฿24,000 ถึง +฿37,000 / เดือน</span>
+            </div>
+            <h3 class="text-lg sm:text-xl font-bold text-white mt-1">
+              รายงานการวิเคราะห์ต้นทุนและข้อเสนอแนะการปรับราคาสินค้า (แยก 4 สาขา)
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl leading-relaxed">
+              วิเคราะห์ต้นทุนเนื้อต่อหน่วยของสินค้าทั้ง 15 รายการ (แยกสาขา 1 มี 12 รายการ vs สาขา 2, 3, 4 มี 15 รายการ) แก้ปัญหาขายดีแต่กำไรบาง และปรับราคาสินค้าหมูปิ้ง ไส้กรอกอีสาน และของทอดเพื่อพลิกธุรกิจให้มีกำไรยั่งยืนทุกเดือน
+            </p>
+          </div>
+        </div>
+        <a href="รายงานวิเคราะห์และข้อเสนอแนะการปรับราคาสินค้า.html" class="shrink-0 px-5 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs sm:text-sm shadow-lg hover:shadow-emerald-500/20 transition flex items-center gap-2">
+          <span>เปิดรายงานวิเคราะห์ฉบับเต็ม</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
       </div>
 
     </div>
@@ -1884,9 +1925,9 @@
           <div>
             <div class="flex items-center gap-2">
               <span class="p-1.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs">
-                9 วันที่เหลือ
+                8 วันที่เหลือ
               </span>
-              <span class="text-xs text-indigo-200">วันที่ 22 ถึง 30 กันยายน 2569</span>
+              <span class="text-xs text-indigo-200">วันที่ 23 ถึง 30 กันยายน 2569</span>
             </div>
             <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">
               ระบบจำลองและวางแผนเป้ายอดขายรวม 4 สาขา
@@ -2227,7 +2268,7 @@
       document.getElementById('kpiRevenue').innerText = '฿' + formatNumber(rev);
       const revTitle = document.getElementById('kpiRevTitle');
       if (revTitle) {
-        revTitle.innerText = currentBranch === 'all' ? 'รายรับจริงรวม (21 วัน)' : `รายรับจริง ${b.name} (${b.days} วัน)`;
+        revTitle.innerText = currentBranch === 'all' ? 'รายรับจริงรวม (22 วัน)' : `รายรับจริง ${b.name} (${b.days} วัน)`;
       }
       document.getElementById('kpiRevenueSub').innerText = currentBranch === 'all' 
         ? `เฉลี่ย ฿${formatNumber(Math.round(rev / b.days))} / วัน (รวม 4 สาขา)` 
@@ -2458,10 +2499,10 @@
       svg.innerHTML = '';
 
       const data = [
-        { key: 'branch1', name: 'สาขา 1', val: 22310, color: '#2563eb' },
-        { key: 'branch2', name: 'สาขา 2', val: 22280, color: '#f59e0b' },
-        { key: 'branch3', name: 'สาขา 3', val: 29567, color: '#10b981' },
-        { key: 'branch4', name: 'สาขา 4', val: 26130, color: '#9333ea' }
+        { key: 'branch1', name: 'สาขา 1', val: 23370, color: '#2563eb' },
+        { key: 'branch2', name: 'สาขา 2', val: 23230, color: '#f59e0b' },
+        { key: 'branch3', name: 'สาขา 3', val: 30357, color: '#10b981' },
+        { key: 'branch4', name: 'สาขา 4', val: 27050, color: '#9333ea' }
       ];
 
       const total = data.reduce((acc, d) => acc + d.val, 0);
