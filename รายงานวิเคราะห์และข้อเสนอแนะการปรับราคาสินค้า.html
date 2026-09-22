@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แคตตาล็อกสินค้าและรายงานวิเคราะห์ต้นทุน แยกรายสาขา 1 - 4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-light: #eff6ff;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #8b5cf6;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Prompt', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 25px 15px;
+    }
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      padding: 35px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+    }
+    .header {
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .header-title h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .header-title p {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-top: 5px;
+    }
+    .print-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .print-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Tab Navigation Styles */
+    .tab-navigation {
+      display: flex;
+      gap: 8px;
+      background: #f1f5f9;
+      padding: 6px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      flex: 1;
+      min-width: 175px;
+      padding: 11px 14px;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      color: #0f172a;
+      background: rgba(255,255,255,0.6);
+    }
+    .tab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .tab-badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      background: #e2e8f0;
+      color: #475569;
+    }
+    .tab-btn.active .tab-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .alert-box {
+      background: #eff6ff;
+      border-left: 4px solid var(--primary);
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 22px;
+      font-size: 13.5px;
+    }
+    .alert-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1e40af;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+    .kpi-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      text-align: center;
+    }
+    .kpi-label {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .kpi-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .kpi-sub {
+      font-size: 12px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+    .text-danger { color: var(--danger); }
+    .text-success { color: var(--success); }
+    .text-warning { color: var(--warning); }
+    .text-primary { color: var(--primary); }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 25px 0 12px 0;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    p, li {
+      font-size: 13.5px;
+      color: #334155;
+    }
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin: 14px 0 20px 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    th, td {
+      padding: 9.5px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    tr:hover td {
+      background: #f8fafc;
+    }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      font-size: 10.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-success { background: #dcfce7; color: #166534; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+    .badge-warning { background: #fef3c7; color: #92400e; }
+    .badge-info { background: #e0f2fe; color: #075985; }
+    .badge-purple { background: #f3e8ff; color: #6b21a8; }
+
+    .box-info {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin: 15px 0;
+    }
+    .box-success {
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 15px 0;
+    }
+
+    .footer {
+      margin-top: 35px;
+      padding-top: 15px;
+      border-top: 1px solid var(--border);
+      font-size: 12.5px;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .container { border: none; box-shadow: none; padding: 0; max-width: 100%; }
+      .print-btn, .tab-navigation { display: none; }
+      .tab-content { display: block !important; page-break-after: always; }
+      .tab-content:last-child { page-break-after: auto; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="header-title">
+      <h1>📊 แคตตาล็อกสินค้าและรายงานวิเคราะห์ต้นทุน แยกรายสาขา 1 - 4</h1>
+      <p>ระบบแคตตาล็อกสินค้าแยกอิสระตามสาขาจริง • ตารางเปรียบเทียบราคาเดิม vs ราคาใหม่</p>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <a href="index.html" class="print-btn" style="text-decoration: none; background: #334155;">
+        🔙 กลับสู่ Dashboard หลัก
+      </a>
+      <button class="print-btn" onclick="window.print()">
+        🖨️ พิมพ์รายงาน / บันทึกเป็น PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tab-navigation">
+    <button class="tab-btn active" onclick="switchTab('tab-overview')">
+      📊 ภาพรวม 4 สาขา <span class="tab-badge">เปรียบเทียบ</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-branch1')">
+      🏆 แคตตาล็อก สาขา 1 <span class="tab-badge">12 รายการ</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-branch2')">
+      🎯 แคตตาล็อก สาขา 2 <span class="tab-badge">15 รายการ</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-branch3')">
+      🥈 แคตตาล็อก สาขา 3 <span class="tab-badge">15 รายการ</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-branch4')">
+      🚀 แคตตาล็อก สาขา 4 <span class="tab-badge">15 รายการ</span>
+    </button>
+  </div>
+
+  <!-- ================= TAB 1: OVERVIEW ================= -->
+  <div id="tab-overview" class="tab-content active">
+    <div class="alert-box">
+      <div class="alert-title">🎯 สรุปภาพรวมและโครงสร้างสินค้าแยกตามสาขา</div>
+      <div>
+        • <strong>สาขา 1 (มีสินค้า 12 รายการ):</strong> ลูกชิ้น 9 รายการ, หมูปิ้งนมสด, ไส้กรอกอีสาน, ข้าวเหนียว <em>(ไม่มีกล้วยทอด, มันทอด, ขนมไข่เต่า)</em><br>
+        • <strong>สาขา 2, สาขา 3, สาขา 4 (มีสินค้าครบ 15 รายการ):</strong> ลูกชิ้น 9 รายการ, หมูปิ้งนมสด, ไส้กรอกอีสาน, ข้าวเหนียว, กล้วยทอด, มันทอด, ขนมไข่เต่า ครบทุกชนิด
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">ยอดขายสะสม 9 เดือน (รวม 4 สาขา)</div>
+        <div class="kpi-value text-primary">฿1,271,554</div>
+        <div class="kpi-sub">เฉลี่ย ฿141,284 / เดือน</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">ผลกำไรสะสม 9 เดือน (เดิม)</div>
+        <div class="kpi-value text-danger">-฿265</div>
+        <div class="kpi-sub text-danger">Margin: -0.02% (แทบเท่าทุน)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">คาดการณ์กำไรใหม่รวม (ต่อเดือน)</div>
+        <div class="kpi-value text-success">+฿24,000 - ฿37,000</div>
+        <div class="kpi-sub text-success">เพิ่มขึ้นกว่า 3-4 หมื่น/ด.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">กระแสเงินสดสะสมต่อปี</div>
+        <div class="kpi-value text-success">+฿288,000 - ฿444,000</div>
+        <div class="kpi-sub text-success">มีเงินเก็บหลักแสนแน่นอน</div>
+      </div>
+    </div>
+
+    <h2>📊 ตารางเปรียบเทียบผลประกอบการ 4 สาขา (ก่อนปรับ vs หลังปรับราคา)</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>สาขา</th>
+            <th>สินค้าประจำสาขา</th>
+            <th class="text-right">ยอดขายเดิม/ด.</th>
+            <th class="text-right">กำไรเดิม/ด.</th>
+            <th class="text-right">ยอดขายใหม่คาดการณ์</th>
+            <th class="text-right">กำไรใหม่คาดการณ์</th>
+            <th class="text-right">กำไรเพิ่มขึ้น/ด.</th>
+            <th class="text-center">บทบาทและสถานะ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>สาขา 1</strong></td>
+            <td>12 รายการ (ไม่มีของทอด)</td>
+            <td class="text-right">฿44,000</td>
+            <td class="text-right text-success">+฿1,500 ถึง +฿4,300</td>
+            <td class="text-right text-primary"><strong>฿49,000 – ฿53,000</strong></td>
+            <td class="text-right text-success"><strong>+฿6,500 ถึง +฿9,500</strong></td>
+            <td class="text-right text-success">+฿4,000 ถึง +฿5,500</td>
+            <td class="text-center"><span class="badge badge-purple">🏆 Cash Cow มั่นคง</span></td>
+          </tr>
+          <tr>
+            <td><strong>สาขา 2</strong></td>
+            <td>ครบ 15 รายการ (มีของทอด)</td>
+            <td class="text-right">฿31,500</td>
+            <td class="text-right text-danger">-฿1,200 ถึง +฿1,000</td>
+            <td class="text-right text-primary"><strong>฿38,000 – ฿42,000</strong></td>
+            <td class="text-right text-success"><strong>+฿4,500 ถึง +฿7,500</strong></td>
+            <td class="text-right text-success">+฿5,000 ถึง +฿6,500</td>
+            <td class="text-center"><span class="badge badge-info">🎯 พลิกพ้นขาดทุน</span></td>
+          </tr>
+          <tr>
+            <td><strong>สาขา 3</strong></td>
+            <td>ครบ 15 รายการ (มีของทอด)</td>
+            <td class="text-right">฿43,000</td>
+            <td class="text-right text-danger">-฿1,500 ถึง +฿2,200</td>
+            <td class="text-right text-primary"><strong>฿50,000 – ฿55,000</strong></td>
+            <td class="text-right text-success"><strong>+฿7,500 ถึง +฿11,500</strong></td>
+            <td class="text-right text-success">+฿7,000 ถึง +฿9,000</td>
+            <td class="text-center"><span class="badge badge-success">🥈 แชมป์ยอดขาย</span></td>
+          </tr>
+          <tr>
+            <td><strong>สาขา 4</strong></td>
+            <td>ครบ 15 รายการ (มีของทอด)</td>
+            <td class="text-right">฿35,000</td>
+            <td class="text-right text-danger">-฿800 ถึง +฿1,800</td>
+            <td class="text-right text-primary"><strong>฿42,000 – ฿46,000</strong></td>
+            <td class="text-right text-success"><strong>+฿5,500 ถึง +฿8,500</strong></td>
+            <td class="text-right text-success">+฿5,500 ถึง +฿7,000</td>
+            <td class="text-center"><span class="badge badge-primary">🚀 คืนทุนค่าไฟเตา</span></td>
+          </tr>
+          <tr style="background: #f0fdf4; font-weight: 700;">
+            <td><strong>รวมทั้ง 4 สาขา</strong></td>
+            <td>-</td>
+            <td class="text-right">฿153,500</td>
+            <td class="text-right text-danger">-฿6,300 (ขาดทุนเฉลี่ย)</td>
+            <td class="text-right text-primary" style="font-size: 14px;">฿179,000 – ฿196,000</td>
+            <td class="text-right text-success" style="font-size: 14.5px;">+฿24,000 ถึง +฿37,000</td>
+            <td class="text-right text-success" style="font-size: 14.5px;">+฿30,000 – ฿43,000</td>
+            <td class="text-center"><span class="badge badge-success">มีเงินเก็บปีละ 3-4 แสน!</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ================= TAB 2: BRANCH 1 ================= -->
+  <div id="tab-branch1" class="tab-content">
+    <div class="alert-box" style="background: #faf5ff; border-color: #8b5cf6;">
+      <div class="alert-title" style="color: #6b21a8;">🏆 แคตตาล็อกสินค้า สาขาที่ 1 (12 รายการ • ไม่มีของทอด)</div>
+      <div style="color: #581c87;">
+        สาขา 1 เน้นขาย <strong>ลูกชิ้นทอด 9 ชนิด + หมูปิ้งนมสด + ไส้กรอกอีสาน + ข้าวเหนียว</strong> ปฏิบัติงานคล่องตัว ต้นทุนคงที่ ฿16,500/ด. (ค่าแรง 10.5k + ค่าเช่า/ไฟ 5k)
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">ยอดขายเฉลี่ยต่อเดือน</div>
+        <div class="kpi-value text-primary">฿44,000</div>
+        <div class="kpi-sub">วันละ ฿1,100 - ฿1,400</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">ต้นทุนคงที่ต่อเดือน</div>
+        <div class="kpi-value text-warning">฿16,500</div>
+        <div class="kpi-sub">ค่าแรง 10.5k + เช่า/ไฟ 5k</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">กำไรเดิมต่อเดือน</div>
+        <div class="kpi-value text-success">+฿1,500 - ฿4,300</div>
+        <div class="kpi-sub">กำไรสะสม 9 ด. 40.8k</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">คาดการณ์กำไรใหม่</div>
+        <div class="kpi-value text-success">+฿6,500 - ฿9,500</div>
+        <div class="kpi-sub text-success">เพิ่มขึ้น +฿4,000 - ฿5,500/ด.</div>
+      </div>
+    </div>
+
+    <h2>📋 ตารางแคตตาล็อกสินค้า สาขา 1 (ครบ 12 รายการ)</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center">ลำดับ</th>
+            <th>รายการสินค้า</th>
+            <th class="text-right">ต้นทุนเนื้อ</th>
+            <th class="text-center">ราคาเดิม</th>
+            <th class="text-right">กำไรเดิม (บาท)</th>
+            <th class="text-right">Margin เดิม</th>
+            <th class="text-center">สถานะเดิม</th>
+            <th class="text-center">ราคาใหม่</th>
+            <th class="text-right">กำไรใหม่ (บาท)</th>
+            <th class="text-right">Margin ใหม่</th>
+            <th class="text-right">กำไรเพิ่มขึ้น</th>
+            <th class="text-center">สถานะใหม่</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td><strong>ฮอตยาว</strong></td>
+            <td class="text-right">฿3.00</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿7.00</td>
+            <td class="text-right text-success">70.0%</td>
+            <td class="text-center"><span class="badge badge-success">Hero Product</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿7.00</strong></td>
+            <td class="text-right text-success">70.0%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">คงเดิม (ป้าย 10 บ.)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td>
+            <td><strong>หมูนิ่ม</strong></td>
+            <td class="text-right">฿3.75</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿6.25</td>
+            <td class="text-right text-success">62.5%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรดีมาก</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿6.25</strong></td>
+            <td class="text-right text-success">62.5%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">คงเดิม (ตัวหลัก)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">3</td>
+            <td><strong>ปลากลม</strong></td>
+            <td class="text-right">฿4.62</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿5.38</td>
+            <td class="text-right">53.8%</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right"><strong>฿5.38</strong></td>
+            <td class="text-right">53.8%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน (ปลอดภัย)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">4</td>
+            <td><strong>N หมู / N เนื้อ</strong></td>
+            <td class="text-right">฿5.00</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right">฿5.00</td>
+            <td class="text-right">50.0%</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right"><strong>฿5.00</strong></td>
+            <td class="text-right">50.0%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน (ปลอดภัย)</span></td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td class="text-center">5</td>
+            <td><strong>เชฟ</strong></td>
+            <td class="text-right">฿5.38</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-warning">฿4.62</td>
+            <td class="text-right text-warning">46.2%</td>
+            <td class="text-center"><span class="badge badge-warning">กำไรเริ่มบาง</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿6.62</strong></td>
+            <td class="text-right text-primary"><strong>55.2%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+43%)</td>
+            <td class="text-center"><span class="badge badge-success">ฟื้นมาร์จิ้นสูง</span></td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td class="text-center">6</td>
+            <td><strong>หมูปิ้งนมสด 🔥</strong></td>
+            <td class="text-right"><strong>฿5.77</strong></td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-warning">฿4.23</td>
+            <td class="text-right text-warning">42.3%</td>
+            <td class="text-center"><span class="badge badge-warning">กำไรบาง (ไม่พอกิน)</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿6.23</strong></td>
+            <td class="text-right text-primary"><strong>51.9%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+47%)</td>
+            <td class="text-center"><span class="badge badge-success">พระเอกสร้างกำไร</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">7</td>
+            <td><strong>จัมโบ้</strong></td>
+            <td class="text-right">฿6.07</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.93</td>
+            <td class="text-right text-danger">39.3%</td>
+            <td class="text-center"><span class="badge badge-danger">กำไรต่ำ เสี่ยงขาดทุน</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿5.93</strong></td>
+            <td class="text-right text-primary"><strong>49.4%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+51%)</td>
+            <td class="text-center"><span class="badge badge-success">พ้นจุดขาดทุน</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">8</td>
+            <td><strong>ผอ 24</strong></td>
+            <td class="text-right">฿6.25</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.75</td>
+            <td class="text-right text-danger">37.5%</td>
+            <td class="text-center"><span class="badge badge-danger">กินเนื้อตัวเอง</span></td>
+            <td class="text-center text-primary"><strong>฿12 - ฿15</strong></td>
+            <td class="text-right text-primary"><strong>฿5.75 - ฿8.75</strong></td>
+            <td class="text-right text-primary"><strong>47.9% - 58.3%</strong></td>
+            <td class="text-right text-success">+฿2.00 ถึง +฿5.00</td>
+            <td class="text-center"><span class="badge badge-success">พรีเมียมกำไรหนา</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">9</td>
+            <td><strong>จ๊อเหลี่ยม</strong></td>
+            <td class="text-right">฿6.25</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.75</td>
+            <td class="text-right text-danger">37.5%</td>
+            <td class="text-center"><span class="badge badge-danger">กินเนื้อตัวเอง</span></td>
+            <td class="text-center text-primary"><strong>฿12 - ฿15</strong></td>
+            <td class="text-right text-primary"><strong>฿5.75 - ฿8.75</strong></td>
+            <td class="text-right text-primary"><strong>47.9% - 58.3%</strong></td>
+            <td class="text-right text-success">+฿2.00 ถึง +฿5.00</td>
+            <td class="text-center"><span class="badge badge-success">พรีเมียมกำไรหนา</span></td>
+          </tr>
+          <tr style="background: #fef2f2;">
+            <td class="text-center">10</td>
+            <td><strong>ไส้กรอกอีสาน 🌭</strong></td>
+            <td class="text-right"><strong>฿3.28</strong></td>
+            <td class="text-center">฿5</td>
+            <td class="text-right text-danger">฿1.72</td>
+            <td class="text-right text-danger">34.4%</td>
+            <td class="text-center"><span class="badge badge-danger">แย่สุดในร้าน (ขาดทุนแฝง)</span></td>
+            <td class="text-center text-success" style="font-size: 14px;"><strong>฿7 (3 ชิ้น 20)</strong></td>
+            <td class="text-right text-success" style="font-size: 14px;"><strong>฿3.72</strong></td>
+            <td class="text-right text-success" style="font-size: 14px;"><strong>53.1%</strong></td>
+            <td class="text-right text-success"><strong>+฿2.00 (+116%)</strong></td>
+            <td class="text-center"><span class="badge badge-success">พลิกกำไรพุ่ง 2 เท่า!</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="text-center">11</td>
+            <td><strong>ข้าวเหนียว 5 บ. (100g) 🍚</strong></td>
+            <td class="text-right"><strong>฿1.95</strong></td>
+            <td class="text-center">฿5</td>
+            <td class="text-right text-success">฿3.05</td>
+            <td class="text-right text-success">61.0%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรดีมาก</span></td>
+            <td class="text-center text-success"><strong>฿5</strong></td>
+            <td class="text-right text-success"><strong>฿3.05</strong></td>
+            <td class="text-right text-success"><strong>61.0%</strong></td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">ตัวดึง Margin หลัก</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="text-center">12</td>
+            <td><strong>ข้าวเหนียว 10 บ. (130g) 🍚</strong></td>
+            <td class="text-right"><strong>฿2.45</strong></td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿7.55</td>
+            <td class="text-right text-success">75.5%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรสูงสุดในร้าน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿7.55</strong></td>
+            <td class="text-right text-success"><strong>75.5%</strong></td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">Super Margin (75.5%)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box-info">
+      <h3 style="color: #6b21a8; margin-top: 0;">🏷️ แผนป้ายราคาหน้าร้าน สาขา 1:</h3>
+      <ul>
+        <li><strong>ลูกชิ้นทอด:</strong> เริ่มต้นไม้ละ 10 บาท / พรีเมียม 12 - 15 บาท</li>
+        <li><strong>หมูปิ้งนมสด:</strong> ไม้ละ 12 บาท / <strong>👑 ชุดมื้อเช้า 50 บาท (หมู 4 ไม้ + ข้าวเหนียว 100g)</strong></li>
+        <li><strong>ไส้กรอกอีสาน:</strong> ชิ้นละ 7 บาท / <strong>🔥 พิเศษ 3 ชิ้น 20 บาท</strong></li>
+        <li><strong>ข้าวเหนียวนึ่ง:</strong> 5 บาท (100g) / 10 บาท (130g)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= TAB 3: BRANCH 2 ================= -->
+  <div id="tab-branch2" class="tab-content">
+    <div class="alert-box" style="background: #f0f9ff; border-color: #0284c7;">
+      <div class="alert-title" style="color: #0369a1;">🎯 แคตตาล็อกสินค้า สาขาที่ 2 (ครบ 15 รายการ • มีของทอด)</div>
+      <div style="color: #075985;">
+        สาขา 2 มีสินค้าครบครันรวมของทอด ยอดขายเฉลี่ย ฿31,500/ด. ต้นทุนคงที่ ฿16,300/ด. (ค่าแรง 10.5k + เช่า 3.3k + ไฟ 2.5k) สัดส่วนเงินสดสูง 68%
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">ยอดขายเฉลี่ยต่อเดือน</div>
+        <div class="kpi-value text-primary">฿31,500</div>
+        <div class="kpi-sub">สัดส่วนเงินสดสูง 68%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">ต้นทุนคงที่ต่อเดือน</div>
+        <div class="kpi-value text-warning">฿16,300</div>
+        <div class="kpi-sub">ค่าแรง 10.5k + เช่า 3.3k + ไฟ</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">กำไรเดิมต่อเดือน</div>
+        <div class="kpi-value text-danger">-฿1,200 - +฿1,000</div>
+        <div class="kpi-sub text-danger">ปริ่มน้ำ ขาดทุนสะสม 7 ด.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">คาดการณ์กำไรใหม่</div>
+        <div class="kpi-value text-success">+฿4,500 - ฿7,500</div>
+        <div class="kpi-sub text-success">พลิกพ้นขาดทุนทันที</div>
+      </div>
+    </div>
+
+    <h2>📋 ตารางแคตตาล็อกสินค้า สาขา 2 (ครบทั้ง 15 รายการ)</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center">ลำดับ</th>
+            <th>รายการสินค้า</th>
+            <th class="text-right">ต้นทุนเนื้อ</th>
+            <th class="text-center">ราคาเดิม</th>
+            <th class="text-right">กำไรเดิม (บาท)</th>
+            <th class="text-right">Margin เดิม</th>
+            <th class="text-center">สถานะเดิม</th>
+            <th class="text-center">ราคาใหม่</th>
+            <th class="text-right">กำไรใหม่ (บาท)</th>
+            <th class="text-right">Margin ใหม่</th>
+            <th class="text-right">กำไรเพิ่มขึ้น</th>
+            <th class="text-center">สถานะใหม่</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td><strong>ฮอตยาว</strong></td>
+            <td class="text-right">฿3.00</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿7.00</td>
+            <td class="text-right text-success">70.0%</td>
+            <td class="text-center"><span class="badge badge-success">Hero Product</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿7.00</strong></td>
+            <td class="text-right text-success">70.0%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">คงเดิม (ป้าย 10 บ.)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td>
+            <td><strong>หมูนิ่ม</strong></td>
+            <td class="text-right">฿3.75</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿6.25</td>
+            <td class="text-right text-success">62.5%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรดีมาก</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿6.25</strong></td>
+            <td class="text-right text-success">62.5%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">คงเดิม (ตัวหลัก)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">3</td>
+            <td><strong>ปลากลม</strong></td>
+            <td class="text-right">฿4.62</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿5.38</td>
+            <td class="text-right">53.8%</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right"><strong>฿5.38</strong></td>
+            <td class="text-right">53.8%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน (ปลอดภัย)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">4</td>
+            <td><strong>N หมู / N เนื้อ</strong></td>
+            <td class="text-right">฿5.00</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right">฿5.00</td>
+            <td class="text-right">50.0%</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right"><strong>฿5.00</strong></td>
+            <td class="text-right">50.0%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน (ปลอดภัย)</span></td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td class="text-center">5</td>
+            <td><strong>เชฟ</strong></td>
+            <td class="text-right">฿5.38</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-warning">฿4.62</td>
+            <td class="text-right text-warning">46.2%</td>
+            <td class="text-center"><span class="badge badge-warning">กำไรเริ่มบาง</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿6.62</strong></td>
+            <td class="text-right text-primary"><strong>55.2%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+43%)</td>
+            <td class="text-center"><span class="badge badge-success">ฟื้นมาร์จิ้นสูง</span></td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td class="text-center">6</td>
+            <td><strong>หมูปิ้งนมสด 🔥</strong></td>
+            <td class="text-right"><strong>฿5.77</strong></td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-warning">฿4.23</td>
+            <td class="text-right text-warning">42.3%</td>
+            <td class="text-center"><span class="badge badge-warning">กำไรบาง (ไม่พอกิน)</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿6.23</strong></td>
+            <td class="text-right text-primary"><strong>51.9%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+47%)</td>
+            <td class="text-center"><span class="badge badge-success">พระเอกสร้างกำไร</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">7</td>
+            <td><strong>จัมโบ้</strong></td>
+            <td class="text-right">฿6.07</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.93</td>
+            <td class="text-right text-danger">39.3%</td>
+            <td class="text-center"><span class="badge badge-danger">กำไรต่ำ เสี่ยงขาดทุน</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿5.93</strong></td>
+            <td class="text-right text-primary"><strong>49.4%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+51%)</td>
+            <td class="text-center"><span class="badge badge-success">พ้นจุดขาดทุน</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">8</td>
+            <td><strong>ผอ 24</strong></td>
+            <td class="text-right">฿6.25</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.75</td>
+            <td class="text-right text-danger">37.5%</td>
+            <td class="text-center"><span class="badge badge-danger">กินเนื้อตัวเอง</span></td>
+            <td class="text-center text-primary"><strong>฿12 - ฿15</strong></td>
+            <td class="text-right text-primary"><strong>฿5.75 - ฿8.75</strong></td>
+            <td class="text-right text-primary"><strong>47.9% - 58.3%</strong></td>
+            <td class="text-right text-success">+฿2.00 ถึง +฿5.00</td>
+            <td class="text-center"><span class="badge badge-success">พรีเมียมกำไรหนา</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">9</td>
+            <td><strong>จ๊อเหลี่ยม</strong></td>
+            <td class="text-right">฿6.25</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.75</td>
+            <td class="text-right text-danger">37.5%</td>
+            <td class="text-center"><span class="badge badge-danger">กินเนื้อตัวเอง</span></td>
+            <td class="text-center text-primary"><strong>฿12 - ฿15</strong></td>
+            <td class="text-right text-primary"><strong>฿5.75 - ฿8.75</strong></td>
+            <td class="text-right text-primary"><strong>47.9% - 58.3%</strong></td>
+            <td class="text-right text-success">+฿2.00 ถึง +฿5.00</td>
+            <td class="text-center"><span class="badge badge-success">พรีเมียมกำไรหนา</span></td>
+          </tr>
+          <tr style="background: #fef2f2;">
+            <td class="text-center">10</td>
+            <td><strong>ไส้กรอกอีสาน 🌭</strong></td>
+            <td class="text-right"><strong>฿3.28</strong></td>
+            <td class="text-center">฿5</td>
+            <td class="text-right text-danger">฿1.72</td>
+            <td class="text-right text-danger">34.4%</td>
+            <td class="text-center"><span class="badge badge-danger">แย่สุดในร้าน</span></td>
+            <td class="text-center text-success" style="font-size: 14px;"><strong>฿7 (3 ชิ้น 20)</strong></td>
+            <td class="text-right text-success" style="font-size: 14px;"><strong>฿3.72</strong></td>
+            <td class="text-right text-success" style="font-size: 14px;"><strong>53.1%</strong></td>
+            <td class="text-right text-success"><strong>+฿2.00 (+116%)</strong></td>
+            <td class="text-center"><span class="badge badge-success">พลิกกำไรพุ่ง 2 เท่า!</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="text-center">11</td>
+            <td><strong>ข้าวเหนียว 5 บ. (100g) 🍚</strong></td>
+            <td class="text-right"><strong>฿1.95</strong></td>
+            <td class="text-center">฿5</td>
+            <td class="text-right text-success">฿3.05</td>
+            <td class="text-right text-success">61.0%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรดีมาก</span></td>
+            <td class="text-center text-success"><strong>฿5</strong></td>
+            <td class="text-right text-success"><strong>฿3.05</strong></td>
+            <td class="text-right text-success"><strong>61.0%</strong></td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">ตัวดึง Margin หลัก</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="text-center">12</td>
+            <td><strong>ข้าวเหนียว 10 บ. (130g) 🍚</strong></td>
+            <td class="text-right"><strong>฿2.45</strong></td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿7.55</td>
+            <td class="text-right text-success">75.5%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรสูงสุดในร้าน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿7.55</strong></td>
+            <td class="text-right text-success"><strong>75.5%</strong></td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">Super Margin (75.5%)</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">13</td>
+            <td><strong>กล้วยทอด 🍌</strong></td>
+            <td class="text-right">฿1.45/ชิ้น</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿5.65/ชุด</td>
+            <td class="text-right">56.5%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก (10 บ.)</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (6 ชิ้น)</strong></td>
+            <td class="text-right text-success"><strong>฿11.30/ชุด</strong></td>
+            <td class="text-right text-success">56.5%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ขยับบิลเป็น 20-30 บ.</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">14</td>
+            <td><strong>มันทอด 🍠</strong></td>
+            <td class="text-right">฿1.60/ชิ้น</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿5.20/ชุด</td>
+            <td class="text-right">52.0%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก (10 บ.)</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (6 ชิ้น)</strong></td>
+            <td class="text-right text-success"><strong>฿10.40/ชุด</strong></td>
+            <td class="text-right text-success">52.0%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ขยับบิลเป็น 20-30 บ.</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">15</td>
+            <td><strong>ขนมไข่เต่า 🥚</strong></td>
+            <td class="text-right">฿1.00/ลูก</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿7.00/ชุด</td>
+            <td class="text-right">70.0%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก ลูกค้าไม่อิ่ม</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (7 ลูก)</strong></td>
+            <td class="text-right text-success"><strong>฿13.00/ชุด</strong></td>
+            <td class="text-right text-success">65.0%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ชุดยอดฮิต กินเพลิน</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box-info">
+      <h3 style="color: #0369a1; margin-top: 0;">🎯 แผนปฏิบัติการเฉพาะ สาขา 2:</h3>
+      <ul>
+        <li><strong>ดันของทอดชุด 20 - 30 บาท:</strong> ดึงดูดลูกค้าช่วงบ่าย เพื่อยกยอดขายจาก 31k ➔ ทะลุ 40k ให้ได้เหมือนสาขา 3</li>
+        <li><strong>เพิ่มป้าย QR Code ชัดเจน:</strong> ลดภาระเงินทอนเหรียญจากสัดส่วนเงินสด 68%</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= TAB 4: BRANCH 3 ================= -->
+  <div id="tab-branch3" class="tab-content">
+    <div class="alert-box" style="background: #f0fdf4; border-color: #10b981;">
+      <div class="alert-title" style="color: #15803d;">🥈 แคตตาล็อกสินค้า สาขาที่ 3 (ครบ 15 รายการ • แชมป์ยอดขาย)</div>
+      <div style="color: #166534;">
+        สาขา 3 มีฐานลูกค้าหนาแน่นที่สุด ทะลุเป้า 40k ต่อเนื่อง 5 เดือนติด! ต้นทุนคงที่ ฿17,000/ด. (ค่าแรง 10.5k + ค่าเช่า 4k + ไฟ 2.5k) การปรับราคาจะสร้างกำไรสุทธิเพิ่มขึ้นสูงสุดในกลุ่ม <strong>(+฿7,500 ถึง +฿11,500 / เดือน)</strong>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">ยอดขายเฉลี่ยต่อเดือน</div>
+        <div class="kpi-value text-success">฿43,000</div>
+        <div class="kpi-sub">แชมป์ยอดขาย 5 เดือนซ้อน</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">ต้นทุนคงที่ต่อเดือน</div>
+        <div class="kpi-value text-warning">฿17,000</div>
+        <div class="kpi-sub">ค่าแรง 10.5k + ค่าเช่า 4k + ไฟ</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">กำไรเดิมต่อเดือน</div>
+        <div class="kpi-value text-danger">-฿1,500 - +฿2,200</div>
+        <div class="kpi-sub">ยอดขายสูงแต่กำไรสุทธิบาง</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">คาดการณ์กำไรใหม่</div>
+        <div class="kpi-value text-success">+฿7,500 - ฿11,500</div>
+        <div class="kpi-sub text-success">กำไรสูงสุดใน 4 สาขา!</div>
+      </div>
+    </div>
+
+    <h2>📋 ตารางแคตตาล็อกสินค้า สาขา 3 (ครบทั้ง 15 รายการ)</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center">ลำดับ</th>
+            <th>รายการสินค้า</th>
+            <th class="text-right">ต้นทุนเนื้อ</th>
+            <th class="text-center">ราคาเดิม</th>
+            <th class="text-right">กำไรเดิม (บาท)</th>
+            <th class="text-right">Margin เดิม</th>
+            <th class="text-center">สถานะเดิม</th>
+            <th class="text-center">ราคาใหม่</th>
+            <th class="text-right">กำไรใหม่ (บาท)</th>
+            <th class="text-right">Margin ใหม่</th>
+            <th class="text-right">กำไรเพิ่มขึ้น</th>
+            <th class="text-center">สถานะใหม่</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td><strong>ฮอตยาว</strong></td>
+            <td class="text-right">฿3.00</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿7.00</td>
+            <td class="text-right text-success">70.0%</td>
+            <td class="text-center"><span class="badge badge-success">Hero Product</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿7.00</strong></td>
+            <td class="text-right text-success">70.0%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">คงเดิม (ป้าย 10 บ.)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td>
+            <td><strong>หมูนิ่ม</strong></td>
+            <td class="text-right">฿3.75</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿6.25</td>
+            <td class="text-right text-success">62.5%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรดีมาก</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿6.25</strong></td>
+            <td class="text-right text-success">62.5%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">คงเดิม (ตัวหลัก)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">3</td>
+            <td><strong>ปลากลม</strong></td>
+            <td class="text-right">฿4.62</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿5.38</td>
+            <td class="text-right">53.8%</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right"><strong>฿5.38</strong></td>
+            <td class="text-right">53.8%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน (ปลอดภัย)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">4</td>
+            <td><strong>N หมู / N เนื้อ</strong></td>
+            <td class="text-right">฿5.00</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right">฿5.00</td>
+            <td class="text-right">50.0%</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right"><strong>฿5.00</strong></td>
+            <td class="text-right">50.0%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน (ปลอดภัย)</span></td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td class="text-center">5</td>
+            <td><strong>เชฟ</strong></td>
+            <td class="text-right">฿5.38</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-warning">฿4.62</td>
+            <td class="text-right text-warning">46.2%</td>
+            <td class="text-center"><span class="badge badge-warning">กำไรเริ่มบาง</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿6.62</strong></td>
+            <td class="text-right text-primary"><strong>55.2%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+43%)</td>
+            <td class="text-center"><span class="badge badge-success">ฟื้นมาร์จิ้นสูง</span></td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td class="text-center">6</td>
+            <td><strong>หมูปิ้งนมสด 🔥</strong></td>
+            <td class="text-right"><strong>฿5.77</strong></td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-warning">฿4.23</td>
+            <td class="text-right text-warning">42.3%</td>
+            <td class="text-center"><span class="badge badge-warning">กำไรบาง (ไม่พอกิน)</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿6.23</strong></td>
+            <td class="text-right text-primary"><strong>51.9%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+47%)</td>
+            <td class="text-center"><span class="badge badge-success">พระเอกสร้างกำไร</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">7</td>
+            <td><strong>จัมโบ้</strong></td>
+            <td class="text-right">฿6.07</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.93</td>
+            <td class="text-right text-danger">39.3%</td>
+            <td class="text-center"><span class="badge badge-danger">กำไรต่ำ เสี่ยงขาดทุน</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿5.93</strong></td>
+            <td class="text-right text-primary"><strong>49.4%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+51%)</td>
+            <td class="text-center"><span class="badge badge-success">พ้นจุดขาดทุน</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">8</td>
+            <td><strong>ผอ 24</strong></td>
+            <td class="text-right">฿6.25</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.75</td>
+            <td class="text-right text-danger">37.5%</td>
+            <td class="text-center"><span class="badge badge-danger">กินเนื้อตัวเอง</span></td>
+            <td class="text-center text-primary"><strong>฿12 - ฿15</strong></td>
+            <td class="text-right text-primary"><strong>฿5.75 - ฿8.75</strong></td>
+            <td class="text-right text-primary"><strong>47.9% - 58.3%</strong></td>
+            <td class="text-right text-success">+฿2.00 ถึง +฿5.00</td>
+            <td class="text-center"><span class="badge badge-success">พรีเมียมกำไรหนา</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">9</td>
+            <td><strong>จ๊อเหลี่ยม</strong></td>
+            <td class="text-right">฿6.25</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.75</td>
+            <td class="text-right text-danger">37.5%</td>
+            <td class="text-center"><span class="badge badge-danger">กินเนื้อตัวเอง</span></td>
+            <td class="text-center text-primary"><strong>฿12 - ฿15</strong></td>
+            <td class="text-right text-primary"><strong>฿5.75 - ฿8.75</strong></td>
+            <td class="text-right text-primary"><strong>47.9% - 58.3%</strong></td>
+            <td class="text-right text-success">+฿2.00 ถึง +฿5.00</td>
+            <td class="text-center"><span class="badge badge-success">พรีเมียมกำไรหนา</span></td>
+          </tr>
+          <tr style="background: #fef2f2;">
+            <td class="text-center">10</td>
+            <td><strong>ไส้กรอกอีสาน 🌭</strong></td>
+            <td class="text-right"><strong>฿3.28</strong></td>
+            <td class="text-center">฿5</td>
+            <td class="text-right text-danger">฿1.72</td>
+            <td class="text-right text-danger">34.4%</td>
+            <td class="text-center"><span class="badge badge-danger">แย่สุดในร้าน</span></td>
+            <td class="text-center text-success" style="font-size: 14px;"><strong>฿7 (3 ชิ้น 20)</strong></td>
+            <td class="text-right text-success" style="font-size: 14px;"><strong>฿3.72</strong></td>
+            <td class="text-right text-success" style="font-size: 14px;"><strong>53.1%</strong></td>
+            <td class="text-right text-success"><strong>+฿2.00 (+116%)</strong></td>
+            <td class="text-center"><span class="badge badge-success">พลิกกำไรพุ่ง 2 เท่า!</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="text-center">11</td>
+            <td><strong>ข้าวเหนียว 5 บ. (100g) 🍚</strong></td>
+            <td class="text-right"><strong>฿1.95</strong></td>
+            <td class="text-center">฿5</td>
+            <td class="text-right text-success">฿3.05</td>
+            <td class="text-right text-success">61.0%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรดีมาก</span></td>
+            <td class="text-center text-success"><strong>฿5</strong></td>
+            <td class="text-right text-success"><strong>฿3.05</strong></td>
+            <td class="text-right text-success"><strong>61.0%</strong></td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">ตัวดึง Margin หลัก</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="text-center">12</td>
+            <td><strong>ข้าวเหนียว 10 บ. (130g) 🍚</strong></td>
+            <td class="text-right"><strong>฿2.45</strong></td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿7.55</td>
+            <td class="text-right text-success">75.5%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรสูงสุดในร้าน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿7.55</strong></td>
+            <td class="text-right text-success"><strong>75.5%</strong></td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">Super Margin (75.5%)</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">13</td>
+            <td><strong>กล้วยทอด 🍌</strong></td>
+            <td class="text-right">฿1.45/ชิ้น</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿5.65/ชุด</td>
+            <td class="text-right">56.5%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก (10 บ.)</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (6 ชิ้น)</strong></td>
+            <td class="text-right text-success"><strong>฿11.30/ชุด</strong></td>
+            <td class="text-right text-success">56.5%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ขยับบิลเป็น 20-30 บ.</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">14</td>
+            <td><strong>มันทอด 🍠</strong></td>
+            <td class="text-right">฿1.60/ชิ้น</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿5.20/ชุด</td>
+            <td class="text-right">52.0%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก (10 บ.)</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (6 ชิ้น)</strong></td>
+            <td class="text-right text-success"><strong>฿10.40/ชุด</strong></td>
+            <td class="text-right text-success">52.0%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ขยับบิลเป็น 20-30 บ.</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">15</td>
+            <td><strong>ขนมไข่เต่า 🥚</strong></td>
+            <td class="text-right">฿1.00/ลูก</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿7.00/ชุด</td>
+            <td class="text-right">70.0%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก ลูกค้าไม่อิ่ม</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (7 ลูก)</strong></td>
+            <td class="text-right text-success"><strong>฿13.00/ชุด</strong></td>
+            <td class="text-right text-success">65.0%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ชุดยอดฮิต กินเพลิน</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box-success">
+      <h3 style="color: #166534; margin-top: 0;">🥈 แผนการเพิ่มกำไรเฉพาะ สาขา 3:</h3>
+      <ul>
+        <li><strong>ลูกค้ารองรับสูง ไม่หนีเมื่อปรับราคา:</strong> ฐานลูกค้าแน่น การปรับหมูปิ้งเป็น 12 บ. (ชุด 50 บ.) ไส้กรอก 7 บ. (3 ชิ้น 20 บ.) และของทอดชุด 20-30 บ. ยอดซื้อจะไม่ตก และได้กำไรสุทธิเพิ่มขึ้นทันทีเดือนละเกือบ 1 หมื่นบาท!</li>
+        <li><strong>เตรียมสต็อกของวันศุกร์บ่าย (+35%):</strong> สถิติชี้ชัดว่ายอดขายเสาร์-อาทิตย์ของสาขา 3 พีคสูงกว่าวันธรรมดาถึง 30%</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= TAB 5: BRANCH 4 ================= -->
+  <div id="tab-branch4" class="tab-content">
+    <div class="alert-box" style="background: #eff6ff; border-color: #2563eb;">
+      <div class="alert-title" style="color: #1d4ed8;">🚀 แคตตาล็อกสินค้า สาขาที่ 4 (ครบ 15 รายการ • เตาไฟฟ้า + QR Code เก่ง)</div>
+      <div style="color: #1e40af;">
+        สาขา 4 เติบโตเร็วที่สุด สัดส่วนเงินโอนเกือบ 48% มีค่าไฟเตาไฟฟ้า ฿3,330/ด. ต้นทุนคงที่ ฿17,163/ด. (ค่าแรง 10.5k + เช่า 3.3k + ไฟเตา 3.3k) การปรับราคาจะช่วยคืนทุนค่าไฟเตาไฟฟ้าได้รวดเร็ว
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">ยอดขายเฉลี่ยต่อเดือน</div>
+        <div class="kpi-value text-primary">฿35,000</div>
+        <div class="kpi-sub">เติบโตเร็วที่สุด (+72.9%)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">ต้นทุนคงที่ต่อเดือน</div>
+        <div class="kpi-value text-warning">฿17,163</div>
+        <div class="kpi-sub">ค่าแรง 10.5k + เช่า 3.3k + ไฟเตา 3.3k</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">กำไรเดิมต่อเดือน</div>
+        <div class="kpi-value text-danger">-฿800 - +฿1,800</div>
+        <div class="kpi-sub">ถูกหักค่าไฟเตาไฟฟ้า</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">คาดการณ์กำไรใหม่</div>
+        <div class="kpi-value text-success">+฿5,500 - ฿8,500</div>
+        <div class="kpi-sub text-success">คืนทุนค่าไฟเตา กำไรสุทธิโต</div>
+      </div>
+    </div>
+
+    <h2>📋 ตารางแคตตาล็อกสินค้า สาขา 4 (ครบทั้ง 15 รายการ)</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center">ลำดับ</th>
+            <th>รายการสินค้า</th>
+            <th class="text-right">ต้นทุนเนื้อ</th>
+            <th class="text-center">ราคาเดิม</th>
+            <th class="text-right">กำไรเดิม (บาท)</th>
+            <th class="text-right">Margin เดิม</th>
+            <th class="text-center">สถานะเดิม</th>
+            <th class="text-center">ราคาใหม่</th>
+            <th class="text-right">กำไรใหม่ (บาท)</th>
+            <th class="text-right">Margin ใหม่</th>
+            <th class="text-right">กำไรเพิ่มขึ้น</th>
+            <th class="text-center">สถานะใหม่</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td><strong>ฮอตยาว</strong></td>
+            <td class="text-right">฿3.00</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿7.00</td>
+            <td class="text-right text-success">70.0%</td>
+            <td class="text-center"><span class="badge badge-success">Hero Product</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿7.00</strong></td>
+            <td class="text-right text-success">70.0%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">คงเดิม (ป้าย 10 บ.)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td>
+            <td><strong>หมูนิ่ม</strong></td>
+            <td class="text-right">฿3.75</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿6.25</td>
+            <td class="text-right text-success">62.5%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรดีมาก</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿6.25</strong></td>
+            <td class="text-right text-success">62.5%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">คงเดิม (ตัวหลัก)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">3</td>
+            <td><strong>ปลากลม</strong></td>
+            <td class="text-right">฿4.62</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿5.38</td>
+            <td class="text-right">53.8%</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right"><strong>฿5.38</strong></td>
+            <td class="text-right">53.8%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน (ปลอดภัย)</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">4</td>
+            <td><strong>N หมู / N เนื้อ</strong></td>
+            <td class="text-right">฿5.00</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right">฿5.00</td>
+            <td class="text-right">50.0%</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right"><strong>฿5.00</strong></td>
+            <td class="text-right">50.0%</td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-info">มาตรฐาน (ปลอดภัย)</span></td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td class="text-center">5</td>
+            <td><strong>เชฟ</strong></td>
+            <td class="text-right">฿5.38</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-warning">฿4.62</td>
+            <td class="text-right text-warning">46.2%</td>
+            <td class="text-center"><span class="badge badge-warning">กำไรเริ่มบาง</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿6.62</strong></td>
+            <td class="text-right text-primary"><strong>55.2%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+43%)</td>
+            <td class="text-center"><span class="badge badge-success">ฟื้นมาร์จิ้นสูง</span></td>
+          </tr>
+          <tr style="background: #eff6ff;">
+            <td class="text-center">6</td>
+            <td><strong>หมูปิ้งนมสด 🔥</strong></td>
+            <td class="text-right"><strong>฿5.77</strong></td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-warning">฿4.23</td>
+            <td class="text-right text-warning">42.3%</td>
+            <td class="text-center"><span class="badge badge-warning">กำไรบาง (ไม่พอกิน)</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿6.23</strong></td>
+            <td class="text-right text-primary"><strong>51.9%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+47%)</td>
+            <td class="text-center"><span class="badge badge-success">พระเอกสร้างกำไร</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">7</td>
+            <td><strong>จัมโบ้</strong></td>
+            <td class="text-right">฿6.07</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.93</td>
+            <td class="text-right text-danger">39.3%</td>
+            <td class="text-center"><span class="badge badge-danger">กำไรต่ำ เสี่ยงขาดทุน</span></td>
+            <td class="text-center text-primary"><strong>฿12</strong></td>
+            <td class="text-right text-primary"><strong>฿5.93</strong></td>
+            <td class="text-right text-primary"><strong>49.4%</strong></td>
+            <td class="text-right text-success">+฿2.00 (+51%)</td>
+            <td class="text-center"><span class="badge badge-success">พ้นจุดขาดทุน</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">8</td>
+            <td><strong>ผอ 24</strong></td>
+            <td class="text-right">฿6.25</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.75</td>
+            <td class="text-right text-danger">37.5%</td>
+            <td class="text-center"><span class="badge badge-danger">กินเนื้อตัวเอง</span></td>
+            <td class="text-center text-primary"><strong>฿12 - ฿15</strong></td>
+            <td class="text-right text-primary"><strong>฿5.75 - ฿8.75</strong></td>
+            <td class="text-right text-primary"><strong>47.9% - 58.3%</strong></td>
+            <td class="text-right text-success">+฿2.00 ถึง +฿5.00</td>
+            <td class="text-center"><span class="badge badge-success">พรีเมียมกำไรหนา</span></td>
+          </tr>
+          <tr style="background: #fff1f2;">
+            <td class="text-center">9</td>
+            <td><strong>จ๊อเหลี่ยม</strong></td>
+            <td class="text-right">฿6.25</td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-danger">฿3.75</td>
+            <td class="text-right text-danger">37.5%</td>
+            <td class="text-center"><span class="badge badge-danger">กินเนื้อตัวเอง</span></td>
+            <td class="text-center text-primary"><strong>฿12 - ฿15</strong></td>
+            <td class="text-right text-primary"><strong>฿5.75 - ฿8.75</strong></td>
+            <td class="text-right text-primary"><strong>47.9% - 58.3%</strong></td>
+            <td class="text-right text-success">+฿2.00 ถึง +฿5.00</td>
+            <td class="text-center"><span class="badge badge-success">พรีเมียมกำไรหนา</span></td>
+          </tr>
+          <tr style="background: #fef2f2;">
+            <td class="text-center">10</td>
+            <td><strong>ไส้กรอกอีสาน 🌭</strong></td>
+            <td class="text-right"><strong>฿3.28</strong></td>
+            <td class="text-center">฿5</td>
+            <td class="text-right text-danger">฿1.72</td>
+            <td class="text-right text-danger">34.4%</td>
+            <td class="text-center"><span class="badge badge-danger">แย่สุดในร้าน</span></td>
+            <td class="text-center text-success" style="font-size: 14px;"><strong>฿7 (3 ชิ้น 20)</strong></td>
+            <td class="text-right text-success" style="font-size: 14px;"><strong>฿3.72</strong></td>
+            <td class="text-right text-success" style="font-size: 14px;"><strong>53.1%</strong></td>
+            <td class="text-right text-success"><strong>+฿2.00 (+116%)</strong></td>
+            <td class="text-center"><span class="badge badge-success">พลิกกำไรพุ่ง 2 เท่า!</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="text-center">11</td>
+            <td><strong>ข้าวเหนียว 5 บ. (100g) 🍚</strong></td>
+            <td class="text-right"><strong>฿1.95</strong></td>
+            <td class="text-center">฿5</td>
+            <td class="text-right text-success">฿3.05</td>
+            <td class="text-right text-success">61.0%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรดีมาก</span></td>
+            <td class="text-center text-success"><strong>฿5</strong></td>
+            <td class="text-right text-success"><strong>฿3.05</strong></td>
+            <td class="text-right text-success"><strong>61.0%</strong></td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">ตัวดึง Margin หลัก</span></td>
+          </tr>
+          <tr style="background: #f0fdf4;">
+            <td class="text-center">12</td>
+            <td><strong>ข้าวเหนียว 10 บ. (130g) 🍚</strong></td>
+            <td class="text-right"><strong>฿2.45</strong></td>
+            <td class="text-center">฿10</td>
+            <td class="text-right text-success">฿7.55</td>
+            <td class="text-right text-success">75.5%</td>
+            <td class="text-center"><span class="badge badge-success">กำไรสูงสุดในร้าน</span></td>
+            <td class="text-center text-success"><strong>฿10</strong></td>
+            <td class="text-right text-success"><strong>฿7.55</strong></td>
+            <td class="text-right text-success"><strong>75.5%</strong></td>
+            <td class="text-right">คงเดิม</td>
+            <td class="text-center"><span class="badge badge-success">Super Margin (75.5%)</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">13</td>
+            <td><strong>กล้วยทอด 🍌</strong></td>
+            <td class="text-right">฿1.45/ชิ้น</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿5.65/ชุด</td>
+            <td class="text-right">56.5%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก (10 บ.)</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (6 ชิ้น)</strong></td>
+            <td class="text-right text-success"><strong>฿11.30/ชุด</strong></td>
+            <td class="text-right text-success">56.5%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ขยับบิลเป็น 20-30 บ.</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">14</td>
+            <td><strong>มันทอด 🍠</strong></td>
+            <td class="text-right">฿1.60/ชิ้น</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿5.20/ชุด</td>
+            <td class="text-right">52.0%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก (10 บ.)</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (6 ชิ้น)</strong></td>
+            <td class="text-right text-success"><strong>฿10.40/ชุด</strong></td>
+            <td class="text-right text-success">52.0%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ขยับบิลเป็น 20-30 บ.</span></td>
+          </tr>
+          <tr style="background: #fdf4ff;">
+            <td class="text-center">15</td>
+            <td><strong>ขนมไข่เต่า 🥚</strong></td>
+            <td class="text-right">฿1.00/ลูก</td>
+            <td class="text-center">3 ชิ้น 10 บ.</td>
+            <td class="text-right">฿7.00/ชุด</td>
+            <td class="text-right">70.0%</td>
+            <td class="text-center"><span class="badge badge-warning">บิลเล็ก ลูกค้าไม่อิ่ม</span></td>
+            <td class="text-center text-primary"><strong>ชุด 20 บ. (7 ลูก)</strong></td>
+            <td class="text-right text-success"><strong>฿13.00/ชุด</strong></td>
+            <td class="text-right text-success">65.0%</td>
+            <td class="text-right text-success">ยอดบิลโต 2 เท่า</td>
+            <td class="text-center"><span class="badge badge-success">ชุดยอดฮิต กินเพลิน</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box-info" style="border-left: 4px solid var(--primary);">
+      <h3 style="color: #1d4ed8; margin-top: 0;">🚀 แผนปฏิบัติการเฉพาะ สาขา 4:</h3>
+      <ul>
+        <li><strong>หยุดขายหมูปิ้ง 10 บาท:</strong> ปรับเป็น 12 บ. (หรือชุด 50 บ.) เพื่อคืนทุนค่าไฟเตาไฟฟ้า ฿3,330/ด.</li>
+        <li><strong>ป้าย QR Code จ่ายชุด 20, 30, 50 บาท:</strong> ลูกค้าสแกนจ่ายคล่องตัว พนักงานไม่ต้องวุ่นวายเรื่องเงินทอน</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>จัดทำโดย: ระบบวิเคราะห์การเงินและต้นทุนธุรกิจร้านลูกชิ้น ข้าวเหนียวหมูปิ้ง ไส้กรอกอีสาน และของทอด 4 สาขา</div>
+    <div>ไฟล์เอกสาร: <code>รายงานวิเคราะห์และข้อเสนอแนะการปรับราคาสินค้า.html</code> และ <code>.md</code></div>
+  </div>
+</div>
+
+<script>
+  function switchTab(tabId) {
+    // Hide all tabs
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+
+    // Deactivate all buttons
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    // Activate selected tab & button
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
