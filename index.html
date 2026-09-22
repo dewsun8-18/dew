@@ -70,7 +70,7 @@
                 บัญชีร้านลูกชิ้น 4 สาขา
               </h1>
               <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                ก.ย. 2569 (21 วันแรก)
+                ก.ย. 2569 (22 วันแรก)
               </span>
             </div>
             <p class="text-xs text-slate-500 truncate hidden sm:block">
@@ -97,7 +97,7 @@
             </button>
             <div id="exportMenu" class="hidden absolute right-0 mt-2 w-56 rounded-xl bg-white shadow-xl border border-slate-100 py-1.5 z-40">
               <button onclick="downloadCSV(); hideExportMenu();" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-50 text-slate-700 flex items-center gap-2">
-                <span>📊</span> ข้อมูลรายวัน 4 สาขา (ก.ย. 21 วัน)
+                <span>📊</span> ข้อมูลรายวัน 4 สาขา (ก.ย. 22 วัน)
               </button>
               <button onclick="downloadAnnualCSV(); hideExportMenu();" class="w-full text-left px-4 py-2 text-xs hover:bg-slate-50 text-slate-700 flex items-center gap-2">
                 <span>📅</span> สรุปภาพรวมทั้งปี 2569 (9 เดือน)
@@ -131,7 +131,7 @@
         <button onclick="switchMainTab('annual')" id="mainTab-annual" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
           <span>📅</span>
           <span>สรุปภาพรวมปี 2569</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold">1.26M 🌟</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold">1.27M 🌟</span>
         </button>
 
         <button onclick="switchMainTab('branches')" id="mainTab-branches" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
@@ -148,7 +148,7 @@
         <button onclick="switchMainTab('simulator')" id="mainTab-simulator" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
           <span>🎯</span>
           <span>เครื่องมือวางแผนเป้าหมาย</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-100 text-amber-800 font-bold">10 วันที่เหลือ</span>
+          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-amber-100 text-amber-800 font-bold">8 วันที่เหลือ</span>
         </button>
       </div>
 
@@ -168,10 +168,10 @@
         <div>
           <div class="flex flex-wrap items-center gap-2">
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
-              สถานะ: วันที่ 1 - 21 ก.ย. 2569 (อัปเดตล่าสุดวันนี้)
+              สถานะ: วันที่ 1 - 22 ก.ย. 2569 (อัปเดตล่าสุดวันนี้)
             </span>
             <span class="text-xs text-slate-500">
-              (บันทึกแล้ว 21 วัน • เหลืออีก 9 วันในเดือนนี้)
+              (บันทึกแล้ว 22 วัน • เหลืออีก 8 วันในเดือนนี้)
             </span>
           </div>
           <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
@@ -467,7 +467,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <h3 id="trendChartTitle" class="text-base sm:text-lg font-bold text-slate-900">
-                  แนวโน้มรายรับ - รายจ่าย รายวัน (วันที่ 1 - 20 ก.ย.)
+                  แนวโน้มรายรับ - รายจ่าย รายวัน (วันที่ 1 - 22 ก.ย.)
                 </h3>
                 <p id="trendChartSub" class="text-xs text-slate-500">
                   ชี้ที่จุดบนกราฟเพื่อดูรายละเอียดยอดขายและต้นทุนแต่ละวัน
@@ -487,7 +487,7 @@
 
           <div id="trendChartSummary" class="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between text-xs text-slate-600 gap-2">
             <span>ยอดขายสูงสุด: วันที่ 5 (฿6,510)</span>
-            <span>ว.20 ล่าสุดวันนี้: ฿5,934 (กำไรดำเนินงานวันนั้น +฿13)</span>
+            <span>ว.22 ล่าสุดวันนี้: ฿3,720 (สาขา 4 กำไร +฿230 • ยอดสะสมแตะ ฿104,007)</span>
           </div>
         </div>
 
@@ -686,13 +686,13 @@
             <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30">
               มกราคม - กันยายน 2569 (9 เดือน)
             </span>
-            <span class="text-xs text-amber-300 font-semibold">ยอดขายสะสมทะลุ 1.08 ล้านบาท! 🚀</span>
+            <span class="text-xs text-amber-300 font-semibold">ยอดขายสะสมทะลุ 1.27 ล้านบาท! 🚀</span>
           </div>
           <h2 class="text-xl sm:text-2xl font-bold mt-1.5 text-white">
             รายงานสรุปผลประกอบการรวมทั้งกิจการ ปี 2569
           </h2>
           <p class="text-xs sm:text-sm text-indigo-200 mt-1">
-            สังเคราะห์ข้อมูลจริง 4 สาขา • เทศกาลสงกรานต์ทำ All-Time High 2.05 แสนบาท • กำไรสุทธิรวมทั้งกิจการเป็นบวก (+฿962)
+            สังเคราะห์ข้อมูลจริง 4 สาขา • เทศกาลสงกรานต์ทำ All-Time High 2.50 แสนบาท • ผลกำไรสุทธิรวมทั้งปีใกล้จุดคุ้มทุน (-฿265)
           </p>
         </div>
         <button onclick="downloadAnnualCSV()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-indigo-950 hover:bg-indigo-50 shadow-md transition flex items-center gap-2 shrink-0">
