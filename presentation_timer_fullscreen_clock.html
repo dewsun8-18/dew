@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Presentation Timer</title>
+<style>
+:root{font-family:Inter,"Noto Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(135deg,#1e293b,#020617);transition:background .6s ease}.app{min-height:100vh;display:flex;flex-direction:column;padding:20px;max-width:1500px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{display:flex;align-items:center;gap:12px}.logo{font-size:28px;background:#ffffff20;border-radius:18px;padding:10px 13px}.brand h1{margin:0;font-size:clamp(18px,3vw,28px)}.brand p{margin:2px 0 0;color:#ffffffbf;font-size:14px}.topActions{display:flex;gap:8px}.btn{border:0;border-radius:16px;padding:13px 18px;font-weight:800;font-size:15px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}.btn:hover{transform:translateY(-1px)}.btnGlass{background:#ffffff20;color:white}.btnPrimary{background:white;color:#0f172a;min-width:180px;font-size:18px;padding:17px 24px;box-shadow:0 14px 30px #0003}.btnDark{background:#0003;color:white;font-size:17px;padding:17px 22px}.timerArea{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 0}.badge{background:#0003;padding:9px 22px;border-radius:999px;font-weight:900;letter-spacing:.12em}.time{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-weight:950;font-size:clamp(58px,14vw,190px);line-height:1;margin:26px 0 20px;letter-spacing:-.07em;text-shadow:0 12px 35px #0005;font-variant-numeric:tabular-nums}.progress{height:12px;width:min(900px,92vw);background:#0003;border-radius:99px;overflow:hidden}.bar{height:100%;width:100%;background:#fff;border-radius:99px;transition:width .35s}.controls{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:30px}.panel{background:#fffffff2;color:#0f172a;border-radius:24px;padding:20px;box-shadow:0 20px 50px #0004;display:grid;grid-template-columns:1fr auto;align-items:end;gap:20px}.panelTitle{font-size:17px;font-weight:900;margin-bottom:12px}.inputs{display:grid;grid-template-columns:repeat(4,minmax(90px,1fr));gap:12px}.field label{display:block;font-size:13px;font-weight:800;color:#475569;margin-bottom:6px}.field input{width:100%;border:1px solid #cbd5e1;border-radius:14px;padding:12px;text-align:center;font-size:20px;font-weight:900;outline:none}.field input:focus{border-color:#334155;box-shadow:0 0 0 4px #e2e8f0}.apply{background:#0f172a;color:white;height:50px}.foot{text-align:center;color:#ffffffa8;font-size:12px;padding-top:12px}.shake{animation:pulse .35s ease}@keyframes pulse{50%{transform:scale(1.025)}}
+@media(max-width:760px){.app{padding:14px}.brand p{display:none}.btnText{display:none}.top .btn{padding:12px}.inputs{grid-template-columns:repeat(2,1fr)}.panel{grid-template-columns:1fr}.apply{width:100%}.time{font-size:clamp(50px,15vw,100px)}.timerArea{padding:18px 0}}
+
+/* โหมดเต็มจอ: แสดงเฉพาะตัวเลขเวลานับถอยหลัง */
+:fullscreen .top,
+:fullscreen .badge,
+:fullscreen .progress,
+:fullscreen .controls,
+:fullscreen .panel,
+:fullscreen .foot { display:none !important; }
+:fullscreen .app { max-width:none; width:100%; height:100vh; min-height:100vh; padding:0; }
+:fullscreen .timerArea { width:100%; height:100vh; min-height:100vh; padding:0; display:flex; align-items:center; justify-content:center; }
+:fullscreen .time { margin:0; font-size:clamp(80px,20vw,360px); line-height:1; }
+
+/* รองรับ Safari รุ่นที่ใช้ webkit fullscreen */
+:-webkit-full-screen .top,
+:-webkit-full-screen .badge,
+:-webkit-full-screen .progress,
+:-webkit-full-screen .controls,
+:-webkit-full-screen .panel,
+:-webkit-full-screen .foot { display:none !important; }
+:-webkit-full-screen .app { max-width:none; width:100%; height:100vh; min-height:100vh; padding:0; }
+:-webkit-full-screen .timerArea { width:100%; height:100vh; min-height:100vh; padding:0; display:flex; align-items:center; justify-content:center; }
+:-webkit-full-screen .time { margin:0; font-size:clamp(80px,20vw,360px); line-height:1; }
+
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div class="brand"><div class="logo">🔔</div><div><h1>Presentation Timer</h1><p>ตัวช่วยควบคุมเวลาสำหรับการนำเสนอ</p></div></div><div class="topActions"><button id="soundBtn" class="btn btnGlass">🔊 <span class="btnText">เปิดเสียง</span></button><button id="fullBtn" class="btn btnGlass">⛶ <span class="btnText">เต็มจอ</span></button></div></header>
+<section class="timerArea"><div id="badge" class="badge">พร้อมเริ่ม</div><div id="time" class="time">00:05:00</div><div class="progress"><div id="bar" class="bar"></div></div><div class="controls"><button id="startBtn" class="btn btnPrimary">▶ เริ่มจับเวลา</button><button id="resetBtn" class="btn btnDark">↻ รีเซ็ต</button></div></section>
+<section class="panel"><div><div class="panelTitle">⚙ ตั้งเวลา</div><div class="inputs"><div class="field"><label>ชั่วโมง</label><input id="hours" type="number" min="0" max="23" value="0"></div><div class="field"><label>นาที</label><input id="minutes" type="number" min="0" max="59" value="5"></div><div class="field"><label>วินาที</label><input id="seconds" type="number" min="0" max="59" value="0"></div><div class="field"><label>เตือนก่อนจบ (นาที)</label><input id="warning" type="number" min="0" max="59" value="1"></div></div></div><button id="applyBtn" class="btn apply">ใช้เวลานี้</button></section>
+<footer class="foot">ปุ่มลัด: Space เริ่ม/หยุด · R รีเซ็ต · F เต็มจอ</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);let initial=300,remaining=300,status='idle',timer=null,soundOn=true,warned=false,ended=false,audioCtx;
+function fmt(s){s=Math.max(0,s);return [Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(v=>String(v).padStart(2,'0')).join(':')}
+function bell(times=1){if(!soundOn)return;audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume();const master=audioCtx.createGain(),compressor=audioCtx.createDynamicsCompressor();master.gain.value=1.8;compressor.threshold.value=-18;compressor.knee.value=12;compressor.ratio.value=6;compressor.attack.value=.003;compressor.release.value=.2;master.connect(compressor);compressor.connect(audioCtx.destination);const now=audioCtx.currentTime;for(let i=0;i<times;i++){[660,880,1320,1760].forEach((f,j)=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain(),t=now+i*.72;o.type=j===0?'triangle':'sine';o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(j===0?.34:j===1?.42:.20,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+.64);o.connect(g);g.connect(master);o.start(t);o.stop(t+.67)})}}
+function render(){const warnSec=Math.max(0,+$('warning').value||0)*60;const expired=status==='expired'||(status!=='idle'&&remaining<=0);const warning=status!=='idle'&&remaining>0&&remaining<=warnSec;let bg,label;if(expired){bg='linear-gradient(135deg,#dc2626,#9f1239)';label='หมดเวลา'}else if(warning){bg='linear-gradient(135deg,#fb923c,#d97706)';label='ใกล้หมดเวลา'}else if(status==='idle'){bg='linear-gradient(135deg,#1e293b,#020617)';label='พร้อมเริ่ม'}else{bg='linear-gradient(135deg,#10b981,#15803d)';label=status==='running'?'กำลังนำเสนอ':'หยุดชั่วคราว'}document.body.style.background=bg;$('badge').textContent=label;$('time').textContent=fmt(remaining);$('bar').style.width=(initial?Math.max(0,remaining/initial*100):0)+'%';$('startBtn').textContent=status==='running'?'⏸ หยุดชั่วคราว':status==='paused'?'▶ ทำต่อ':status==='expired'?'▶ เริ่มใหม่':'▶ เริ่มจับเวลา'}
+function tick(){remaining--;if(remaining<=0){remaining=0;status='expired';clearInterval(timer);timer=null;if(!ended){ended=true;bell(3)}}else{const w=(+$('warning').value||0)*60;if(remaining<=w&&!warned){warned=true;bell(1)}}$('time').classList.remove('shake');void $('time').offsetWidth;$('time').classList.add('shake');render()}
+function toggle(){if(status==='running'){status='paused';clearInterval(timer);timer=null}else{if(status==='expired'){remaining=initial;warned=false;ended=false}audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();status='running';timer=setInterval(tick,1000)}render()}
+function reset(){clearInterval(timer);timer=null;remaining=initial;status='idle';warned=false;ended=false;render()}
+$('startBtn').onclick=toggle;$('resetBtn').onclick=reset;$('applyBtn').onclick=()=>{const h=Math.min(23,Math.max(0,+$('hours').value||0)),m=Math.min(59,Math.max(0,+$('minutes').value||0)),s=Math.min(59,Math.max(0,+$('seconds').value||0)),total=h*3600+m*60+s;if(total<=0){alert('กรุณาตั้งเวลามากกว่า 0 วินาที');return}initial=remaining=total;clearInterval(timer);timer=null;status='idle';warned=ended=false;render()};
+$('soundBtn').onclick=()=>{soundOn=!soundOn;$('soundBtn').innerHTML=(soundOn?'🔊 <span class="btnText">เปิดเสียง</span>':'🔇 <span class="btnText">ปิดเสียง</span>');if(soundOn)bell(1)};
+$('fullBtn').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){}};
+document.addEventListener('keydown',e=>{if(['INPUT','BUTTON'].includes(document.activeElement.tagName))return;if(e.code==='Space'){e.preventDefault();toggle()}if(e.key.toLowerCase()==='r')reset();if(e.key.toLowerCase()==='f')$('fullBtn').click()});render();
+</script></body></html>
