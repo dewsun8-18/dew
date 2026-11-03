@@ -1,4 +1,4 @@
-/**
+﻿/**
  * AI Vision & Image-to-Dashboard Module for Meatball Store Dashboard
  * Connects with Local PowerShell Server and Google Gemini API
  */
@@ -103,10 +103,18 @@
             <div>
               <label class="block font-semibold text-slate-700 mb-1">Google Gemini API Key</label>
               <div class="relative">
-                <input type="password" id="inputGeminiApiKey" placeholder="AIzaSy..." class="w-full font-mono text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 pr-10">
+                <input type="password" id="inputGeminiApiKey" placeholder="AIzaSy... (วาง Gemini API Key ที่นี่)" class="w-full font-mono text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 pr-10">
                 <button type="button" onclick="window.toggleApiKeyVisibility()" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600">👁️</button>
               </div>
-              <p class="text-[11px] text-slate-500 mt-1">รับ API Key ได้ฟรีที่ <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-indigo-600 hover:underline">Google AI Studio</a></p>
+              <div id="boxKeySavedStatus" class="hidden mt-2 p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center justify-between">
+                <span class="flex items-center gap-1.5">
+                  <span>🔑</span>
+                  <span id="txtKeySavedMasked">มี API Key บันทึกไว้แล้ว</span>
+                </span>
+                <span class="text-[10px] bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full font-semibold">พร้อมใช้งาน</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-1.5">รับ API Key ได้ฟรีที่ <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-indigo-600 font-semibold hover:underline">Google AI Studio (คลิก)</a></p>
+              <div id="testConnectionResult" class="hidden p-3 rounded-xl text-xs font-medium mt-2"></div>
             </div>
             <div>
               <label class="block font-semibold text-slate-700 mb-1">โมเดล AI Vision</label>
@@ -895,8 +903,30 @@
     const inputKey = document.getElementById('inputGeminiApiKey');
     const selectModel = document.getElementById('selectGeminiModel');
     const txtStatus = document.getElementById('txtServerStatus');
+    const boxKeySaved = document.getElementById('boxKeySavedStatus');
+    const txtKeySavedMasked = document.getElementById('txtKeySavedMasked');
+    const resultBox = document.getElementById('testConnectionResult');
+    if (resultBox) resultBox.classList.add('hidden');
 
-    if (inputKey) inputKey.value = config.maskedKey || config.apiKey || '';
+    if (config.hasApiKey) {
+      if (boxKeySaved) {
+        boxKeySaved.classList.remove('hidden');
+        if (txtKeySavedMasked) {
+          txtKeySavedMasked.textContent = `มี API Key บันทึกในระบบแล้ว (${config.maskedKey || '••••••••'})`;
+        }
+      }
+      if (inputKey) {
+        inputKey.placeholder = '•••••••••••••••• (พิมพ์ใหม่หากต้องการเปลี่ยน)';
+        inputKey.value = '';
+      }
+    } else {
+      if (boxKeySaved) boxKeySaved.classList.add('hidden');
+      if (inputKey) {
+        inputKey.placeholder = 'AIzaSy... (วาง Gemini API Key ที่นี่)';
+        inputKey.value = config.apiKey || '';
+      }
+    }
+
     if (selectModel) selectModel.value = config.model || 'gemini-1.5-flash';
     if (txtStatus) {
       txtStatus.textContent = config.serverAvailable ? '✅ พร้อมใช้งาน (พอร์ต 8080)' : '⚠️ โหมดออฟไลน์ (Standalone)';
@@ -914,60 +944,119 @@
   };
 
   window.saveSettings = async () => {
-    const key = document.getElementById('inputGeminiApiKey').value.trim();
+    const inputEl = document.getElementById('inputGeminiApiKey');
+    const enteredKey = inputEl ? inputEl.value.trim() : '';
     const model = document.getElementById('selectGeminiModel').value;
+
+    const hasNewKey = enteredKey && !enteredKey.includes('...') && !enteredKey.includes('***');
+    if (hasNewKey) {
+      config.apiKey = enteredKey;
+      config.hasApiKey = true;
+    }
 
     if (config.serverAvailable) {
       try {
+        const payload = { model };
+        if (hasNewKey) { payload.apiKey = enteredKey; }
         const res = await fetch('/api/config', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ apiKey: key, model })
+          body: JSON.stringify(payload)
         });
         if (res.ok) {
-          config.hasApiKey = true;
-          config.model = model;
-          showToast('บันทึกการตั้งค่าลง config.json เรียบร้อยแล้ว', 'success');
+          showToast('บันทึกการตั้งค่าเรียบร้อยแล้ว', 'success');
+          await checkServerAndConfig();
         }
       } catch (e) {
         showToast('ไม่สามารถบันทึกลงเซิร์ฟเวอร์ได้: ' + e.message, 'error');
       }
     }
 
-    // Always keep localStorage updated as fallback
-    localStorage.setItem('gemini_api_key', key);
+    if (hasNewKey) {
+      localStorage.setItem('gemini_api_key', enteredKey);
+    }
     localStorage.setItem('gemini_model', model);
-    config.apiKey = key;
     config.model = model;
-    config.hasApiKey = !!key;
 
     window.closeSettingsModal();
   };
 
   window.testGeminiConnection = async () => {
-    const key = document.getElementById('inputGeminiApiKey').value.trim() || config.apiKey;
+    const inputEl = document.getElementById('inputGeminiApiKey');
+    const enteredKey = inputEl ? inputEl.value.trim() : '';
     const model = document.getElementById('selectGeminiModel').value;
-    if (!key) {
-      showToast('กรุณากรอก API Key ก่อนทดสอบ', 'error');
+    const resultBox = document.getElementById('testConnectionResult');
+
+    const hasKey = enteredKey || config.hasApiKey || config.apiKey;
+    if (!hasKey) {
+      if (resultBox) {
+        resultBox.className = 'p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs';
+        resultBox.innerHTML = '⚠️ กรุณาวาง Gemini API Key ก่อนกดทดสอบ (ขึ้นต้นด้วย AIzaSy...)';
+        resultBox.classList.remove('hidden');
+      }
       return;
     }
-    showToast('กำลังทดสอบเชื่อมต่อ Google Gemini API...', 'info');
+
+    if (resultBox) {
+      resultBox.className = 'p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-800 text-xs flex items-center gap-2';
+      resultBox.innerHTML = '<span class="animate-spin text-base">⏳</span> <span>กำลังทดสอบเชื่อมต่อ Google Gemini API...</span>';
+      resultBox.classList.remove('hidden');
+    }
 
     try {
-      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ role: 'user', parts: [{ text: 'ping' }] }]
-        })
-      });
-      if (res.ok) {
-        showToast('🎉 เชื่อมต่อ Google Gemini API สำเร็จพร้อมใช้งาน!', 'success');
+      if (config.serverAvailable) {
+        const res = await fetch('/api/test-key', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ apiKey: enteredKey, model })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          resultBox.className = 'p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs';
+          resultBox.innerHTML = `🎉 <strong>เชื่อมต่อสำเร็จ!</strong> ${data.message}`;
+          showToast('เชื่อมต่อสำเร็จพร้อมใช้งาน!', 'success');
+        } else {
+          resultBox.className = 'p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs space-y-1';
+          resultBox.innerHTML = `<div>❌ <strong>เชื่อมต่อไม่สำเร็จ:</strong> ${data.error || 'เกิดข้อผิดพลาด'}</div>${data.rawError ? `<div class="text-[10px] text-rose-600 font-mono break-all mt-1">${data.rawError}</div>` : ''}`;
+          showToast('เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
+        }
       } else {
-        const err = await res.text();
-        showToast('เชื่อมต่อไม่สำเร็จ: ' + err, 'error');
+        const keyToUse = enteredKey || config.apiKey;
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${keyToUse}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: 'สวัสดี' }] }]
+          })
+        });
+
+        if (res.ok) {
+          resultBox.className = 'p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs';
+          resultBox.innerHTML = `🎉 <strong>เชื่อมต่อสำเร็จ!</strong> Google Gemini (${model}) พร้อมใช้งาน`;
+          showToast('เชื่อมต่อสำเร็จพร้อมใช้งาน!', 'success');
+        } else {
+          const errText = await res.text();
+          let msg = errText;
+          try {
+            const errObj = JSON.parse(errText);
+            if (errObj.error && errObj.error.message) msg = errObj.error.message;
+          } catch(e) {}
+
+          let friendly = msg;
+          if (msg.includes('API_KEY_INVALID') || msg.includes('API key not valid')) {
+            friendly = 'API Key ไม่ถูกต้อง กรุณาคัดลอก Key ให้ครบถ้วนจาก Google AI Studio (ขึ้นต้นด้วย AIzaSy...)';
+          }
+
+          resultBox.className = 'p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs space-y-1';
+          resultBox.innerHTML = `<div>❌ <strong>เชื่อมต่อไม่สำเร็จ:</strong> ${friendly}</div><div class="text-[10px] text-rose-600 font-mono break-all mt-1">${msg}</div>`;
+          showToast('เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
+        }
       }
     } catch (e) {
+      if (resultBox) {
+        resultBox.className = 'p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs';
+        resultBox.innerHTML = `❌ <strong>เกิดข้อผิดพลาด:</strong> ${e.message} (กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต)`;
+      }
       showToast('เกิดข้อผิดพลาดในการเชื่อมต่อ: ' + e.message, 'error');
     }
   };
