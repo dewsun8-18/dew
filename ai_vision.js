@@ -511,35 +511,59 @@
 }
 ตอบเฉพาะ JSON ล้วนเท่านั้น`;
 
-        const geminiRes = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{
-              role: 'user',
-              parts: [
-                { text: promptText },
-                { inline_data: { mime_type: item.mimeType, data: cleanBase64 } }
-              ]
-            }],
-            generationConfig: {
-              temperature: 0.1,
-              response_mime_type: 'application/json'
-            }
-          })
-        });
+        const candidateModels = [model, 'gemini-3.5-flash-lite', 'gemini-flash-latest', 'gemini-3.8-flash'].filter((v, i, a) => a.indexOf(v) === i);
+        let parsedResult = null;
+        let lastErrorMsg = '';
 
-        if (!geminiRes.ok) {
-          const errBody = await geminiRes.text();
-          throw new Error(`Gemini API Error: ${errBody}`);
+        for (const m of candidateModels) {
+          const callUrl = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${apiKey}`;
+          try {
+            const geminiRes = await fetch(callUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{
+                  role: 'user',
+                  parts: [
+                    { text: promptText },
+                    { inline_data: { mime_type: item.mimeType, data: cleanBase64 } }
+                  ]
+                }],
+                generationConfig: {
+                  temperature: 0.1,
+                  response_mime_type: 'application/json'
+                }
+              })
+            });
+
+            if (geminiRes.ok) {
+              const data = await geminiRes.json();
+              let rawText = data.candidates[0].content.parts[0].text.trim();
+              if (rawText.startsWith('```json')) rawText = rawText.substring(7);
+              if (rawText.startsWith('```')) rawText = rawText.substring(3);
+              if (rawText.endsWith('```')) rawText = rawText.substring(0, rawText.length - 3);
+              parsedResult = JSON.parse(rawText.trim());
+              config.model = m;
+              localStorage.setItem('gemini_model', m);
+              break;
+            } else {
+              const errBody = await geminiRes.text();
+              lastErrorMsg = errBody;
+              if (!errBody.includes('high demand') && !errBody.includes('503') && !errBody.includes('not found')) {
+                break;
+              }
+            }
+          } catch (e) {
+            lastErrorMsg = e.message;
+          }
         }
-        const data = await geminiRes.json();
-        let rawText = data.candidates[0].content.parts[0].text.trim();
-        if (rawText.startsWith('```json')) rawText = rawText.substring(7);
-        if (rawText.startsWith('```')) rawText = rawText.substring(3);
-        if (rawText.endsWith('```')) rawText = rawText.substring(0, rawText.length - 3);
-        item.status = 'success';
-        item.result = JSON.parse(rawText.trim());
+
+        if (parsedResult) {
+          item.status = 'success';
+          item.result = parsedResult;
+        } else {
+          throw new Error(`Gemini API Error: ${lastErrorMsg}`);
+        }
       }
     } catch (err) {
       item.status = 'error';
@@ -1022,33 +1046,55 @@
         }
       } else {
         const keyToUse = enteredKey || config.apiKey;
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${keyToUse}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: 'สวัสดี' }] }]
-          })
-        });
+        const candidateModels = [model, 'gemini-3.5-flash-lite', 'gemini-flash-latest', 'gemini-3.8-flash'].filter((v, i, a) => a.indexOf(v) === i);
+        let success = false;
+        let lastErr = '';
 
-        if (res.ok) {
-          resultBox.className = 'p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs';
-          resultBox.innerHTML = `🎉 <strong>เชื่อมต่อสำเร็จ!</strong> Google Gemini (${model}) พร้อมใช้งาน`;
-          showToast('เชื่อมต่อสำเร็จพร้อมใช้งาน!', 'success');
-        } else {
-          const errText = await res.text();
-          let msg = errText;
+        for (const m of candidateModels) {
           try {
-            const errObj = JSON.parse(errText);
-            if (errObj.error && errObj.error.message) msg = errObj.error.message;
-          } catch(e) {}
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${keyToUse}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{ parts: [{ text: 'สวัสดี' }] }]
+              })
+            });
 
-          let friendly = msg;
-          if (msg.includes('API_KEY_INVALID') || msg.includes('API key not valid')) {
-            friendly = 'API Key ไม่ถูกต้อง กรุณาคัดลอก Key ให้ครบถ้วนจาก Google AI Studio (ขึ้นต้นด้วย AIzaSy...)';
+            if (res.ok) {
+              success = true;
+              const sel = document.getElementById('selectGeminiModel');
+              if (sel) sel.value = m;
+              config.model = m;
+              localStorage.setItem('gemini_model', m);
+              resultBox.className = 'p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs';
+              resultBox.innerHTML = `🎉 <strong>เชื่อมต่อสำเร็จ!</strong> Google Gemini (${m}) พร้อมใช้งาน`;
+              showToast('เชื่อมต่อสำเร็จพร้อมใช้งาน!', 'success');
+              break;
+            } else {
+              const errText = await res.text();
+              lastErr = errText;
+              try {
+                const errObj = JSON.parse(errText);
+                if (errObj.error && errObj.error.message) lastErr = errObj.error.message;
+              } catch(e) {}
+              if (!lastErr.includes('high demand') && !lastErr.includes('503') && !lastErr.includes('not found')) {
+                break;
+              }
+            }
+          } catch(e) {
+            lastErr = e.message;
           }
+        }
 
+        if (!success) {
+          let friendly = lastErr;
+          if (lastErr.includes('API_KEY_INVALID') || lastErr.includes('API key not valid')) {
+            friendly = 'API Key ไม่ถูกต้อง กรุณาคัดลอก Key ให้ครบถ้วนจาก Google AI Studio';
+          } else if (lastErr.includes('high demand')) {
+            friendly = 'เซิร์ฟเวอร์โมเดลมีผู้ใช้งานหนาแน่นชั่วคราว กรุณากดทดสอบใหม่อีกครั้ง';
+          }
           resultBox.className = 'p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs space-y-1';
-          resultBox.innerHTML = `<div>❌ <strong>เชื่อมต่อไม่สำเร็จ:</strong> ${friendly}</div><div class="text-[10px] text-rose-600 font-mono break-all mt-1">${msg}</div>`;
+          resultBox.innerHTML = `<div>❌ <strong>เชื่อมต่อไม่สำเร็จ:</strong> ${friendly}</div>`;
           showToast('เกิดข้อผิดพลาดในการเชื่อมต่อ', 'error');
         }
       }
