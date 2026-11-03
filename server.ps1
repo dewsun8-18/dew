@@ -20,7 +20,7 @@ function Get-AppConfig {
     }
     return [PSCustomObject]@{
         geminiApiKey = ""
-        model = "gemini-1.5-flash"
+        model = "gemini-3.5-flash-lite"
         port = 8080
     }
 }
@@ -161,7 +161,7 @@ while ($listener.IsListening) {
             $body = $bodyText | ConvertFrom-Json
             $cfg = Get-AppConfig
             $keyToTest = if ($body.apiKey -and -not $body.apiKey.Contains("...") -and -not $body.apiKey.Contains("***")) { $body.apiKey.Trim() } else { $cfg.geminiApiKey }
-            $modelToTest = if ($body.model) { $body.model.Trim() } else { if ($cfg.model) { $cfg.model } else { "gemini-1.5-flash" } }
+            $modelToTest = if ($body.model) { $body.model.Trim() } else { if ($cfg.model) { $cfg.model } else { "gemini-3.5-flash-lite" } }
 
             if ([string]::IsNullOrWhiteSpace($keyToTest)) {
                 Send-JsonResponse -Response $response -StatusCode 400 -Object @{ success = $false; error = "ยังไม่มี API Key กรุณากรอก API Key ก่อนทดสอบ" }
@@ -226,7 +226,7 @@ while ($listener.IsListening) {
                 continue
             }
 
-            $modelName = if ($cfg.model) { $cfg.model } else { "gemini-1.5-flash" }
+            $modelName = if ($cfg.model) { $cfg.model } else { "gemini-3.5-flash-lite" }
             $geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}"
 
             $base64Image = $body.image
