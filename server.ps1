@@ -90,6 +90,55 @@ $thaiMonths = @{
     12 = "12_ธค"
 }
 
+# Smart Fallback Invoker for Google Gemini
+function Invoke-GeminiWithFallback {
+    param(
+        [string]$ApiKey,
+        [string]$PreferredModel,
+        [object]$PayloadObj,
+        [int]$TimeoutSec = 30
+    )
+    $candidateModels = @($PreferredModel, "gemini-3.5-flash-lite", "gemini-flash-latest", "gemini-3.8-flash") | Select-Object -Unique
+    $lastError = $null
+
+    foreach ($m in $candidateModels) {
+        if ([string]::IsNullOrWhiteSpace($m)) { continue }
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${ApiKey}"
+        $jsonPayload = $PayloadObj | ConvertTo-Json -Depth 10
+
+        try {
+            $resp = Invoke-RestMethod -Uri $url -Method POST -Body $jsonPayload -ContentType "application/json; charset=utf-8" -TimeoutSec $TimeoutSec
+            return @{
+                success = $true
+                modelUsed = $m
+                response = $resp
+            }
+        } catch {
+            $errDetail = $_.Exception.Message
+            try {
+                $stream = $_.Exception.Response.GetResponseStream()
+                $reader = New-Object System.IO.StreamReader($stream)
+                $errJson = $reader.ReadToEnd() | ConvertFrom-Json
+                if ($errJson.error.message) { $errDetail = $errJson.error.message }
+            } catch {}
+
+            $lastError = $errDetail
+            if ($errDetail -match "high demand" -or $errDetail -match "503" -or $errDetail -match "no longer available" -or $errDetail -match "not found") {
+                Write-Host "Model $m unavailable ($errDetail). Trying fallback..." -ForegroundColor Yellow
+                Start-Sleep -Milliseconds 300
+                continue
+            } else {
+                break
+            }
+        }
+    }
+
+    return @{
+        success = $false
+        error = $lastError
+    }
+}
+
 # Event loop
 while ($listener.IsListening) {
     try {
@@ -128,7 +177,7 @@ while ($listener.IsListening) {
             Send-JsonResponse -Response $response -StatusCode 200 -Object @{
                 hasApiKey = $hasKey
                 maskedKey = $maskedKey
-                model = $cfg.model
+                model = if ($cfg.model) { $cfg.model } else { "gemini-3.5-flash-lite" }
                 port = $cfg.port
             }
             continue
@@ -168,38 +217,37 @@ while ($listener.IsListening) {
                 continue
             }
 
-            $testUrl = "https://generativelanguage.googleapis.com/v1beta/models/${modelToTest}:generateContent?key=${keyToTest}"
             $testPayload = @{
                 contents = @(
                     @{ parts = @( @{ text = "สวัสดี" } ) }
                 )
-            } | ConvertTo-Json -Depth 5
+            }
 
-            try {
-                $testResp = Invoke-RestMethod -Uri $testUrl -Method POST -Body $testPayload -ContentType "application/json; charset=utf-8"
+            $gemResult = Invoke-GeminiWithFallback -ApiKey $keyToTest -PreferredModel $modelToTest -PayloadObj $testPayload -TimeoutSec 15
+            if ($gemResult.success) {
+                $usedM = $gemResult.modelUsed
+                # If fallback model worked, update config
+                if ($cfg.model -ne $usedM) {
+                    $cfg.model = $usedM
+                    $cfgJson = $cfg | ConvertTo-Json -Depth 5
+                    [System.IO.File]::WriteAllText($configFile, $cfgJson, [System.Text.Encoding]::UTF8)
+                }
                 Send-JsonResponse -Response $response -StatusCode 200 -Object @{
                     success = $true
-                    message = "เชื่อมต่อสำเร็จ! Google Gemini ($modelToTest) พร้อมใช้งาน"
+                    modelUsed = $usedM
+                    message = "เชื่อมต่อสำเร็จ! Google Gemini ($usedM) พร้อมใช้งาน"
                 }
-            } catch {
-                $errMsg = $_.Exception.Message
-                try {
-                    $stream = $_.Exception.Response.GetResponseStream()
-                    $errReader = New-Object System.IO.StreamReader($stream)
-                    $errBody = $errReader.ReadToEnd()
-                    $errJson = $errBody | ConvertFrom-Json
-                    if ($errJson.error.message) {
-                        $errMsg = $errJson.error.message
-                    }
-                } catch {}
-
+            } else {
+                $errMsg = $gemResult.error
                 $userFriendly = $errMsg
                 if ($errMsg -match "API_KEY_INVALID" -or $errMsg -match "API key not valid") {
-                    $userFriendly = "API Key ไม่ถูกต้อง กรุณาคัดลอก Key ให้ครบถ้วนจาก Google AI Studio (ขึ้นต้นด้วย AIzaSy...)"
+                    $userFriendly = "API Key ไม่ถูกต้อง กรุณาคัดลอก Key ให้ครบถ้วนจาก Google AI Studio"
                 } elseif ($errMsg -match "Quota" -or $errMsg -match "RESOURCE_EXHAUSTED") {
                     $userFriendly = "โควตาการใช้งานของ API Key นี้เกินขีดจำกัดชั่วคราว กรุณารอสักครู่หรือเปลี่ยนคีย์"
                 } elseif ($errMsg -match "location is not supported") {
-                    $userFriendly = "พื้นที่การใช้งานไม่รองรับ (Location not supported) แนะนำให้เปิดใช้งานผ่าน VPN หรือตรวจสอบ Region ใน Google Cloud"
+                    $userFriendly = "พื้นที่การใช้งานไม่รองรับ (Location not supported)"
+                } elseif ($errMsg -match "high demand") {
+                    $userFriendly = "เซิร์ฟเวอร์โมเดลกำลังมีผู้ใช้งานหนาแน่นชั่วคราว กรุณากดทดสอบใหม่อีกครั้ง"
                 }
 
                 Send-JsonResponse -Response $response -StatusCode 400 -Object @{
@@ -227,8 +275,6 @@ while ($listener.IsListening) {
             }
 
             $modelName = if ($cfg.model) { $cfg.model } else { "gemini-3.5-flash-lite" }
-            $geminiUrl = "https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}"
-
             $base64Image = $body.image
             if ($base64Image.Contains(",")) {
                 $base64Image = $base64Image.Substring($base64Image.IndexOf(",") + 1)
@@ -258,7 +304,7 @@ while ($listener.IsListening) {
 ตอบเฉพาะ JSON ก้อนเดียวเท่านั้น ห้ามมี markdown backticks หรือคำอธิบายอื่น
 "@
 
-            $geminiPayload = @{
+            $gemPayloadObj = @{
                 contents = @(
                     @{
                         role = "user"
@@ -277,36 +323,29 @@ while ($listener.IsListening) {
                     temperature = 0.1
                     response_mime_type = "application/json"
                 }
-            } | ConvertTo-Json -Depth 10
+            }
 
-            try {
-                $geminiResponse = Invoke-RestMethod -Uri $geminiUrl -Method POST -Body $geminiPayload -ContentType "application/json; charset=utf-8"
+            $resObj = Invoke-GeminiWithFallback -ApiKey $apiKey -PreferredModel $modelName -PayloadObj $gemPayloadObj -TimeoutSec 45
+            if ($resObj.success) {
+                $geminiResponse = $resObj.response
                 $rawText = $geminiResponse.candidates[0].content.parts[0].text
-                
                 $cleanJson = $rawText.Trim()
-                if ($cleanJson.StartsWith('```json')) {
-                    $cleanJson = $cleanJson.Substring(7)
-                }
-                if ($cleanJson.StartsWith('```')) {
-                    $cleanJson = $cleanJson.Substring(3)
-                }
-                if ($cleanJson.EndsWith('```')) {
-                    $cleanJson = $cleanJson.Substring(0, $cleanJson.Length - 3)
-                }
+                if ($cleanJson.StartsWith('```json')) { $cleanJson = $cleanJson.Substring(7) }
+                if ($cleanJson.StartsWith('```')) { $cleanJson = $cleanJson.Substring(3) }
+                if ($cleanJson.EndsWith('```')) { $cleanJson = $cleanJson.Substring(0, $cleanJson.Length - 3) }
                 $cleanJson = $cleanJson.Trim()
 
                 $parsedData = $cleanJson | ConvertFrom-Json
                 Send-JsonResponse -Response $response -StatusCode 200 -Object @{
                     success = $true
                     data = $parsedData
+                    modelUsed = $resObj.modelUsed
                     raw = $cleanJson
                 }
-            } catch {
-                $err = $_.Exception.Message
-                if ($_.ErrorDetails) { $err = $_.ErrorDetails.Message }
+            } else {
                 Send-JsonResponse -Response $response -StatusCode 500 -Object @{
                     success = $false
-                    error = "เกิดข้อผิดพลาดในการเรียก Gemini API: $err"
+                    error = "เกิดข้อผิดพลาดในการเรียก Gemini API: $($resObj.error)"
                 }
             }
             continue
