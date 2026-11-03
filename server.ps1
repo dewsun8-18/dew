@@ -142,11 +142,72 @@ while ($listener.IsListening) {
             $bodyText = $reader.ReadToEnd()
             $body = $bodyText | ConvertFrom-Json
             $cfg = Get-AppConfig
-            if ($body.apiKey) { $cfg.geminiApiKey = $body.apiKey.Trim() }
+            if ($body.apiKey -and -not $body.apiKey.Contains("...") -and -not $body.apiKey.Contains("***")) {
+                $cfg.geminiApiKey = $body.apiKey.Trim()
+            }
             if ($body.model) { $cfg.model = $body.model.Trim() }
             $savedJson = $cfg | ConvertTo-Json -Depth 5
             [System.IO.File]::WriteAllText($configFile, $savedJson, [System.Text.Encoding]::UTF8)
             Send-JsonResponse -Response $response -StatusCode 200 -Object @{ success = $true; message = "บันทึกการตั้งค่าเรียบร้อยแล้ว" }
+            continue
+        }
+
+        # -------------------------------------------------------------
+        # API ROUTE: POST /api/test-key
+        # -------------------------------------------------------------
+        if ($httpMethod -eq "POST" -and $decodedPath -eq "/api/test-key") {
+            $reader = New-Object System.IO.StreamReader($request.InputStream, $request.ContentEncoding)
+            $bodyText = $reader.ReadToEnd()
+            $body = $bodyText | ConvertFrom-Json
+            $cfg = Get-AppConfig
+            $keyToTest = if ($body.apiKey -and -not $body.apiKey.Contains("...") -and -not $body.apiKey.Contains("***")) { $body.apiKey.Trim() } else { $cfg.geminiApiKey }
+            $modelToTest = if ($body.model) { $body.model.Trim() } else { if ($cfg.model) { $cfg.model } else { "gemini-1.5-flash" } }
+
+            if ([string]::IsNullOrWhiteSpace($keyToTest)) {
+                Send-JsonResponse -Response $response -StatusCode 400 -Object @{ success = $false; error = "ยังไม่มี API Key กรุณากรอก API Key ก่อนทดสอบ" }
+                continue
+            }
+
+            $testUrl = "https://generativelanguage.googleapis.com/v1beta/models/${modelToTest}:generateContent?key=${keyToTest}"
+            $testPayload = @{
+                contents = @(
+                    @{ parts = @( @{ text = "สวัสดี" } ) }
+                )
+            } | ConvertTo-Json -Depth 5
+
+            try {
+                $testResp = Invoke-RestMethod -Uri $testUrl -Method POST -Body $testPayload -ContentType "application/json; charset=utf-8"
+                Send-JsonResponse -Response $response -StatusCode 200 -Object @{
+                    success = $true
+                    message = "เชื่อมต่อสำเร็จ! Google Gemini ($modelToTest) พร้อมใช้งาน"
+                }
+            } catch {
+                $errMsg = $_.Exception.Message
+                try {
+                    $stream = $_.Exception.Response.GetResponseStream()
+                    $errReader = New-Object System.IO.StreamReader($stream)
+                    $errBody = $errReader.ReadToEnd()
+                    $errJson = $errBody | ConvertFrom-Json
+                    if ($errJson.error.message) {
+                        $errMsg = $errJson.error.message
+                    }
+                } catch {}
+
+                $userFriendly = $errMsg
+                if ($errMsg -match "API_KEY_INVALID" -or $errMsg -match "API key not valid") {
+                    $userFriendly = "API Key ไม่ถูกต้อง กรุณาคัดลอก Key ให้ครบถ้วนจาก Google AI Studio (ขึ้นต้นด้วย AIzaSy...)"
+                } elseif ($errMsg -match "Quota" -or $errMsg -match "RESOURCE_EXHAUSTED") {
+                    $userFriendly = "โควตาการใช้งานของ API Key นี้เกินขีดจำกัดชั่วคราว กรุณารอสักครู่หรือเปลี่ยนคีย์"
+                } elseif ($errMsg -match "location is not supported") {
+                    $userFriendly = "พื้นที่การใช้งานไม่รองรับ (Location not supported) แนะนำให้เปิดใช้งานผ่าน VPN หรือตรวจสอบ Region ใน Google Cloud"
+                }
+
+                Send-JsonResponse -Response $response -StatusCode 400 -Object @{
+                    success = $false
+                    error = $userFriendly
+                    rawError = $errMsg
+                }
+            }
             continue
         }
 
