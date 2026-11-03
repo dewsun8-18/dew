@@ -7,7 +7,7 @@
   // State
   let config = {
     apiKey: '',
-    model: 'gemini-1.5-flash',
+    model: 'gemini-3.5-flash-lite',
     hasApiKey: false,
     serverAvailable: false
   };
@@ -37,7 +37,7 @@
         const data = await res.json();
         config.serverAvailable = true;
         config.hasApiKey = data.hasApiKey;
-        config.model = data.model || 'gemini-1.5-flash';
+        config.model = data.model || 'gemini-3.5-flash-lite';
         config.maskedKey = data.maskedKey || '';
         updateStatusBadge(true);
       } else {
@@ -53,7 +53,7 @@
     const localKey = localStorage.getItem('gemini_api_key') || '';
     config.apiKey = localKey;
     config.hasApiKey = !!localKey;
-    config.model = localStorage.getItem('gemini_model') || 'gemini-1.5-flash';
+    config.model = localStorage.getItem('gemini_model') || 'gemini-3.5-flash-lite';
     updateStatusBadge(false);
   }
 
@@ -119,9 +119,9 @@
             <div>
               <label class="block font-semibold text-slate-700 mb-1">โมเดล AI Vision</label>
               <select id="selectGeminiModel" class="w-full text-xs px-3 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500">
-                <option value="gemini-1.5-flash">Gemini 1.5 Flash (แนะนำ: รวดเร็ว แม่นยำ และประหยัด)</option>
-                <option value="gemini-2.0-flash">Gemini 2.0 Flash (โมเดลใหม่ล่าสุด ความเร็วสูง)</option>
-                <option value="gemini-1.5-pro">Gemini 1.5 Pro (การคิดวิเคราะห์ขั้นสูง เอกสารซับซ้อน)</option>
+                <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite (แนะนำ: รวดเร็ว แม่นยำ อ่านลายมือไทยดีเยี่ยม)</option>
+                <option value="gemini-3.8-flash">Gemini 3.8 Flash (โมเดลเรือธง ความสามารถสูง)</option>
+                <option value="gemini-flash-latest">Gemini Flash Latest (อัปเดตอัตโนมัติ)</option>
               </select>
             </div>
             <div id="settingsServerStatus" class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
@@ -482,7 +482,7 @@
         if (!apiKey) {
           throw new Error('ยังไม่ได้ตั้งค่า Gemini API Key กรุณากดปุ่ม ⚙️ เพื่อใส่ Key ก่อนใช้งาน');
         }
-        const model = config.model || 'gemini-1.5-flash';
+        const model = config.model || 'gemini-3.5-flash-lite';
         const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
         let cleanBase64 = item.base64;
@@ -927,7 +927,7 @@
       }
     }
 
-    if (selectModel) selectModel.value = config.model || 'gemini-1.5-flash';
+    if (selectModel) selectModel.value = config.model || 'gemini-3.5-flash-lite';
     if (txtStatus) {
       txtStatus.textContent = config.serverAvailable ? '✅ พร้อมใช้งาน (พอร์ต 8080)' : '⚠️ โหมดออฟไลน์ (Standalone)';
       txtStatus.className = `font-bold ${config.serverAvailable ? 'text-emerald-600' : 'text-amber-600'}`;
