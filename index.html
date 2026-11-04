@@ -69,7 +69,7 @@
               <h1 class="text-base sm:text-lg font-bold text-slate-900 truncate">
                 บัญชีร้านลูกชิ้น 4 สาขา
               </h1>
-              <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
+              <span id="navCurrentDayBadge" class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
                 พ.ย. 2569 (วันที่ 4 พ.ย. วันพุธ)
               </span>
             </div>
@@ -152,7 +152,7 @@
         <button onclick="switchMainTab('annual')" id="mainTab-annual" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
           <span>📅</span>
           <span>สรุปภาพรวมปี 2569</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold">1.517M 🌟</span>
+          <span id="navAnnualRevBadge" class="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold">1.535M 🌟</span>
         </button>
 
         <button onclick="switchMainTab('branches')" id="mainTab-branches" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
@@ -169,7 +169,7 @@
         <button onclick="switchMainTab('simulator')" id="mainTab-simulator" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
           <span>🎯</span>
           <span>เครื่องมือวางแผนเป้าหมาย</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold">พ.ย. (วันที่ 4)</span>
+          <span id="navSimulatorBadge" class="px-1.5 py-0.2 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold">พ.ย. (วันที่ 4)</span>
         </button>
 
         <a href="รายงานวิเคราะห์และข้อเสนอแนะการปรับราคาสินค้า.html" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2 hover:text-emerald-700 hover:bg-emerald-50 border border-emerald-200">
@@ -706,16 +706,16 @@
       <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 text-white rounded-2xl p-6 shadow-md border border-indigo-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <div class="flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30">
-              มกราคม - ตุลาคม 2569 (10 เดือนเต็ม)
+            <span id="annualPeriodBadge" class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-500/30 text-indigo-200 border border-indigo-400/30">
+              มกราคม - พฤศจิกายน 2569 (11 เดือนเต็ม)
             </span>
-            <span class="text-xs text-amber-300 font-semibold">ยอดขายสะสมแตะ 1.498 ล้านบาท! 🚀</span>
+            <span id="annualSalesTag" class="text-xs text-amber-300 font-semibold">ยอดขายสะสมแตะ 1.535 ล้านบาท! 🚀</span>
           </div>
           <h2 class="text-xl sm:text-2xl font-bold mt-1.5 text-white">
             รายงานสรุปผลประกอบการรวมทั้งกิจการ ปี 2569
           </h2>
-          <p class="text-xs sm:text-sm text-indigo-200 mt-1">
-            สังเคราะห์ข้อมูลจริง 4 สาขา • เทศกาลสงกรานต์ทำ All-Time High 2.50 แสนบาท • ผลกำไรสุทธิสะสมรวม 10 เดือน เติบโตต่อเนื่อง (+฿3,891) โดยสาขา 1 หนุนกำไรสูงสุด +฿48,764
+          <p id="annualDescText" class="text-xs sm:text-sm text-indigo-200 mt-1">
+            สังเคราะห์ข้อมูลจริง 4 สาขา • ยอดขายสะสมแตะ ฿1,535,420 • เทศกาลสงกรานต์ทำ All-Time High 2.50 แสนบาท • ผลกำไรสุทธิสะสมรวมเติบโตต่อเนื่อง โดยสาขา 1 หนุนกำไรสูงสุด
           </p>
         </div>
         <button onclick="downloadAnnualCSV()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-indigo-950 hover:bg-indigo-50 shadow-md transition flex items-center gap-2 shrink-0">
@@ -727,9 +727,9 @@
       <!-- 4 Metric Cards for Annual 2569 -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <span class="text-xs font-semibold uppercase tracking-wider text-indigo-600 block">ยอดขายรวมทั้งปี (10 เดือน)</span>
-          <div class="text-2xl sm:text-3xl font-bold font-num text-indigo-950 mt-1">฿1,497,829</div>
-          <span class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿149,783 / เดือน (แตะ 1.498 ล้าน)</span>
+          <span id="annualMetric1Label" class="text-xs font-semibold uppercase tracking-wider text-indigo-600 block">ยอดขายรวมทั้งปี (11 เดือน)</span>
+          <div id="annualMetric1Rev" class="text-2xl sm:text-3xl font-bold font-num text-indigo-950 mt-1">฿1,535,420</div>
+          <span id="annualMetric1Sub" class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿139,584 / เดือน (แตะ 1.535 ล้าน)</span>
         </div>
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
           <span class="text-xs font-semibold uppercase tracking-wider text-amber-600 block">เดือนยอดขายสูงสุด (ATH)</span>
@@ -737,14 +737,14 @@
           <span class="text-xs text-slate-500 block mt-1">เม.ย. 2569 (สงกรานต์ กำไร +฿52,800)</span>
         </div>
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <span class="text-xs font-semibold uppercase tracking-wider text-emerald-600 block">กำไรสุทธิรวมทั้งปี 🎯</span>
-          <div class="text-2xl sm:text-3xl font-bold font-num text-emerald-600 mt-1">+฿3,891</div>
-          <span class="text-xs text-slate-500 block mt-1">สะสม 10 เดือน (ส.1 หนุนเดี่ยว +48.8k 🥇)</span>
+          <span id="annualMetric3Label" class="text-xs font-semibold uppercase tracking-wider text-emerald-600 block">กำไรสุทธิรวมทั้งปี 🎯</span>
+          <div id="annualMetric3Net" class="text-2xl sm:text-3xl font-bold font-num text-emerald-600 mt-1">+฿3,891</div>
+          <span id="annualMetric3Sub" class="text-xs text-slate-500 block mt-1">สะสม 11 เดือน (ส.1 หนุนเดี่ยว +44.9k 🥇)</span>
         </div>
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 block">รายจ่ายรวมทั้งปี</span>
-          <div class="text-2xl sm:text-3xl font-bold font-num text-slate-800 mt-1">฿1,493,938</div>
-          <span class="text-xs text-slate-500 block mt-1">ดำเนินงาน 1.375M + ค่าเช่าบันทึก 109.8k</span>
+          <span id="annualMetric4Label" class="text-xs font-semibold uppercase tracking-wider text-slate-500 block">รายจ่ายรวมทั้งปี</span>
+          <div id="annualMetric4Exp" class="text-2xl sm:text-3xl font-bold font-num text-slate-800 mt-1">฿1,518,485</div>
+          <span id="annualMetric4Sub" class="text-xs text-slate-500 block mt-1">ดำเนินงาน + ค่าเช่า 4 สาขา</span>
         </div>
       </div>
 
@@ -1088,9 +1088,9 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <span class="text-xs font-semibold text-blue-600 block">รายรับสะสม 10 เดือน</span>
-            <div class="text-2xl font-bold font-num text-blue-900 mt-1">฿553,236</div>
-            <span class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿55,324 / เดือน (อันดับ 1)</span>
+            <span id="b1CardRevLabel" class="text-xs font-semibold text-blue-600 block">รายรับสะสม 11 เดือน</span>
+            <div id="b1CardRevVal" class="text-2xl font-bold font-num text-blue-900 mt-1">฿561,746</div>
+            <span id="b1CardRevSub" class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿51,068 / เดือน (อันดับ 1)</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
             <span class="text-xs font-semibold text-amber-600 block">ยอดขายสูงสุด (ATH)</span>
@@ -1098,9 +1098,9 @@
             <span class="text-xs text-slate-500 block mt-1">เดือน เม.ย. (สงกรานต์ กำไร +฿45,056)</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <span class="text-xs font-semibold text-emerald-600 block">กำไรสุทธิสะสม 10 เดือน</span>
-            <div class="text-2xl font-bold font-num text-emerald-600 mt-1">+฿49,251</div>
-            <span class="text-xs text-slate-500 block mt-1">Margin เฉลี่ย 8.9%</span>
+            <span id="b1CardNetLabel" class="text-xs font-semibold text-emerald-600 block">กำไรสุทธิสะสม 11 เดือน</span>
+            <div id="b1CardNetVal" class="text-2xl font-bold font-num text-emerald-600 mt-1">+฿44,938</div>
+            <span id="b1CardNetSub" class="text-xs text-slate-500 block mt-1">Margin เฉลี่ย 8.00%</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
             <span class="text-xs font-semibold text-slate-500 block">ค่าเช่าร้านคงที่</span>
@@ -1171,9 +1171,9 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <span class="text-xs font-semibold text-amber-600 block">รายรับสะสม 8 เดือน</span>
-            <div class="text-2xl font-bold font-num text-amber-900 mt-1">฿242,872</div>
-            <span class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿30,359 / เดือน (ทะลุ 2.42 แสน)</span>
+            <span id="b2CardRevLabel" class="text-xs font-semibold text-amber-600 block">รายรับสะสม 9 เดือน</span>
+            <div id="b2CardRevVal" class="text-2xl font-bold font-num text-amber-900 mt-1">฿248,364</div>
+            <span id="b2CardRevSub" class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿27,596 / เดือน (มี.ค. - พ.ย.)</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
             <span class="text-xs font-semibold text-emerald-600 block">ยอดขายสูงสุด (ATH)</span>
@@ -1183,12 +1183,12 @@
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
             <span class="text-xs font-semibold text-blue-600 block">รอบจ่ายค่าเช่าร้าน</span>
             <div class="text-2xl font-bold font-num text-blue-900 mt-1">฿10,000 / 3 ด.</div>
-            <span class="text-xs text-slate-500 block mt-1">จ่าย 1 ก.ค. เฉลี่ย ฿3,333.33 / เดือน</span>
+            <span class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿3,333.33 / เดือน</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <span class="text-xs font-semibold text-slate-500 block">กำไรสุทธิสะสม 8 เดือน</span>
-            <div class="text-2xl font-bold font-num text-slate-800 mt-1">-฿11,397</div>
-            <span class="text-xs text-slate-500 block mt-1">กำไรดำเนินงานก่อนเช่า +฿1,936 (16 วัน -1,214 บ.)</span>
+            <span id="b2CardNetLabel" class="text-xs font-semibold text-slate-500 block">กำไรสุทธิสะสม 9 เดือน</span>
+            <div id="b2CardNetVal" class="text-2xl font-bold font-num text-red-600 mt-1">-฿16,330</div>
+            <span id="b2CardNetSub" class="text-xs text-slate-500 block mt-1">Margin เฉลี่ย -6.58%</span>
           </div>
         </div>
 
@@ -1244,7 +1244,7 @@
               <span class="text-xs text-emerald-300 font-semibold">ทะลุเป้า 40k ติดต่อกัน 5 เดือนซ้อน 🎯</span>
             </div>
             <h3 class="text-xl sm:text-2xl font-bold mt-1 text-white">สาขา 3 — สถิติยอดขายยอดเยี่ยม</h3>
-            <p class="text-xs text-emerald-200 mt-0.5">ยอดขายสะสม ฿425,250 (ทะลุ 4.25 แสน!) • ม.ค. ทำ ATH 7.7 หมื่น • 16 วัน ต.ค. ยอด 24,668 บ. สุทธิ -฿3,010 🥈</p>
+            <p id="b3HeaderSub" class="text-xs text-emerald-200 mt-0.5">ยอดขายสะสม ฿453,029 (ทะลุ 4.53 แสน!) • ม.ค. ทำ ATH 7.7 หมื่น • สถิติยอดขายสม่ำเสมออันดับ 2 🥈</p>
           </div>
           <button onclick="downloadB3HistoryCSV()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-white text-emerald-950 hover:bg-emerald-50 shadow transition flex items-center gap-2 shrink-0">
             <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
@@ -1254,9 +1254,9 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <span class="text-xs font-semibold text-emerald-600 block">รายรับสะสม 10 เดือน</span>
-            <div class="text-2xl font-bold font-num text-emerald-900 mt-1">฿425,250</div>
-            <span class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿42,525 / เดือน (ทะลุ 4.25 แสน)</span>
+            <span id="b3CardRevLabel" class="text-xs font-semibold text-emerald-600 block">รายรับสะสม 11 เดือน</span>
+            <div id="b3CardRevVal" class="text-2xl font-bold font-num text-emerald-900 mt-1">฿453,029</div>
+            <span id="b3CardRevSub" class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿41,184 / เดือน (ทะลุ 4.53 แสน)</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
             <span class="text-xs font-semibold text-blue-600 block">ยอดขายสูงสุด (ATH)</span>
@@ -1264,14 +1264,14 @@
             <span class="text-xs text-slate-500 block mt-1">เดือน ม.ค. (กำไร +฿11,743)</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <span class="text-xs font-semibold text-amber-600 block">สถิติทะลุเป้า 40k</span>
-            <div class="text-2xl font-bold font-num text-amber-800 mt-1">5 เดือนติด</div>
-            <span class="text-xs text-slate-500 block mt-1">มิ.ย., ก.ค., ส.ค., ก.ย.</span>
+            <span id="b3CardNetLabel" class="text-xs font-semibold text-amber-600 block">กำไรสุทธิสะสม 11 เดือน</span>
+            <div id="b3CardNetVal" class="text-2xl font-bold font-num text-red-600 mt-1">-฿24,756</div>
+            <span id="b3CardNetSub" class="text-xs text-slate-500 block mt-1">Margin เฉลี่ย -5.46%</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
             <span class="text-xs font-semibold text-slate-500 block">ค่าเช่าร้านคงที่</span>
             <div class="text-2xl font-bold font-num text-slate-800 mt-1">฿4,000 / ด.</div>
-            <span class="text-xs text-slate-500 block mt-1">ค่าเช่าสะสม 10 เดือน ฿25,806</span>
+            <span class="text-xs text-slate-500 block mt-1">จ่ายต้นเดือน ฿4,000 / ด.</span>
           </div>
         </div>
 
@@ -1337,9 +1337,9 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <span class="text-xs font-semibold text-purple-600 block">รายรับสะสม 8 เดือน</span>
-            <div class="text-2xl font-bold font-num text-purple-900 mt-1">฿246,833</div>
-            <span class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿30,854 / เดือน (ทะลุ 2.46 แสน)</span>
+            <span id="b4CardRevLabel" class="text-xs font-semibold text-purple-600 block">รายรับสะสม 9 เดือน</span>
+            <div id="b4CardRevVal" class="text-2xl font-bold font-num text-purple-900 mt-1">฿253,466</div>
+            <span id="b4CardRevSub" class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿28,163 / เดือน (มี.ค. - พ.ย.)</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
             <span class="text-xs font-semibold text-emerald-600 block">ยอดขายสูงสุด (ATH)</span>
@@ -1352,9 +1352,9 @@
             <span class="text-xs text-slate-500 block mt-1">เฉลี่ย ฿3,333.33 / เดือน</span>
           </div>
           <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-            <span class="text-xs font-semibold text-slate-500 block">กำไรสุทธิสะสม 8 เดือน</span>
-            <div class="text-2xl font-bold font-num text-slate-800 mt-1">-฿8,192</div>
-            <span class="text-xs text-slate-500 block mt-1">กำไรดำเนินงานสะสม +฿8,478 (16 วัน +1,285 บ.)</span>
+            <span id="b4CardNetLabel" class="text-xs font-semibold text-slate-500 block">กำไรสุทธิสะสม 9 เดือน</span>
+            <div id="b4CardNetVal" class="text-2xl font-bold font-num text-red-600 mt-1">-฿9,256</div>
+            <span id="b4CardNetSub" class="text-xs text-slate-500 block mt-1">Margin เฉลี่ย -3.65%</span>
           </div>
         </div>
 
@@ -1417,7 +1417,7 @@
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-400/30">
                 📈 การวิเคราะห์เชิงกลยุทธ์ (Business Intelligence)
               </span>
-              <span class="text-xs text-indigo-300 font-medium">กลั่นกรองจากข้อมูลจริง 16 วัน ต.ค. (฿109,096) & สถิติ 10 เดือนเต็ม</span>
+              <span class="text-xs text-indigo-300 font-medium">กลั่นกรองจากข้อมูลจริงสะสม 4 วัน พ.ย. (฿18,776) & สถิติ 11 เดือนเต็ม</span>
             </div>
             <h2 class="text-xl sm:text-2xl font-extrabold text-white mt-2">
               4 มิติวิเคราะห์เจาะลึกเพื่อเพิ่มผลกำไรและประสิทธิภาพร้าน
@@ -1431,15 +1431,15 @@
           <div class="flex items-center gap-2 shrink-0 flex-wrap">
             <div class="bg-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center">
               <span class="text-[11px] text-slate-300 block">สัดส่วนเงินโอน</span>
-              <span class="text-base font-bold font-num text-emerald-400">42.5%</span>
+              <span id="insightTransferPctBadge" class="text-base font-bold font-num text-emerald-400">41.5%</span>
             </div>
             <div class="bg-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center">
               <span class="text-[11px] text-slate-300 block">พีคสุดสัปดาห์</span>
-              <span class="text-base font-bold font-num text-amber-400">+31.6%</span>
+              <span id="insightWeekendPeakBadge" class="text-base font-bold font-num text-amber-400">+31.6%</span>
             </div>
             <div class="bg-white/10 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/10 text-center">
               <span class="text-[11px] text-slate-300 block">BEP รวม 4 สาขา</span>
-              <span class="text-base font-bold font-num text-blue-400">฿3,844/ว.</span>
+              <span id="insightBepTotalBadge" class="text-base font-bold font-num text-blue-400">฿3,844/ว.</span>
             </div>
           </div>
         </div>
@@ -1455,18 +1455,18 @@
                 <h3 class="text-lg font-bold text-slate-900">
                   1. การวิเคราะห์สัดส่วนเงินสด vs เงินโอน (Cash vs Transfer Ratio)
                 </h3>
-                <p class="text-xs text-slate-500">
-                  พฤติกรรมการชำระเงินของลูกค้าแต่ละสาขาใน 16 วัน ต.ค. (ยอดขายรวม ฿109,096)
+                <p id="insightCashTransSub" class="text-xs text-slate-500">
+                  พฤติกรรมการชำระเงินของลูกค้าแต่ละสาขาใน 4 วัน พ.ย. (ยอดขายรวม ฿18,776)
                 </p>
               </div>
             </div>
           </div>
           <div class="flex items-center gap-4 text-xs">
             <div class="flex items-center gap-1.5 font-medium text-slate-600">
-              <span class="w-3 h-3 rounded-full bg-blue-600"></span> เงินสด (57.5%)
+              <span class="w-3 h-3 rounded-full bg-blue-600"></span> <span id="insightCashPctLabel">เงินสด (58.5%)</span>
             </div>
             <div class="flex items-center gap-1.5 font-medium text-slate-600">
-              <span class="w-3 h-3 rounded-full bg-emerald-500"></span> เงินโอน/สแกน (42.5%)
+              <span class="w-3 h-3 rounded-full bg-emerald-500"></span> <span id="insightTransPctLabel">เงินโอน/สแกน (41.5%)</span>
             </div>
           </div>
         </div>
@@ -1477,22 +1477,22 @@
           <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
-                <span class="font-bold text-sm text-slate-800">สาขา 1 🥇 (รวม ฿21,872)</span>
-                <span class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-semibold font-num">โอน 49.3% 🔥</span>
+                <span id="insightB1Title" class="font-bold text-sm text-slate-800">สาขา 1 🥇 (รวม ฿6,388)</span>
+                <span id="insightB1Badge" class="text-[11px] px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-semibold font-num">โอน 51.5% 🔥</span>
               </div>
               <div class="mt-3 space-y-1.5 font-num text-xs">
                 <div class="flex justify-between text-slate-600">
                   <span>💵 เงินสด:</span>
-                  <span class="font-bold text-blue-700">฿11,093 (50.7%)</span>
+                  <span id="insightB1Cash" class="font-bold text-blue-700">฿3,098 (48.5%)</span>
                 </div>
                 <div class="flex justify-between text-slate-600">
                   <span>📱 เงินโอน:</span>
-                  <span class="font-bold text-emerald-700">฿10,779 (49.3%)</span>
+                  <span id="insightB1Trans" class="font-bold text-emerald-700">฿3,290 (51.5%)</span>
                 </div>
               </div>
               <div class="w-full bg-slate-200 h-2.5 rounded-full mt-3 overflow-hidden flex">
-                <div class="bg-blue-600 h-full" style="width: 50.7%" title="เงินสด 50.7%"></div>
-                <div class="bg-emerald-500 h-full" style="width: 49.3%" title="เงินโอน 49.3%"></div>
+                <div id="insightB1CashBar" class="bg-blue-600 h-full" style="width: 48.5%" title="เงินสด 48.5%"></div>
+                <div id="insightB1TransBar" class="bg-emerald-500 h-full" style="width: 51.5%" title="เงินโอน 51.5%"></div>
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-200/80 text-[11px] text-slate-500">
@@ -1504,22 +1504,22 @@
           <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
-                <span class="font-bold text-sm text-slate-800">สาขา 2 (รวม ฿13,970)</span>
-                <span class="text-[11px] px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-semibold font-num">เงินสด 56.4%</span>
+                <span id="insightB2Title" class="font-bold text-sm text-slate-800">สาขา 2 (รวม ฿3,337)</span>
+                <span id="insightB2Badge" class="text-[11px] px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-semibold font-num">เงินสด 70.8%</span>
               </div>
               <div class="mt-3 space-y-1.5 font-num text-xs">
                 <div class="flex justify-between text-slate-600">
                   <span>💵 เงินสด:</span>
-                  <span class="font-bold text-blue-700">฿7,875 (56.4%)</span>
+                  <span id="insightB2Cash" class="font-bold text-blue-700">฿2,363 (70.8%)</span>
                 </div>
                 <div class="flex justify-between text-slate-600">
                   <span>📱 เงินโอน:</span>
-                  <span class="font-bold text-emerald-700">฿6,095 (43.6%)</span>
+                  <span id="insightB2Trans" class="font-bold text-emerald-700">฿974 (29.2%)</span>
                 </div>
               </div>
               <div class="w-full bg-slate-200 h-2.5 rounded-full mt-3 overflow-hidden flex">
-                <div class="bg-blue-600 h-full" style="width: 56.4%" title="เงินสด 56.4%"></div>
-                <div class="bg-emerald-500 h-full" style="width: 43.6%" title="เงินโอน 43.6%"></div>
+                <div id="insightB2CashBar" class="bg-blue-600 h-full" style="width: 70.8%" title="เงินสด 70.8%"></div>
+                <div id="insightB2TransBar" class="bg-emerald-500 h-full" style="width: 29.2%" title="เงินโอน 29.2%"></div>
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-200/80 text-[11px] text-slate-500">
@@ -1531,26 +1531,26 @@
           <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
-                <span class="font-bold text-sm text-slate-800">สาขา 3 🥈 (รวม ฿16,552)</span>
-                <span class="text-[11px] px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-semibold font-num">เงินสด 63.8% 🔥</span>
+                <span id="insightB3Title" class="font-bold text-sm text-slate-800">สาขา 3 🥈 (รวม ฿5,563)</span>
+                <span id="insightB3Badge" class="text-[11px] px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-semibold font-num">เงินสด 63.6% 🔥</span>
               </div>
               <div class="mt-3 space-y-1.5 font-num text-xs">
                 <div class="flex justify-between text-slate-600">
                   <span>💵 เงินสด:</span>
-                  <span class="font-bold text-blue-700">฿10,560 (63.8%)</span>
+                  <span id="insightB3Cash" class="font-bold text-blue-700">฿3,536 (63.6%)</span>
                 </div>
                 <div class="flex justify-between text-slate-600">
                   <span>📱 เงินโอน:</span>
-                  <span class="font-bold text-emerald-700">฿5,992 (36.2%)</span>
+                  <span id="insightB3Trans" class="font-bold text-emerald-700">฿2,027 (36.4%)</span>
                 </div>
               </div>
               <div class="w-full bg-slate-200 h-2.5 rounded-full mt-3 overflow-hidden flex">
-                <div class="bg-blue-600 h-full" style="width: 63.8%" title="เงินสด 63.8%"></div>
-                <div class="bg-emerald-500 h-full" style="width: 36.2%" title="เงินโอน 36.2%"></div>
+                <div id="insightB3CashBar" class="bg-blue-600 h-full" style="width: 63.6%" title="เงินสด 63.6%"></div>
+                <div id="insightB3TransBar" class="bg-emerald-500 h-full" style="width: 36.4%" title="เงินโอน 36.4%"></div>
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-slate-200/80 text-[11px] text-slate-500">
-              🪙 ยอดขายเงินสดสูงสุดแตะ ฿1.05 หมื่น ระวังความเสี่ยงเงินสูญหายตอนปิดร้าน
+              🪙 ยอดขายเงินสดสูงสุด ระวังความเสี่ยงเงินสูญหายตอนปิดร้าน
             </div>
           </div>
 
@@ -1558,22 +1558,22 @@
           <div class="p-4 rounded-2xl bg-purple-50/50 border border-purple-200 flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
-                <span class="font-bold text-purple-950">สาขา 4 🚀 (รวม ฿13,175)</span>
-                <span class="text-[11px] px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 font-semibold font-num">โอน 46.7% 🌟</span>
+                <span id="insightB4Title" class="font-bold text-purple-950">สาขา 4 🚀 (รวม ฿3,488)</span>
+                <span id="insightB4Badge" class="text-[11px] px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 font-semibold font-num">โอน 42.8% 🌟</span>
               </div>
               <div class="mt-3 space-y-1.5 font-num text-xs">
                 <div class="flex justify-between text-purple-900">
                   <span>💵 เงินสด:</span>
-                  <span class="font-bold text-blue-700">฿7,019 (53.3%)</span>
+                  <span id="insightB4Cash" class="font-bold text-blue-700">฿1,996 (57.2%)</span>
                 </div>
                 <div class="flex justify-between text-purple-900">
                   <span>📱 เงินโอน:</span>
-                  <span class="font-bold text-emerald-700">฿6,156 (46.7%)</span>
+                  <span id="insightB4Trans" class="font-bold text-emerald-700">฿1,492 (42.8%)</span>
                 </div>
               </div>
               <div class="w-full bg-slate-200 h-2.5 rounded-full mt-3 overflow-hidden flex">
-                <div class="bg-blue-600 h-full" style="width: 53.3%" title="เงินสด 53.3%"></div>
-                <div class="bg-emerald-500 h-full" style="width: 46.7%" title="เงินโอน 46.7%"></div>
+                <div id="insightB4CashBar" class="bg-blue-600 h-full" style="width: 57.2%" title="เงินสด 57.2%"></div>
+                <div id="insightB4TransBar" class="bg-emerald-500 h-full" style="width: 42.8%" title="เงินโอน 42.8%"></div>
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-purple-200/80 text-[11px] text-purple-700">
@@ -1808,15 +1808,15 @@
             <div>
               <div class="flex items-center justify-between font-sans">
                 <span class="font-bold text-sm text-blue-900">สาขา 1</span>
-                <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">ผ่านเกณฑ์ ✅</span>
+                <span id="bepB1Status" class="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">ผ่านเกณฑ์ ✅</span>
               </div>
               <div class="mt-3">
                 <span class="text-xs text-slate-500 font-sans block">จุดคุ้มทุนขั้นต่ำ (BEP):</span>
-                <span class="text-2xl font-extrabold text-blue-950">฿1,034 / วัน</span>
+                <span id="bepB1Val" class="text-2xl font-extrabold text-blue-950">฿1,034 / วัน</span>
               </div>
-              <div class="mt-2 text-xs text-slate-600 font-sans space-y-1">
+              <div id="bepB1Detail" class="mt-2 text-xs text-slate-600 font-sans space-y-1">
                 <div>• ค่าแรง ฿350 + เช่าเฉลี่ย ฿167 = ฿517/วัน</div>
-                <div>• ทำได้จริงครบ 30 วัน (29 วันขาย): <strong class="text-emerald-600">฿1,158 / วัน</strong> (112.0%)</div>
+                <div>• ทำได้จริงสะสม 4 วัน: <strong class="text-emerald-600">฿1,597 / วัน</strong> (154.5%)</div>
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-blue-200 font-sans">
@@ -1831,21 +1831,21 @@
             <div>
               <div class="flex items-center justify-between font-sans">
                 <span class="font-bold text-sm text-amber-900">สาขา 2</span>
-                <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md">ผ่านเกณฑ์ ✅</span>
+                <span id="bepB2Status" class="text-[11px] font-semibold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md">กำลังเร่งทำยอด 🎯</span>
               </div>
               <div class="mt-3">
                 <span class="text-xs text-slate-500 font-sans block">จุดคุ้มทุนขั้นต่ำ (BEP):</span>
-                <span class="text-2xl font-extrabold text-amber-950">฿922 / วัน</span>
+                <span id="bepB2Val" class="text-2xl font-extrabold text-amber-950">฿922 / วัน</span>
               </div>
-              <div class="mt-2 text-xs text-slate-600 font-sans space-y-1">
+              <div id="bepB2Detail" class="mt-2 text-xs text-slate-600 font-sans space-y-1">
                 <div>• ค่าแรง ฿350 + เช่าเฉลี่ย ฿111 = ฿461/วัน</div>
-                <div>• ทำได้จริงครบ 30 วัน: <strong class="text-emerald-600">฿1,065 / วัน</strong> (115.5%)</div>
+                <div>• ทำได้จริงสะสม 4 วัน: <strong class="text-amber-600">฿834 / วัน</strong> (90.5%)</div>
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-amber-200 font-sans">
               <span class="text-xs font-bold text-amber-800 block">🎯 เป้าหมายแนะนำหน้าร้าน:</span>
               <span class="text-base font-bold text-amber-900 font-num">฿1,100 / วัน</span>
-              <span class="text-[10px] text-slate-500 block mt-0.5">เพื่อแตะเป้ายอดขาย 3.3 หมื่นบาท/เดือน</span>
+              <span class="text-[10px] text-slate-500 block mt-0.5">เพื่อแตะเป้ายอดขาย 3.5 หมื่นบาท/เดือน</span>
             </div>
           </div>
 
@@ -1854,15 +1854,15 @@
             <div>
               <div class="flex items-center justify-between font-sans">
                 <span class="font-bold text-sm text-emerald-900">สาขา 3 🏆</span>
-                <span class="text-[11px] font-semibold text-emerald-800 bg-emerald-200 px-2 py-0.5 rounded-md">ทะลุเป้าสูง 🌟</span>
+                <span id="bepB3Status" class="text-[11px] font-semibold text-emerald-800 bg-emerald-200 px-2 py-0.5 rounded-md">ทะลุเป้าสูง 🌟</span>
               </div>
               <div class="mt-3">
                 <span class="text-xs text-slate-500 font-sans block">จุดคุ้มทุนขั้นต่ำ (BEP):</span>
-                <span class="text-2xl font-extrabold text-emerald-950">฿966 / วัน</span>
+                <span id="bepB3Val" class="text-2xl font-extrabold text-emerald-950">฿967 / วัน</span>
               </div>
-              <div class="mt-2 text-xs text-slate-600 font-sans space-y-1">
+              <div id="bepB3Detail" class="mt-2 text-xs text-slate-600 font-sans space-y-1">
                 <div>• ค่าแรง ฿350 + เช่า ฿133 = ฿483/วัน</div>
-                <div>• ทำได้จริงครบ 30 วัน: <strong class="text-emerald-600">฿1,376 / วัน</strong> (142.4%)</div>
+                <div>• ทำได้จริงสะสม 4 วัน: <strong class="text-emerald-600">฿1,391 / วัน</strong> (143.9%)</div>
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-emerald-200 font-sans">
@@ -1877,21 +1877,21 @@
             <div>
               <div class="flex items-center justify-between font-sans">
                 <span class="font-bold text-purple-900">สาขา 4 🚀</span>
-                <span class="text-[11px] font-semibold text-purple-800 bg-purple-200 px-2 py-0.5 rounded-md">เติบโตเด่น 🚀</span>
+                <span id="bepB4Status" class="text-[11px] font-semibold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md">กำลังเร่งทำยอด 🎯</span>
               </div>
               <div class="mt-3">
                 <span class="text-xs text-slate-500 font-sans block">จุดคุ้มทุนขั้นต่ำ (BEP):</span>
-                <span class="text-2xl font-extrabold text-purple-950">฿922 / วัน</span>
+                <span id="bepB4Val" class="text-2xl font-extrabold text-purple-950">฿922 / วัน</span>
               </div>
-              <div class="mt-2 text-xs text-slate-600 font-sans space-y-1">
+              <div id="bepB4Detail" class="mt-2 text-xs text-slate-600 font-sans space-y-1">
                 <div>• ค่าแรง ฿350 + เช่าเฉลี่ย ฿111 = ฿461/วัน</div>
-                <div>• ทำได้จริงครบ 30 วัน: <strong class="text-emerald-600">฿1,221 / วัน</strong> (132.4%)</div>
+                <div>• ทำได้จริงสะสม 4 วัน: <strong class="text-amber-600">฿872 / วัน</strong> (94.6%)</div>
               </div>
             </div>
             <div class="mt-4 pt-3 border-t border-purple-200 font-sans">
               <span class="text-xs font-bold text-purple-800 block">🎯 เป้าหมายแนะนำหน้าร้าน:</span>
               <span class="text-base font-bold text-purple-900 font-num">฿1,250 / วัน</span>
-              <span class="text-[10px] text-slate-500 block mt-0.5">ผลักดันให้ยอดรวมเดือนนี้แตะ 3.8 หมื่นบาท</span>
+              <span class="text-[10px] text-slate-500 block mt-0.5">ผลักดันให้ยอดรวมเดือนนี้แตะ 4.0 หมื่นบาท</span>
             </div>
           </div>
 
@@ -1902,11 +1902,11 @@
           <div class="flex items-center gap-3">
             <span class="text-2xl">🎮</span>
             <div>
-              <div class="text-sm font-bold text-white">
-                เป้าหมายรวม 4 สาขา: จุดคุ้มทุน <span class="text-amber-400 font-num">฿3,844 / วัน</span> • ยอดขายเฉลี่ยจริงทั้งเดือน <span class="text-emerald-400 font-num">฿4,781 / วัน</span>
+              <div id="bepSummaryText" class="text-sm font-bold text-white">
+                เป้าหมายรวม 4 สาขา: จุดคุ้มทุน <span class="text-amber-400 font-num">฿3,844 / วัน</span> • ยอดขายเฉลี่ยจริงสะสม 4 วัน <span class="text-emerald-400 font-num">฿4,694 / วัน</span>
               </div>
-              <p class="text-xs text-slate-300 mt-0.5">
-                เฉลี่ย 30 วันเต็มทำได้ <strong>฿4,781 / วัน</strong> คุ้มทุนทุกสาขา ผลักดันให้กำไรดำเนินงานหน้าร้านทั้งระบบปิดบวก <strong>+฿813</strong> ในสิ้นเดือน
+              <p id="bepSummarySub" class="text-xs text-slate-300 mt-0.5">
+                เฉลี่ย 4 วันแรกทำได้ <strong>฿4,694 / วัน</strong> (122.1% ของจุดคุ้มทุน) กำไรดำเนินงานหน้าร้านสะสม <strong>+฿15,226</strong>
               </p>
             </div>
           </div>
@@ -1961,7 +1961,7 @@
               <span class="p-1.5 rounded-lg bg-emerald-400 text-slate-950 font-bold text-xs">
                 อัพเดทสถานะล่าสุด
               </span>
-              <span class="text-xs text-indigo-200">สะสม 25 วัน (1-25 ตุลาคม 2569)</span>
+              <span id="simStatusBadge" class="text-xs text-indigo-200">สะสม 4 วัน (1-4 พฤศจิกายน 2569)</span>
             </div>
             <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">
               ระบบจำลองและวางแผนเป้ายอดขายรวม 4 สาขา
@@ -1972,8 +1972,8 @@
           </div>
 
           <div class="bg-white/10 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-white/10 text-right shrink-0">
-            <span class="text-xs text-blue-200 block">ยอดขายจริงสะสม 25 วัน:</span>
-            <div class="text-xl sm:text-2xl font-bold font-num text-emerald-300">฿135,421</div>
+            <span id="simActualLabel" class="text-xs text-blue-200 block">ยอดขายจริงสะสม 4 วัน:</span>
+            <div id="simActualRev" class="text-xl sm:text-2xl font-bold font-num text-emerald-300">฿18,776</div>
           </div>
         </div>
 
@@ -2021,7 +2021,7 @@
               <div class="font-semibold text-blue-100">📌 สมมติฐานในการคำนวณ:</div>
               <div>• ต้นทุนคงที่เฉลี่ยรวม (Fixed Costs + ค่าเช่า): <strong>฿59,167</strong> / เดือน</div>
               <div>• อัตรากำไรส่วนเกินเฉลี่ย (Contribution Margin): <strong>50%</strong></div>
-              <div>• สถานะรอบการขาย: <strong>สะสมแล้ว 1 วัน (เริ่มต้นเดือน พ.ย. 69)</strong></div>
+              <div>• สถานะรอบการขาย: <strong id="simAssumpDays">สะสมแล้ว 4 วัน (เริ่มต้นเดือน พ.ย. 69)</strong></div>
             </div>
           </div>
 
@@ -2031,7 +2031,7 @@
             <div class="grid grid-cols-2 gap-3.5">
               <!-- Required Monthly -->
               <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
-                <span class="text-xs text-blue-200">เป้ายอดขายรวมทั้งเดือน (ตุลาคม 31 วัน)</span>
+                <span id="simTargetHeader" class="text-xs text-blue-200">เป้ายอดขายรวมทั้งเดือน (พฤศจิกายน 30 วัน)</span>
                 <div id="targetMonthlyRev" class="text-2xl sm:text-3xl font-bold font-num text-white mt-1">฿198,333</div>
                 <p class="text-[11px] text-blue-300 mt-1">รวมทั้ง 4 สาขา</p>
               </div>
@@ -2039,22 +2039,22 @@
               <!-- Remaining Needed -->
               <div class="bg-emerald-500/20 backdrop-blur-md rounded-2xl p-4 border border-emerald-400/30">
                 <span class="text-xs text-emerald-200 font-semibold">ยอดขายที่ต้องทำเพิ่ม</span>
-                <div id="targetRemainingRev" class="text-2xl sm:text-3xl font-bold font-num text-emerald-300 mt-1">฿89,237</div>
-                <p class="text-[11px] text-emerald-200 mt-1">เหลือเวลาอีก 6 วันในเดือนนี้</p>
+                <div id="targetRemainingRev" class="text-2xl sm:text-3xl font-bold font-num text-emerald-300 mt-1">฿179,557</div>
+                <p id="simRemainingDaysText" class="text-[11px] text-emerald-200 mt-1">เหลือเวลาอีก 26 วันในเดือนนี้</p>
               </div>
 
               <!-- Daily 4 Branches -->
               <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
                 <span class="text-xs text-blue-200">ยอดขายเฉลี่ยต่อวัน (4 สาขา)</span>
-                <div id="targetDailyAll" class="text-2xl sm:text-3xl font-bold font-num text-emerald-300 mt-1">฿5,949</div>
-                <p class="text-[11px] text-blue-300 mt-1">เฉลี่ยรายวันทั้ง 4 สาขา (6 วันที่เหลือ)</p>
+                <div id="targetDailyAll" class="text-2xl sm:text-3xl font-bold font-num text-emerald-300 mt-1">฿6,906</div>
+                <p id="simDailyAllSub" class="text-[11px] text-blue-300 mt-1">เฉลี่ยรายวันทั้ง 4 สาขา (26 วันที่เหลือ)</p>
               </div>
 
               <!-- Daily per branch -->
               <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/10">
                 <span class="text-xs text-blue-200">ยอดขายเฉลี่ยต่อสาขาต่อวัน</span>
-                <div id="targetDailyPerBranch" class="text-2xl sm:text-3xl font-bold font-num text-emerald-300 mt-1">฿1,487</div>
-                <p class="text-[11px] text-blue-300 mt-1">เฉลี่ยต่อสาขาต่อวัน (6 วันที่เหลือ)</p>
+                <div id="targetDailyPerBranch" class="text-2xl sm:text-3xl font-bold font-num text-emerald-300 mt-1">฿1,727</div>
+                <p id="simDailyBranchSub" class="text-[11px] text-blue-300 mt-1">เฉลี่ยต่อสาขาต่อวัน (26 วันที่เหลือ)</p>
               </div>
             </div>
 
@@ -2075,38 +2075,38 @@
 
         <!-- Allocation by Branch Cards -->
         <div class="mt-6 pt-6 border-t border-white/10">
-          <h4 class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-blue-200 mb-3">
-            🎯 การกระจายเป้าหมายรายวันตามสัดส่วนผลงานเริ่มต้นเดือนตุลาคม (31 วัน)
+          <h4 id="simBranchDistHeader" class="text-xs sm:text-sm font-semibold uppercase tracking-wider text-blue-200 mb-3">
+            🎯 การกระจายเป้าหมายรายวันตามสัดส่วนผลงาน (เดือนพฤศจิกายน 30 วัน)
           </h4>
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
             
             <!-- B1 Target -->
             <div class="bg-white/10 p-3.5 rounded-2xl border border-white/10">
-              <span class="text-blue-300 font-bold block text-xs">สาขา 1 (สัดส่วน 33.4% 🥇)</span>
-              <span id="targetB1Daily" class="text-lg sm:text-xl font-bold font-num text-white block mt-1">฿2,217 / วัน</span>
-              <span class="text-[11px] text-blue-200 block mt-1">เป้าเดือน พ.ย.: <strong id="targetB1Total" class="font-num text-amber-300">฿66,243</strong></span>
+              <span id="targetB1Label" class="text-blue-300 font-bold block text-xs">สาขา 1 (สัดส่วน 34.0% 🥇)</span>
+              <span id="targetB1Daily" class="text-lg sm:text-xl font-bold font-num text-white block mt-1">฿2,348 / วัน</span>
+              <span class="text-[11px] text-blue-200 block mt-1">เป้าเดือน พ.ย.: <strong id="targetB1Total" class="font-num text-amber-300">฿67,433</strong></span>
             </div>
 
             <!-- B2 Target -->
             <div class="bg-white/10 p-3.5 rounded-2xl border border-white/10">
-              <span class="text-amber-300 font-bold block text-xs">สาขา 2 (สัดส่วน 21.3%)</span>
-              <span id="targetB2Daily" class="text-lg sm:text-xl font-bold font-num text-white block mt-1">฿1,414 / วัน</span>
-              <span class="text-[11px] text-blue-200 block mt-1">เป้าเดือน พ.ย.: <strong id="targetB2Total" class="font-num text-amber-300">฿42,245</strong></span>
+              <span id="targetB2Label" class="text-amber-300 font-bold block text-xs">สาขา 2 (สัดส่วน 17.8%)</span>
+              <span id="targetB2Daily" class="text-lg sm:text-xl font-bold font-num text-white block mt-1">฿1,229 / วัน</span>
+              <span class="text-[11px] text-blue-200 block mt-1">เป้าเดือน พ.ย.: <strong id="targetB2Total" class="font-num text-amber-300">฿35,303</strong></span>
             </div>
 
             <!-- B3 Target -->
             <div class="bg-white/10 p-3.5 rounded-2xl border border-white/10">
-              <span class="text-emerald-300 font-bold block text-xs">สาขา 3 (สัดส่วน 25.2% 🥈)</span>
-              <span id="targetB3Daily" class="text-lg sm:text-xl font-bold font-num text-emerald-300 block mt-1">฿1,673 / วัน</span>
-              <span class="text-[11px] text-blue-200 block mt-1">เป้าเดือน พ.ย.: <strong id="targetB3Total" class="font-num text-emerald-200">฿49,980</strong></span>
+              <span id="targetB3Label" class="text-emerald-300 font-bold block text-xs">สาขา 3 (สัดส่วน 29.6% 🥈)</span>
+              <span id="targetB3Daily" class="text-lg sm:text-xl font-bold font-num text-emerald-300 block mt-1">฿2,044 / วัน</span>
+              <span class="text-[11px] text-blue-200 block mt-1">เป้าเดือน พ.ย.: <strong id="targetB3Total" class="font-num text-emerald-200">฿58,707</strong></span>
             </div>
 
             <!-- B4 Target -->
             <div class="bg-white/10 p-3.5 rounded-2xl border border-white/10">
-              <span class="text-purple-300 font-bold block text-xs">สาขา 4 (สัดส่วน 20.1%)</span>
-              <span id="targetB4Daily" class="text-lg sm:text-xl font-bold font-num text-white block mt-1">฿1,334 / วัน</span>
-              <span class="text-[11px] text-blue-200 block mt-1">เป้าเดือน พ.ย.: <strong id="targetB4Total" class="font-num text-amber-300">฿39,865</strong></span>
+              <span id="targetB4Label" class="text-purple-300 font-bold block text-xs">สาขา 4 (สัดส่วน 18.6%)</span>
+              <span id="targetB4Daily" class="text-lg sm:text-xl font-bold font-num text-white block mt-1">฿1,285 / วัน</span>
+              <span class="text-[11px] text-blue-200 block mt-1">เป้าเดือน พ.ย.: <strong id="targetB4Total" class="font-num text-amber-300">฿36,890</strong></span>
             </div>
 
           </div>
@@ -2368,6 +2368,23 @@
       const fcMarginEl = document.getElementById("fcMarginText");
       if (fcMarginEl) fcMarginEl.innerText = (opProfit >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(opProfit));
 
+      // Dynamic Top Navigation Badges
+      const annualRevTotal = annualHistoryData.reduce((s, d) => s + (d.rev || 0), 0);
+      const navAnnualRevBadge = document.getElementById("navAnnualRevBadge");
+      if (navAnnualRevBadge) {
+        navAnnualRevBadge.innerText = `${(annualRevTotal / 1000000).toFixed(3)}M 🌟`;
+      }
+
+      const navCurrentDayBadge = document.getElementById("navCurrentDayBadge");
+      if (navCurrentDayBadge) {
+        navCurrentDayBadge.innerText = `พ.ย. 2569 (วันที่ ${days} พ.ย. วัน${lastD.dayOfWeek})`;
+      }
+
+      const navSimulatorBadge = document.getElementById("navSimulatorBadge");
+      if (navSimulatorBadge) {
+        navSimulatorBadge.innerText = `พ.ย. (วันที่ ${days})`;
+      }
+
       // Branch cards
       const dateEl = document.getElementById("fcBranchDate");
       if (dateEl) dateEl.innerText = `ข้อมูลวันที่ ${days} พ.ย. 69`;
@@ -2455,6 +2472,28 @@
             </tr>
           `;
         }
+
+        // Update Tab 2 Executive Metric Cards dynamically
+        const elPeriodBadge = document.getElementById("annualPeriodBadge");
+        if (elPeriodBadge) elPeriodBadge.innerText = `มกราคม - พฤศจิกายน 2569 (${annualHistoryData.length} เดือนเต็ม)`;
+
+        const elSalesTag = document.getElementById("annualSalesTag");
+        if (elSalesTag) elSalesTag.innerText = `ยอดขายสะสมแตะ ${(allRev/1000000).toFixed(3)} ล้านบาท! 🚀`;
+
+        const elDescText = document.getElementById("annualDescText");
+        if (elDescText) elDescText.innerText = `สังเคราะห์ข้อมูลจริง 4 สาขา • ม.ค. - ${rawDatabase.metadata.latestDay} พ.ย. 69 ยอดขายสะสมแตะ ฿${formatNumber(allRev)} • เทศกาลสงกรานต์ทำ All-Time High 2.50 แสนบาท • กำไรสุทธิสะสมรวม ${annualHistoryData.length} เดือน (${allNet >= 0 ? '+' : '-'}฿${formatNumber(Math.abs(allNet))}) โดยสาขา 1 หนุนกำไรสูงสุด`;
+
+        const elM1Rev = document.getElementById("annualMetric1Rev");
+        if (elM1Rev) elM1Rev.innerText = "฿" + formatNumber(allRev);
+
+        const elM1Sub = document.getElementById("annualMetric1Sub");
+        if (elM1Sub) elM1Sub.innerText = `เฉลี่ย ฿${formatNumber(Math.round(allRev / annualHistoryData.length))} / เดือน (แตะ ${(allRev/1000000).toFixed(3)} ล้าน)`;
+
+        const elM3Net = document.getElementById("annualMetric3Net");
+        if (elM3Net) elM3Net.innerText = (allNet >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(allNet));
+
+        const elM4Exp = document.getElementById("annualMetric4Exp");
+        if (elM4Exp) elM4Exp.innerText = "฿" + formatNumber(allTotExp);
       }
 
       // Table 2
@@ -3467,20 +3506,36 @@
         tbody.appendChild(tr);
       });
 
-        if (tfoot) {
+      if (tfoot) {
+        const totRev = b1HistoryData.reduce((s, d) => s + (d.rev || 0), 0);
+        const totOpExp = b1HistoryData.reduce((s, d) => s + (d.opExp || 0), 0);
+        const totRent = b1HistoryData.reduce((s, d) => s + (d.rent || 0), 0);
+        const totExp = b1HistoryData.reduce((s, d) => s + (d.totalExp || 0), 0);
+        const totNet = b1HistoryData.reduce((s, d) => s + (d.net || 0), 0);
+        const totMargin = totRev > 0 ? ((totNet / totRev) * 100).toFixed(2) : "0.00";
+
         tfoot.innerHTML = `
           <tr class="bg-blue-100/70 font-bold border-t-2 border-blue-300 text-blue-950">
-            <td class="py-3 px-3 font-sans">รวมสะสม 11 เดือน (ถึง 4 พ.ย.)</td>
+            <td class="py-3 px-3 font-sans">รวมสะสม ${b1HistoryData.length} เดือน (ถึง ${rawDatabase ? rawDatabase.metadata.latestDay : 4} พ.ย.)</td>
             <td class="py-3 px-3">-</td>
-            <td class="py-3 px-3 text-blue-900">฿561,746</td>
-            <td class="py-3 px-3">฿461,465</td>
-            <td class="py-3 px-3">฿55,343</td>
-            <td class="py-3 px-3">฿516,808</td>
-            <td class="py-3 px-3 text-emerald-700">+฿44,938</td>
-            <td class="py-3 px-3 text-emerald-700">+8.00%</td>
-            <td class="py-3 px-3 text-xs text-blue-900 font-sans">ยอดขายและกำไรสุทธิสะสมอันดับ 1 ของทุกสาขา (ยอดขายทะลุ 5.61 แสน กำไรสะสมแตะ 4.49 หมื่นบาท 4 วันแรก พ.ย. ขาย 6,388 บ. 🥇)</td>
+            <td class="py-3 px-3 text-blue-900">฿${formatNumber(totRev)}</td>
+            <td class="py-3 px-3">฿${formatNumber(totOpExp)}</td>
+            <td class="py-3 px-3">฿${formatNumber(totRent)}</td>
+            <td class="py-3 px-3">฿${formatNumber(totExp)}</td>
+            <td class="py-3 px-3 ${totNet >= 0 ? "text-emerald-700" : "text-red-700"}">${totNet >= 0 ? "+" : ""}฿${formatNumber(totNet)}</td>
+            <td class="py-3 px-3 ${totNet >= 0 ? "text-emerald-700" : "text-red-700"}">${totMargin}%</td>
+            <td class="py-3 px-3 text-xs text-blue-900 font-sans">ยอดขายและกำไรสุทธิสะสมอันดับ 1 ของทุกสาขา (ยอดขายแตะ ฿${formatNumber(totRev)} กำไรสะสม ${totNet >= 0 ? "+" : ""}฿${formatNumber(totNet)} 🥇)</td>
           </tr>
         `;
+
+        const b1RevVal = document.getElementById("b1CardRevVal");
+        if (b1RevVal) b1RevVal.innerText = "฿" + formatNumber(totRev);
+        const b1RevSub = document.getElementById("b1CardRevSub");
+        if (b1RevSub) b1RevSub.innerText = `เฉลี่ย ฿${formatNumber(Math.round(totRev / b1HistoryData.length))} / เดือน (อันดับ 1)`;
+        const b1NetVal = document.getElementById("b1CardNetVal");
+        if (b1NetVal) b1NetVal.innerText = (totNet >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(totNet));
+        const b1NetSub = document.getElementById("b1CardNetSub");
+        if (b1NetSub) b1NetSub.innerText = `Margin เฉลี่ย ${totMargin}%`;
       }
     }
 
@@ -3672,19 +3727,35 @@
       });
 
       if (tfoot) {
+        const totRev = b2HistoryData.reduce((s, d) => s + (d.rev || 0), 0);
+        const totOpExp = b2HistoryData.reduce((s, d) => s + (d.opExp || 0), 0);
+        const totRentPaid = b2HistoryData.reduce((s, d) => s + (d.rentPaid || 0), 0);
+        const totRentAmort = b2HistoryData.reduce((s, d) => s + (d.rentAmort || 0), 0);
+        const totNet = b2HistoryData.reduce((s, d) => s + (d.net || 0), 0);
+        const totMargin = totRev > 0 ? ((totNet / totRev) * 100).toFixed(2) : "0.00";
+
         tfoot.innerHTML = `
           <tr class="bg-amber-100/70 font-bold border-t-2 border-amber-300 text-amber-950">
-            <td class="py-3 px-3 font-sans">รวมสะสม 9 เดือน (ถึง 3 พ.ย.)</td>
+            <td class="py-3 px-3 font-sans">รวมสะสม ${b2HistoryData.length} เดือน (ถึง ${rawDatabase ? rawDatabase.metadata.latestDay : 4} พ.ย.)</td>
             <td class="py-3 px-3">-</td>
-            <td class="py-3 px-3 text-amber-900">฿248,364</td>
-            <td class="py-3 px-3">฿248,028</td>
-            <td class="py-3 px-3">฿16,666</td>
-            <td class="py-3 px-3">฿16,666</td>
-            <td class="py-3 px-3 text-red-700">-฿16,330</td>
-            <td class="py-3 px-3 text-red-700">-6.58%</td>
-            <td class="py-3 px-3 text-xs text-amber-900 font-sans">ยอดขายสะสมแตะ 2.483 แสนบาท 4 วันแรก พ.ย. ยอดขาย 3,337 บ. 🎯</td>
+            <td class="py-3 px-3 text-amber-900">฿${formatNumber(totRev)}</td>
+            <td class="py-3 px-3">฿${formatNumber(totOpExp)}</td>
+            <td class="py-3 px-3">฿${formatNumber(Math.round(totRentPaid))}</td>
+            <td class="py-3 px-3">฿${formatNumber(Math.round(totRentAmort))}</td>
+            <td class="py-3 px-3 ${totNet >= 0 ? "text-emerald-700" : "text-red-700"}">${totNet >= 0 ? "+" : ""}฿${formatNumber(Math.round(totNet))}</td>
+            <td class="py-3 px-3 ${totNet >= 0 ? "text-emerald-700" : "text-red-700"}">${totMargin}%</td>
+            <td class="py-3 px-3 text-xs text-amber-900 font-sans">ยอดขายสะสมแตะ ฿${formatNumber(totRev)} (${b2HistoryData.length} เดือน) 🎯</td>
           </tr>
         `;
+
+        const b2RevVal = document.getElementById("b2CardRevVal");
+        if (b2RevVal) b2RevVal.innerText = "฿" + formatNumber(totRev);
+        const b2RevSub = document.getElementById("b2CardRevSub");
+        if (b2RevSub) b2RevSub.innerText = `เฉลี่ย ฿${formatNumber(Math.round(totRev / b2HistoryData.length))} / เดือน`;
+        const b2NetVal = document.getElementById("b2CardNetVal");
+        if (b2NetVal) b2NetVal.innerText = (totNet >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(Math.round(totNet)));
+        const b2NetSub = document.getElementById("b2CardNetSub");
+        if (b2NetSub) b2NetSub.innerText = `Margin เฉลี่ย ${totMargin}%`;
       }
     }
 
@@ -3878,19 +3949,35 @@
       });
 
       if (tfoot) {
+        const totRev = b3HistoryData.reduce((s, d) => s + (d.rev || 0), 0);
+        const totOpExp = b3HistoryData.reduce((s, d) => s + (d.opExp || 0), 0);
+        const totRent = b3HistoryData.reduce((s, d) => s + (d.rent || 0), 0);
+        const totExp = b3HistoryData.reduce((s, d) => s + (d.totalExp || 0), 0);
+        const totNet = b3HistoryData.reduce((s, d) => s + (d.net || 0), 0);
+        const totMargin = totRev > 0 ? ((totNet / totRev) * 100).toFixed(2) : "0.00";
+
         tfoot.innerHTML = `
           <tr class="bg-emerald-100/70 font-bold border-t-2 border-emerald-300 text-emerald-950">
-            <td class="py-3 px-3 font-sans">รวมสะสม 11 เดือน (ถึง 4 พ.ย.)</td>
+            <td class="py-3 px-3 font-sans">รวมสะสม ${b3HistoryData.length} เดือน (ถึง ${rawDatabase ? rawDatabase.metadata.latestDay : 4} พ.ย.)</td>
             <td class="py-3 px-3">-</td>
-            <td class="py-3 px-3 text-emerald-900">฿453,029</td>
-            <td class="py-3 px-3">฿445,785</td>
-            <td class="py-3 px-3">฿32,000</td>
-            <td class="py-3 px-3">฿477,785</td>
-            <td class="py-3 px-3 text-red-700">-฿24,756</td>
-            <td class="py-3 px-3 text-red-700">-5.46%</td>
-            <td class="py-3 px-3 text-xs text-emerald-900 font-sans">ยอดขายสม่ำเสมออันดับ 2 ทะลุ 4.53 แสนบาท 4 วันแรก พ.ย. ขาย 5,563 บ. 🥈</td>
+            <td class="py-3 px-3 text-emerald-900">฿${formatNumber(totRev)}</td>
+            <td class="py-3 px-3">฿${formatNumber(totOpExp)}</td>
+            <td class="py-3 px-3">฿${formatNumber(totRent)}</td>
+            <td class="py-3 px-3">฿${formatNumber(totExp)}</td>
+            <td class="py-3 px-3 ${totNet >= 0 ? "text-emerald-700" : "text-red-700"}">${totNet >= 0 ? "+" : ""}฿${formatNumber(totNet)}</td>
+            <td class="py-3 px-3 ${totNet >= 0 ? "text-emerald-700" : "text-red-700"}">${totMargin}%</td>
+            <td class="py-3 px-3 text-xs text-emerald-900 font-sans">ยอดขายสม่ำเสมออันดับ 2 ทะลุ ฿${formatNumber(totRev)} 🥈</td>
           </tr>
         `;
+
+        const b3RevVal = document.getElementById("b3CardRevVal");
+        if (b3RevVal) b3RevVal.innerText = "฿" + formatNumber(totRev);
+        const b3RevSub = document.getElementById("b3CardRevSub");
+        if (b3RevSub) b3RevSub.innerText = `เฉลี่ย ฿${formatNumber(Math.round(totRev / b3HistoryData.length))} / เดือน`;
+        const b3NetVal = document.getElementById("b3CardNetVal");
+        if (b3NetVal) b3NetVal.innerText = (totNet >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(totNet));
+        const b3NetSub = document.getElementById("b3CardNetSub");
+        if (b3NetSub) b3NetSub.innerText = `Margin เฉลี่ย ${totMargin}%`;
       }
     }
 
@@ -4082,19 +4169,35 @@
       });
 
       if (tfoot) {
+        const totRev = b4HistoryData.reduce((s, d) => s + (d.rev || 0), 0);
+        const totOpExp = b4HistoryData.reduce((s, d) => s + (d.opExp || 0), 0);
+        const totRentPaid = b4HistoryData.reduce((s, d) => s + (d.rentPaid || 0), 0);
+        const totRentAmort = b4HistoryData.reduce((s, d) => s + (d.rentAmort || 0), 0);
+        const totNet = b4HistoryData.reduce((s, d) => s + (d.net || 0), 0);
+        const totMargin = totRev > 0 ? ((totNet / totRev) * 100).toFixed(2) : "0.00";
+
         tfoot.innerHTML = `
           <tr class="bg-purple-100/70 font-bold border-t-2 border-purple-300 text-purple-950">
-            <td class="py-3 px-3 font-sans">รวมสะสม 9 เดือน (ถึง 3 พ.ย.)</td>
+            <td class="py-3 px-3 font-sans">รวมสะสม ${b4HistoryData.length} เดือน (ถึง ${rawDatabase ? rawDatabase.metadata.latestDay : 4} พ.ย.)</td>
             <td class="py-3 px-3">-</td>
-            <td class="py-3 px-3 text-purple-900">฿253,466</td>
-            <td class="py-3 px-3">฿241,257</td>
-            <td class="py-3 px-3">฿31,465</td>
-            <td class="py-3 px-3">฿21,465</td>
-            <td class="py-3 px-3 text-red-700">-฿9,256</td>
-            <td class="py-3 px-3 text-red-700">-3.65%</td>
-            <td class="py-3 px-3 text-xs text-purple-900 font-sans">เติบโตเร็ว ทะลุ 2.534 แสนบาท 4 วันแรก พ.ย. ขาย 3,488 บ. 🚀</td>
+            <td class="py-3 px-3 text-purple-900">฿${formatNumber(totRev)}</td>
+            <td class="py-3 px-3">฿${formatNumber(totOpExp)}</td>
+            <td class="py-3 px-3">฿${formatNumber(Math.round(totRentPaid))}</td>
+            <td class="py-3 px-3">฿${formatNumber(Math.round(totRentAmort))}</td>
+            <td class="py-3 px-3 ${totNet >= 0 ? "text-emerald-700" : "text-red-700"}">${totNet >= 0 ? "+" : ""}฿${formatNumber(Math.round(totNet))}</td>
+            <td class="py-3 px-3 ${totNet >= 0 ? "text-emerald-700" : "text-red-700"}">${totMargin}%</td>
+            <td class="py-3 px-3 text-xs text-purple-900 font-sans">เติบโตเร็ว ทะลุ ฿${formatNumber(totRev)} (${b4HistoryData.length} เดือน) 🚀</td>
           </tr>
         `;
+
+        const b4RevVal = document.getElementById("b4CardRevVal");
+        if (b4RevVal) b4RevVal.innerText = "฿" + formatNumber(totRev);
+        const b4RevSub = document.getElementById("b4CardRevSub");
+        if (b4RevSub) b4RevSub.innerText = `เฉลี่ย ฿${formatNumber(Math.round(totRev / b4HistoryData.length))} / เดือน`;
+        const b4NetVal = document.getElementById("b4CardNetVal");
+        if (b4NetVal) b4NetVal.innerText = (totNet >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(Math.round(totNet)));
+        const b4NetSub = document.getElementById("b4CardNetSub");
+        if (b4NetSub) b4NetSub.innerText = `Margin เฉลี่ย ${totMargin}%`;
       }
     }
 
@@ -4183,8 +4286,154 @@
       if (elB4) elB4.innerText = '฿' + formatNumber(b4);
     }
 
-    function renderCashTransferChart() {
-      const container = document.getElementById('chart-cash-transfer-container');
+    function renderInsightsSection() {
+      if (!rawDatabase || !rawDatabase.currentMonthDaily) return;
+      const days = rawDatabase.currentMonthDaily.length;
+      const latestDay = rawDatabase.metadata.latestDay;
+      const shortMonth = "พ.ย.";
+
+      let totCash = 0, totTrans = 0, totRev = 0;
+      const bStats = {
+        branch1: { name: "สาขา 1 🥇", cash: 0, trans: 0, rev: 0, color: "blue" },
+        branch2: { name: "สาขา 2", cash: 0, trans: 0, rev: 0, color: "amber" },
+        branch3: { name: "สาขา 3 🥈", cash: 0, trans: 0, rev: 0, color: "emerald" },
+        branch4: { name: "สาขา 4 🚀", cash: 0, trans: 0, rev: 0, color: "purple" }
+      };
+
+      rawDatabase.currentMonthDaily.forEach(d => {
+        ["branch1", "branch2", "branch3", "branch4"].forEach(bk => {
+          bStats[bk].cash += d.branches[bk].cash;
+          bStats[bk].trans += d.branches[bk].transfer;
+          bStats[bk].rev += d.branches[bk].revenue;
+        });
+        totCash += (d.total.cash || (d.branches.branch1.cash + d.branches.branch2.cash + d.branches.branch3.cash + d.branches.branch4.cash));
+        totTrans += (d.total.transfer || (d.branches.branch1.transfer + d.branches.branch2.transfer + d.branches.branch3.transfer + d.branches.branch4.transfer));
+        totRev += (d.total.revenue || (d.branches.branch1.revenue + d.branches.branch2.revenue + d.branches.branch3.revenue + d.branches.branch4.revenue));
+      });
+
+      const cashPct = totRev > 0 ? (totCash / totRev * 100) : 0;
+      const transPct = totRev > 0 ? (totTrans / totRev * 100) : 0;
+
+      // Update Subtitle Badge
+      const subBadge = document.getElementById("insightSubtitleBadge");
+      if (subBadge) subBadge.innerText = `กลั่นกรองจากข้อมูลจริงสะสม ${days} วัน ${shortMonth} (฿${formatNumber(totRev)}) & สถิติ 11 เดือนเต็ม`;
+
+      // Top Quick Badges
+      const transBadge = document.getElementById("insightTransferPctBadge");
+      if (transBadge) transBadge.innerText = `${transPct.toFixed(1)}%`;
+
+      // Header labels
+      const cashPctLabel = document.getElementById("insightCashPctLabel");
+      if (cashPctLabel) cashPctLabel.innerText = `เงินสด (${cashPct.toFixed(1)}%)`;
+
+      const transPctLabel = document.getElementById("insightTransPctLabel");
+      if (transPctLabel) transPctLabel.innerText = `เงินโอน/สแกน (${transPct.toFixed(1)}%)`;
+
+      const cashTransSub = document.getElementById("insightCashTransSub");
+      if (cashTransSub) cashTransSub.innerText = `พฤติกรรมการชำระเงินของลูกค้าแต่ละสาขาใน ${days} วัน ${shortMonth} (ยอดขายรวม ฿${formatNumber(totRev)})`;
+
+      // Branch cards
+      ["branch1", "branch2", "branch3", "branch4"].forEach((bk, idx) => {
+        const n = idx + 1;
+        const b = bStats[bk];
+        const bCashPct = b.rev > 0 ? ((b.cash / b.rev) * 100) : 0;
+        const bTransPct = b.rev > 0 ? ((b.trans / b.rev) * 100) : 0;
+
+        const titleEl = document.getElementById(`insightB${n}Title`);
+        if (titleEl) titleEl.innerText = `${b.name} (รวม ฿${formatNumber(b.rev)})`;
+
+        const badgeEl = document.getElementById(`insightB${n}Badge`);
+        if (badgeEl) {
+          if (bTransPct >= bCashPct) {
+            badgeEl.innerText = `โอน ${bTransPct.toFixed(1)}% 🔥`;
+            badgeEl.className = "text-[11px] px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-semibold font-num";
+          } else {
+            badgeEl.innerText = `เงินสด ${bCashPct.toFixed(1)}%`;
+            badgeEl.className = "text-[11px] px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 font-semibold font-num";
+          }
+        }
+
+        const cashEl = document.getElementById(`insightB${n}Cash`);
+        if (cashEl) cashEl.innerText = `฿${formatNumber(b.cash)} (${bCashPct.toFixed(1)}%)`;
+
+        const transEl = document.getElementById(`insightB${n}Trans`);
+        if (transEl) transEl.innerText = `฿${formatNumber(b.trans)} (${bTransPct.toFixed(1)}%)`;
+
+        const cashBar = document.getElementById(`insightB${n}CashBar`);
+        if (cashBar) {
+          cashBar.style.width = `${bCashPct}%`;
+          cashBar.title = `เงินสด ${bCashPct.toFixed(1)}%`;
+        }
+
+        const transBar = document.getElementById(`insightB${n}TransBar`);
+        if (transBar) {
+          transBar.style.width = `${bTransPct}%`;
+          transBar.title = `เงินโอน ${bTransPct.toFixed(1)}%`;
+        }
+      });
+
+      // BEP Cards Dynamic Updates
+      const daysInMonth = (rawDatabase.metadata && rawDatabase.metadata.daysInMonth) || 30;
+      const b1Bep = Math.round((350 + (rawDatabase.branchConfig.branch1.fixedRent / daysInMonth)) / 0.5);
+      const b2Bep = Math.round((350 + (rawDatabase.branchConfig.branch2.fixedRent / daysInMonth)) / 0.5);
+      const b3Bep = Math.round((350 + (rawDatabase.branchConfig.branch3.fixedRent / daysInMonth)) / 0.5);
+      const b4Bep = Math.round((350 + (rawDatabase.branchConfig.branch4.fixedRent / daysInMonth)) / 0.5);
+      const totBep = b1Bep + b2Bep + b3Bep + b4Bep;
+
+      const bepTotalBadge = document.getElementById("insightBepTotalBadge");
+      if (bepTotalBadge) bepTotalBadge.innerText = `฿${formatNumber(totBep)}/ว.`;
+
+      const b1AvgDaily = bStats.branch1.rev / days;
+      const b2AvgDaily = bStats.branch2.rev / days;
+      const b3AvgDaily = bStats.branch3.rev / days;
+      const b4AvgDaily = bStats.branch4.rev / days;
+      const totAvgDaily = totRev / days;
+
+      const updateBepCard = (n, bepVal, avgVal, rentVal) => {
+        const bepValEl = document.getElementById(`bepB${n}Val`);
+        if (bepValEl) bepValEl.innerText = `฿${formatNumber(bepVal)} / วัน`;
+
+        const bepDetailEl = document.getElementById(`bepB${n}Detail`);
+        if (bepDetailEl) {
+          const rentDaily = Math.round(rentVal / daysInMonth);
+          const fixedDaily = 350 + rentDaily;
+          const pct = ((avgVal / bepVal) * 100).toFixed(1);
+          bepDetailEl.innerHTML = `<div>• ค่าแรง ฿350 + เช่าเฉลี่ย ฿${formatNumber(rentDaily)} = ฿${formatNumber(fixedDaily)}/วัน</div>
+            <div>• ทำได้จริงสะสม ${days} วัน: <strong class="${avgVal >= bepVal ? "text-emerald-600" : "text-amber-600"}">฿${formatNumber(Math.round(avgVal))} / วัน</strong> (${pct}%)</div>`;
+        }
+
+        const bepStatusEl = document.getElementById(`bepB${n}Status`);
+        if (bepStatusEl) {
+          if (avgVal >= bepVal) {
+            bepStatusEl.innerText = "ผ่านเกณฑ์ ✅";
+            bepStatusEl.className = "text-[11px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md";
+          } else {
+            bepStatusEl.innerText = "กำลังเร่งทำยอด 🎯";
+            bepStatusEl.className = "text-[11px] font-semibold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md";
+          }
+        }
+      };
+
+      updateBepCard(1, b1Bep, b1AvgDaily, rawDatabase.branchConfig.branch1.fixedRent);
+      updateBepCard(2, b2Bep, b2AvgDaily, rawDatabase.branchConfig.branch2.fixedRent);
+      updateBepCard(3, b3Bep, b3AvgDaily, rawDatabase.branchConfig.branch3.fixedRent);
+      updateBepCard(4, b4Bep, b4AvgDaily, rawDatabase.branchConfig.branch4.fixedRent);
+
+      const bepSummaryText = document.getElementById("bepSummaryText");
+      if (bepSummaryText) {
+        bepSummaryText.innerHTML = `เป้าหมายรวม 4 สาขา: จุดคุ้มทุน <span class="text-amber-400 font-num">฿${formatNumber(totBep)} / วัน</span> • ยอดขายเฉลี่ยจริงสะสม ${days} วัน <span class="text-emerald-400 font-num">฿${formatNumber(Math.round(totAvgDaily))} / วัน</span>`;
+      }
+      const bepSummarySub = document.getElementById("bepSummarySub");
+      if (bepSummarySub) {
+        bepSummarySub.innerHTML = `เฉลี่ย ${days} วันทำได้ <strong>฿${formatNumber(Math.round(totAvgDaily))} / วัน</strong> (${((totAvgDaily / totBep) * 100).toFixed(1)}% ของจุดคุ้มทุน) กำไรดำเนินงานหน้าร้านสะสม <strong>+฿${formatNumber(totRev - (branchMeta.all ? branchMeta.all.opExp : 0))}</strong>`;
+      }
+
+      // Render Dynamic SVG Cash vs Transfer Chart
+      renderCashTransferChartDynamic(bStats);
+    }
+
+    function renderCashTransferChartDynamic(bStats) {
+      const container = document.getElementById("chart-cash-transfer-container");
       if (!container) return;
 
       const width = container.clientWidth || 550;
@@ -4193,14 +4442,22 @@
       const chartWidth = width - margin.left - margin.right;
       const chartHeight = height - margin.top - margin.bottom;
 
-      const data = [
-        { name: 'สาขา 1', cash: 24912, transfer: 17905, total: 42817, cashPct: 58.2, transPct: 41.8 },
-        { name: 'สาขา 2', cash: 11397, transfer: 7288, total: 18685, cashPct: 61.0, transPct: 39.0 },
-        { name: 'สาขา 3', cash: 14022, transfer: 9226, total: 23248, cashPct: 60.3, transPct: 39.7 },
-        { name: 'สาขา 4', cash: 8120, transfer: 9880, total: 18000, cashPct: 45.1, transPct: 54.9 }
-      ];
+      const keys = ["branch1", "branch2", "branch3", "branch4"];
+      const data = keys.map(k => {
+        const b = bStats[k];
+        const cashPct = b.rev > 0 ? (b.cash / b.rev * 100) : 50;
+        const transPct = b.rev > 0 ? (b.trans / b.rev * 100) : 50;
+        return {
+          name: b.name.split(" ")[0] + " " + b.name.split(" ")[1],
+          cash: b.cash,
+          transfer: b.trans,
+          total: b.rev,
+          cashPct: parseFloat(cashPct.toFixed(1)),
+          transPct: parseFloat(transPct.toFixed(1))
+        };
+      });
 
-      const maxTotal = 45000;
+      const maxTotal = Math.max(...data.map(d => d.total), 1000) * 1.18;
       const rowHeight = chartHeight / data.length;
       const barHeight = 18;
 
@@ -4209,51 +4466,41 @@
       data.forEach((d, i) => {
         const y = margin.top + i * rowHeight + (rowHeight - barHeight) / 2;
         const totalW = (d.total / maxTotal) * chartWidth;
-        const cashW = (d.cash / d.total) * totalW;
+        const cashW = d.total > 0 ? (d.cash / d.total) * totalW : 0;
         const transW = totalW - cashW;
 
-        // Branch label
         svg += `<text x="${margin.left - 10}" y="${y + barHeight - 4}" text-anchor="end" fill="#475569" font-size="12" font-family="'Prompt', sans-serif" font-weight="600">${d.name}</text>`;
-
-        // Background track
         svg += `<rect x="${margin.left}" y="${y}" width="${chartWidth}" height="${barHeight}" rx="4" fill="#e2e8f0" opacity="0.4"/>`;
+        svg += `<rect x="${margin.left}" y="${y}" width="${cashW}" height="${barHeight}" rx="4" fill="#2563eb" opacity="0.9"><title>${d.name} เงินสด: ฿${formatNumber(d.cash)} (${d.cashPct}%)</title></rect>`;
+        svg += `<rect x="${margin.left + cashW}" y="${y}" width="${transW}" height="${barHeight}" rx="4" fill="#10b981" opacity="0.95"><title>${d.name} เงินโอน: ฿${formatNumber(d.transfer)} (${d.transPct}%)</title></rect>`;
 
-        // Cash bar (blue)
-        svg += `<rect x="${margin.left}" y="${y}" width="${cashW}" height="${barHeight}" rx="4" fill="#2563eb" opacity="0.9">
-          <title>${d.name} เงินสด: ฿${formatNumber(d.cash)} (${d.cashPct}%)</title>
-        </rect>`;
-
-        // Transfer bar (emerald)
-        svg += `<rect x="${margin.left + cashW}" y="${y}" width="${transW}" height="${barHeight}" rx="4" fill="#10b981" opacity="0.95">
-          <title>${d.name} เงินโอน: ฿${formatNumber(d.transfer)} (${d.transPct}%)</title>
-        </rect>`;
-
-        // Value text
-        const cashLabel = d.cashPct >= 30 ? `${d.cashPct}%` : '';
-        const transLabel = d.transPct >= 30 ? `${d.transPct}%` : '';
-
-        if (cashW > 35) {
-          svg += `<text x="${margin.left + cashW / 2}" y="${y + barHeight - 4.5}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">${cashLabel}</text>`;
+        if (cashW > 28) {
+          svg += `<text x="${margin.left + cashW / 2}" y="${y + barHeight - 4.5}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">${d.cashPct}%</text>`;
         }
-        if (transW > 35) {
-          svg += `<text x="${margin.left + cashW + transW / 2}" y="${y + barHeight - 4.5}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">${transLabel}</text>`;
+        if (transW > 28) {
+          svg += `<text x="${margin.left + cashW + transW / 2}" y="${y + barHeight - 4.5}" text-anchor="middle" fill="#ffffff" font-size="10" font-weight="bold">${d.transPct}%</text>`;
         }
 
-        // Total badge on right
         svg += `<text x="${margin.left + totalW + 8}" y="${y + barHeight - 4.5}" fill="#1e293b" font-size="11" font-weight="bold">฿${formatNumber(d.total)}</text>`;
       });
 
-      // Axis ticks at bottom
-      const ticks = [0, 10000, 20000, 30000, 40000];
+      const step = Math.ceil(maxTotal / 4 / 1000) * 1000;
+      const ticks = [0, step, step * 2, step * 3, step * 4];
       const yAxis = height - margin.bottom + 14;
       ticks.forEach(t => {
-        const x = margin.left + (t / maxTotal) * chartWidth;
-        svg += `<text x="${x}" y="${yAxis}" text-anchor="middle" fill="#94a3b8" font-size="10">฿${t / 1000}k</text>`;
-        svg += `<line x1="${x}" y1="${margin.top}" x2="${x}" y2="${height - margin.bottom}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 2"/>`;
+        if (t <= maxTotal) {
+          const x = margin.left + (t / maxTotal) * chartWidth;
+          svg += `<text x="${x}" y="${yAxis}" text-anchor="middle" fill="#94a3b8" font-size="10">฿${t >= 1000 ? (t / 1000) + 'k' : t}</text>`;
+          svg += `<line x1="${x}" y1="${margin.top}" x2="${x}" y2="${height - margin.bottom}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="2 2"/>`;
+        }
       });
 
       svg += `</svg>`;
       container.innerHTML = svg;
+    }
+
+    function renderCashTransferChart() {
+      renderInsightsSection();
     }
 
     function renderDayOfWeekChart() {
@@ -4352,18 +4599,50 @@
       const contributionMarginRatio = 0.50;
       const targetMonthlyRevenue = (targetProfit + fixedCosts) / contributionMarginRatio;
 
-      const currentRevenue = branchMeta['all'].rev;
-      const remainingDays = 31 - branchMeta['all'].days;
+      const daysInMonth = (rawDatabase && rawDatabase.metadata && rawDatabase.metadata.daysInMonth) || 30;
+      const daysElapsed = (branchMeta['all'] && branchMeta['all'].days) || 1;
+      const currentRevenue = (branchMeta['all'] && branchMeta['all'].rev) || 0;
+      const remainingDays = Math.max(1, daysInMonth - daysElapsed);
       const remainingRevenue = Math.max(0, targetMonthlyRevenue - currentRevenue);
-      const dailyAllNeeded = remainingDays > 0 ? (remainingRevenue / remainingDays) : 0;
-      const dailyPerBranchNeeded = remainingDays > 0 ? (dailyAllNeeded / 4) : 0;
+      const dailyAllNeeded = remainingRevenue / remainingDays;
+      const dailyPerBranchNeeded = dailyAllNeeded / 4;
 
       const progressPct = Math.min(100, Math.max(0, (currentRevenue / targetMonthlyRevenue) * 100));
+      const monthName = (rawDatabase && rawDatabase.metadata && rawDatabase.metadata.currentMonthName) || "พฤศจิกายน 2569";
+      const shortMonth = "พ.ย.";
 
       const goalInput = document.getElementById('profitGoalInput');
       const goalSlider = document.getElementById('profitGoalSlider');
       if (goalInput) goalInput.value = targetProfit;
       if (goalSlider) goalSlider.value = targetProfit;
+
+      // Update Simulator Dynamic Status & Headers
+      const elStatus = document.getElementById('simStatusBadge');
+      if (elStatus) elStatus.innerText = `สะสม ${daysElapsed} วัน (1-${daysElapsed} ${monthName})`;
+
+      const elActualLabel = document.getElementById('simActualLabel');
+      if (elActualLabel) elActualLabel.innerText = `ยอดขายจริงสะสม ${daysElapsed} วัน:`;
+
+      const elActualRev = document.getElementById('simActualRev');
+      if (elActualRev) elActualRev.innerText = '฿' + formatNumber(currentRevenue);
+
+      const elTargetHeader = document.getElementById('simTargetHeader');
+      if (elTargetHeader) elTargetHeader.innerText = `เป้ายอดขายรวมทั้งเดือน (${monthName} ${daysInMonth} วัน)`;
+
+      const elRemainingDays = document.getElementById('simRemainingDaysText');
+      if (elRemainingDays) elRemainingDays.innerText = `เหลือเวลาอีก ${remainingDays} วันในเดือนนี้`;
+
+      const elDailyAllSub = document.getElementById('simDailyAllSub');
+      if (elDailyAllSub) elDailyAllSub.innerText = `เฉลี่ยรายวันทั้ง 4 สาขา (${remainingDays} วันที่เหลือ)`;
+
+      const elDailyBranchSub = document.getElementById('simDailyBranchSub');
+      if (elDailyBranchSub) elDailyBranchSub.innerText = `เฉลี่ยต่อสาขาต่อวัน (${remainingDays} วันที่เหลือ)`;
+
+      const elBranchDistHeader = document.getElementById('simBranchDistHeader');
+      if (elBranchDistHeader) elBranchDistHeader.innerText = `🎯 การกระจายเป้าหมายรายวันตามสัดส่วนผลงาน (เดือน${monthName} ${daysInMonth} วัน)`;
+
+      const elAssumpDays = document.getElementById('simAssumpDays');
+      if (elAssumpDays) elAssumpDays.innerText = `สะสมแล้ว ${daysElapsed} วัน (เริ่มต้นเดือน ${shortMonth} 69)`;
 
       document.getElementById('targetMonthlyRev').innerText = '฿' + formatNumber(targetMonthlyRevenue);
       document.getElementById('targetRemainingRev').innerText = '฿' + formatNumber(remainingRevenue);
@@ -4373,18 +4652,33 @@
       document.getElementById('progressPctText').innerText = progressPct.toFixed(1) + '%';
       document.getElementById('goalProgressBar').style.width = progressPct.toFixed(1) + '%';
 
-      const ratios = { b1: 0.334, b2: 0.213, b3: 0.252, b4: 0.201 };
-      document.getElementById('targetB1Daily').innerText = '฿' + formatNumber(dailyAllNeeded * ratios.b1) + ' / วัน';
-      document.getElementById('targetB1Total').innerText = '฿' + formatNumber(targetMonthlyRevenue * ratios.b1);
+      let rB1 = 0.334, rB2 = 0.213, rB3 = 0.252, rB4 = 0.201;
+      if (currentRevenue > 0 && branchMeta.branch1 && branchMeta.branch2 && branchMeta.branch3 && branchMeta.branch4) {
+        rB1 = branchMeta.branch1.rev / currentRevenue;
+        rB2 = branchMeta.branch2.rev / currentRevenue;
+        rB3 = branchMeta.branch3.rev / currentRevenue;
+        rB4 = branchMeta.branch4.rev / currentRevenue;
+      }
 
-      document.getElementById('targetB2Daily').innerText = '฿' + formatNumber(dailyAllNeeded * ratios.b2) + ' / วัน';
-      document.getElementById('targetB2Total').innerText = '฿' + formatNumber(targetMonthlyRevenue * ratios.b2);
+      const elB1Label = document.getElementById('targetB1Label');
+      if (elB1Label) elB1Label.innerText = `สาขา 1 (สัดส่วน ${(rB1 * 100).toFixed(1)}% 🥇)`;
+      document.getElementById('targetB1Daily').innerText = '฿' + formatNumber(dailyAllNeeded * rB1) + ' / วัน';
+      document.getElementById('targetB1Total').innerText = '฿' + formatNumber(targetMonthlyRevenue * rB1);
 
-      document.getElementById('targetB3Daily').innerText = '฿' + formatNumber(dailyAllNeeded * ratios.b3) + ' / วัน';
-      document.getElementById('targetB3Total').innerText = '฿' + formatNumber(targetMonthlyRevenue * ratios.b3);
+      const elB2Label = document.getElementById('targetB2Label');
+      if (elB2Label) elB2Label.innerText = `สาขา 2 (สัดส่วน ${(rB2 * 100).toFixed(1)}%)`;
+      document.getElementById('targetB2Daily').innerText = '฿' + formatNumber(dailyAllNeeded * rB2) + ' / วัน';
+      document.getElementById('targetB2Total').innerText = '฿' + formatNumber(targetMonthlyRevenue * rB2);
 
-      document.getElementById('targetB4Daily').innerText = '฿' + formatNumber(dailyAllNeeded * ratios.b4) + ' / วัน';
-      document.getElementById('targetB4Total').innerText = '฿' + formatNumber(targetMonthlyRevenue * ratios.b4);
+      const elB3Label = document.getElementById('targetB3Label');
+      if (elB3Label) elB3Label.innerText = `สาขา 3 (สัดส่วน ${(rB3 * 100).toFixed(1)}% 🥈)`;
+      document.getElementById('targetB3Daily').innerText = '฿' + formatNumber(dailyAllNeeded * rB3) + ' / วัน';
+      document.getElementById('targetB3Total').innerText = '฿' + formatNumber(targetMonthlyRevenue * rB3);
+
+      const elB4Label = document.getElementById('targetB4Label');
+      if (elB4Label) elB4Label.innerText = `สาขา 4 (สัดส่วน ${(rB4 * 100).toFixed(1)}% 🚀)`;
+      document.getElementById('targetB4Daily').innerText = '฿' + formatNumber(dailyAllNeeded * rB4) + ' / วัน';
+      document.getElementById('targetB4Total').innerText = '฿' + formatNumber(targetMonthlyRevenue * rB4);
     }
 
     function onGoalSliderChange(val) {
@@ -4628,7 +4922,7 @@
       renderB3HistoryChart();
       renderB4HistoryTable();
       renderHistoryChart();
-      renderCashTransferChart();
+      renderInsightsSection();
       renderDayOfWeekChart();
       updateTargetPlanning();
     }
