@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="UTF-8">
@@ -318,15 +318,15 @@
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-indigo-800/40 pb-5">
           <div>
             <div class="flex items-center gap-2">
-              <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
+              <span id="fcBadgeText" class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-400/30">
                 🚀 สรุปผลประกอบการ: พฤศจิกายน 2569 (Day 4: วันพุธที่ 4 พ.ย.)
               </span>
-              <span class="text-xs text-emerald-400 font-medium">วันที่ 4 จาก 30 วัน (พ.ย. 69)</span>
+              <span id="fcDayCount" class="text-xs text-emerald-400 font-medium">วันที่ 4 จาก 30 วัน (พ.ย. 69)</span>
             </div>
-            <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-2">
+            <h3 id="fcHeadingText" class="text-xl sm:text-2xl font-extrabold text-white mt-2">
               ผลการดำเนินงานเดือนพฤศจิกายน 2569 (สะสม 4 วัน Day 4)
             </h3>
-            <p class="text-xs sm:text-sm text-slate-300 mt-1">
+            <p id="fcSubText" class="text-xs sm:text-sm text-slate-300 mt-1">
               ผลประกอบการสะสม 4 วัน: ยอดขายรวม <strong class="text-white font-num">฿18,776</strong> (ว.4 ฿3,876) | รายจ่ายดำเนินงานหน้าร้าน <strong class="text-amber-300 font-num">฿21,639</strong> (ว.4 ฿5,404) | ค่าเช่าจ่ายสด 4 สาขา <strong class="text-rose-300 font-num">฿15,667</strong> | ยอดเงินโอนส่งสะสม <strong class="text-emerald-400 font-num">฿3,256</strong> (ว.4 ฿602)
             </p>
           </div>
@@ -386,7 +386,7 @@
                 <strong id="fcMarginText" class="font-num font-bold text-amber-300">-฿2,863</strong>
               </div>
             </div>
-            <div class="mt-3 pt-2.5 border-t border-emerald-900/40 text-[11px] text-slate-300">
+            <div id="fcSummaryBottom" class="mt-3 pt-2.5 border-t border-emerald-900/40 text-[11px] text-slate-300">
               <span class="text-amber-300 font-semibold">💡 สรุปภาพรวม:</span> สะสม 4 วัน ยอดขายรวมแตะ <strong class="text-white font-num">฿18,776</strong> โดยมี <strong class="text-blue-300">สาขา 1</strong> นำอันดับ 1 ที่ <strong class="text-blue-300 font-num">฿6,388</strong> 🥇 และคว้ากำไรหน้าร้านวันที่ 4 เด่นสุด (+฿771) ค่าเช่าล่วงหน้าทั้งเดือน 4 สาขา <strong class="text-purple-300 font-num">฿15,666.67</strong> จ่ายครบตั้งแต่ต้นเดือน ยอดโอนส่งสะสม 4 วันรวม <strong class="text-emerald-400 font-num">฿3,256</strong> (ว.4 ส.3 ส่ง ฿602 🏆)
             </div>
           </div>
@@ -399,7 +399,7 @@
             <span class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
               <span>🏢</span> ผลประกอบการวันแรกแยกรายสาขา (Revenue & Profit by Branch):
             </span>
-            <span class="text-xs text-slate-400">ข้อมูลวันที่ 4 พ.ย. 69</span>
+            <span id="fcBranchDate" class="text-xs text-slate-400">ข้อมูลวันที่ 4 พ.ย. 69</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 font-num">
@@ -408,7 +408,7 @@
             <div class="p-3.5 rounded-xl bg-blue-900/30 border border-blue-700/40">
               <div class="flex items-center justify-between">
                 <span class="font-sans font-bold text-xs text-blue-300">สาขา 1 🥇 (เป้า 40k)</span>
-                <span class="text-[11px] text-slate-400">ว.4: ฿1,334</span>
+                <span id="fcB1RevTag" class="text-[11px] text-slate-400">ว.4: ฿1,334</span>
               </div>
               <div class="flex items-baseline justify-between mt-2">
                 <span id="fcB1Rev" class="text-xl font-extrabold text-white">฿6,388</span>
@@ -438,7 +438,7 @@
             <div class="p-3.5 rounded-xl bg-emerald-900/30 border border-emerald-700/40">
               <div class="flex items-center justify-between">
                 <span class="font-sans font-bold text-xs text-emerald-300">สาขา 3 🏆 (เป้า 40k)</span>
-                <span class="text-[11px] text-slate-400">ว.4: ฿1,334</span>
+                <span id="fcB1RevTag" class="text-[11px] text-slate-400">ว.4: ฿1,334</span>
               </div>
               <div class="flex items-baseline justify-between mt-2">
                 <span id="fcB3Rev" class="text-xl font-extrabold text-emerald-300">฿5,563</span>
@@ -792,7 +792,7 @@
                 <th class="py-3 px-3">บทบาทและสถานะทางธุรกิจ</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 font-num">
+            <tbody id="annualTable1Body" class="divide-y divide-slate-100 font-num">
               <tr class="hover:bg-blue-50/30">
                 <td class="py-2.5 px-3 font-bold text-blue-900 font-sans">สาขา 1 🏆</td>
                 <td class="py-2.5 px-3 font-sans">11 เดือน (ม.ค.-4 พ.ย.)</td>
@@ -842,7 +842,7 @@
                 <td class="py-2.5 px-3 text-[11px] text-purple-800 font-medium font-sans">เติบโตเร็ว ทะลุ 2.534 แสนบาท ว.4 ขาย 580 บ. สั่งโมเลน 810 บ. 🚀</td>
               </tr>
             </tbody>
-            <tfoot class="font-num">
+            <tfoot id="annualTable1Foot" class="font-num">
               <tr class="bg-indigo-100/70 font-bold border-t-2 border-indigo-300 text-indigo-950">
                 <td class="py-3 px-3 font-sans">รวมทั้งกิจการ</td>
                 <td class="py-3 px-3 font-sans">ม.ค. - 4 พ.ย. 2569</td>
@@ -881,7 +881,7 @@
                 <th class="py-3 px-3">หมายเหตุและสถานะ</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-100 font-num">
+            <tbody id="annualTable2Body" class="divide-y divide-slate-100 font-num">
               <tr class="hover:bg-slate-50">
                 <td class="py-2.5 px-3 font-medium font-sans">มกราคม 2569</td>
                 <td class="py-2.5 px-3">฿44,743</td>
@@ -2128,7 +2128,7 @@
       { day: 4, r1: 1334, r2: 520, r3: 1442, r4: 580, e1: 563, e2: 1211, e3: 2430, e4: 1200 }
     ];
 
-    const branchMeta = {
+    let branchMeta = {
       all:     { name: "รวม 4 สาขา", rev: 18776, opExp: 21639.33, rent: 15666.67, days: 4, rentNote: "4 สาขา (จ่ายค่าเช่าสดล่วงหน้าต้นเดือน ว.1 ครบทั้ง 4 สาขา ฿15,666.67)" },
       branch1: { name: "สาขา 1", rev: 6388, opExp: 5214, rent: 5000, days: 4, rentNote: "฿5,000 / เดือน (จ่ายแล้วใน ว.1)" },
       branch2: { name: "สาขา 2", rev: 3337, opExp: 4640.67, rent: 3333.33, days: 4, rentNote: "฿10,000 ต่อ 3 เดือน (เฉลี่ย ฿3,333/ด. จ่ายแล้วใน ว.1)" },
@@ -2136,7 +2136,7 @@
       branch4: { name: "สาขา 4", rev: 3488, opExp: 5096.67, rent: 3333.33, days: 4, rentNote: "฿10,000 ต่อ 3 เดือน (เฉลี่ย ฿3,333/ด. จ่ายแล้วใน ว.1)" }
     };
 
-    const branchNotes = {
+    let branchNotes = {
       branch1: { 
         1: "สด ฿1,065, โอน ฿1,501, รวมรับ ฿2,566, ค่าแรง ฿400, น้ำแข็ง ฿40, เดินทาง ฿100, หมูปิ้ง ฿300, ลูกชิ้น ฿1,231, น้ำจิ้ม ฿746, ค่าเช่า ฿5,000 รวมจ่าย ฿7,817 (กำไรดำเนินงานหน้าร้าน -฿251, ส่งโอน ฿926)",
         2: "สด ฿764, โอน ฿270, รวมรับ ฿1,034, ค่าแรง ฿350, น้ำแข็ง ฿40, เดินทาง/น้ำมัน ฿52, หมูปิ้ง ฿600, น้ำจิ้ม ฿300 รวมจ่าย ฿1,342 (กำไรดำเนินงานหน้าร้าน -฿308, ส่งสด ฿322, ส่งโอนสะสม ฿1,248)",
@@ -2162,6 +2162,325 @@
         4: "สด ฿280, โอน ฿300, รวมรับ ฿580, ค่าแรง ฿350, น้ำแข็ง ฿40, โมเลน ฿810 รวมจ่าย ฿1,200 กำไรหน้าร้าน -฿620 (สะสมส่ง ฿343)"
       }
     };
+
+    // ========================================================
+    // DYNAMIC DATABASE ENGINE (database.json Single Source of Truth)
+    // ========================================================
+    let rawDatabase = null;
+
+    async function loadDatabase() {
+      try {
+        const res = await fetch("database.json?t=" + Date.now());
+        if (res.ok) {
+          rawDatabase = await res.json();
+          processDatabase(rawDatabase);
+          console.log("Single Source of Truth: database.json loaded successfully.");
+          return true;
+        }
+      } catch (e) {
+        console.warn("Could not fetch database.json (fallback to built-in constants):", e);
+      }
+      return false;
+    }
+
+    function processDatabase(db) {
+      if (!db || !db.currentMonthDaily) return;
+      
+      // 1. Rebuild dailyData
+      dailyData = db.currentMonthDaily.map(d => ({
+        day: d.day,
+        r1: d.branches.branch1.revenue,
+        r2: d.branches.branch2.revenue,
+        r3: d.branches.branch3.revenue,
+        r4: d.branches.branch4.revenue,
+        e1: d.branches.branch1.totalExpense,
+        e2: d.branches.branch2.totalExpense,
+        e3: d.branches.branch3.totalExpense,
+        e4: d.branches.branch4.totalExpense
+      }));
+
+      // 2. Compute branchMeta
+      const days = db.currentMonthDaily.length;
+      const b1Rev = db.currentMonthDaily.reduce((s, d) => s + d.branches.branch1.revenue, 0);
+      const b1OpExp = db.currentMonthDaily.reduce((s, d) => s + d.branches.branch1.opExpense, 0);
+      const b2Rev = db.currentMonthDaily.reduce((s, d) => s + d.branches.branch2.revenue, 0);
+      const b2OpExp = db.currentMonthDaily.reduce((s, d) => s + d.branches.branch2.opExpense, 0);
+      const b3Rev = db.currentMonthDaily.reduce((s, d) => s + d.branches.branch3.revenue, 0);
+      const b3OpExp = db.currentMonthDaily.reduce((s, d) => s + d.branches.branch3.opExpense, 0);
+      const b4Rev = db.currentMonthDaily.reduce((s, d) => s + d.branches.branch4.revenue, 0);
+      const b4OpExp = db.currentMonthDaily.reduce((s, d) => s + d.branches.branch4.opExpense, 0);
+
+      branchMeta.branch1 = { name: "สาขา 1", rev: b1Rev, opExp: b1OpExp, rent: db.branchConfig.branch1.fixedRent, days: days, rentNote: db.branchConfig.branch1.rentNote };
+      branchMeta.branch2 = { name: "สาขา 2", rev: b2Rev, opExp: b2OpExp, rent: db.branchConfig.branch2.fixedRent, days: days, rentNote: db.branchConfig.branch2.rentNote };
+      branchMeta.branch3 = { name: "สาขา 3", rev: b3Rev, opExp: b3OpExp, rent: db.branchConfig.branch3.fixedRent, days: days, rentNote: db.branchConfig.branch3.rentNote };
+      branchMeta.branch4 = { name: "สาขา 4", rev: b4Rev, opExp: b4OpExp, rent: db.branchConfig.branch4.fixedRent, days: days, rentNote: db.branchConfig.branch4.rentNote };
+      
+      const totRent = branchMeta.branch1.rent + branchMeta.branch2.rent + branchMeta.branch3.rent + branchMeta.branch4.rent;
+      branchMeta.all = {
+        name: "รวม 4 สาขา",
+        rev: b1Rev + b2Rev + b3Rev + b4Rev,
+        opExp: b1OpExp + b2OpExp + b3OpExp + b4OpExp,
+        rent: totRent,
+        days: days,
+        rentNote: "4 สาขา (จ่ายค่าเช่าสดล่วงหน้าต้นเดือน ว.1 ครบทั้ง 4 สาขา ฿" + formatNumber(totRent) + ")"
+      };
+
+      // 3. Rebuild branchNotes
+      branchNotes.branch1 = {};
+      branchNotes.branch2 = {};
+      branchNotes.branch3 = {};
+      branchNotes.branch4 = {};
+      db.currentMonthDaily.forEach(d => {
+        branchNotes.branch1[d.day] = d.branches.branch1.note;
+        branchNotes.branch2[d.day] = d.branches.branch2.note;
+        branchNotes.branch3[d.day] = d.branches.branch3.note;
+        branchNotes.branch4[d.day] = d.branches.branch4.note;
+      });
+
+      // 4. Rebuild Annual History
+      const novTotRev = branchMeta.all.rev;
+      const novTotExp = branchMeta.all.opExp + branchMeta.all.rent;
+      const novNet = novTotRev - novTotExp;
+      annualHistoryData = [
+        ...db.history.annual,
+        {
+          month: 'พ.ย. 69',
+          fullMonth: `พฤศจิกายน 2569 (${days} วัน)`,
+          b1Rev: b1Rev,
+          b2Rev: b2Rev,
+          b3Rev: b3Rev,
+          b4Rev: b4Rev,
+          rev: novTotRev,
+          totalExp: Math.round(novTotExp),
+          net: Math.round(novNet),
+          note: `สะสม ${days} วัน พ.ย. จ่ายค่าเช่าครบ 4 สาขา ฿${formatNumber(totRent)} รายจ่ายรวม ฿${formatNumber(novTotExp)} ยอดขายรวม ฿${formatNumber(novTotRev)}`
+        }
+      ];
+
+      // 5. Rebuild Branch Historical Data
+      b1HistoryData = [
+        ...db.history.branch1,
+        {
+          month: 'พ.ย. 69',
+          fullMonth: `พฤศจิกายน 2569 (${days} วัน)`,
+          target: db.branchConfig.branch1.monthlyTarget,
+          rev: b1Rev,
+          opExp: Math.round(b1OpExp),
+          rent: db.branchConfig.branch1.fixedRent,
+          totalExp: Math.round(b1OpExp + db.branchConfig.branch1.fixedRent),
+          net: Math.round(b1Rev - (b1OpExp + db.branchConfig.branch1.fixedRent)),
+          note: `สะสม ${days} วัน ยอดขาย ${formatNumber(b1Rev)} บ. จ่ายดำเนินงาน ${formatNumber(b1OpExp)} บ. ค่าเช่า ${formatNumber(db.branchConfig.branch1.fixedRent)} บ.`
+        }
+      ];
+
+      b2HistoryData = [
+        ...db.history.branch2,
+        {
+          month: 'พ.ย. 69',
+          fullMonth: `พฤศจิกายน 2569 (${days} วัน)`,
+          target: db.branchConfig.branch2.monthlyTarget,
+          rev: b2Rev,
+          opExp: Math.round(b2OpExp),
+          rentPaid: db.branchConfig.branch2.fixedRent,
+          rentAmort: db.branchConfig.branch2.fixedRent,
+          totalExp: Math.round(b2OpExp + db.branchConfig.branch2.fixedRent),
+          net: Math.round(b2Rev - (b2OpExp + db.branchConfig.branch2.fixedRent)),
+          note: `สะสม ${days} วัน ยอดขาย ${formatNumber(b2Rev)} บ. จ่ายดำเนินงาน ${formatNumber(b2OpExp)} บ.`
+        }
+      ];
+
+      b3HistoryData = [
+        ...db.history.branch3,
+        {
+          month: 'พ.ย. 69',
+          fullMonth: `พฤศจิกายน 2569 (${days} วัน)`,
+          target: db.branchConfig.branch3.monthlyTarget,
+          rev: b3Rev,
+          opExp: Math.round(b3OpExp),
+          rent: db.branchConfig.branch3.fixedRent,
+          totalExp: Math.round(b3OpExp + db.branchConfig.branch3.fixedRent),
+          net: Math.round(b3Rev - (b3OpExp + db.branchConfig.branch3.fixedRent)),
+          note: `สะสม ${days} วัน ยอดขาย ${formatNumber(b3Rev)} บ. ค่าเช่า ${formatNumber(db.branchConfig.branch3.fixedRent)} บ.`
+        }
+      ];
+
+      b4HistoryData = [
+        ...db.history.branch4,
+        {
+          month: 'พ.ย. 69',
+          fullMonth: `พฤศจิกายน 2569 (${days} วัน)`,
+          target: db.branchConfig.branch4.monthlyTarget,
+          rev: b4Rev,
+          opExp: Math.round(b4OpExp),
+          rentPaid: db.branchConfig.branch4.fixedRent,
+          rentAmort: db.branchConfig.branch4.fixedRent,
+          totalExp: Math.round(b4OpExp + db.branchConfig.branch4.fixedRent),
+          net: Math.round(b4Rev - (b4OpExp + db.branchConfig.branch4.fixedRent)),
+          note: `สะสม ${days} วัน ยอดขาย ${formatNumber(b4Rev)} บ. จ่ายดำเนินงาน ${formatNumber(b4OpExp)} บ.`
+        }
+      ];
+    }
+
+    function renderForecastSection() {
+      if (!rawDatabase || !rawDatabase.currentMonthDaily) return;
+      const days = rawDatabase.currentMonthDaily.length;
+      const lastD = rawDatabase.currentMonthDaily[days - 1];
+      const totRev = branchMeta.all.rev;
+      const totOpExp = branchMeta.all.opExp;
+      const totRent = branchMeta.all.rent;
+      const totExp = totOpExp + totRent;
+      const opProfit = totRev - totOpExp;
+      const net = totRev - totExp;
+      const lastDRev = lastD.branches.branch1.revenue + lastD.branches.branch2.revenue + lastD.branches.branch3.revenue + lastD.branches.branch4.revenue;
+      const lastDOpExp = lastD.branches.branch1.opExpense + lastD.branches.branch2.opExpense + lastD.branches.branch3.opExpense + lastD.branches.branch4.opExpense;
+      const totSent = rawDatabase.currentMonthDaily.reduce((s, d) => s + (d.branches.branch1.sent + d.branches.branch2.sent + d.branches.branch3.sent + d.branches.branch4.sent), 0);
+      const lastDSent = lastD.branches.branch1.sent + lastD.branches.branch2.sent + lastD.branches.branch3.sent + lastD.branches.branch4.sent;
+
+      const badgeEl = document.getElementById("fcBadgeText");
+      if (badgeEl) badgeEl.innerText = `🚀 สรุปผลประกอบการ: พฤศจิกายน 2569 (Day ${days}: วัน${lastD.dayOfWeek}ที่ ${days} พ.ย.)`;
+      
+      const dayCountEl = document.getElementById("fcDayCount");
+      if (dayCountEl) dayCountEl.innerText = `วันที่ ${days} จาก 30 วัน (พ.ย. 69)`;
+
+      const headingEl = document.getElementById("fcHeadingText");
+      if (headingEl) headingEl.innerText = `ผลการดำเนินงานเดือนพฤศจิกายน 2569 (สะสม ${days} วัน Day ${days})`;
+
+      const subEl = document.getElementById("fcSubText");
+      if (subEl) subEl.innerHTML = `ผลประกอบการสะสม ${days} วัน: ยอดขายรวม <strong class="text-white font-num">฿${formatNumber(totRev)}</strong> (ว.${days} ฿${formatNumber(lastDRev)}) | รายจ่ายดำเนินงานหน้าร้าน <strong class="text-amber-300 font-num">฿${formatNumber(totOpExp)}</strong> (ว.${days} ฿${formatNumber(lastDOpExp)}) | ค่าเช่าจ่ายสด 4 สาขา <strong class="text-rose-300 font-num">฿${formatNumber(totRent)}</strong> | ยอดเงินโอนส่งสะสม <strong class="text-emerald-400 font-num">฿${formatNumber(totSent)}</strong> (ว.${days} ฿${formatNumber(lastDSent)})`;
+
+      const fcRevEl = document.getElementById("fcTotalRev");
+      if (fcRevEl) fcRevEl.innerText = "฿" + formatNumber(totRev);
+
+      const fcRemRevEl = document.getElementById("fcRemainingRevText");
+      if (fcRemRevEl) {
+        const pct = ((totRev / 160000) * 100).toFixed(1);
+        fcRemRevEl.innerText = `สะสม ${days} วัน ${pct}% (เป้าหมาย 40k x 4 สาขา = 160k)`;
+        const pBar = document.getElementById("fcRevProgressBar");
+        if (pBar) pBar.style.width = pct + "%";
+      }
+
+      const fcExpEl = document.getElementById("fcTotalExp");
+      if (fcExpEl) fcExpEl.innerText = "฿" + formatNumber(totExp);
+
+      const fcNetEl = document.getElementById("fcNetProfit");
+      if (fcNetEl) fcNetEl.innerText = (net >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(net));
+
+      const fcMarginEl = document.getElementById("fcMarginText");
+      if (fcMarginEl) fcMarginEl.innerText = (opProfit >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(opProfit));
+
+      // Branch cards
+      const dateEl = document.getElementById("fcBranchDate");
+      if (dateEl) dateEl.innerText = `ข้อมูลวันที่ ${days} พ.ย. 69`;
+
+      ["branch1", "branch2", "branch3", "branch4"].forEach((bk, idx) => {
+        const n = idx + 1;
+        const bMeta = branchMeta[bk];
+        const bLast = lastD.branches[bk];
+        const bSentTot = rawDatabase.currentMonthDaily.reduce((s, d) => s + d.branches[bk].sent, 0);
+
+        const revEl = document.getElementById(`fcB${n}Rev`);
+        if (revEl) revEl.innerText = "฿" + formatNumber(bMeta.rev);
+
+        const tagEl = document.getElementById(`fcB${n}RevTag`);
+        if (tagEl) tagEl.innerText = `ว.${days}: ฿${formatNumber(bLast.revenue)}`;
+
+        const sentEl = document.getElementById(`fcB${n}Sent`);
+        if (sentEl) sentEl.innerText = `ส่งเงินสะสม: ฿${formatNumber(bSentTot)}`;
+
+        const subEl = document.getElementById(`fcB${n}Sub`);
+        if (subEl) {
+          const bOpProfit = bLast.revenue - bLast.opExpense;
+          subEl.innerText = `สะสม ${days} วัน ${formatNumber(bMeta.rev)} บ. (ว.${days} ขาย ${formatNumber(bLast.revenue)} บ. สด ${formatNumber(bLast.cash)} + โอน ${formatNumber(bLast.transfer)}) จ่ายดำเนินงาน ${formatNumber(bLast.opExpense)} บ. หน้าร้าน ${bOpProfit >= 0 ? "+" : ""}${formatNumber(bOpProfit)} บ.`;
+        }
+      });
+    }
+
+    function renderAnnualTables() {
+      const t1Body = document.getElementById("annualTable1Body");
+      const t1Foot = document.getElementById("annualTable1Foot");
+      if (t1Body && rawDatabase) {
+        t1Body.innerHTML = "";
+        let allRev = 0, allOpExp = 0, allRent = 0, allTotExp = 0, allNet = 0;
+        const bData = [
+          { id: "branch1", name: "สาขา 1 🥇", months: "11 เดือน (ม.ค.-" + rawDatabase.metadata.latestDay + " พ.ย.)", list: b1HistoryData, color: "blue", desc: "Cash Cow อันดับ 1 🥇" },
+          { id: "branch2", name: "สาขา 2 🎯", months: "9 เดือน (มี.ค.-" + rawDatabase.metadata.latestDay + " พ.ย.)", list: b2HistoryData, color: "amber", desc: "เปิด มี.ค. 69 🎯" },
+          { id: "branch3", name: "สาขา 3 🥈", months: "11 เดือน (ม.ค.-" + rawDatabase.metadata.latestDay + " พ.ย.)", list: b3HistoryData, color: "emerald", desc: "ยอดขายสม่ำเสมออันดับ 2 🥈" },
+          { id: "branch4", name: "สาขา 4 🚀", months: "9 เดือน (มี.ค.-" + rawDatabase.metadata.latestDay + " พ.ย.)", list: b4HistoryData, color: "purple", desc: "เติบโตเร็ว 🚀" }
+        ];
+
+        const grandRev = bData.reduce((sum, b) => sum + b.list.reduce((s, r) => s + r.rev, 0), 0);
+
+        bData.forEach(b => {
+          const r = b.list.reduce((s, x) => s + x.rev, 0);
+          const op = b.list.reduce((s, x) => s + x.opExp, 0);
+          const rent = b.list.reduce((s, x) => s + (x.rent || x.rentPaid || 0), 0);
+          const exp = b.list.reduce((s, x) => s + x.totalExp, 0);
+          const net = b.list.reduce((s, x) => s + x.net, 0);
+          const pct = ((r / grandRev) * 100).toFixed(1);
+          const margin = ((net / r) * 100).toFixed(1);
+
+          allRev += r; allOpExp += op; allRent += rent; allTotExp += exp; allNet += net;
+
+          const tr = document.createElement("tr");
+          tr.className = `hover:bg-${b.color}-50/30`;
+          tr.innerHTML = `
+            <td class="py-2.5 px-3 font-bold text-${b.color}-900 font-sans">${b.name}</td>
+            <td class="py-2.5 px-3 font-sans">${b.months}</td>
+            <td class="py-2.5 px-3 font-bold text-${b.color}-700">฿${formatNumber(r)}</td>
+            <td class="py-2.5 px-3 font-semibold text-${b.color}-700">${pct}%</td>
+            <td class="py-2.5 px-3">฿${formatNumber(op)}</td>
+            <td class="py-2.5 px-3">฿${formatNumber(rent)}</td>
+            <td class="py-2.5 px-3">฿${formatNumber(exp)}</td>
+            <td class="py-2.5 px-3 font-bold ${net >= 0 ? "text-emerald-600" : "text-red-600"}">${net >= 0 ? "+" : ""}฿${formatNumber(net)}</td>
+            <td class="py-2.5 px-3 font-bold ${net >= 0 ? "text-emerald-600" : "text-red-600"}">${margin}%</td>
+            <td class="py-2.5 px-3 text-[11px] text-${b.color}-800 font-sans">${b.desc}</td>
+          `;
+          t1Body.appendChild(tr);
+        });
+
+        if (t1Foot) {
+          const allMargin = ((allNet / allRev) * 100).toFixed(2);
+          t1Foot.innerHTML = `
+            <tr class="bg-indigo-100/70 font-bold border-t-2 border-indigo-300 text-indigo-950">
+              <td class="py-3 px-3 font-sans">รวมทั้งกิจการ</td>
+              <td class="py-3 px-3 font-sans">ม.ค. - ${rawDatabase.metadata.latestDay} พ.ย. 2569</td>
+              <td class="py-3 px-3 text-indigo-900">฿${formatNumber(allRev)}</td>
+              <td class="py-3 px-3">100.0%</td>
+              <td class="py-3 px-3">฿${formatNumber(allOpExp)}</td>
+              <td class="py-3 px-3">฿${formatNumber(allRent)}</td>
+              <td class="py-3 px-3">฿${formatNumber(allTotExp)}</td>
+              <td class="py-3 px-3 ${allNet >= 0 ? "text-emerald-700" : "text-red-700"}">${allNet >= 0 ? "+" : ""}฿${formatNumber(allNet)}</td>
+              <td class="py-3 px-3 ${allNet >= 0 ? "text-emerald-700" : "text-red-700"}">${allMargin}%</td>
+              <td class="py-3 px-3 text-xs text-indigo-900 font-bold font-sans">ยอดขายสะสมทั้งปีทะลุ ${(allRev/1000000).toFixed(3)} ล้านบาท (฿${formatNumber(allRev)}) 🎉 (เกณฑ์เงินสด รวมค่าเช่าสดล่วงหน้าทั้งเดือน พ.ย.)</td>
+            </tr>
+          `;
+        }
+      }
+
+      // Table 2
+      const t2Body = document.getElementById("annualTable2Body");
+      if (t2Body) {
+        t2Body.innerHTML = "";
+        annualHistoryData.forEach(d => {
+          const margin = ((d.net / d.rev) * 100).toFixed(1) + "%";
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
+          tr.innerHTML = `
+            <td class="py-2.5 px-3 font-semibold text-slate-900 font-sans">${d.fullMonth}</td>
+            <td class="py-2.5 px-3 font-medium text-blue-700">฿${formatNumber(d.b1Rev || 0)}</td>
+            <td class="py-2.5 px-3 font-medium text-amber-700">฿${formatNumber(d.b2Rev || 0)}</td>
+            <td class="py-2.5 px-3 font-medium text-emerald-700">฿${formatNumber(d.b3Rev || 0)}</td>
+            <td class="py-2.5 px-3 font-medium text-purple-700">฿${formatNumber(d.b4Rev || 0)}</td>
+            <td class="py-2.5 px-3 font-bold text-indigo-700">฿${formatNumber(d.rev)}</td>
+            <td class="py-2.5 px-3 font-medium text-amber-700">฿${formatNumber(d.totalExp)}</td>
+            <td class="py-2.5 px-3 font-bold ${d.net >= 0 ? "text-emerald-600" : "text-red-600"}">${d.net >= 0 ? "+" : ""}฿${formatNumber(d.net)}</td>
+            <td class="py-2.5 px-3 font-bold ${d.net >= 0 ? "text-emerald-600" : "text-red-600"}">${margin}</td>
+            <td class="py-2.5 px-3 text-[11px] text-slate-500 font-sans">${d.note}</td>
+          `;
+          t2Body.appendChild(tr);
+        });
+      }
+    }
 
     // Load any saved in-place edits from LocalStorage
     try {
@@ -2797,7 +3116,7 @@
     }
 
     // 8. ANNUAL 2569 CHART
-    const annualHistoryData = [
+    let annualHistoryData = [
       { month: 'ม.ค. 69', fullMonth: 'มกราคม 2569', rev: 122237, totalExp: 97468, net: 24769, note: 'เปิดปีใหม่ ยอดขายทะลุ 1.2 แสน สาขา 3 ทำ ATH 7.7 หมื่น' },
       { month: 'ก.พ. 69', fullMonth: 'กุมภาพันธ์ 2569', rev: 75983, totalExp: 89714, net: -13731, note: 'เดือนสั้น 28 วัน ยอดชะลอตัว' },
       { month: 'มี.ค. 69', fullMonth: 'มีนาคม 2569', rev: 123232, totalExp: 137663, net: -14431, note: 'สาขา 2 และ 4 เริ่มเปิดขายเดือนแรก ยอดรวมแตะ 1.23 แสนบาท' },
@@ -2960,7 +3279,7 @@
     }
 
     // 9. BRANCH 1 HISTORICAL DATA & RENDER
-    const b1HistoryData = [
+    let b1HistoryData = [
       { month: 'ม.ค. 69', fullMonth: 'มกราคม 2569', target: 40000, rev: 44743, opExp: 26078, rent: 5639, totalExp: 31717, net: 13026, note: '🎯 ทะลุเป้า 40k กำไรสุทธิสูง +฿13,026 (ค่าเช่า/ไฟ ฿5,639 ว.6)' },
       { month: 'ก.พ. 69', fullMonth: 'กุมภาพันธ์ 2569', target: 40000, rev: 31510, opExp: 25597, rent: 5000, totalExp: 30597, net: 913, note: 'ขาย 28 วัน คุมรายจ่ายได้ดี จ่ายค่าเช่า ฿5,000 ว.2 กำไร +฿913' },
       { month: 'มี.ค. 69', fullMonth: 'มีนาคม 2569', target: 40000, rev: 54373, opExp: 52267, rent: 5000, totalExp: 57267, net: -2894, note: 'ยอดขายทะลุ 5.4 หมื่นบาท จ่ายค่าเช่า ฿5,000 รวมค่าไฟตกค้าง ฿4,942' },
@@ -3166,7 +3485,7 @@
     }
 
     // 9.5 BRANCH 2 HISTORICAL DATA & RENDER
-    const b2HistoryData = [
+    let b2HistoryData = [
       { month: 'มี.ค. 69', fullMonth: 'มีนาคม 2569', target: 30000, rev: 14219, opExp: 16466, rentPaid: 0, rentAmort: 0, totalExp: 16466, net: -2247, note: 'เปิดร้านครึ่งเดือนหลัง (16-31 มี.ค.) รวม 16 วัน' },
       { month: 'เม.ย. 69', fullMonth: 'เมษายน 2569', target: 30000, rev: 44303, opExp: 36224, rentPaid: 0, rentAmort: 0, totalExp: 36224, net: 8079, note: '🏆 All-Time High! เทศกาลสงกรานต์ ยอดพุ่งแตะ 4.4 หมื่น กำไร +฿8,079' },
       { month: 'พ.ค. 69', fullMonth: 'พฤษภาคม 2569', target: 30000, rev: 28715, opExp: 25562, rentPaid: 0, rentAmort: 0, totalExp: 25562, net: 3153, note: 'ยอดสม่ำเสมอ คุมรายจ่ายได้ดี เงินเหลือยกไป 3,153 บ.' },
@@ -3370,7 +3689,7 @@
     }
 
     // 10. BRANCH 3 HISTORICAL DATA & RENDER
-    const b3HistoryData = [
+    let b3HistoryData = [
       { month: 'ม.ค. 69', fullMonth: 'มกราคม 2569', target: 60000, rev: 77494, opExp: 61751, rent: 4000, totalExp: 65751, net: 11743, note: '🏆 All-Time High! ยอดขายทะลุ 7.7 หมื่น กำไรสุทธิ +฿11,743' },
       { month: 'ก.พ. 69', fullMonth: 'กุมภาพันธ์ 2569', target: 60000, rev: 44473, opExp: 55117, rent: 4000, totalExp: 59117, net: -14644, note: 'ขาย 28 วัน ยอดหลุดเป้า รายจ่ายสูง เงินคงเหลือสิ้นเดือน 506 บ.' },
       { month: 'มี.ค. 69', fullMonth: 'มีนาคม 2569', target: 40000, rev: 32186, opExp: 38847, rent: 2000, totalExp: 40847, net: -8661, note: 'ปรับเป้าเป็น 40k จ่ายค่าเช่า 2k รวมค่าไฟ 1,398 บ. เงินเหลือ 174 บ.' },
@@ -3576,7 +3895,7 @@
     }
 
     // 11. BRANCH 4 HISTORICAL DATA & RENDER
-    const b4HistoryData = [
+    let b4HistoryData = [
       { month: 'มี.ค. 69', fullMonth: 'มีนาคม 2569', target: 30000, rev: 22454, opExp: 23083, rentPaid: 0, rentAmort: 0, totalExp: 23083, net: -629, note: 'เดือนแรกที่เปิดร้าน ยอดขาย ฿22,454' },
       { month: 'เม.ย. 69', fullMonth: 'เมษายน 2569', target: 30000, rev: 24236, opExp: 19992, rentPaid: 10000, rentAmort: 3333.33, totalExp: 23325.33, net: 910.67, note: 'เปิดขาย 21 วัน (ถึง ว.23) จ่ายค่าเช่า 3 ด. ฿10,000' },
       { month: 'พ.ค. 69', fullMonth: 'พฤษภาคม 2569', target: 30000, rev: 31466, opExp: 31161, rentPaid: 0, rentAmort: 0, totalExp: 31161, net: 305, note: '🎯 ทะลุเป้า 30,000 บ. กำไรสุทธิ +฿305' },
@@ -4101,17 +4420,34 @@
       }
     });
 
-        function downloadCSV() {
+    function downloadCSV() {
       const bom = "\uFEFF";
-      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(bom +
-        "สาขา,ยอดขายรวม,สัดส่วนยอดขาย,รายจ่ายดำเนินงาน,ค่าเช่าต่อเดือน,รายจ่ายรวม,กำไรดำเนินงาน,กำไรสุทธิ (Cash Basis),อัตรากำไรสุทธิ,หมายเหตุ\n" +
-        "สาขา 1,6388,34.02%,5214,5000,10214,1174,-3826,-59.89%,สะสม 4 วัน ยอดขาย 6388 จ่ายดำเนินงาน 5214 เช่า 5000 ส่งโอนรวม 1277\n" +
-        "สาขา 2,3337,17.77%,4641,3333.33,7974.33,-1304,-4637.33,-138.97%,สะสม 4 วัน ยอดขาย 3337 จ่ายดำเนินงาน 4641 เช่า 3333.33 ส่งโอนรวม 434\n" +
-        "สาขา 3,5563,29.63%,6688,4000,10688,-1125,-5125,-92.13%,สะสม 4 วัน ยอดขาย 5563 จ่ายดำเนินงาน 6688 เช่า 4000 ส่งโอนรวม 1202\n" +
-        "สาขา 4,3488,18.58%,5097,3333.33,8430.33,-1609,-4942.33,-141.69%,สะสม 4 วัน ยอดขาย 3488 จ่ายดำเนินงาน 5097 เช่า 3333.33 ส่งโอนรวม 343\n" +
-        "รวมทั้ง 4 สาขา,18776,100.00%,21639.33,15666.67,37306.67,-2863.33,-18530.67,-98.69%,เกณฑ์เงินสด รวมค่าเช่าสดครบ 4 สาขาทั้งเดือน 15666.67 บ. รายจ่ายรวม 37306.67 บ. ยอดส่งโอนรวม 3256 บ.");
+      let csv = "สาขา,ยอดขายรวม,สัดส่วนยอดขาย,รายจ่ายดำเนินงาน,ค่าเช่าต่อเดือน,รายจ่ายรวม,กำไรดำเนินงาน,กำไรสุทธิ (Cash Basis),อัตรากำไรสุทธิ,หมายเหตุ\n";
+      const totRev = branchMeta.all.rev;
+      const bKeys = [
+        { k: 'branch1', name: 'สาขา 1' },
+        { k: 'branch2', name: 'สาขา 2' },
+        { k: 'branch3', name: 'สาขา 3' },
+        { k: 'branch4', name: 'สาขา 4' }
+      ];
+      bKeys.forEach(b => {
+        const m = branchMeta[b.k];
+        const totExp = m.opExp + m.rent;
+        const opProfit = m.rev - m.opExp;
+        const net = m.rev - totExp;
+        const pct = ((m.rev / totRev) * 100).toFixed(2) + '%';
+        const margin = ((net / m.rev) * 100).toFixed(2) + '%';
+        csv += `${b.name},${m.rev},${pct},${m.opExp.toFixed(2)},${m.rent.toFixed(2)},${totExp.toFixed(2)},${opProfit.toFixed(2)},${net.toFixed(2)},${margin},สะสม ${m.days} วัน ยอดขาย ${m.rev} จ่ายดำเนินงาน ${Math.round(m.opExp)} เช่า ${Math.round(m.rent)}\n`;
+      });
+      const allTotExp = branchMeta.all.opExp + branchMeta.all.rent;
+      const allOpProfit = branchMeta.all.rev - branchMeta.all.opExp;
+      const allNet = branchMeta.all.rev - allTotExp;
+      const allMargin = ((allNet / totRev) * 100).toFixed(2) + '%';
+      csv += `รวมทั้ง 4 สาขา,${totRev},100.00%,${branchMeta.all.opExp.toFixed(2)},${branchMeta.all.rent.toFixed(2)},${allTotExp.toFixed(2)},${allOpProfit.toFixed(2)},${allNet.toFixed(2)},${allMargin},เกณฑ์เงินสด รวมค่าเช่าสดครบ 4 สาขาทั้งเดือน ${branchMeta.all.rent.toFixed(2)} บ. รายจ่ายรวม ${allTotExp.toFixed(2)} บ.`;
+
+      const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement("a");
-      a.href = csvContent;
+      a.href = URL.createObjectURL(blob);
       a.download = "สรุปภาพรวม_4สาขา_พฤศจิกายน_2569.csv";
       a.click();
     }
@@ -4148,128 +4484,141 @@
 
     function downloadAnnualCSV() {
       const bom = "\uFEFF";
-      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(bom +
-        "ตารางที่ 1: สรุปเปรียบเทียบผลประกอบการ 4 สาขา ประจำปี 2569 (มกราคม - ตุลาคม 2569)\n" +
-        "สาขา,ช่วงเวลาที่มีข้อมูล,รายรับรวม (บาท),สัดส่วนรายรับ,รายจ่ายดำเนินงาน (บาท),ค่าเช่าบันทึก (บาท),รายจ่ายรวม (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),บทบาทและสถานะทางธุรกิจ\n" +
-        "สาขา 1,10 เดือน (ม.ค.-ต.ค.),555358,37.08%,456251,50343,506594,48764,8.78%,Cash Cow อันดับ 1 (กำไรสุทธิสูงสุดและยอดขายสูงสุดในกลุ่ม ทะลุ 5.55 แสน ปิด ต.ค. กำไรสุทธิ +8,283 บ. 🥇)\n" +
-        "สาขา 2,8 เดือน (มี.ค.-ต.ค.),245027,16.36%,243387,13333.33,256720.33,-11693.33,-4.77%,เปิด มี.ค. 69 ยอดสะสมแตะ 2.45 แสนบาท ปิด ต.ค. ยอดขายทะลุ 35,841 บ. 🎯\n" +
-        "สาขา 3,10 เดือน (ม.ค.-ต.ค.),447466,29.87%,439097,28000,467097,-19631,-4.39%,ยอดขายสม่ำเสมออันดับ 2 ทะลุ 4.47 แสนบาท ปิด ต.ค. ทะลุเป้า 45k สำเร็จแตะ 46,884 บ. 🥈\n" +
-        "สาขา 4,8 เดือน (มี.ค.-ต.ค.),249978,16.69%,236160,18132,254292,-4314,-1.73%,เติบโตเร็ว ทะลุ 2.49 แสนบาท ปิด ต.ค. ยอดขายแตะ 38,745 บ. กำไรหน้าร้าน +4,420 บ. 🚀\n" +
-        "รวมทั้งกิจการ,ม.ค. - ต.ค. 2569,1497829,100.00%,1374895,109808.33,1484703.33,13125.67,0.88%,ยอดขายสะสมแตะ 1.498 ล้านบาท (1,497,829 บ.) กำไรคงค้างสะสมทั้งปีแตะ +13,126 บ. (เกณฑ์เงินสด +3,891 บ. พลิกเป็นบวกสมบูรณ์แบบ! 🎉)\n\n" +
-        "ตารางที่ 2: สรุปผลประกอบการรายเดือนทั้งกิจการ ปี 2569 (มกราคม - ตุลาคม 2569)\n" +
-        "เดือน,ปี,สาขา 1 (บาท),สาขา 2 (บาท),สาขา 3 (บาท),สาขา 4 (บาท),รายรับรวม (บาท),รายจ่ายรวม (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),หมายเหตุสำคัญ\n" +
-        "มกราคม,2569,44743,0,77494,0,122237,97468,24769,20.26%,เปิดปีใหม่ ยอดขายทะลุ 1.2 แสน สาขา 3 ทำ All-Time High 7.7 หมื่นบาท\n" +
-        "กุมภาพันธ์,2569,31510,0,44473,0,75983,89714,-13731,-18.07%,เดือนสั้น 28 วัน ยอดชะลอตัว\n" +
-        "มีนาคม,2569,54373,14219,32186,22454,123232,137663,-14431,-11.71%,สาขา 2 และ สาขา 4 เริ่มเปิดขายเดือนแรก ยอดรวมแตะ 1.23 แสนบาท\n" +
-        "เมษายน,2569,144215,44303,37470,24236,250224,197424,52800,21.10%,All-Time High! เทศกาลสงกรานต์ ยอดขายพุ่งทะลุ 2.5 แสน กำไรสุทธิเดือนเดียวกว่า 5.2 หมื่น\n" +
-        "พฤษภาคม,2569,45260,28715,32214,31466,137655,133663,3992,2.90%,สาขา 4 ทะลุเป้า 30k ทุกสาขาทำยอดรวมเกิน 1.37 แสนบาท กำไรสุทธิเป็นบวก\n" +
-        "มิถุนายน,2569,33265,22016,41143,28368,124792,157475,-32683,-26.19%,ต้นฤดูฝน มีรอบจ่ายค่าเช่าและสต็อกของหลายสาขา\n" +
-        "กรกฎาคม,2569,56370,35048,49295,34810,175523,176481,-958,-0.55%,ยอดขายฟื้นตัวอย่างแข็งแกร่ง สาขา 2 จ่ายค่าเช่า 3 ด. ยอดรวมแตะ 1.75 แสนบาท\n" +
-        "สิงหาคม,2569,44005,33885,45812,38655,162357,157909,4448,2.74%,สาขา 4 ทำ ATH สาขา 2 ยอดพุ่ง 3.38 หมื่น พลิกกลับมามีกำไรสุทธิ +4448 บ.\n" +
-        "กันยายน (30 วัน),2569,33577,31950,41285,36620,143432,158286,-14854,-10.36%,ข้อมูลปิดสิ้นเดือน 30 วัน ยอดขายสะสมแตะ 1.43 แสนบาท กำไรดำเนินงานรวมปิดบวก +813 บ. ส.3 ปิดบวกทั้งยอดขายและกำไรสุทธิ (+946 บ.) 🏆\n" +
-        "ตุลาคม (31 วัน),2569,69100,35841,46884,38745,190570,187855,2715,1.42%,\"ปิดสิ้นเดือน 31 วัน ต.ค. ยอดขายพุ่งแตะ 190,570 บ. รายจ่ายรวม 187,855 บ. (รวมค่าเช่าจ่ายสดตามจริงล่วงหน้าทั้งเดือน 4 สาขา) สุทธิพลิกบวก +2,715 บ. (กำไรดำเนินงานหน้าร้านก่อนหักค่าเช่าสูงถึง +19,843 บ. หรือ +10.41%) 🎉\"\n" +
-        "พฤศจิกายน (4 วัน),2569,6388,3337,5563,3488,18776,37307,-18531,-98.69%,\"สะสม 4 วันของเดือน พ.ย. (1-4 พ.ย. 69) ยอดขาย 18,776 บ. จ่ายค่าเช่าสดครบ 4 สาขา 15,666.67 บ. รายจ่ายรวม 37,307 บ. ว.4 หน้าร้านกำไร ส.1 +771 บ. ยอดส่งโอน ว.4 รวม 602 บ.\"\n" +
-        "รวมสะสม 11 เดือน,-,561746,248364,453029,253466,1516605,1531244,-14639,-0.97%,\"ยอดขายสะสมแตะ 1.516 ล้านบาท (1,516,605 บ.) 🎉 รายจ่ายรวม 1,531,244 บ. (รวมค่าเช่าจ่ายสดล่วงหน้าทั้งเดือน พ.ย. ครบ 100%)\""
-      );
+      let csv = "ตารางที่ 1: สรุปเปรียบเทียบผลประกอบการ 4 สาขา ประจำปี 2569\n";
+      csv += "สาขา,ช่วงเวลาที่มีข้อมูล,รายรับรวม (บาท),สัดส่วนรายรับ,รายจ่ายดำเนินงาน (บาท),ค่าเช่าบันทึก (บาท),รายจ่ายรวม (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),บทบาทและสถานะทางธุรกิจ\n";
+      
+      const bData = [
+        { name: 'สาขา 1', list: b1HistoryData, desc: 'Cash Cow อันดับ 1 🥇' },
+        { name: 'สาขา 2', list: b2HistoryData, desc: 'เปิด มี.ค. 69 🎯' },
+        { name: 'สาขา 3', list: b3HistoryData, desc: 'ยอดขายสม่ำเสมออันดับ 2 🥈' },
+        { name: 'สาขา 4', list: b4HistoryData, desc: 'เติบโตเร็ว 🚀' }
+      ];
+      const grandRev = bData.reduce((sum, b) => sum + b.list.reduce((s, r) => s + r.rev, 0), 0);
+      let allRev = 0, allOpExp = 0, allRent = 0, allTotExp = 0, allNet = 0;
+
+      bData.forEach(b => {
+        const r = b.list.reduce((s, x) => s + x.rev, 0);
+        const op = b.list.reduce((s, x) => s + x.opExp, 0);
+        const rent = b.list.reduce((s, x) => s + (x.rent || x.rentPaid || 0), 0);
+        const exp = b.list.reduce((s, x) => s + x.totalExp, 0);
+        const net = b.list.reduce((s, x) => s + x.net, 0);
+        const pct = ((r / grandRev) * 100).toFixed(2) + '%';
+        const margin = ((net / r) * 100).toFixed(2) + '%';
+        allRev += r; allOpExp += op; allRent += rent; allTotExp += exp; allNet += net;
+        csv += `${b.name},${b.list.length} เดือน,${r},${pct},${Math.round(op)},${Math.round(rent)},${Math.round(exp)},${Math.round(net)},${margin},${b.desc}\n`;
+      });
+      const allMargin = ((allNet / allRev) * 100).toFixed(2) + '%';
+      csv += `รวมทั้งกิจการ,ม.ค. - พ.ย. 2569,${allRev},100.00%,${Math.round(allOpExp)},${Math.round(allRent)},${Math.round(allTotExp)},${Math.round(allNet)},${allMargin},ยอดขายสะสมทั้งปีแตะ ${(allRev/1000000).toFixed(3)} ล้านบาท\n\n`;
+
+      csv += "ตารางที่ 2: สรุปผลประกอบการรายเดือนทั้งกิจการ ปี 2569\n";
+      csv += "เดือน,ปี,สาขา 1 (บาท),สาขา 2 (บาท),สาขา 3 (บาท),สาขา 4 (บาท),รายรับรวม (บาท),รายจ่ายรวม (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),หมายเหตุสำคัญ\n";
+      annualHistoryData.forEach(d => {
+        const margin = ((d.net / d.rev) * 100).toFixed(2) + '%';
+        csv += `${d.fullMonth.split(' ')[0]},2569,${d.b1Rev || 0},${d.b2Rev || 0},${d.b3Rev || 0},${d.b4Rev || 0},${d.rev},${d.totalExp},${d.net},${margin},"${d.note}"\n`;
+      });
+      csv += `รวมสะสม 11 เดือน,-,${bData[0].list.reduce((s,x)=>s+x.rev,0)},${bData[1].list.reduce((s,x)=>s+x.rev,0)},${bData[2].list.reduce((s,x)=>s+x.rev,0)},${bData[3].list.reduce((s,x)=>s+x.rev,0)},${allRev},${Math.round(allTotExp)},${Math.round(allNet)},${allMargin},"ยอดขายสะสมแตะ ${(allRev/1000000).toFixed(3)} ล้านบาท"`;
+
+      const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement("a");
-      a.href = csvContent;
+      a.href = URL.createObjectURL(blob);
       a.download = "สรุปภาพรวมปี_2569.csv";
       a.click();
     }
 
     function downloadB1HistoryCSV() {
       const bom = "\uFEFF";
-      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(bom +
-        "เดือน,ปี,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายดำเนินงาน (บาท),ค่าเช่าบันทึก (บาท),รายจ่ายรวม (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),หมายเหตุและสถานะ\n" +
-        "มกราคม,2569,40000,44743,26078,5639,31717,13026,29.11%,ทะลุเป้า 40k กำไรสุทธิสูงถึง +13026 บ. (ค่าเช่า/ค่าไฟ 5639 บ. วันที่ 6)\n" +
-        "กุมภาพันธ์,2569,40000,31510,25597,5000,30597,913,2.90%,ขาย 28 วัน คุมรายจ่ายได้ดี จ่ายค่าเช่า 5000 บ. วันที่ 2 กำไรสุทธิ +913 บ.\n" +
-        "มีนาคม,2569,40000,54373,52267,5000,57267,-2894,-5.32%,ยอดขายทะลุ 5.4 หมื่นบาท จ่ายค่าเช่า 5000 บ. รวมค่าไฟตกค้าง 4942 บ.\n" +
-        "เมษายน,2569,50000,144215,94159,5000,99159,45056,31.24%,All-Time High! ยอดขายเทศกาลสงกรานต์ทะลุ 1.44 แสนบาท กำไรสุทธิ +45056 บ.\n" +
-        "พฤษภาคม,2569,40000,45260,42016,5000,47016,-1756,-3.88%,ยอดขายเกิน 4.5 หมื่นบาท ทะลุเป้า 40k จ่ายค่าเช่า 5000 บ. วันที่ 1\n" +
-        "มิถุนายน,2569,40000,33265,39664,7554,47218,-13953,-41.95%,ยอดชะลอตัวตามฤดูกาล มีค่าเช่า 5000 บ. และค่าไฟ 2554 บ. วันที่ 1\n" +
-        "กรกฎาคม,2569,40000,56370,51021,5000,56021,349,0.62%,ทะลุเป้า 40k ยอดพุ่ง 5.6 หมื่นบาท พลิกกลับมามีกำไรสุทธิ จ่ายค่าเช่า 5000 บ.\n" +
-        "สิงหาคม,2569,40000,44005,37522,2150,39672,4333,9.85%,ทะลุเป้า 40k ต่อเนื่อง กำไรสุทธิเด่น +4333 บ. ทยอยเก็บค่าเช่าวันละ 215 บ.\n" +
-        "กันยายน (30 วัน),2569,40000,33577,34526,5000,39526,-5949,-17.72%,ขาย 29 วัน (พัก 1 วัน) วันที่ 30 ยอดขาย 1,174 บ. จ่าย 2,468 บ. มีสต็อกของชุดใหญ่ กำไรดำเนินงานปิดเดือน -949 บ. ยอดสะสมปิดเดือน 33,577 บ.\n" +
-        "ตุลาคม (31 วัน),2569,40000,69100,55817,5000,60817,8283,11.99%,\"ครบ 31 วัน ปิดสิ้นเดือน ยอดขาย 69,100 บ. (172.8% ของเป้า 40k!) จ่ายดำเนินงาน 55,817 บ. (รวมค่าไฟ 1,829 บ. ว.30) ค่าเช่าจ่ายสด ว.1 5,000 บ. รายจ่ายรวม 60,817 บ. กำไรสุทธิ +8,283 บ. 🥇\"\n" +
-        "พฤศจิกายน (4 วัน),2569,40000,6388,5214,5000,10214,-3826,-59.89%,\"สะสม 4 วัน ยอดขาย 6,388 บ. (ว.4 ขาย 1,334 บ. กำไรหน้าร้าน +771 บ. 🥇) จ่ายดำเนินงาน 5,214 บ. ค่าเช่า 5,000 บ. รวมจ่าย 10,214 บ. ส่งเงินสะสม 1,277 บ.\"\n" +
-        "รวมสะสม 11 เดือน,-,-,561746,461465,55343,516808,44938,8.00%,\"ยอดขายและกำไรสุทธิสะสมอันดับ 1 ของทุกสาขา (ยอดขายแตะ 5.617 แสน กำไรสะสมแตะ 4.49 หมื่นบาท 4 วันแรก พ.ย. ขาย 6,388 บ. 🥇)\""
-      );
+      let csv = "เดือน,ปี,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายดำเนินงาน (บาท),ค่าเช่าบันทึก (บาท),รายจ่ายรวม (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),หมายเหตุและสถานะ\n";
+      b1HistoryData.forEach(d => {
+        const margin = ((d.net / d.rev) * 100).toFixed(2) + '%';
+        csv += `${d.fullMonth.split(' ')[0]},2569,${d.target},${d.rev},${d.opExp},${d.rent},${d.totalExp},${d.net},${margin},"${d.note}"\n`;
+      });
+      const totRev = b1HistoryData.reduce((s, d) => s + d.rev, 0);
+      const totOpExp = b1HistoryData.reduce((s, d) => s + d.opExp, 0);
+      const totRent = b1HistoryData.reduce((s, d) => s + d.rent, 0);
+      const totExp = b1HistoryData.reduce((s, d) => s + d.totalExp, 0);
+      const totNet = b1HistoryData.reduce((s, d) => s + d.net, 0);
+      const totMargin = ((totNet / totRev) * 100).toFixed(2) + '%';
+      csv += `รวมสะสม ${b1HistoryData.length} เดือน,-,-,${totRev},${totOpExp},${totRent},${totExp},${totNet},${totMargin},"ยอดขายและกำไรสุทธิสะสมอันดับ 1 ของทุกสาขา"`;
+
+      const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement("a");
-      a.href = csvContent;
+      a.href = URL.createObjectURL(blob);
       a.download = "สรุปประวัติย้อนหลัง_สาขา1.csv";
       a.click();
     }
 
     function downloadB2HistoryCSV() {
       const bom = "\uFEFF";
-      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(bom +
-        "เดือน,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายดำเนินงาน (บาท),ค่าเช่าจ่ายจริง (บาท),ค่าเช่าเฉลี่ยต่อเดือน (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (%),หมายเหตุ\n" +
-        "มีนาคม 2569,30000,14219,16466,0,0,-2247,-15.8%,\"เปิดร้านครึ่งเดือนหลัง 16-31 มี.ค. (16 วัน) ค่าแรง 5,750 บ. วัตถุดิบ 10,716 บ.\"\n" +
-        "เมษายน 2569,30000,44303,36224,0,0,8079,18.2%,\"🏆 All-Time High! เทศกาลสงกรานต์ ยอดขายพุ่งแตะ 44,303 บ. กำไรดำเนินงานเด่น +8,079 บ.\"\n" +
-        "พฤษภาคม 2569,30000,28715,25562,0,0,3153,11.0%,\"คุมรายจ่ายได้ดี กำไรดำเนินงาน +3,153 บ. เงินคงเหลือยกไป 3,153 บ.\"\n" +
-        "มิถุนายน 2569,30000,22016,29512,0,0,-7496,-34.0%,\"รายจ่ายสต็อกของและตัดรอบต้นฤดูฝน ขาดทุน -7,496 บ.\"\n" +
-        "กรกฎาคม 2569,30000,35048,30658,10000,3333.33,1056.67,3.0%,\"🎯 ทะลุเป้า 30k ยอดฟื้นแตะ 3.5 หมื่น จ่ายค่าเช่า 3 เดือน 10,000 บ. หักเฉลี่ยกำไรสุทธิ +1,057 บ.\"\n" +
-        "สิงหาคม 2569,40000,33885,30785,0,3333.33,-233.33,-0.7%,\"ตั้งเป้าใหม่ 40k ยอดขาย 3.38 หมื่น กำไรดำเนินงานหน้าร้าน +3,100 บ. (หักเช่าเฉลี่ย -233 บ.)\"\n" +
-        "กันยายน 2569 (30 วัน),40000,31950,36829,0,3333.33,-8212.33,-25.70%,\"ข้อมูลปิดสิ้นเดือน 30 วัน วันที่ 30 ยอดขาย 845 บ. จ่าย 440 บ. กำไรหน้าร้าน +405 บ. ยอดสะสมปิดเดือนแตะ 31,950 บ. หักค่าเช่าเฉลี่ย 3,333.33 บ./ด.\"\n" +
-        "ตุลาคม 2569 (31 วัน),35000,35841,37316.67,3333.33,3333.33,-4809,-13.42%,\"ครบ 31 วัน ปิดสิ้นเดือน ทะลุเป้า 35k สำเร็จแตะ 35,841 บ.! จ่ายดำเนินงาน 37,316.67 บ. ค่าเช่าจ่ายสด ว.10 3,333.33 บ. รายจ่ายรวม 40,650 บ. กำไรสุทธิ -4,809 บ. (ตรงตามสมุดบันทึก)\"\n" +
-        "พฤศจิกายน 2569 (4 วัน),35000,3337,4641,3333.33,3333.33,-4637.33,-138.97%,\"สะสม 4 วัน ยอดขาย 3,337 บ. (ว.4 ขาย 520 บ. มีลงโมเลน 810 บ.) จ่ายดำเนินงาน 4,641 บ. รวมจ่าย 7,974 บ.\"\n" +
-        "รวม 9 เดือน (มี.ค. - พ.ย. 69),-,248364,248028,16666.66,16666.66,-16330.66,-6.58%,\"ยอดขายสะสมแตะ 2.484 แสนบาท (248,364 บ.) 🎯\""
-      );
+      let csv = "เดือน,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายดำเนินงาน (บาท),ค่าเช่าจ่ายจริง (บาท),ค่าเช่าเฉลี่ยต่อเดือน (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (%),หมายเหตุ\n";
+      b2HistoryData.forEach(d => {
+        const margin = ((d.net / d.rev) * 100).toFixed(2) + '%';
+        csv += `${d.fullMonth},${d.target},${d.rev},${d.opExp},${d.rentPaid || 0},${d.rentAmort || 0},${Math.round(d.net)},${margin},"${d.note}"\n`;
+      });
+      const totRev = b2HistoryData.reduce((s, d) => s + d.rev, 0);
+      const totOpExp = b2HistoryData.reduce((s, d) => s + d.opExp, 0);
+      const totRentPaid = b2HistoryData.reduce((s, d) => s + (d.rentPaid || 0), 0);
+      const totRentAmort = b2HistoryData.reduce((s, d) => s + (d.rentAmort || 0), 0);
+      const totNet = b2HistoryData.reduce((s, d) => s + d.net, 0);
+      const totMargin = ((totNet / totRev) * 100).toFixed(2) + '%';
+      csv += `รวม ${b2HistoryData.length} เดือน,-,${totRev},${totOpExp},${totRentPaid},${totRentAmort},${Math.round(totNet)},${totMargin},"ยอดขายสะสมสาขา 2"`;
+
+      const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement("a");
-      a.href = csvContent;
+      a.href = URL.createObjectURL(blob);
       a.download = "สรุปประวัติย้อนหลัง_สาขา2.csv";
       a.click();
     }
 
     function downloadB3HistoryCSV() {
       const bom = "\uFEFF";
-      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(bom +
-        "เดือน,ปี,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายรวม (บาท),ค่าเช่าบันทึก (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),หมายเหตุและสถานะ\n" +
-        "มกราคม,2569,60000,77494,65751,4000,11743,15.15%,เปิดปีใหม่ ยอดขายสูงสุดทะลุเป้า 60k (+11743 บ.)\n" +
-        "กุมภาพันธ์,2569,60000,44473,59117,4000,-14644,-32.93%,เดือนสั้น 28 วัน จ่ายค่าเช่า 4000 บ. (ว.2) ยอดคงเหลือ 506 บ.\n" +
-        "มีนาคม,2569,40000,32186,40847,2000,-8661,-26.91%,มีค่าไฟ 1398 บ. (ว.1) ค่าเช่า 2000 บ. (ว.3) ยอดคงเหลือ 174 บ.\n" +
-        "เมษายน,2569,40000,37470,38716,2000,-1246,-3.33%,บันทึกสรุปตามสมุด: สารรับ 37470 รายจ่าย 38716 ติดลบ 1246 บ.\n" +
-        "พฤษภาคม,2569,40000,32214,29924,2000,2290,7.11%,พลิกมีกำไรสุทธิ +2290 บ. จ่ายค่าเช่า 2000 บ. ยอดคงเหลือ 1297 บ.\n" +
-        "มิถุนายน,2569,40000,41143,49967,4000,-8824,-21.45%,🎯 ทะลุเป้า 40k จ่ายค่าเช่า 4000 บ. (ว.2) ยอดคงเหลือ 119 บ.\n" +
-        "กรกฎาคม,2569,40000,49295,51785,2000,-2490,-5.05%,🎯 ทะลุเป้า 40k แตะ 49295 บ. จ่ายค่าเช่า 2000 บ. ยอดคงเหลือ 340 บ.\n" +
-        "สิงหาคม,2569,40000,45812,47343,2000,-1531,-3.34%,🎯 ทะลุเป้า 40k ต่อเนื่อง (หากไม่รวมก้อนพิเศษ 5400 บ. จะกำไร +3869 บ.)\n" +
-        "กันยายน (30 วัน),2569,40000,41285,40339,4000,946,2.29%,ขาย 30 วัน ยอดขายทะลุเป้า 40k จบที่ 41,285 บ.! กำไรดำเนินงานสะสม +4946 บ. กำไรสุทธิหลังหักเช่าปิดบวก +946 บ. 🏆 ทะลุเป้า 5 เดือนติด\n" +
-        "ตุลาคม (31 วัน),2569,45000,46884,47268,4000,-384,-0.82%,\"ครบ 31 วัน ปิดสิ้นเดือน ทะลุเป้า 45k สำเร็จแตะ 46,884 บ.! (104.2% ของเป้า) จ่ายดำเนินงาน 43,268 บ. ค่าเช่าจ่ายสด ว.9 4,000 บ. รายจ่ายรวม 47,268 บ. สุทธิ -384 บ. (กำไรหน้าร้านสะสม +3,616 บ.) 🥈\"\n" +
-        "พฤศจิกายน (4 วัน),2569,40000,5563,10688,4000,-5125,-92.13%,\"สะสม 4 วัน ยอดขาย 5,563 บ. (ว.4 ขาย 1,442 บ. ส่งเงินสด 602 บ. 🏆 มีลงโมเลน 1,782 บ.) จ่ายดำเนินงาน 6,688 บ. รวมจ่าย 10,688 บ. ส่งเงินรวม 1,202 บ.\"\n" +
-        "รวมสะสม 11 เดือน,-,-,453029,477785,32000,-24756,-5.46%,\"ยอดขายสม่ำเสมออันดับ 2 ทะลุ 4.53 แสนบาท (453,029 บ.) 🥈\""
-      );
+      let csv = "เดือน,ปี,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายรวม (บาท),ค่าเช่าบันทึก (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (Margin),หมายเหตุและสถานะ\n";
+      b3HistoryData.forEach(d => {
+        const margin = ((d.net / d.rev) * 100).toFixed(2) + '%';
+        csv += `${d.fullMonth.split(' ')[0]},2569,${d.target},${d.rev},${d.totalExp},${d.rent},${d.net},${margin},"${d.note}"\n`;
+      });
+      const totRev = b3HistoryData.reduce((s, d) => s + d.rev, 0);
+      const totExp = b3HistoryData.reduce((s, d) => s + d.totalExp, 0);
+      const totRent = b3HistoryData.reduce((s, d) => s + d.rent, 0);
+      const totNet = b3HistoryData.reduce((s, d) => s + d.net, 0);
+      const totMargin = ((totNet / totRev) * 100).toFixed(2) + '%';
+      csv += `รวมสะสม ${b3HistoryData.length} เดือน,-,-,${totRev},${totExp},${totRent},${totNet},${totMargin},"ยอดขายสม่ำเสมออันดับ 2"`;
+
+      const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement("a");
-      a.href = csvContent;
+      a.href = URL.createObjectURL(blob);
       a.download = "สรุปประวัติย้อนหลัง_สาขา3.csv";
       a.click();
     }
 
     function downloadB4HistoryCSV() {
       const bom = "\uFEFF";
-      const csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(bom +
-        "เดือน,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายดำเนินงาน (บาท),ค่าเช่าจ่ายจริง (บาท),ค่าเช่าเฉลี่ยต่อเดือน (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (%),หมายเหตุ\n" +
-        "มีนาคม 2569,30000,22454,23083,0,0,-629,-2.8%,\"ยอดถึงวันที่ 29 ได้ 20,839 บ. / สิ้นเดือนรวม 22,454 บ.\"\n" +
-        "เมษายน 2569,30000,24236,19992,10000,3333.33,910.67,3.8%,\"ขายถึงวันที่ 23 (21 วันขาย) จ่ายค่าเช่ารอบ 3 เดือน 10,000 บ. (เฉลี่ย 3,333.33 บ./ด.)\"\n" +
-        "พฤษภาคม 2569,30000,31466,31161,0,0,305,1.0%,\"ยอดขายทะลุเป้า 30,000 บ. กำไรสุทธิ +฿305\"\n" +
-        "มิถุนายน 2569,30000,28368,27442,3336,3336,-2410,-8.5%,\"ลงค่าเช่าตัดรอบ 3,336 บ. ในวันที่ 1 รวมรายจ่าย 30,778 บ.\"\n" +
-        "กรกฎาคม 2569,30000,34810,31351,10000,3333.33,125.67,0.4%,\"จ่ายค่าเช่ารอบใหม่ 3 เดือน 10,000 บ. (เฉลี่ย 3,333.33 บ./ด.) ทะลุเป้า\"\n" +
-        "สิงหาคม 2569,40000,38655,36776,0,0,1879,4.9%,\"ตั้งเป้าใหม่ 40,000 บ. ยอดขายสูงสุดเป็นประวัติการณ์ 38,655 บ. กำไร +1,879 บ.\"\n" +
-        "กันยายน 2569 (30 วัน),40000,36620,34925,0,3333.33,-1638.33,-4.47%,\"ข้อมูลปิดสิ้นเดือน 30 วัน วันที่ 30 ยอดขาย 1,000 บ. จ่าย 640 บ. กำไรหน้าร้าน +360 บ. กำไรดำเนินงานสะสมปิดเดือนแตะ +1,695 บ. 🚀 ยอดสะสมแตะ 3.66 หมื่น (36,620 บ.) หักค่าเช่าเฉลี่ย 3,333.33 บ./ด.\"\n" +
-        "ตุลาคม (31 วัน),40000,38745,34325,4795.33,3333.33,-375.33,-0.97%,\"ครบ 31 วัน ปิดสิ้นเดือน ยอดขาย 38,745 บ. จ่ายดำเนินงาน 34,325 บ. ค่าเช่าจ่ายสด ว.10 3,333.33 บ. และเช่าพิเศษ ว.31 1,462 บ. รายจ่ายรวม 39,120.33 บ. สุทธิ -375.33 บ. (กำไรหน้าร้านสะสมพุ่งแตะ +฿4,420 บ. 🚀)\"\n" +
-        "พฤศจิกายน (4 วัน),40000,3488,5097,3333.33,3333.33,-4942.33,-141.69%,\"สะสม 4 วัน ยอดขาย 3,488 บ. (ว.4 ขาย 580 บ. มีลงโมเลน 810 บ.) จ่ายดำเนินงาน 5,097 บ. รวมจ่าย 8,430 บ.\"\n" +
-        "รวม 9 เดือน (มี.ค. - พ.ย. 69),-,253466,241257,31464.66,21464.85,-9255.85,-3.65%,\"ยอดขายสะสมแตะ 253,466 บ. ทะลุ 2.534 แสนบาท 🚀\""
-      );
+      let csv = "เดือน,เป้าหมายยอดขาย (บาท),รายรับจริง (บาท),รายจ่ายดำเนินงาน (บาท),ค่าเช่าจ่ายจริง (บาท),ค่าเช่าเฉลี่ยต่อเดือน (บาท),กำไร/ขาดทุนสุทธิ (บาท),อัตรากำไร (%),หมายเหตุ\n";
+      b4HistoryData.forEach(d => {
+        const margin = ((d.net / d.rev) * 100).toFixed(2) + '%';
+        csv += `${d.fullMonth},${d.target},${d.rev},${d.opExp},${d.rentPaid || 0},${d.rentAmort || 0},${Math.round(d.net)},${margin},"${d.note}"\n`;
+      });
+      const totRev = b4HistoryData.reduce((s, d) => s + d.rev, 0);
+      const totOpExp = b4HistoryData.reduce((s, d) => s + d.opExp, 0);
+      const totRentPaid = b4HistoryData.reduce((s, d) => s + (d.rentPaid || 0), 0);
+      const totRentAmort = b4HistoryData.reduce((s, d) => s + (d.rentAmort || 0), 0);
+      const totNet = b4HistoryData.reduce((s, d) => s + d.net, 0);
+      const totMargin = ((totNet / totRev) * 100).toFixed(2) + '%';
+      csv += `รวม ${b4HistoryData.length} เดือน,-,${totRev},${totOpExp},${totRentPaid},${totRentAmort},${Math.round(totNet)},${totMargin},"เติบโตต่อเนื่อง สาขา 4"`;
+
+      const blob = new Blob([bom + csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement("a");
-      a.href = csvContent;
+      a.href = URL.createObjectURL(blob);
       a.download = "สรุปประวัติย้อนหลัง_สาขา4.csv";
       a.click();
     }
 
     // 14. INITIALIZE ON LOAD
-    window.addEventListener('DOMContentLoaded', () => {
+    function renderAllComponents() {
       updateDashboard();
+      renderForecastSection();
       renderTable();
       renderDonut();
+      renderAnnualTables();
       renderAnnualChart();
       renderB1HistoryTable();
       renderB1HistoryChart();
@@ -4282,9 +4631,18 @@
       renderCashTransferChart();
       renderDayOfWeekChart();
       updateTargetPlanning();
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      // 1. Fetch single source of truth database.json
+      await loadDatabase();
+
+      // 2. Render all components dynamically
+      renderAllComponents();
     });
 
-    // Handle Window Resize for SVG Charts
+
+        // Handle Window Resize for SVG Charts
     window.addEventListener('resize', () => {
       if (currentMainTab === 'current') {
         renderTrendChart();
