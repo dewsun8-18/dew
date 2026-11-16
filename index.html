@@ -5,13 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard สรุปยอดรายรับ-รายจ่าย ร้านลูกชิ้น 4 สาขา</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = { darkMode: 'class' };
+    }
+  </script>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('dashboard_theme') === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
     .font-num {
       font-family: 'Plus Jakarta Sans', 'Prompt', sans-serif;
@@ -23,16 +38,16 @@
     .nav-tab-active {
       background-color: #1e293b;
       color: #ffffff;
-      box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.12);
+      box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.16);
     }
     .nav-tab-inactive {
-      background-color: #ffffff;
-      color: #64748b;
-      border: 1px solid #e2e8f0;
+      background-color: transparent;
+      color: #475569;
+      border: 1px solid transparent;
     }
     .nav-tab-inactive:hover {
-      background-color: #f8fafc;
-      color: #1e293b;
+      background-color: #f1f5f9;
+      color: #0f172a;
     }
     /* Custom scrollbar */
     ::-webkit-scrollbar {
@@ -50,17 +65,164 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
+
+    /* Dark Mode Theme Overrides */
+    html.dark body {
+      background-color: #0b1120 !important;
+      color: #e2e8f0 !important;
+    }
+    html.dark ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    html.dark ::-webkit-scrollbar-thumb {
+      background: #334155;
+    }
+    html.dark ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+    html.dark header {
+      background-color: rgba(15, 23, 42, 0.92) !important;
+      border-color: #1e293b !important;
+    }
+    html.dark #leftSidebar {
+      background-color: #0f172a !important;
+      border-color: #1e293b !important;
+    }
+    html.dark .nav-tab-active {
+      background-color: #4f46e5;
+      color: #ffffff;
+      box-shadow: 0 4px 14px -2px rgba(79, 70, 229, 0.4);
+    }
+    html.dark .nav-tab-inactive {
+      background-color: transparent;
+      color: #cbd5e1;
+      border-color: transparent;
+    }
+    html.dark .nav-tab-inactive:hover {
+      background-color: #1e293b !important;
+      color: #ffffff !important;
+    }
+    html.dark .bg-white,
+    html.dark .bg-white\/90 {
+      background-color: #131c31 !important;
+    }
+    html.dark .bg-slate-50,
+    html.dark .bg-slate-50\/50 {
+      background-color: #0f172a !important;
+    }
+    html.dark .bg-slate-100 {
+      background-color: #1e293b !important;
+    }
+    html.dark .hover\:bg-slate-50:hover,
+    html.dark .hover\:bg-slate-100:hover,
+    html.dark .hover\:bg-slate-200:hover {
+      background-color: #1e293b !important;
+    }
+    html.dark .border-slate-100,
+    html.dark .border-slate-200,
+    html.dark .border-slate-300 {
+      border-color: #263248 !important;
+    }
+    html.dark .text-slate-900,
+    html.dark .text-slate-800 {
+      color: #f1f5f9 !important;
+    }
+    html.dark .text-slate-700 {
+      color: #cbd5e1 !important;
+    }
+    html.dark .text-slate-600,
+    html.dark .text-slate-500 {
+      color: #94a3b8 !important;
+    }
+    html.dark input,
+    html.dark select,
+    html.dark textarea {
+      background-color: #0f172a !important;
+      color: #f1f5f9 !important;
+      border-color: #334155 !important;
+    }
+    /* Tinted cards in Dark Mode */
+    html.dark .bg-blue-50,
+    html.dark .bg-blue-50\/50,
+    html.dark .bg-blue-50\/60,
+    html.dark .bg-blue-50\/80 {
+      background-color: rgba(30, 58, 138, 0.25) !important;
+      border-color: rgba(59, 130, 246, 0.35) !important;
+    }
+    html.dark .bg-amber-50,
+    html.dark .bg-amber-50\/50,
+    html.dark .bg-amber-50\/60,
+    html.dark .bg-amber-50\/80 {
+      background-color: rgba(120, 53, 15, 0.25) !important;
+      border-color: rgba(245, 158, 11, 0.35) !important;
+    }
+    html.dark .bg-emerald-50,
+    html.dark .bg-emerald-50\/50,
+    html.dark .bg-emerald-50\/60,
+    html.dark .bg-emerald-50\/80 {
+      background-color: rgba(6, 78, 59, 0.25) !important;
+      border-color: rgba(16, 185, 129, 0.35) !important;
+    }
+    html.dark .bg-purple-50,
+    html.dark .bg-purple-50\/50,
+    html.dark .bg-purple-50\/60,
+    html.dark .bg-purple-50\/80 {
+      background-color: rgba(88, 28, 135, 0.25) !important;
+      border-color: rgba(168, 85, 247, 0.35) !important;
+    }
+    html.dark .bg-indigo-50,
+    html.dark .bg-indigo-50\/60,
+    html.dark .bg-indigo-100\/70 {
+      background-color: rgba(49, 46, 129, 0.3) !important;
+      border-color: rgba(99, 102, 241, 0.35) !important;
+    }
+    html.dark .bg-rose-50,
+    html.dark .bg-red-50 {
+      background-color: rgba(136, 19, 55, 0.25) !important;
+      border-color: rgba(244, 63, 94, 0.35) !important;
+    }
+    html.dark .border-blue-100, html.dark .border-blue-200 { border-color: rgba(59, 130, 246, 0.3) !important; }
+    html.dark .border-amber-100, html.dark .border-amber-200 { border-color: rgba(245, 158, 11, 0.3) !important; }
+    html.dark .border-emerald-100, html.dark .border-emerald-200 { border-color: rgba(16, 185, 129, 0.3) !important; }
+    html.dark .border-purple-100, html.dark .border-purple-200 { border-color: rgba(168, 85, 247, 0.3) !important; }
+    html.dark .border-indigo-100, html.dark .border-indigo-200, html.dark .border-indigo-300 { border-color: rgba(99, 102, 241, 0.35) !important; }
+
+    html.dark .text-blue-900, html.dark .text-blue-950, html.dark .text-blue-800, html.dark .text-blue-700 { color: #93c5fd !important; }
+    html.dark .text-amber-900, html.dark .text-amber-950, html.dark .text-amber-800, html.dark .text-amber-700 { color: #fcd34d !important; }
+    html.dark .text-emerald-900, html.dark .text-emerald-950, html.dark .text-emerald-800, html.dark .text-emerald-700, html.dark .text-emerald-600 { color: #6ee7b7 !important; }
+    html.dark .text-purple-900, html.dark .text-purple-950, html.dark .text-purple-800, html.dark .text-purple-700 { color: #d8b4fe !important; }
+    html.dark .text-indigo-900, html.dark .text-indigo-950, html.dark .text-indigo-700 { color: #a5b4fc !important; }
+    html.dark .text-red-700, html.dark .text-red-600 { color: #fda4af !important; }
+
+    /* SVG Chart Dark Mode readability */
+    html.dark svg text[fill="#64748b"],
+    html.dark svg text[fill="#475569"],
+    html.dark svg text[fill="#94a3b8"] {
+      fill: #cbd5e1 !important;
+    }
+    html.dark svg text[fill="#1e293b"],
+    html.dark svg text[fill="#0f172a"],
+    html.dark svg text[fill="#334155"] {
+      fill: #f1f5f9 !important;
+    }
+    html.dark svg line[stroke="#e2e8f0"],
+    html.dark svg line[stroke="#f1f5f9"] {
+      stroke: #334155 !important;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen">
 
   <!-- TOP NAVBAR -->
   <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16 gap-4">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 gap-3">
         
-        <!-- Brand / Title -->
-        <div class="flex items-center gap-3 min-w-0">
+        <!-- Brand / Title + Mobile Sidebar Toggle -->
+        <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+          <button onclick="toggleMobileSidebar()" class="lg:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 shadow-sm transition shrink-0" title="เปิด/ปิดเมนูด้านซ้าย" aria-label="เปิดเมนู">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xl shadow-md shrink-0">
             🍡
           </div>
@@ -70,7 +232,7 @@
                 บัญชีร้านลูกชิ้น 4 สาขา
               </h1>
               <span id="navCurrentDayBadge" class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-100 text-emerald-800 border border-emerald-200">
-                พ.ย. 2569 (วันที่ 4 พ.ย. วันพุธ)
+                พ.ย. 2569
               </span>
             </div>
             <p class="text-xs text-slate-500 truncate hidden sm:block">
@@ -80,7 +242,13 @@
         </div>
 
         <!-- Global Actions -->
-        <div class="flex items-center gap-2.5 shrink-0">
+        <div class="flex items-center gap-2 shrink-0">
+          <!-- Theme Toggle Button (Light / Dark) -->
+          <button id="themeToggleBtn" onclick="toggleTheme()" class="px-2.5 sm:px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 bg-white hover:bg-slate-50 transition shadow-sm flex items-center gap-1.5" title="สลับโหมดมืด / โหมดสว่าง">
+            <span id="themeIcon">🌙</span>
+            <span id="themeLabel" class="hidden md:inline">โหมดมืด</span>
+          </button>
+
           <!-- Rent Toggle Button -->
           <button id="globalRentBtn" onclick="toggleRent()" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 bg-white hover:bg-slate-50 transition shadow-sm flex items-center gap-2" title="คลิกเพื่อสลับการคำนวณค่าเช่าคงที่">
             <span id="rentIndicator" class="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-sm"></span>
@@ -99,7 +267,8 @@
           <div class="relative inline-block text-left">
             <button onclick="toggleExportMenu()" class="px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition flex items-center gap-1.5">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-              <span>ดาวน์โหลด CSV</span>
+              <span class="hidden sm:inline">ดาวน์โหลด CSV</span>
+              <span class="sm:hidden">CSV</span>
               <svg class="w-3.5 h-3.5 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div id="exportMenu" class="hidden absolute right-0 mt-2 w-56 rounded-xl bg-white shadow-xl border border-slate-100 py-1.5 z-40">
@@ -141,49 +310,95 @@
         </div>
 
       </div>
-
-      <!-- MAIN NAVIGATION TABS (Level 1) -->
-      <div class="flex items-center gap-2 overflow-x-auto py-2.5 no-scrollbar border-t border-slate-100">
-        <button onclick="switchMainTab('current')" id="mainTab-current" class="nav-tab-active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
-          <span>📊</span>
-          <span>ภาพรวมเดือนปัจจุบัน (พ.ย. 69)</span>
-        </button>
-
-        <button onclick="switchMainTab('annual')" id="mainTab-annual" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
-          <span>📅</span>
-          <span>สรุปภาพรวมปี 2569</span>
-          <span id="navAnnualRevBadge" class="px-1.5 py-0.2 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold">1.535M 🌟</span>
-        </button>
-
-        <button onclick="switchMainTab('branches')" id="mainTab-branches" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
-          <span>🏪</span>
-          <span>เจาะลึกประวัติรายสาขา</span>
-        </button>
-
-        <button onclick="switchMainTab('insights')" id="mainTab-insights" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
-          <span>📈</span>
-          <span>วิเคราะห์เจาะลึกธุรกิจ</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-rose-100 text-rose-700 font-bold">Insight ✨</span>
-        </button>
-
-        <button onclick="switchMainTab('simulator')" id="mainTab-simulator" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2">
-          <span>🎯</span>
-          <span>เครื่องมือวางแผนเป้าหมาย</span>
-          <span id="navSimulatorBadge" class="px-1.5 py-0.2 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold">พ.ย. (วันที่ 4)</span>
-        </button>
-
-        <a href="รายงานวิเคราะห์และข้อเสนอแนะการปรับราคาสินค้า.html" class="nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2 hover:text-emerald-700 hover:bg-emerald-50 border border-emerald-200">
-          <span>📑</span>
-          <span>รายงานวิเคราะห์และปรับราคา</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold">กลยุทธ์ 4 สาขา ✨</span>
-        </a>
-      </div>
-
     </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+  <!-- MOBILE SIDEBAR BACKDROP -->
+  <div id="sidebarBackdrop" onclick="closeMobileSidebar()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 hidden lg:hidden"></div>
+
+  <!-- APP SHELL: LEFT SIDEBAR + MAIN CONTENT -->
+  <div class="max-w-[1600px] mx-auto flex items-start">
+
+    <!-- LEFT SIDEBAR NAVIGATION -->
+    <aside id="leftSidebar" class="fixed lg:sticky top-0 lg:top-16 left-0 z-50 lg:z-20 w-[250px] shrink-0 h-screen lg:h-[calc(100vh-4rem)] bg-white border-r border-slate-200 flex flex-col justify-between p-4 overflow-y-auto -translate-x-full lg:translate-x-0 transition-transform duration-200 shadow-xl lg:shadow-none">
+      <div>
+        <!-- Mobile Drawer Header -->
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100 lg:hidden">
+          <div class="flex items-center gap-2 font-bold text-slate-900 text-sm">
+            <span>🍡</span> เมนูหลัก
+          </div>
+          <button onclick="closeMobileSidebar()" class="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100" aria-label="ปิดเมนู">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 mb-2 hidden lg:block">
+          เมนูหลัก (Navigation)
+        </div>
+
+        <nav class="flex flex-col gap-1.5">
+          <button onclick="switchMainTab('current')" id="mainTab-current" class="nav-tab-active w-full px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-between text-left">
+            <span class="flex items-center gap-2.5 min-w-0">
+              <span>📊</span>
+              <span class="truncate">ภาพรวมเดือนปัจจุบัน</span>
+            </span>
+          </button>
+
+          <button onclick="switchMainTab('annual')" id="mainTab-annual" class="nav-tab-inactive w-full px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-between text-left gap-1.5">
+            <span class="flex items-center gap-2.5 min-w-0">
+              <span>📅</span>
+              <span class="truncate">สรุปภาพรวมปี 2569</span>
+            </span>
+            <span id="navAnnualRevBadge" class="px-1.5 py-0.5 rounded-full text-[10px] bg-indigo-100 text-indigo-700 font-bold shrink-0">1.592M 🌟</span>
+          </button>
+
+          <button onclick="switchMainTab('branches')" id="mainTab-branches" class="nav-tab-inactive w-full px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-between text-left">
+            <span class="flex items-center gap-2.5 min-w-0">
+              <span>🏪</span>
+              <span class="truncate">เจาะลึกประวัติรายสาขา</span>
+            </span>
+          </button>
+
+          <button onclick="switchMainTab('insights')" id="mainTab-insights" class="nav-tab-inactive w-full px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-between text-left gap-1.5">
+            <span class="flex items-center gap-2.5 min-w-0">
+              <span>📈</span>
+              <span class="truncate">วิเคราะห์เจาะลึกธุรกิจ</span>
+            </span>
+            <span class="px-1.5 py-0.5 rounded-full text-[10px] bg-rose-100 text-rose-700 font-bold shrink-0">Insight ✨</span>
+          </button>
+
+          <button onclick="switchMainTab('simulator')" id="mainTab-simulator" class="nav-tab-inactive w-full px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-between text-left gap-1.5">
+            <span class="flex items-center gap-2.5 min-w-0">
+              <span>🎯</span>
+              <span class="truncate">วางแผนเป้าหมาย</span>
+            </span>
+            <span id="navSimulatorBadge" class="px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold shrink-0">พ.ย.</span>
+          </button>
+
+          <div class="my-1.5 border-t border-slate-100"></div>
+
+          <a href="รายงานวิเคราะห์และข้อเสนอแนะการปรับราคาสินค้า.html" class="nav-tab-inactive w-full px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-between text-left gap-1.5 border border-emerald-200/70 hover:text-emerald-700 hover:bg-emerald-50">
+            <span class="flex items-center gap-2.5 min-w-0">
+              <span>📑</span>
+              <span class="truncate">วิเคราะห์ปรับราคา</span>
+            </span>
+            <span class="px-1.5 py-0.5 rounded-full text-[10px] bg-emerald-100 text-emerald-800 font-bold shrink-0">4 สาขา ✨</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Sidebar Footer -->
+      <div class="pt-4 mt-4 border-t border-slate-100 text-[11px] text-slate-500 space-y-1">
+        <div class="font-semibold text-slate-700 flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>ฐานข้อมูลกลาง (Live)</span>
+        </div>
+        <div id="sidebarLastUpdated" class="text-[10px] font-num text-slate-400">ซิงค์จาก database.json</div>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-6 space-y-6">
 
     <!-- ======================================================== -->
     <!-- TAB 1: CURRENT MONTH OVERVIEW (NOVEMBER 2569)             -->
@@ -194,15 +409,15 @@
       <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <div class="flex flex-wrap items-center gap-2">
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-              สถานะ: วันที่ 4 พ.ย. 2569 (วันพุธ • วันที่ 4 ของเดือนพฤศจิกายน 2569)
+            <span id="tab1StatusPill" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              สถานะ: กำลังโหลดข้อมูล...
             </span>
-            <span class="text-xs text-slate-500">
-              (ยอดขายสะสม 4 วัน ฿18,776 • รายจ่ายดำเนินงาน ฿21,640 • ค่าเช่าจ่ายสด 4 สาขา ฿15,667 • เงินโอนส่งสะสม ฿3,256)
+            <span id="tab1StatusSummary" class="text-xs text-slate-500">
+              (กำลังซิงค์ข้อมูลจาก database.json)
             </span>
           </div>
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
-            ผลการดำเนินงานเดือนพฤศจิกายน 2569 (Day 4 • วันพุธที่ 4 พ.ย.)
+          <h2 id="tab1MainHeading" class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+            ผลการดำเนินงานเดือนพฤศจิกายน 2569
           </h2>
           <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
             เลือกสาขาด้านล่างเพื่อกรองข้อมูลการเงิน กราฟแนวโน้ม และตารางรายวัน
@@ -359,21 +574,21 @@
             <div class="w-full bg-indigo-950/80 h-2 rounded-full mt-3 overflow-hidden border border-indigo-800/50">
               <div id="fcRevProgressBar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-400 rounded-full" style="width: 11.7%"></div>
             </div>
-            <span class="text-[10px] text-slate-400 mt-1 block text-right font-num">บันทึกข้อมูลเดือนพฤศจิกายน Day 4 (4 พ.ย. 69)</span>
+            <span id="fcRevFooter" class="text-[10px] text-slate-400 mt-1 block text-right font-num">บันทึกข้อมูลเดือนพฤศจิกายน</span>
           </div>
 
           <!-- Card 2: Projected Operating Expenses -->
           <div class="bg-amber-950/30 border border-amber-700/30 rounded-2xl p-4 sm:p-5 backdrop-blur-sm">
-            <span class="text-xs font-semibold text-amber-300 block">รายจ่ายรวมตามเกณฑ์เงินสด (สะสม 4 วัน)</span>
-            <div id="fcTotalExp" class="text-3xl sm:text-4xl font-extrabold font-num text-amber-400 mt-1.5">฿37,307</div>
+            <span id="fcExpTitle" class="text-xs font-semibold text-amber-300 block">รายจ่ายรวมตามเกณฑ์เงินสด</span>
+            <div id="fcTotalExp" class="text-3xl sm:text-4xl font-extrabold font-num text-amber-400 mt-1.5">฿0</div>
             <div class="text-xs text-amber-200/80 mt-2 flex items-center justify-between">
-              <span>จ่ายดำเนินงาน: <strong class="font-num text-white">฿21,639</strong></span>
+              <span id="fcOpExpInline">จ่ายดำเนินงาน: <strong class="font-num text-white">฿0</strong></span>
               <span id="fcRemainingExpText" class="font-num text-purple-300 font-semibold">ค่าเช่าจ่ายสด 4 สาขา ฿15,667</span>
             </div>
             <div class="w-full bg-slate-950/80 h-2 rounded-full mt-3 overflow-hidden border border-amber-800/50">
               <div class="h-full bg-gradient-to-r from-amber-500 to-orange-400 rounded-full" style="width: 100%"></div>
             </div>
-            <span class="text-[10px] text-slate-400 mt-1 block text-right font-num">มีสต็อกวัตถุดิบและลงของโมเลน 3 สาขา (ส.2, ส.3, ส.4) วันที่ 4 รวมกว่า ฿10,900</span>
+            <span id="fcExpFooter" class="text-[10px] text-slate-400 mt-1 block text-right font-num">อัปเดตอัตโนมัติจากฐานข้อมูลกลาง</span>
           </div>
 
           <!-- Card 3: Projected Net Profit -->
@@ -572,12 +787,12 @@
 
       </div>
 
-      <!-- 4 Branch Comparison Mini Cards (September) -->
+      <!-- 4 Branch Comparison Mini Cards -->
       <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
         <div class="flex items-center justify-between mb-4">
           <div>
-            <h3 class="text-base sm:text-lg font-bold text-slate-900">
-              สรุปภาพรวม 4 สาขา (วันที่ 1 - 4 พ.ย. 69 สะสม 4 วัน)
+            <h3 id="summary4Heading" class="text-base sm:text-lg font-bold text-slate-900">
+              สรุปภาพรวม 4 สาขา (พฤศจิกายน 2569)
             </h3>
             <p class="text-xs text-slate-500">คลิกที่การ์ดเพื่อสลับดูกราฟและตารางของสาขานั้น</p>
           </div>
@@ -594,16 +809,16 @@
               <span class="font-bold text-blue-900 flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> สาขา 1 🥇
               </span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold font-num">1-4 พ.ย.</span>
+              <span id="summaryB1Period" class="text-[11px] px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold font-num">1-16 พ.ย.</span>
             </div>
             <div class="mt-3 space-y-1.5 text-xs">
-              <div class="flex justify-between"><span>รายรับสะสม 4 วัน:</span><strong class="font-num text-slate-800">฿6,388</strong></div>
-              <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span class="font-num text-slate-600">฿5,214</span></div>
-              <div class="flex justify-between text-blue-700 font-semibold"><span>กำไรดำเนินงาน:</span><span class="font-num text-emerald-600 font-bold">+฿1,174</span></div>
-              <div class="flex justify-between text-blue-700 font-semibold"><span>สุทธิรวมค่าเช่า:</span><span class="font-num text-red-700 font-bold">-฿3,826</span></div>
+              <div class="flex justify-between"><span id="summaryB1RevLabel">รายรับสะสม:</span><strong id="summaryB1Rev" class="font-num text-slate-800">฿0</strong></div>
+              <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span id="summaryB1OpExp" class="font-num text-slate-600">฿0</span></div>
+              <div class="flex justify-between text-blue-700 font-semibold"><span>กำไรดำเนินงาน:</span><span id="summaryB1OpProfit" class="font-num font-bold">฿0</span></div>
+              <div class="flex justify-between text-blue-700 font-semibold"><span>สุทธิรวมค่าเช่า:</span><span id="summaryB1Net" class="font-num font-bold">฿0</span></div>
             </div>
-            <div class="mt-3 pt-2 border-t border-blue-100 text-[11px] text-blue-800 flex items-center justify-between">
-              <span>ว.4 ยอดส่งเงิน:</span><span class="font-num text-slate-700">สด ฿748, โอน ฿586 (กำไรหน้าร้าน +฿771 | สะสมส่ง ฿1,277) 🥇</span>
+            <div class="mt-3 pt-2 border-t border-blue-100 text-[11px] text-blue-800 flex items-start justify-between gap-2">
+              <span id="summaryB1DayLabel" class="shrink-0 font-semibold">ล่าสุด:</span><span id="summaryB1Footer" class="font-num text-slate-700 text-right">-</span>
             </div>
           </div>
 
@@ -613,16 +828,16 @@
               <span class="font-bold text-amber-900 flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> สาขา 2
               </span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-semibold font-num">1-4 พ.ย.</span>
+              <span id="summaryB2Period" class="text-[11px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 font-semibold font-num">1-16 พ.ย.</span>
             </div>
             <div class="mt-3 space-y-1.5 text-xs">
-              <div class="flex justify-between"><span>รายรับสะสม 4 วัน:</span><strong class="font-num text-slate-800">฿3,337</strong></div>
-              <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span class="font-num text-slate-600">฿4,641</span></div>
-              <div class="flex justify-between text-amber-700 font-semibold"><span>กำไรดำเนินงาน:</span><span class="font-num text-red-600">-฿1,304</span></div>
-              <div class="flex justify-between text-slate-600 font-semibold"><span>สุทธิรวมค่าเช่า:</span><span class="font-num text-red-600 font-bold">-฿4,637</span></div>
+              <div class="flex justify-between"><span id="summaryB2RevLabel">รายรับสะสม:</span><strong id="summaryB2Rev" class="font-num text-slate-800">฿0</strong></div>
+              <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span id="summaryB2OpExp" class="font-num text-slate-600">฿0</span></div>
+              <div class="flex justify-between text-amber-700 font-semibold"><span>กำไรดำเนินงาน:</span><span id="summaryB2OpProfit" class="font-num font-bold">฿0</span></div>
+              <div class="flex justify-between text-slate-600 font-semibold"><span>สุทธิรวมค่าเช่า:</span><span id="summaryB2Net" class="font-num font-bold">฿0</span></div>
             </div>
-            <div class="mt-3 pt-2 border-t border-amber-100 text-[11px] text-amber-800 flex items-center justify-between">
-              <span>ว.4 ยอดส่งเงิน:</span><span class="font-num text-slate-700">สด ฿460, โอน ฿60 (สั่งโมเลน ฿810 | สะสมส่ง ฿434)</span>
+            <div class="mt-3 pt-2 border-t border-amber-100 text-[11px] text-amber-800 flex items-start justify-between gap-2">
+              <span id="summaryB2DayLabel" class="shrink-0 font-semibold">ล่าสุด:</span><span id="summaryB2Footer" class="font-num text-slate-700 text-right">-</span>
             </div>
           </div>
 
@@ -630,18 +845,18 @@
           <div id="card-b3-sep" onclick="selectBranch('branch3')" class="cursor-pointer p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50 hover:shadow-md transition">
             <div class="flex items-center justify-between">
               <span class="font-bold text-emerald-900 flex items-center gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> สาขา 3 🥈
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> สาขา 3 🏆
               </span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-semibold font-num">1-4 พ.ย.</span>
+              <span id="summaryB3Period" class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 font-semibold font-num">1-16 พ.ย.</span>
             </div>
             <div class="mt-3 space-y-1.5 text-xs">
-              <div class="flex justify-between"><span>รายรับสะสม 4 วัน:</span><strong class="font-num text-slate-800">฿5,563</strong></div>
-              <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span class="font-num text-slate-600">฿6,688</span></div>
-              <div class="flex justify-between text-emerald-700 font-semibold"><span>กำไรดำเนินงาน:</span><span class="font-num text-red-600 font-bold">-฿1,125</span></div>
-              <div class="flex justify-between text-slate-600 font-semibold"><span>สุทธิรวมค่าเช่า:</span><span class="font-num text-red-600 font-bold">-฿5,125</span></div>
+              <div class="flex justify-between"><span id="summaryB3RevLabel">รายรับสะสม:</span><strong id="summaryB3Rev" class="font-num text-slate-800">฿0</strong></div>
+              <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span id="summaryB3OpExp" class="font-num text-slate-600">฿0</span></div>
+              <div class="flex justify-between text-emerald-700 font-semibold"><span>กำไรดำเนินงาน:</span><span id="summaryB3OpProfit" class="font-num font-bold">฿0</span></div>
+              <div class="flex justify-between text-slate-600 font-semibold"><span>สุทธิรวมค่าเช่า:</span><span id="summaryB3Net" class="font-num font-bold">฿0</span></div>
             </div>
-            <div class="mt-3 pt-2 border-t border-emerald-100 text-[11px] text-emerald-800 flex items-center justify-between">
-              <span>ว.4 ยอดส่งเงิน:</span><span class="font-num text-slate-700">สด ฿992, โอน ฿450 (ส่งสด ฿602 | สะสมส่ง ฿1,202) 🏆</span>
+            <div class="mt-3 pt-2 border-t border-emerald-100 text-[11px] text-emerald-800 flex items-start justify-between gap-2">
+              <span id="summaryB3DayLabel" class="shrink-0 font-semibold">ล่าสุด:</span><span id="summaryB3Footer" class="font-num text-slate-700 text-right">-</span>
             </div>
           </div>
 
@@ -651,16 +866,16 @@
               <span class="font-bold text-purple-900 flex items-center gap-1.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-purple-600"></span> สาขา 4 🚀
               </span>
-              <span class="text-[11px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-semibold font-num">1-4 พ.ย.</span>
+              <span id="summaryB4Period" class="text-[11px] px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 font-semibold font-num">1-16 พ.ย.</span>
             </div>
             <div class="mt-3 space-y-1.5 text-xs">
-              <div class="flex justify-between"><span>รายรับสะสม 4 วัน:</span><strong class="font-num text-slate-800">฿3,488</strong></div>
-              <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span class="font-num text-slate-600">฿5,097</span></div>
-              <div class="flex justify-between text-purple-700 font-semibold"><span>กำไรดำเนินงาน:</span><span class="font-num text-purple-700 font-bold">-฿1,609</span></div>
-              <div class="flex justify-between text-slate-600 font-semibold"><span>สุทธิรวมค่าเช่า:</span><span class="font-num text-red-600 font-bold">-฿4,942</span></div>
+              <div class="flex justify-between"><span id="summaryB4RevLabel">รายรับสะสม:</span><strong id="summaryB4Rev" class="font-num text-slate-800">฿0</strong></div>
+              <div class="flex justify-between"><span>รายจ่ายดำเนินงาน:</span><span id="summaryB4OpExp" class="font-num text-slate-600">฿0</span></div>
+              <div class="flex justify-between text-purple-700 font-semibold"><span>กำไรดำเนินงาน:</span><span id="summaryB4OpProfit" class="font-num font-bold">฿0</span></div>
+              <div class="flex justify-between text-slate-600 font-semibold"><span>สุทธิรวมค่าเช่า:</span><span id="summaryB4Net" class="font-num font-bold">฿0</span></div>
             </div>
-            <div class="mt-3 pt-2 border-t border-purple-100 text-[11px] text-purple-800 flex items-center justify-between">
-              <span>ว.4 ยอดส่งเงิน:</span><span class="font-num text-slate-700">สด ฿280, โอน ฿300 (สั่งโมเลน ฿810 | สะสมส่ง ฿343) 🚀</span>
+            <div class="mt-3 pt-2 border-t border-purple-100 text-[11px] text-purple-800 flex items-start justify-between gap-2">
+              <span id="summaryB4DayLabel" class="shrink-0 font-semibold">ล่าสุด:</span><span id="summaryB4Footer" class="font-num text-slate-700 text-right">-</span>
             </div>
           </div>
 
@@ -2117,6 +2332,7 @@
     </div>
 
   </main>
+  </div>
 
   <!-- JAVASCRIPT DATA & INTERACTION LOGIC -->
   <script>
@@ -2369,7 +2585,62 @@
       }
 
       const fcMarginEl = document.getElementById("fcMarginText");
-      if (fcMarginEl) fcMarginEl.innerText = (opProfit >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(opProfit));
+      if (fcMarginEl) {
+        fcMarginEl.innerText = (opProfit >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(opProfit));
+        fcMarginEl.className = "font-num font-bold " + (opProfit >= 0 ? "text-emerald-300" : "text-amber-300");
+      }
+
+      // Dynamic Tab 1 Status Header & Banner Footnotes
+      const tab1StatusPill = document.getElementById("tab1StatusPill");
+      if (tab1StatusPill) {
+        tab1StatusPill.innerText = `สถานะ: วันที่ ${days} พ.ย. 2569 (วัน${lastD.dayOfWeek} • วันที่ ${days} ของเดือนพฤศจิกายน 2569)`;
+      }
+      const tab1StatusSummary = document.getElementById("tab1StatusSummary");
+      if (tab1StatusSummary) {
+        tab1StatusSummary.innerText = `(ยอดขายสะสม ${days} วัน ฿${formatNumber(totRev)} • รายจ่ายดำเนินงาน ฿${formatNumber(totOpExp)} • ค่าเช่าจ่ายสด 4 สาขา ฿${formatNumber(totRent)} • เงินโอนส่งสะสม ฿${formatNumber(totSent)})`;
+      }
+      const tab1MainHeading = document.getElementById("tab1MainHeading");
+      if (tab1MainHeading) {
+        tab1MainHeading.innerText = `ผลการดำเนินงานเดือนพฤศจิกายน 2569 (Day ${days} • วัน${lastD.dayOfWeek}ที่ ${days} พ.ย.)`;
+      }
+
+      const fcRevFooter = document.getElementById("fcRevFooter");
+      if (fcRevFooter) fcRevFooter.innerText = `บันทึกข้อมูลเดือนพฤศจิกายน Day ${days} (${days} พ.ย. 69)`;
+
+      const fcExpTitle = document.getElementById("fcExpTitle");
+      if (fcExpTitle) fcExpTitle.innerText = `รายจ่ายรวมตามเกณฑ์เงินสด (สะสม ${days} วัน)`;
+
+      const fcOpExpInline = document.getElementById("fcOpExpInline");
+      if (fcOpExpInline) fcOpExpInline.innerHTML = `จ่ายดำเนินงาน: <strong class="font-num text-white">฿${formatNumber(totOpExp)}</strong>`;
+
+      const fcRemainingExpText = document.getElementById("fcRemainingExpText");
+      if (fcRemainingExpText) fcRemainingExpText.innerText = `ค่าเช่าจ่ายสด 4 สาขา ฿${formatNumber(totRent)}`;
+
+      const fcExpFooter = document.getElementById("fcExpFooter");
+      if (fcExpFooter) fcExpFooter.innerText = `อัปเดตล่าสุด Day ${days}: จ่ายดำเนินงาน ว.${days} ฿${formatNumber(lastDOpExp)} (ซิงค์จากฐานข้อมูลกลาง)`;
+
+      const fcSummaryBottom = document.getElementById("fcSummaryBottom");
+      if (fcSummaryBottom) {
+        const branchList = [
+          { key: "branch1", label: "สาขา 1", rev: branchMeta.branch1.rev, lastProfit: lastD.branches.branch1.revenue - lastD.branches.branch1.opExpense },
+          { key: "branch2", label: "สาขา 2", rev: branchMeta.branch2.rev, lastProfit: lastD.branches.branch2.revenue - lastD.branches.branch2.opExpense },
+          { key: "branch3", label: "สาขา 3", rev: branchMeta.branch3.rev, lastProfit: lastD.branches.branch3.revenue - lastD.branches.branch3.opExpense },
+          { key: "branch4", label: "สาขา 4", rev: branchMeta.branch4.rev, lastProfit: lastD.branches.branch4.revenue - lastD.branches.branch4.opExpense }
+        ];
+        const topRevBranch = [...branchList].sort((a, b) => b.rev - a.rev)[0];
+        const topDayProfitBranch = [...branchList].sort((a, b) => b.lastProfit - a.lastProfit)[0];
+        fcSummaryBottom.innerHTML = `<span class="text-amber-300 font-semibold">💡 สรุปภาพรวม:</span> สะสม ${days} วัน ยอดขายรวมแตะ <strong class="text-white font-num">฿${formatNumber(totRev)}</strong> โดยมี <strong class="text-blue-300">${topRevBranch.label}</strong> นำอันดับ 1 ที่ <strong class="text-blue-300 font-num">฿${formatNumber(topRevBranch.rev)}</strong> 🏆 และ <strong class="text-emerald-300">${topDayProfitBranch.label}</strong> ทำกำไรหน้าร้าน ว.${days} สูงสุด (${topDayProfitBranch.lastProfit >= 0 ? "+" : "-"}฿${formatNumber(Math.abs(topDayProfitBranch.lastProfit))}) ค่าเช่าล่วงหน้า 4 สาขา <strong class="text-purple-300 font-num">฿${totRent.toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong> ยอดโอนส่งสะสมรวม <strong class="text-emerald-400 font-num">฿${formatNumber(totSent)}</strong>`;
+      }
+
+      const sidebarLastUpdated = document.getElementById("sidebarLastUpdated");
+      if (sidebarLastUpdated && rawDatabase.metadata && rawDatabase.metadata.lastUpdated) {
+        sidebarLastUpdated.innerText = `อัปเดต: ${rawDatabase.metadata.lastUpdated}`;
+      }
+
+      const tableSub = document.getElementById("tableSub");
+      if (tableSub) {
+        tableSub.innerText = `ข้อมูลรายวันประจำเดือนพฤศจิกายน 2569 รวมทั้ง 4 สาขา (วันที่ 1 - ${days} พ.ย.)`;
+      }
 
       // Dynamic Top Navigation Badges
       const annualRevTotal = annualHistoryData.reduce((s, d) => s + (d.rev || 0), 0);
@@ -2388,6 +2659,12 @@
         navSimulatorBadge.innerText = `พ.ย. (วันที่ ${days})`;
       }
 
+      // Summary 4 Branches Section (สรุปภาพรวม 4 สาขา)
+      const summary4Heading = document.getElementById("summary4Heading");
+      if (summary4Heading) {
+        summary4Heading.innerText = `สรุปภาพรวม 4 สาขา (วันที่ 1 - ${days} พ.ย. 69 สะสม ${days} วัน)`;
+      }
+
       // Branch cards
       const dateEl = document.getElementById("fcBranchDate");
       if (dateEl) dateEl.innerText = `ข้อมูลวันที่ ${days} พ.ย. 69`;
@@ -2397,6 +2674,9 @@
         const bMeta = branchMeta[bk];
         const bLast = lastD.branches[bk];
         const bSentTot = rawDatabase.currentMonthDaily.reduce((s, d) => s + d.branches[bk].sent, 0);
+        const bCumOpProfit = bMeta.rev - bMeta.opExp;
+        const bCumNet = bMeta.rev - (bMeta.opExp + bMeta.rent);
+        const bLastProfit = bLast.revenue - bLast.opExpense;
 
         const revEl = document.getElementById(`fcB${n}Rev`);
         if (revEl) revEl.innerText = "฿" + formatNumber(bMeta.rev);
@@ -2409,8 +2689,40 @@
 
         const subEl = document.getElementById(`fcB${n}Sub`);
         if (subEl) {
-          const bOpProfit = bLast.revenue - bLast.opExpense;
-          subEl.innerText = `สะสม ${days} วัน ${formatNumber(bMeta.rev)} บ. (ว.${days} ขาย ${formatNumber(bLast.revenue)} บ. สด ${formatNumber(bLast.cash)} + โอน ${formatNumber(bLast.transfer)}) จ่ายดำเนินงาน ${formatNumber(bLast.opExpense)} บ. หน้าร้าน ${bOpProfit >= 0 ? "+" : ""}${formatNumber(bOpProfit)} บ.`;
+          subEl.innerText = `สะสม ${days} วัน ${formatNumber(bMeta.rev)} บ. (ว.${days} ขาย ${formatNumber(bLast.revenue)} บ. สด ${formatNumber(bLast.cash)} + โอน ${formatNumber(bLast.transfer)}) จ่ายดำเนินงาน ${formatNumber(bLast.opExpense)} บ. หน้าร้าน ${bLastProfit >= 0 ? "+" : ""}${formatNumber(bLastProfit)} บ.`;
+        }
+
+        // Update 4-Branch Summary Mini Cards (card-b1-sep..card-b4-sep)
+        const sPeriod = document.getElementById(`summaryB${n}Period`);
+        if (sPeriod) sPeriod.innerText = `1-${days} พ.ย.`;
+
+        const sRevLabel = document.getElementById(`summaryB${n}RevLabel`);
+        if (sRevLabel) sRevLabel.innerText = `รายรับสะสม ${days} วัน:`;
+
+        const sRev = document.getElementById(`summaryB${n}Rev`);
+        if (sRev) sRev.innerText = "฿" + formatNumber(bMeta.rev);
+
+        const sOpExp = document.getElementById(`summaryB${n}OpExp`);
+        if (sOpExp) sOpExp.innerText = "฿" + formatNumber(bMeta.opExp);
+
+        const sOpProfit = document.getElementById(`summaryB${n}OpProfit`);
+        if (sOpProfit) {
+          sOpProfit.innerText = (bCumOpProfit >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(bCumOpProfit));
+          sOpProfit.className = "font-num font-bold " + (bCumOpProfit >= 0 ? "text-emerald-600" : "text-red-600");
+        }
+
+        const sNet = document.getElementById(`summaryB${n}Net`);
+        if (sNet) {
+          sNet.innerText = (bCumNet >= 0 ? "+฿" : "-฿") + formatNumber(Math.abs(bCumNet));
+          sNet.className = "font-num font-bold " + (bCumNet >= 0 ? "text-emerald-600" : "text-red-600");
+        }
+
+        const sDayLabel = document.getElementById(`summaryB${n}DayLabel`);
+        if (sDayLabel) sDayLabel.innerText = `ว.${days} ล่าสุด:`;
+
+        const sFooter = document.getElementById(`summaryB${n}Footer`);
+        if (sFooter) {
+          sFooter.innerText = `สด ฿${formatNumber(bLast.cash)}, โอน ฿${formatNumber(bLast.transfer)} (หน้าร้าน ${bLastProfit >= 0 ? "+" : "-"}฿${formatNumber(Math.abs(bLastProfit))} | สะสมส่ง ฿${formatNumber(bSentTot)})`;
         }
       });
     }
@@ -2563,6 +2875,52 @@
       return Math.round(num).toLocaleString('th-TH');
     }
 
+    // 2. THEME & SIDEBAR NAVIGATION CONTROLS
+    function applyThemeUI(isDark) {
+      const icon = document.getElementById('themeIcon');
+      const label = document.getElementById('themeLabel');
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        if (icon) icon.innerText = '☀️';
+        if (label) label.innerText = 'โหมดสว่าง';
+      } else {
+        document.documentElement.classList.remove('dark');
+        if (icon) icon.innerText = '🌙';
+        if (label) label.innerText = 'โหมดมืด';
+      }
+    }
+
+    function toggleTheme() {
+      const nextDark = !document.documentElement.classList.contains('dark');
+      try {
+        localStorage.setItem('dashboard_theme', nextDark ? 'dark' : 'light');
+      } catch (e) {}
+      applyThemeUI(nextDark);
+    }
+
+    // Sync toggle button UI on load
+    applyThemeUI(document.documentElement.classList.contains('dark'));
+
+    function toggleMobileSidebar() {
+      const sidebar = document.getElementById('leftSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (!sidebar) return;
+      const isClosed = sidebar.classList.contains('-translate-x-full');
+      if (isClosed) {
+        sidebar.classList.remove('-translate-x-full');
+        if (backdrop) backdrop.classList.remove('hidden');
+      } else {
+        closeMobileSidebar();
+      }
+    }
+
+    function closeMobileSidebar() {
+      const sidebar = document.getElementById('leftSidebar');
+      const backdrop = document.getElementById('sidebarBackdrop');
+      if (sidebar) sidebar.classList.add('-translate-x-full');
+      if (backdrop) backdrop.classList.add('hidden');
+    }
+
     // 2. NAVIGATION & TAB SWITCHING
     function switchMainTab(tabId) {
       currentMainTab = tabId;
@@ -2574,15 +2932,17 @@
         if (t === tabId) {
           if (viewEl) viewEl.classList.remove('hidden');
           if (btnEl) {
-            btnEl.className = 'nav-tab-active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2';
+            btnEl.className = 'nav-tab-active w-full px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-between text-left gap-1.5';
           }
         } else {
           if (viewEl) viewEl.classList.add('hidden');
           if (btnEl) {
-            btnEl.className = 'nav-tab-inactive px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shrink-0 flex items-center gap-2';
+            btnEl.className = 'nav-tab-inactive w-full px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center justify-between text-left gap-1.5';
           }
         }
       });
+
+      closeMobileSidebar();
 
       // Redraw charts based on active view
       if (tabId === 'current') {
